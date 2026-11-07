@@ -104,6 +104,22 @@ On-click agents (Route, Apply Assist) are called by the UI with `(Opportunity, C
 | T9 | Skip then undo | Item returns | TODO (UI) |
 | T10 | New user, first card | Decision < 1 min | UAT (P5) |
 
-## 5. Spec template
+## 5. Tools for LLM agents (`core/tools.py`, owner: lead)
+
+LLM agents may call read-only tools through `core.llm.chat_with_tools(agent=..., tools=[...], max_steps=3)`. The final answer is still a structured schema checked by the Verifier. Every tool call is written to `logs/llm/*.jsonl`.
+
+| Tool | What it returns | Default allow-list |
+|---|---|---|
+| `lookup_program_owner` | NC office that owns this kind of program | Card |
+| `check_annual_program` | "already yours?" — matches CFDA **and** title (shared CFDA numbers like 15.916 are not enough) | Card |
+| `get_objective` / `list_objectives` | DNCR objective text, page, urgency, divisions | Card |
+| `get_opportunity_details` | full stored record (live mode: Grants.gov API) | Apply Assist |
+| `days_until` | days from today to a date — the model never does date math | Card, Apply Assist |
+| `get_prep_time` | typical prep days for a money type | Apply Assist |
+| `backward_timeline` | dated backward plan from the close date + `too_late` flag | Apply Assist |
+
+Not allowed, ever: anything that writes, sends, submits, or looks up EIN/UEI/bank/credentials. Route Agent uses no tools (owner lookup is done in code). To give your agent a tool, ask the lead to add it to `AGENT_TOOLS`.
+
+## 6. Spec template
 
 New agent or new major feature? Copy [TEMPLATE.md](TEMPLATE.md).
