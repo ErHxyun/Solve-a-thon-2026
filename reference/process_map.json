@@ -1,0 +1,15 @@
+{
+  "_note": "Typical federal application path — used by Apply Assist to build starter packs. P1 owns this file; replace estimates with researched/sponsor-confirmed values.",
+  "steps": [
+    {"step": "Read the NOFO and confirm eligibility", "who": "DNCR grants developer", "ai_can_help": true},
+    {"step": "Confirm SAM.gov registration / UEI is active", "who": "DNCR grants developer", "ai_can_help": false},
+    {"step": "Notify division lead and agree to pursue", "who": "Division lead", "ai_can_help": true},
+    {"step": "Confirm match / cost share and partners", "who": "Division lead + budget office", "ai_can_help": false},
+    {"step": "Create Grants.gov workspace and gather SF-424 information", "who": "DNCR grants developer", "ai_can_help": true},
+    {"step": "Write narrative and budget justification", "who": "Division lead", "ai_can_help": false},
+    {"step": "Internal review and approvals", "who": "Leadership", "ai_can_help": false},
+    {"step": "AOR signs and submits in Grants.gov", "who": "AOR", "ai_can_help": false}
+  ],
+  "prep_time_days_estimate": {"formula": 7, "pass-through": 7, "competitive": 30, "one-time disaster": 21, "not stated": 30},
+  "sf424_fields_to_gather": ["Legal name and UEI (gather internally, never send to AI)", "Congressional districts", "Project title and description", "Proposed start and end dates", "Estimated funding (federal, applicant match, other)", "Authorized representative (AOR) contact", "State review (EO 12372) status"]
+}
