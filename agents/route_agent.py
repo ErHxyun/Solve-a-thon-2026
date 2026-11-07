@@ -1,4 +1,4 @@
-"""Route Agent — drafts a forwarding note when the user clicks Route.  Owner: P3
+"""Route Agent — drafts a forwarding note when the user clicks Route.  Owner: LLM-B
 Spec: docs/agents/route_agent.md
 
 Runs on click (called from the UI), not in the daily batch.

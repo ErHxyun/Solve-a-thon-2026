@@ -1,4 +1,4 @@
-"""Route Agent (owner: P3). Spec: docs/agents/route_agent.md"""
+"""Route Agent (owner: LLM-B). Spec: docs/agents/route_agent.md"""
 from agents import route_agent
 from core.schemas import Card, Opportunity
 

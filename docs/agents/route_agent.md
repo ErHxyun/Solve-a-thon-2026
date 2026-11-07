@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P3 |
+| Owner | LLM-B |
 | Branch | `agent/route` |
 | Code | `agents/route_agent.py`, prompt `prompts/route_agent.md` |
 | Type | Code lookup + LLM wording (deployment `chat`) |
