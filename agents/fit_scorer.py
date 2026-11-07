@@ -1,4 +1,4 @@
-"""Fit Scorer — rank gated opportunities against DNCR objectives.  Owner: lead
+"""Fit Scorer — rank gated opportunities against DNCR objectives.  Owner: Criteria
 Spec: docs/agents/fit_scorer.md
 
 Weights (Field Notes §7): semantic 40, keyword 20, eligibility clarity 15,
@@ -21,7 +21,7 @@ URGENCY_VALUE = {"normal": 0.3, "elevated": 0.6, "high": 0.8, "highest": 1.0}
 
 
 def _semantic(opps: list[Opportunity], profile: Profile):
-    """Return a matrix [opp x objective] of similarities in 0-1. TODO(lead): embeddings."""
+    """Return a matrix [opp x objective] of similarities in 0-1. TODO(Criteria): embeddings."""
     obj_texts = [f"{o.text} {' '.join(o.keywords)}" for o in profile.objectives]
     opp_texts = [f"{o.title} {o.description}" for o in opps]
     vec = TfidfVectorizer(stop_words="english").fit(obj_texts + opp_texts)
@@ -72,7 +72,7 @@ def run(state: dict) -> dict:
         best = int(sims[i].argmax())
         obj = profile.objectives[best]
         b = ScoreBreakdown(
-            semantic=float(min(sims[i][best] * 2.5, 1.0)),  # TF-IDF cosines are small; rescale (TODO lead: calibrate)
+            semantic=float(min(sims[i][best] * 2.5, 1.0)),  # TF-IDF cosines are small; rescale (TODO Criteria: calibrate)
             keyword=_keyword(opp, profile),
             eligibility=_eligibility(opp),
             urgency=URGENCY_VALUE[obj.urgency],

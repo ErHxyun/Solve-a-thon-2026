@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | lead |
+| Owner | Criteria |
 | Branch | `agent/fit-scorer` |
 | Code | `agents/fit_scorer.py` |
 | Type | Code + embeddings (`core.llm.embed`, deployment `embed` = text-embedding-3-large) |

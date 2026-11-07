@@ -1,4 +1,4 @@
-"""Fit Scorer (owner: lead). Spec: docs/agents/fit_scorer.md"""
+"""Fit Scorer (owner: Criteria). Spec: docs/agents/fit_scorer.md"""
 from agents import fit_scorer
 from core.schemas import GateResult
 
