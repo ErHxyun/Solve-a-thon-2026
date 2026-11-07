@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Federal Funds Matchmaker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #000000; --ink: #1A1A1A; --dim: #58585B; --line: #D1D1D1; --gray: #F6F6F6;
+    --red: #E2382B; --red-text: #C7271B; --ok: #1E6B3A; --ok-bg: #DFF1E5; --warn: #8A3B00; --warn-bg: #FCE6D2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
+  a { color: var(--ink); } a:hover { color: var(--red-text); }
+  button, input, select { font: inherit; color: inherit; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  @media (max-width: 640px) { .wrap { padding: 0 18px; } }
+  .mono { font-family: 'DM Mono', ui-monospace, monospace; text-transform: uppercase; letter-spacing: .14em; font-size: 13px; font-weight: 400; }
+  .mono.small, .small { font-size: 12px; }
+  .small-text { font-size: 14px; }
+  .dim { color: var(--dim); }
+  .red { color: var(--red-text); }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+  :focus-visible { outline: 3px solid #4AA3FF; outline-offset: 2px; }
+
+  /* header */
+  header.top { background: var(--black); color: #fff; position: sticky; top: 0; z-index: 20; }
+  @media (max-width: 760px) { header.top { position: static; } .agency-name { margin-left: 0; } }
+  header.top .wrap { display: flex; align-items: center; gap: 14px 36px; flex-wrap: wrap; min-height: 76px; padding-top: 8px; padding-bottom: 8px; }
+  .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -.01em; }
+  .brand:hover { color: #fff; }
+  .brand .logo { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #3B5BDB, #0B1E5B 70%); display: grid; place-items: center; box-shadow: inset 0 0 0 2px rgba(255,255,255,.15); }
+  nav.main { display: flex; gap: 4px 26px; flex-wrap: wrap; }
+  nav.main a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; padding: 12px 0; border-bottom: 3px solid transparent; }
+  nav.main a[aria-current="page"] { border-bottom-color: var(--red); }
+  nav.main a:hover { color: #fff; border-bottom-color: #777; }
+  .agency-name { margin-left: auto; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: #BDBDBD; }
+  .notice { background: #111; color: #BDBDBD; border-top: 1px solid #2A2A2A; }
+  .notice .wrap { padding-top: 9px; padding-bottom: 9px; }
+
+  /* hero */
+  .hero { position: relative; background: #05070C; color: #fff; overflow: hidden; }
+  .hero-art { position: absolute; inset: 0; background:
+      radial-gradient(ellipse 70% 55% at 78% 112%, rgba(226,56,43,.55), transparent 60%),
+      radial-gradient(ellipse 60% 70% at 85% 10%, rgba(59,91,219,.45), transparent 65%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px),
+      linear-gradient(180deg, #0A0F1E, #000); }
+  .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,0) 100%); }
+  .hero-inner { position: relative; padding-top: 120px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+  .hero.short .hero-inner { padding-top: 80px; padding-bottom: 56px; }
+  .eyebrow-light { color: #C9C9C9; }
+  .eyebrow-light a { color: #fff; }
+  .hero h1 { margin: 0; font-size: clamp(40px, 6vw, 76px); line-height: 1.02; font-weight: 800; letter-spacing: -.025em; max-width: 15ch; }
+  .hero.short h1 { font-size: clamp(36px, 5vw, 60px); max-width: 20ch; }
+  .lede { margin: 0; font-size: 19px; color: #E4E4E4; max-width: 58ch; }
+
+  .arrow-link { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; text-decoration: none; color: var(--ink); min-height: 44px; }
+  .arrow-link.light { color: #fff; }
+  .arrow-link:hover .arrow { transform: translateX(3px); }
+  .arrow { width: 24px; height: 24px; border-radius: 50%; background: var(--red); display: inline-grid; place-items: center; transition: transform .15s; flex: 0 0 auto; }
+
+  .pipeline { display: flex; gap: 14px 34px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.2); width: 100%; }
+  .agent { display: flex; align-items: center; gap: 10px; color: #fff; }
+  .agent-status { color: #A9A9A9; font-size: 14px; }
+  .led { width: 9px; height: 9px; background: #555; flex: 0 0 auto; }
+  .agent.done .led { background: #3DDC84; }
+  .agent.run .led { background: var(--red); animation: blink .7s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+  @media (prefers-reduced-motion: reduce) { .agent.run .led { animation: none; } }
+
+  .hero-stats { display: flex; gap: 20px 56px; flex-wrap: wrap; margin: 8px 0 6px; }
+  .hero-stats > div { display: flex; flex-direction: column; gap: 4px; }
+  .big-num { font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+  .hero-stats .mono { color: #BDBDBD; }
+
+  /* buttons */
+  .btn { min-height: 46px; padding: 0 20px; border: 2px solid var(--ink); background: transparent; color: var(--ink); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 0; }
+  .btn:hover { background: var(--ink); color: #fff; }
+  .btn.solid { background: var(--ink); color: #fff; }
+  .btn.solid:hover { background: var(--red-text); border-color: var(--red-text); }
+  .btn.light { border-color: #fff; color: #fff; }
+  .btn.light:hover { background: #fff; color: #000; }
+  .btn.light-solid { background: #fff; color: #000; border-color: #fff; }
+  .btn.light-solid:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn.ghost { border-color: transparent; text-decoration: underline; padding: 0 8px; }
+  .btn.ghost:hover { background: transparent; color: var(--red-text); }
+  .btn.icon { width: 46px; padding: 0; }
+  .btn.icon.on { background: var(--ink); color: #fff; }
+  .btn.sm { min-height: 36px; padding: 0 10px; font-size: 13px; border-width: 1px; }
+  .btn:disabled { opacity: .3; cursor: default; background: transparent; color: var(--ink); }
+
+  /* sections */
+  .sec { padding: 88px 0; }
+  .sec.gray { background: var(--gray); }
+  @media (max-width: 640px) { .sec { padding: 56px 0; } }
+  .sec h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+  .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-bottom: 40px; }
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px 72px; align-items: start; }
+  .body-text { font-size: 18px; color: #333; max-width: 46ch; }
+
+  /* feature grid (top matches) */
+  .feature-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-auto-rows: 270px; gap: 16px; }
+  @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .feature-grid { grid-template-columns: 1fr; } }
+  .feature { position: relative; color: #fff; text-decoration: none; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+  .feature:hover { color: #fff; }
+  .feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.75)); }
+  .feature > * { position: relative; z-index: 1; }
+  .feature.big { grid-row: span 2; }
+  @media (max-width: 900px) { .feature.big { grid-column: span 2; } }
+  @media (max-width: 560px) { .feature.big { grid-column: auto; grid-row: span 1; } }
+  .feature:hover .feature-title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .tag-top { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+  .sq { width: 10px; height: 10px; background: var(--red); }
+  .feature-body { display: flex; flex-direction: column; gap: 8px; }
+  .feature-title { font-size: 24px; font-weight: 800; line-height: 1.12; letter-spacing: -.01em; }
+  .feature.big .feature-title { font-size: clamp(30px, 3.4vw, 46px); }
+  .feature-why { color: #DDD; font-size: 16px; max-width: 46ch; }
+  .bg-a { background: radial-gradient(circle at 80% 20%, #2B4FB8, transparent 55%), radial-gradient(circle at 10% 90%, #7A1E16, transparent 60%), #0B0B12; }
+  .bg-b { background: radial-gradient(circle at 70% 30%, #1E6B5A, transparent 55%), #071210; }
+  .bg-c { background: radial-gradient(circle at 30% 20%, #8A5A12, transparent 55%), #120C05; }
+  .bg-d { background: radial-gradient(circle at 75% 25%, #5B2A86, transparent 55%), #0D0714; }
+  .bg-e { background: radial-gradient(circle at 25% 30%, #2A6E9C, transparent 55%), #050C12; }
+  .bg-f { background: radial-gradient(circle at 70% 70%, #A3332A, transparent 55%), #110606; }
+
+  /* filters + results */
+  .layout { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+  .filters { flex: 1 1 260px; max-width: 300px; display: flex; flex-direction: column; gap: 26px; }
+  @media (max-width: 900px) { .filters { max-width: none; } }
+  .results { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+  label.field { display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 700; }
+  input[type=text], input[type=search], input[type=url], select { min-height: 46px; padding: 0 12px; border: 1px solid #8A8A8A; border-radius: 0; background: #fff; font-size: 15px; font-weight: 400; }
+  fieldset { border: 0; margin: 0; padding: 0; }
+  legend { font-size: 14px; font-weight: 700; padding: 0; margin-bottom: 10px; }
+  .check { display: flex; align-items: center; gap: 10px; font-size: 15px; min-height: 32px; cursor: pointer; }
+  .check input { width: 18px; height: 18px; accent-color: #000; margin: 0; }
+
+  .grant { background: #fff; border-top: 4px solid var(--ink); padding: 26px; display: flex; gap: 22px 28px; flex-wrap: wrap; align-items: flex-start; }
+  .score-col { width: 76px; display: flex; flex-direction: column; gap: 2px; }
+  .score-num { font-size: 46px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+  .grant-body { flex: 999 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .grant-title { font-size: 24px; font-weight: 800; line-height: 1.15; text-decoration: none; letter-spacing: -.01em; }
+  .grant-title:hover { text-decoration: underline; }
+  .why { margin: 0; font-size: 15px; color: #333; }
+  .grant-side { flex: 1 1 210px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
+  .kv { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .kv > span:last-child { font-weight: 600; text-align: right; }
+  .due { color: var(--red-text); font-weight: 600; }
+  .chip { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; font-size: 11px; border: 1px solid var(--ink); padding: 4px 8px; }
+  .status { font-size: 12px; font-weight: 700; padding: 4px 9px; }
+  .status.ok { color: var(--ok); background: var(--ok-bg); }
+  .status.warn { color: var(--warn); background: var(--warn-bg); }
+  .status.neutral { color: var(--ink); background: #E6E6E6; }
+  .empty { background: #fff; padding: 56px 24px; text-align: center; color: var(--dim); }
+
+  /* detail */
+  .align-row { border-top: 4px solid var(--ink); background: #fff; }
+  .align-hd { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .align-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 48px; padding: 18px 0 30px; }
+  .align-cols p { margin: 10px 0 0; font-size: 17px; }
+  .checklist { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .checklist li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; }
+  .checklist .status { min-width: 58px; text-align: center; flex: 0 0 auto; margin-top: 2px; }
+  .note { margin-top: 28px; padding-left: 16px; border-left: 4px solid var(--red); font-size: 16px; }
+  .facts { background: #fff; padding: 8px 28px; }
+  .facts .kv { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .facts .kv:last-child { border-bottom: 0; }
+  .draft { background: var(--gray); padding: 28px; font-size: 16px; white-space: pre-wrap; border-left: 4px solid var(--ink); }
+
+  /* plan */
+  .steps { list-style: none; margin: 8px 0 0; padding: 0; display: flex; gap: 12px 40px; flex-wrap: wrap; }
+  .steps li { display: flex; gap: 10px; align-items: baseline; font-weight: 700; font-size: 17px; }
+  .steps .mono { color: var(--red); }
+  .drop { border: 2px dashed #8A8A8A; padding: 30px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .drop.over { border-color: var(--red); background: #FFF4F3; }
+  .drop-name { font-size: 20px; font-weight: 800; margin-top: 4px; }
+  .goal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .goal-card { background: #fff; border-top: 4px solid var(--ink); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-height: 230px; }
+  .goal-title { font-size: 24px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; }
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+
+  /* tracker */
+  .board-scroll { overflow-x: auto; padding-bottom: 8px; }
+  .board { display: grid; grid-template-columns: repeat(5, minmax(220px, 1fr)); gap: 16px; min-width: 1150px; }
+  .col { display: flex; flex-direction: column; gap: 12px; min-height: 440px; }
+  .col-hd { display: flex; justify-content: space-between; background: var(--ink); color: #fff; padding: 12px 14px; }
+  .tcard { background: #fff; padding: 16px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--red); }
+  .tcard-title { font-size: 17px; font-weight: 800; line-height: 1.2; text-decoration: none; }
+  .tcard-title:hover { text-decoration: underline; }
+  .col-empty { font-size: 14px; color: var(--dim); padding: 6px 2px; }
+
+  footer.foot { background: #000; color: #BDBDBD; padding: 48px 0; }
+  footer.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer.foot strong { color: #fff; font-size: 18px; }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #000; color: #fff; padding: 14px 20px; font-size: 14px; border-left: 4px solid var(--red); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; }
+  .toast.show { opacity: 1; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#matches">
+      <span class="logo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-7M15 21v-7M2 10l10-6 10 6"/></svg></span>
+      Federal Funds Matchmaker
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="#matches" data-nav="matches">Matches</a>
+      <a href="#tracker" data-nav="tracker">Tracker</a>
+      <a href="#plan" data-nav="plan">Strategic Plan</a>
+    </nav>
+    <span class="agency-name" id="agencyName">[NC agency name]</span>
+  </div>
+  <div class="notice"><div class="wrap mono small">Prototype · Sample data, not live Grants.gov results</div></div>
+</header>
+
+<main id="app"></main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><strong>Federal Funds Matchmaker</strong><div class="mono small" style="margin-top:8px">Solve-a-thon 2026 prototype</div></div>
+    <div class="mono small">Data source (planned): Grants.gov · SAM.gov</div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+
+/* ---------------- Sample data ---------------- */
+const GRANTS = [
+  { id: 'build', title: 'BUILD Discretionary Grants', agency: 'DOT', agencyFull: 'U.S. Department of Transportation',
+    keywords: ['road safety', 'multimodal', 'rural', 'infrastructure', 'freight', 'jobs access'],
+    priorities: { 'road safety': 'Safety improvements on surface transportation networks.', 'multimodal': 'Projects that connect transit, walking, biking and roads.', 'rural': 'Set-aside for projects in rural areas.', 'jobs access': 'Improving access to jobs and economic opportunity.' },
+    costShare: true, eligibleTypes: ['State government', 'County government', 'City or township'], due: '2027-01-30', ceiling: 'See notice', type: 'Discretionary grant' },
+  { id: 'brownfields', title: 'Brownfields Assessment Grants', agency: 'EPA', agencyFull: 'Environmental Protection Agency',
+    keywords: ['site cleanup', 'drinking water', 'stormwater', 'redevelopment'],
+    priorities: { 'site cleanup': 'Inventory and assessment of contaminated properties.', 'drinking water': 'Protecting nearby water sources from contamination.', 'redevelopment': 'Planning reuse of assessed sites.' },
+    costShare: false, eligibleTypes: ['State government', 'County government', 'City or township'], due: '2026-12-15', ceiling: 'See notice', type: 'Competitive grant' },
+  { id: 'rbdg', title: 'Rural Business Development Grants', agency: 'USDA', agencyFull: 'U.S. Department of Agriculture',
+    keywords: ['small business', 'rural', 'tier 1 counties', 'jobs access'],
+    priorities: { 'small business': 'Technical assistance and training for small rural businesses.', 'rural': 'Projects in rural areas below population limits.' },
+    costShare: false, eligibleTypes: ['State government', 'County government', 'City or township', 'Public university'], due: '2027-02-28', ceiling: 'See notice', type: 'Competitive grant' },
+  { id: 'youthbuild', title: 'YouthBuild', agency: 'DOL', agencyFull: 'U.S. Department of Labor',
+    keywords: ['apprenticeships', 'trades training', 'workforce', 'youth'],
+    priorities: { 'apprenticeships': 'Pre-apprenticeship pathways into registered apprenticeships.', 'trades training': 'Construction-skills training on community projects.' },
+    costShare: true, eligibleTypes: ['State government', 'County government', 'City or township', 'Public university'], due: '2027-03-12', ceiling: 'See notice', type: 'Competitive grant' },
+  { id: 'hmgp', title: 'Hazard Mitigation Grant Program', agency: 'FEMA', agencyFull: 'Federal Emergency Management Agency',
+    keywords: ['flood mitigation', 'resilience', 'infrastructure', 'stormwater'],
+    priorities: { 'flood mitigation': 'Projects that reduce long-term flood risk.', 'stormwater': 'Drainage and stormwater upgrades.', 'infrastructure': 'Hardening public facilities against hazards.' },
+    costShare: true, eligibleTypes: ['State government'], due: '2027-01-10', ceiling: 'See notice', type: 'Post-disaster grant' },
+  { id: 'broadband', title: 'Broadband Infrastructure Program (example)', agency: 'NTIA', agencyFull: 'National Telecommunications and Information Administration',
+    keywords: ['broadband', 'rural', 'digital access'],
+    priorities: { 'broadband': 'Deploying high-speed internet to unserved locations.', 'digital access': 'Affordability and adoption programs.' },
+    costShare: true, eligibleTypes: ['State government', 'County government'], due: '2027-04-01', ceiling: 'See notice', type: 'Competitive grant' }
+];
+
+const DEFAULT_GOALS = [
+  { id: 'g1', title: 'Resilient infrastructure', tags: ['road safety', 'flood mitigation', 'multimodal', 'infrastructure'] },
+  { id: 'g2', title: 'Clean water', tags: ['drinking water', 'stormwater', 'site cleanup'] },
+  { id: 'g3', title: 'Rural economic growth', tags: ['small business', 'tier 1 counties', 'broadband', 'rural'] },
+  { id: 'g4', title: 'Workforce readiness', tags: ['apprenticeships', 'trades training'] }
+];
+
+const COLUMNS = ['Discovered', 'Evaluating', 'Drafting', 'Submitted', 'Awarded / Declined'];
+
+/* ---------------- State (in memory, with optional localStorage) ---------------- */
+const store = {
+  get(k, fallback) { try { const v = localStorage.getItem('ffm-' + k); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; } },
+  set(k, v) { try { localStorage.setItem('ffm-' + k, JSON.stringify(v)); } catch (e) {} }
+};
+const state = {
+  goals: store.get('goals', DEFAULT_GOALS),
+  profile: store.get('profile', { agency: '', type: 'State government', area: 'North Carolina — statewide', size: 'Any size', costShare: 'Can provide up to 20%', sam: true }),
+  planFile: store.get('planFile', ''),
+  tracker: store.get('tracker', { build: 'Drafting', brownfields: 'Submitted', rbdg: 'Evaluating' }),
+  filters: { q: '', goals: null, agencies: [], due: 'any', eligibleOnly: false, hideCost: false, sort: 'score' },
+  drafts: {},
+  editing: null
+};
+function save() { store.set('goals', state.goals); store.set('profile', state.profile); store.set('tracker', state.tracker); store.set('planFile', state.planFile); }
+
+/* ---------------- Matching ---------------- */
+function goalLabel(g, i) { return 'Goal ' + (i + 1) + ' · ' + g.title; }
+function isEligible(grant) {
+  if (!grant.eligibleTypes.includes(state.profile.type)) return false;
+  if (grant.costShare && state.profile.costShare === 'No cost share') return false;
+  return true;
+}
+function scoreGrant(grant) {
+  const kws = grant.keywords.map(k => k.toLowerCase());
+  const perGoal = state.goals.map((g, i) => {
+    const hits = g.tags.filter(t => kws.includes(t.toLowerCase()));
+    return { goal: g, idx: i, hits };
+  }).sort((a, b) => b.hits.length - a.hits.length);
+  const best = perGoal[0] || { hits: [] };
+  const totalHits = new Set(perGoal.flatMap(p => p.hits.map(h => h.toLowerCase()))).size;
+  let score = 40 + best.hits.length * 14 + (totalHits - best.hits.length) * 5;
+  if (isEligible(grant)) score += 8; else score -= 10;
+  if (!state.profile.sam) score -= 5;
+  score = Math.max(5, Math.min(98, score));
+  return { score, best, perGoal: perGoal.filter(p => p.hits.length), eligible: isEligible(grant) };
+}
+function daysUntil(d) { return Math.ceil((new Date(d + 'T23:59:00') - new Date()) / 86400000); }
+function fmtDate(d) { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function scoreClass(s) { return s >= 80 ? '' : s >= 60 ? 'mid' : 'low'; }
+
+/* ---------------- Helpers ---------------- */
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const $ = sel => document.querySelector(sel);
+let toastTimer;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200); }
+const ICON_CHECK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
+const ICON_BOOKMARK = (on) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on ? '#1A4480' : 'none'}" stroke="${on ? '#1A4480' : '#3D4550'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
+
+/* ---------------- Views ---------------- */
+const ARROW = '<span class="arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+const BOOKMARK = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
+const CARD_BG = ['bg-a', 'bg-b', 'bg-c', 'bg-d', 'bg-e', 'bg-f'];
+const shortDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+function hero(eyebrow, title, body, extra = '', size = '') {
+  return `<section class="hero ${size}"><div class="hero-art" aria-hidden="true"></div><div class="wrap hero-inner">
+    <div class="mono eyebrow-light">${eyebrow}</div>
+    <h1>${title}</h1>
+    ${body ? `<p class="lede">${body}</p>` : ''}
+    ${extra}
+  </div></section>`;
+}
+
+function ranked() { return GRANTS.map(g => ({ g, m: scoreGrant(g) })).sort((a, b) => b.m.score - a.m.score); }
+
+function viewMatches() {
+  const f = state.filters;
+  if (f.goals === null) f.goals = state.goals.map(g => g.id);
+  const agencies = [...new Set(GRANTS.map(g => g.agency))];
+  let list = GRANTS.map(g => ({ g, m: scoreGrant(g) }));
+  list = list.filter(({ g, m }) => {
+    if (f.q) { const q = f.q.toLowerCase(); if (![g.title, g.agencyFull, g.agency, ...g.keywords].join(' ').toLowerCase().includes(q)) return false; }
+    if (f.agencies.length && !f.agencies.includes(g.agency)) return false;
+    if (f.eligibleOnly && !m.eligible) return false;
+    if (f.hideCost && g.costShare) return false;
+    if (f.due !== 'any' && daysUntil(g.due) > Number(f.due)) return false;
+    if (state.goals.length && !m.perGoal.some(p => f.goals.includes(p.goal.id))) return false;
+    return true;
+  });
+  list.sort((a, b) => f.sort === 'due' ? a.g.due.localeCompare(b.g.due) : b.m.score - a.m.score);
+  const top = ranked().slice(0, 5);
+
+  return hero('Federal Funds Matchmaker · North Carolina',
+    'Federal funding,<br>matched to your strategic plan',
+    'Every open federal opportunity, scored against the goals in your agency’s strategic plan — with the reason it fits.',
+    `<a class="arrow-link light" href="#plan">Update your strategic plan ${ARROW}</a>
+     <div class="pipeline" id="pipeline" aria-label="Agent pipeline">${pipelineHTML()}</div>`) + `
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><h2>Top Matches</h2><a class="arrow-link" href="#tracker">Open the tracker ${ARROW}</a></div>
+      <div class="feature-grid">
+        ${top.map(({ g, m }, i) => `
+          <a class="feature ${i === 0 ? 'big' : ''} ${CARD_BG[GRANTS.indexOf(g) % CARD_BG.length]}" href="#grant-${g.id}">
+            <span class="mono tag-top"><span class="sq" aria-hidden="true"></span>${m.score} Match · ${esc(g.agency)}</span>
+            <span class="feature-body">
+              <span class="mono small">Due ${shortDate(g.due)}</span>
+              <span class="feature-title">${esc(g.title)}</span>
+              ${i === 0 && m.best.hits.length ? `<span class="feature-why">Supports ${esc(goalLabel(m.best.goal, m.best.idx))} — ${m.best.hits.map(esc).join(', ')}</span>` : ''}
+            </span>
+          </a>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec gray">
+    <div class="wrap">
+      <div class="sec-head"><h2>All Opportunities</h2>
+        <div class="row"><button class="btn" data-act="copy-list">Copy list</button><button class="btn solid" data-act="rerun">Re-run matching</button></div>
+      </div>
+      <div class="layout">
+        <aside class="filters" aria-label="Filters">
+          <label class="field">Search
+            <input type="search" id="f-q" placeholder="Keyword, agency, or topic" value="${esc(f.q)}">
+          </label>
+          <fieldset>
+            <legend>Strategic goal</legend>
+            ${state.goals.length ? state.goals.map((g, i) => `<label class="check"><input type="checkbox" data-goal="${g.id}" ${f.goals.includes(g.id) ? 'checked' : ''}>${esc(goalLabel(g, i))}</label>`).join('') : '<p class="muted small-text">No goals yet. <a href="#plan">Add them</a>.</p>'}
+          </fieldset>
+          <fieldset>
+            <legend>Federal agency</legend>
+            ${agencies.map(a => `<label class="check"><input type="checkbox" data-agency="${a}" ${f.agencies.includes(a) ? 'checked' : ''}>${a}</label>`).join('')}
+          </fieldset>
+          <label class="field">Deadline
+            <select id="f-due">
+              ${[['any', 'Any time'], ['30', 'Next 30 days'], ['60', 'Next 60 days'], ['90', 'Next 90 days'], ['180', 'Next 6 months']].map(([v, t]) => `<option value="${v}" ${f.due === v ? 'selected' : ''}>${t}</option>`).join('')}
+            </select>
+          </label>
+          <fieldset>
+            <legend>Eligibility</legend>
+            <label class="check"><input type="checkbox" id="f-elig" ${f.eligibleOnly ? 'checked' : ''}>Only show likely eligible</label>
+            <label class="check"><input type="checkbox" id="f-cost" ${f.hideCost ? 'checked' : ''}>Hide cost-share required</label>
+          </fieldset>
+          <button class="btn ghost" data-act="reset-filters">Reset filters</button>
+        </aside>
+
+        <div class="results" aria-label="Results">
+          <div class="row" style="justify-content:space-between">
+            <span class="mono small dim">${list.length} of ${GRANTS.length} opportunities</span>
+            <label class="row small-text">Sort by
+              <select id="f-sort">
+                <option value="score" ${f.sort === 'score' ? 'selected' : ''}>Match score</option>
+                <option value="due" ${f.sort === 'due' ? 'selected' : ''}>Deadline</option>
+              </select>
+            </label>
+          </div>
+          ${list.length ? list.map(({ g, m }) => grantCard(g, m)).join('') : `<div class="empty">No opportunities match these filters.<br><button class="btn" data-act="reset-filters" style="margin-top:16px">Reset filters</button></div>`}
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+let pipelineStep = 4;
+function pipelineHTML() {
+  const agents = [['Plan Parser', state.goals.length + ' goals'], ['Grant Scout', GRANTS.length + ' opportunities'], ['Eligibility Checker', 'screened'], ['Alignment Scorer', 'scored']];
+  return agents.map(([n, s], i) => {
+    const st = i < pipelineStep ? 'done' : i === pipelineStep ? 'run' : 'wait';
+    return `<span class="agent ${st}"><span class="led" aria-hidden="true"></span><span class="mono">${n}</span><span class="agent-status">${st === 'done' ? s : st === 'run' ? 'working…' : 'waiting'}</span></span>`;
+  }).join('');
+}
+
+function grantCard(g, m) {
+  const days = daysUntil(g.due);
+  const best = m.best;
+  const pr = best.hits.length && g.priorities[best.hits[0]];
+  const why = best.hits.length
+    ? `Your goal “${esc(best.goal.title)}” mentions <strong>${best.hits.map(esc).join(', ')}</strong>${pr ? '; this program prioritizes ' + esc(pr.charAt(0).toLowerCase() + pr.slice(1)) : '.'}`
+    : 'No direct keyword overlap with your goals.';
+  const saved = state.tracker[g.id];
+  return `
+  <article class="grant">
+    <div class="score-col"><span class="score-num">${m.score}</span><span class="mono small">Match</span></div>
+    <div class="grant-body">
+      <div class="mono small dim">${esc(g.agency)} · ${esc(g.type)} · ALN [00.000]</div>
+      <a class="grant-title" href="#grant-${g.id}">${esc(g.title)}</a>
+      <p class="why">${why}</p>
+      <div class="row">${m.perGoal.map(p => `<span class="chip">${esc(goalLabel(p.goal, p.idx))}</span>`).join('')}</div>
+    </div>
+    <div class="grant-side">
+      <div class="kv"><span class="mono small dim">Deadline</span><span class="due">${shortDate(g.due)}${days >= 0 ? ` · ${days}d` : ' · closed'}</span></div>
+      <div class="kv"><span class="mono small dim">Award</span><span>${esc(g.ceiling)}</span></div>
+      <div class="row">${m.eligible ? '<span class="status ok">Likely eligible</span>' : '<span class="status warn">Check eligibility</span>'}${g.costShare ? '<span class="status neutral">Cost share</span>' : ''}</div>
+      <div class="row" style="flex-wrap:nowrap;margin-top:6px">
+        <a class="arrow-link" href="#grant-${g.id}">Details ${ARROW}</a>
+        <button class="btn icon ${saved ? 'on' : ''}" data-act="toggle-save" data-id="${g.id}" aria-pressed="${saved ? 'true' : 'false'}" aria-label="${saved ? 'Remove from tracker' : 'Save to tracker'}" style="margin-left:auto">${BOOKMARK(!!saved)}</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function viewDetail(id) {
+  const g = GRANTS.find(x => x.id === id);
+  if (!g) return hero('Not found', 'Opportunity not found', '', `<a class="arrow-link light" href="#matches">Back to matches ${ARROW}</a>`, 'short');
+  const m = scoreGrant(g);
+  const p = state.profile;
+  const strength = n => n >= 3 ? 'Strong fit' : n === 2 ? 'Good fit' : 'Partial fit';
+  const elig = [
+    [g.eligibleTypes.includes(p.type), 'Applicant type', g.eligibleTypes.includes(p.type) ? `${p.type} is an eligible applicant.` : `${p.type} is not listed — eligible: ${g.eligibleTypes.join(', ')}.`],
+    [true, 'Location', 'North Carolina is within the eligible area.'],
+    [!g.costShare, 'Cost share', g.costShare ? `A non-federal match is required — confirm [percent] against your capacity (${p.costShare.toLowerCase()}).` : 'No cost share required.'],
+    [p.sam, 'SAM.gov registration', p.sam ? 'UEI on file in your profile.' : 'Register in SAM.gov before applying; it can take several weeks.']
+  ];
+  const saved = state.tracker[g.id];
+  const days = daysUntil(g.due);
+  return hero(`<a href="#matches">Matches</a> / ${esc(g.agency)}`, esc(g.title), esc(g.agencyFull) + ' · ' + esc(g.type),
+    `<div class="hero-stats">
+       <div><span class="big-num">${m.score}</span><span class="mono small">Match score</span></div>
+       <div><span class="big-num">${days >= 0 ? days : '—'}</span><span class="mono small">Days to deadline</span></div>
+       <div><span class="big-num">${m.perGoal.length}</span><span class="mono small">Goals supported</span></div>
+     </div>
+     <div class="row">
+       <button class="btn light-solid" data-act="toggle-save" data-id="${g.id}">${saved ? 'In tracker · ' + esc(saved) : 'Add to tracker'}</button>
+       <button class="btn light" data-act="draft" data-id="${g.id}">Draft concept summary</button>
+       <a class="arrow-link light" href="https://www.grants.gov/search-grants" target="_blank" rel="noopener">Search on Grants.gov ${ARROW}</a>
+     </div>`) + `
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><h2>Why This Matches</h2><span class="mono small dim">Plan language ↔ funding notice priorities</span></div>
+      <div class="stack">
+        ${m.perGoal.length ? m.perGoal.map(pg => `
+          <div class="align-row">
+            <div class="align-hd"><span class="mono">${esc(goalLabel(pg.goal, pg.idx))}</span><span class="mono">${strength(pg.hits.length)}</span></div>
+            <div class="align-cols">
+              <div><div class="mono small dim">Your plan says</div><div class="row" style="margin:10px 0 8px">${pg.hits.map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div><div class="dim">“[Excerpt from strategic plan, p. #]”</div></div>
+              <div><div class="mono small dim">Funding notice priority</div><p>${pg.hits.map(h => esc(g.priorities[h] || ('Mentions ' + h + '.'))).join('<br>')}</p></div>
+            </div>
+          </div>`).join('') : '<p class="dim">None of your goals’ keywords appear in this notice.</p>'}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec gray">
+    <div class="wrap split">
+      <div>
+        <h2>Eligibility Check</h2>
+        <ul class="checklist">
+          ${elig.map(([ok, label, note]) => `<li><span class="status ${ok ? 'ok' : 'warn'}">${ok ? 'Pass' : 'Verify'}</span><span><strong>${label}.</strong> <span class="dim">${esc(note)}</span></span></li>`).join('')}
+        </ul>
+        <p class="note">${m.perGoal.length ? `Strongest fit is ${esc(goalLabel(m.best.goal, m.best.idx))}. ` : 'Weak fit with current goals. '}${elig.some(e => !e[0]) ? 'Resolve the items marked “Verify” before drafting.' : 'No eligibility blockers found.'}</p>
+      </div>
+      <div class="facts">
+        ${[['Award ceiling', g.ceiling], ['Cost share', g.costShare ? 'Required' : 'None'], ['Funding type', g.type], ['Agency', g.agencyFull], ['Notice posted', '[Date]'], ['Questions due', '[Date]'], ['Application due', shortDate(g.due)]].map(([k, v]) => `<div class="kv"><span class="mono small dim">${k}</span><span>${esc(v)}</span></div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><h2>Concept Summary</h2><span class="mono small dim">Draft Writer · review before use</span></div>
+      <div class="draft">${state.drafts[g.id] ? esc(state.drafts[g.id]) : '<span class="dim">Generate a one-page project concept that ties this opportunity to your plan’s goals.</span>'}</div>
+      <div class="row" style="margin-top:16px">
+        ${state.drafts[g.id] ? `<button class="btn" data-act="copy-draft" data-id="${g.id}">Copy draft</button>` : `<button class="btn solid" data-act="draft" data-id="${g.id}">Draft concept summary</button>`}
+      </div>
+    </div>
+  </section>`;
+}
+
+function viewPlan() {
+  const p = state.profile;
+  return hero('Agency profile', 'Your Strategic Plan', 'Upload the plan once. Its goals and keywords drive every match score.',
+    `<ol class="steps" aria-label="Setup steps"><li><span class="mono">01</span>Upload plan</li><li><span class="mono">02</span>Review goals</li><li><span class="mono">03</span>Eligibility profile</li></ol>`, 'short') + `
+
+  <section class="sec">
+    <div class="wrap split">
+      <div>
+        <div class="mono small red">01</div>
+        <h2>Upload the Plan</h2>
+        <p class="body-text">Plan Parser reads the document and pulls out each goal, the page it came from, and the keywords used to match funding notices.</p>
+      </div>
+      <div class="stack">
+        <div class="drop" id="drop">
+          <div style="flex:1 1 220px">
+            <div class="mono small dim">${state.planFile ? 'Uploaded' : 'PDF · DOCX · TXT'}</div>
+            <div class="drop-name">${state.planFile ? esc(state.planFile) : 'Drop your strategic plan here'}</div>
+          </div>
+          <label class="btn solid" style="cursor:pointer">${state.planFile ? 'Replace file' : 'Choose file'}<input type="file" id="planInput" accept=".pdf,.doc,.docx,.txt" class="sr-only"></label>
+        </div>
+        <label class="field">Or paste a link to the plan<input type="url" id="planUrl" placeholder="https://"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec gray">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="mono small red">02</div><h2>Goals We Found</h2></div><button class="btn" data-act="add-goal">+ Add a goal</button></div>
+      <div class="goal-grid">
+      ${state.goals.map((g, i) => state.editing === g.id ? `
+        <form class="goal-card" data-form="${g.id}">
+          <label class="field">Goal title<input type="text" name="title" value="${esc(g.title)}" required></label>
+          <label class="field">Keywords (comma-separated)<input type="text" name="tags" value="${esc(g.tags.join(', '))}"></label>
+          <div class="row"><button class="btn solid" type="submit">Save goal</button><button class="btn" type="button" data-act="cancel-edit">Cancel</button></div>
+        </form>` : `
+        <div class="goal-card">
+          <div class="mono small dim">Goal ${String(i + 1).padStart(2, '0')} · Source p. [#]</div>
+          <div class="goal-title">${esc(g.title)}</div>
+          <div class="row">${g.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('') || '<span class="dim small-text">No keywords</span>'}</div>
+          <div class="row" style="margin-top:auto;padding-top:8px">
+            <button class="btn" data-act="edit-goal" data-id="${g.id}">Edit</button>
+            <button class="btn ghost" data-act="remove-goal" data-id="${g.id}" aria-label="Remove ${esc(g.title)}">Remove</button>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div>
+        <div class="mono small red">03</div>
+        <h2>Eligibility Profile</h2>
+        <p class="body-text">Eligibility Checker screens every opportunity against these answers before it is scored.</p>
+      </div>
+      <div class="stack">
+        <div class="grid2">
+          <label class="field">Agency name<input type="text" data-prof="agency" value="${esc(p.agency)}" placeholder="e.g. NC Department of …"></label>
+          <label class="field">Applicant type<select data-prof="type">${['State government', 'County government', 'City or township', 'Public university'].map(o => `<option ${p.type === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
+          <label class="field">Service area<input type="text" data-prof="area" value="${esc(p.area)}"></label>
+          <label class="field">Cost-share capacity<select data-prof="costShare">${['Can provide up to 20%', 'Can provide over 20%', 'No cost share'].map(o => `<option ${p.costShare === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
+        </div>
+        <label class="check"><input type="checkbox" data-prof="sam" ${p.sam ? 'checked' : ''}>Active SAM.gov registration (UEI on file)</label>
+        <div class="row" style="margin-top:8px">
+          <a class="btn solid" href="#matches" data-act="find">Find matches</a>
+          <button class="btn ghost" data-act="reset-sample">Reset to sample data</button>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function viewTracker() {
+  const byCol = Object.fromEntries(COLUMNS.map(c => [c, []]));
+  Object.entries(state.tracker).forEach(([id, col]) => { const g = GRANTS.find(x => x.id === id); if (g && byCol[col]) byCol[col].push(g); });
+  const total = Object.keys(state.tracker).length;
+  return hero('Pipeline', 'Application Tracker', 'Move opportunities from discovery to award.',
+    `<div class="hero-stats">${COLUMNS.slice(0, 4).map(c => `<div><span class="big-num">${byCol[c].length}</span><span class="mono small">${c}</span></div>`).join('')}</div>`, 'short') + `
+  <section class="sec gray">
+    <div class="wrap">
+      <div class="sec-head"><h2>${total} Opportunities</h2><a class="arrow-link" href="#matches">Find more ${ARROW}</a></div>
+      <div class="board-scroll"><div class="board">
+        ${COLUMNS.map((c, ci) => `
+          <section class="col" aria-label="${c}">
+            <div class="col-hd"><span class="mono">${c}</span><span class="mono">${byCol[c].length}</span></div>
+            ${byCol[c].length ? byCol[c].sort((a, b) => a.due.localeCompare(b.due)).map(g => {
+              const s = scoreGrant(g).score, d = daysUntil(g.due);
+              return `<div class="tcard">
+                <div class="mono small dim">${s} Match · ${g.agency}</div>
+                <a class="tcard-title" href="#grant-${g.id}">${esc(g.title)}</a>
+                <span class="due small-text">Due ${shortDate(g.due)}${d >= 0 && d <= 45 ? ' · soon' : ''}</span>
+                <div class="row" style="gap:6px">
+                  <button class="btn sm" data-act="move" data-id="${g.id}" data-dir="-1" ${ci === 0 ? 'disabled' : ''} aria-label="Move ${esc(g.title)} back">←</button>
+                  <button class="btn sm" data-act="move" data-id="${g.id}" data-dir="1" ${ci === COLUMNS.length - 1 ? 'disabled' : ''} aria-label="Move ${esc(g.title)} forward">→</button>
+                  <button class="btn sm ghost" data-act="toggle-save" data-id="${g.id}" style="margin-left:auto">Remove</button>
+                </div>
+              </div>`;
+            }).join('') : '<div class="col-empty">Nothing here yet.</div>'}
+          </section>`).join('')}
+      </div></div>
+    </div>
+  </section>`;
+}
+
+/* ---------------- Router ---------------- */
+function render() {
+  const h = (location.hash || '#matches').slice(1);
+  let html, nav;
+  if (h.startsWith('grant-')) { html = viewDetail(h.slice(6)); nav = 'matches'; }
+  else if (h === 'tracker') { html = viewTracker(); nav = 'tracker'; }
+  else if (h === 'plan') { html = viewPlan(); nav = 'plan'; }
+  else { html = viewMatches(); nav = 'matches'; }
+  $('#app').innerHTML = html;
+  document.querySelectorAll('[data-nav]').forEach(a => { if (a.dataset.nav === nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  $('#agencyName').textContent = state.profile.agency || '[NC agency name]';
+  bindView();
+}
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+/* ---------------- Events ---------------- */
+function bindView() {
+  const f = state.filters;
+  const on = (sel, ev, fn) => { const el = $(sel); if (el) el.addEventListener(ev, fn); };
+  on('#f-q', 'input', e => { f.q = e.target.value; rerenderKeepFocus('#f-q'); });
+  on('#f-due', 'change', e => { f.due = e.target.value; render(); });
+  on('#f-sort', 'change', e => { f.sort = e.target.value; render(); });
+  on('#f-elig', 'change', e => { f.eligibleOnly = e.target.checked; render(); });
+  on('#f-cost', 'change', e => { f.hideCost = e.target.checked; render(); });
+  document.querySelectorAll('[data-goal]').forEach(el => el.addEventListener('change', e => {
+    const id = e.target.dataset.goal; f.goals = e.target.checked ? [...f.goals, id] : f.goals.filter(x => x !== id); render();
+  }));
+  document.querySelectorAll('[data-agency]').forEach(el => el.addEventListener('change', e => {
+    const a = e.target.dataset.agency; f.agencies = e.target.checked ? [...f.agencies, a] : f.agencies.filter(x => x !== a); render();
+  }));
+  document.querySelectorAll('[data-prof]').forEach(el => el.addEventListener(el.type === 'text' ? 'input' : 'change', e => {
+    const k = e.target.dataset.prof; state.profile[k] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; save();
+    if (k === 'agency') $('#agencyName').textContent = state.profile.agency || '[NC agency name]';
+  }));
+  document.querySelectorAll('[data-form]').forEach(form => form.addEventListener('submit', e => {
+    e.preventDefault();
+    const g = state.goals.find(x => x.id === form.dataset.form); const fd = new FormData(form);
+    g.title = String(fd.get('title')).trim() || g.title;
+    g.tags = String(fd.get('tags')).split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+    state.editing = null; save(); render(); toast('Goal saved — matches updated');
+  }));
+  const input = $('#planInput');
+  if (input) input.addEventListener('change', e => { const file = e.target.files[0]; if (file) planUploaded(file.name); });
+  const drop = $('#drop');
+  if (drop) {
+    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+    drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); const file = e.dataTransfer.files[0]; if (file) planUploaded(file.name); });
+  }
+}
+function rerenderKeepFocus(sel) {
+  const el = $(sel); const pos = el ? el.selectionStart : 0; render(); const n = $(sel); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} }
+}
+function planUploaded(name) { state.planFile = name; save(); render(); toast('Plan uploaded — Plan Parser would extract goals here'); }
+
+function runPipeline() {
+  pipelineStep = 0;
+  const tick = () => {
+    const el = $('#pipeline'); if (el) el.innerHTML = pipelineHTML();
+    if (pipelineStep < 4) { pipelineStep++; setTimeout(tick, 600); } else { render(); toast('Matching complete'); }
+  };
+  tick();
+}
+
+function draftFor(g) {
+  const m = scoreGrant(g); const p = state.profile;
+  const goals = m.perGoal.map(pg => goalLabel(pg.goal, pg.idx)).join('; ') || '[goal]';
+  return `PROJECT CONCEPT — ${g.title}
+Applicant: ${p.agency || '[Agency name]'} (${p.type}), ${p.area}
+
+1. Need
+[Describe the problem in North Carolina, with local data.]
+
+2. Alignment with our strategic plan
+This project advances ${goals}. Overlapping priorities: ${m.perGoal.flatMap(pg => pg.hits).join(', ') || '[keywords]'}.
+
+3. Proposed activities
+[2–4 activities that respond to the ${g.agency} notice's priorities.]
+
+4. Budget & match
+Request: [amount]. ${g.costShare ? 'Non-federal match: [amount / source].' : 'No cost share required.'}
+
+5. Timeline
+Application due ${fmtDate(g.due)}. Project period: [start – end].`;
+}
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const act = b.dataset.act, id = b.dataset.id;
+  if (act === 'toggle-save') {
+    e.preventDefault();
+    if (state.tracker[id]) { delete state.tracker[id]; toast('Removed from tracker'); }
+    else { state.tracker[id] = 'Discovered'; toast('Saved to tracker · Discovered'); }
+    save(); render();
+  } else if (act === 'move') {
+    const i = COLUMNS.indexOf(state.tracker[id]) + Number(b.dataset.dir);
+    if (i >= 0 && i < COLUMNS.length) { state.tracker[id] = COLUMNS[i]; save(); render(); }
+  } else if (act === 'reset-filters') {
+    Object.assign(state.filters, { q: '', goals: state.goals.map(g => g.id), agencies: [], due: 'any', eligibleOnly: false, hideCost: false }); render();
+  } else if (act === 'rerun') { runPipeline();
+  } else if (act === 'draft') {
+    const g = GRANTS.find(x => x.id === id); state.drafts[id] = draftFor(g); render(); toast('Draft generated (template)');
+  } else if (act === 'copy-draft' || act === 'copy-list') {
+    const text = act === 'copy-draft' ? state.drafts[id]
+      : GRANTS.map(g => ({ g, s: scoreGrant(g).score })).sort((a, b) => b.s - a.s).map(({ g, s }) => `${s}\t${g.title}\t${g.agency}\tdue ${g.due}`).join('\n');
+    try { await navigator.clipboard.writeText(text); toast('Copied to clipboard'); } catch (err) { toast('Copy was blocked by the browser'); }
+  } else if (act === 'edit-goal') { state.editing = id; render();
+  } else if (act === 'cancel-edit') { state.editing = null; render();
+  } else if (act === 'remove-goal') {
+    state.goals = state.goals.filter(g => g.id !== id); state.filters.goals = state.filters.goals ? state.filters.goals.filter(x => x !== id) : null; save(); render(); toast('Goal removed');
+  } else if (act === 'add-goal') {
+    const g = { id: 'g' + Date.now(), title: 'New goal', tags: [] }; state.goals.push(g);
+    if (state.filters.goals) state.filters.goals.push(g.id); state.editing = g.id; save(); render();
+  } else if (act === 'reset-sample') {
+    state.goals = JSON.parse(JSON.stringify(DEFAULT_GOALS)); state.tracker = { build: 'Drafting', brownfields: 'Submitted', rbdg: 'Evaluating' }; state.planFile = ''; state.filters.goals = null; save(); render(); toast('Reset to sample data');
+  } else if (act === 'find') { state.filters.goals = null; }
+});
+
+render();
+</script>
+</body>
+</html>
