@@ -1,4 +1,4 @@
-"""Collector (owner: P2). Spec: docs/agents/collector.md"""
+"""Collector (owner: lead). Spec: docs/agents/collector.md"""
 from datetime import date
 
 from agents.collector import normalize

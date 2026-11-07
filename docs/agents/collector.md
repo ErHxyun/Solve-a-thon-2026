@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P2 |
+| Owner | lead |
 | Branch | `agent/collector` |
 | Code | `agents/collector.py` |
 | Type | Code (no LLM) |

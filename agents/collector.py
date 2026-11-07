@@ -1,4 +1,4 @@
-"""Collector — pulls Grants.gov opportunities and normalizes them.  Owner: P2
+"""Collector — pulls Grants.gov opportunities and normalizes them.  Owner: lead
 Spec: docs/agents/collector.md
 
 Working baseline included (fixture mode + live mode + normalize). P2 extends:
