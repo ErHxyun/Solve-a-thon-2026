@@ -1,0 +1,10 @@
+{
+  "_note": "Who owns this kind of program in NC — used by Route Agent so DNCR forwards instead of applying. P1: extend from Discovery notes; P3: match rules in agents/route_agent.py.",
+  "rules": [
+    {"match": {"top_agency_code": "DHS"}, "owner": "NC Emergency Management (NCDPS)", "reason": "FEMA / DHS disaster programs are administered by Emergency Management"},
+    {"match": {"keyword": "school bus"}, "owner": "NC Department of Public Instruction (DPI)", "reason": "School transportation programs belong to DPI"},
+    {"match": {"top_agency_code": "HHS"}, "owner": "NC Department of Health and Human Services (DHHS)", "reason": "Health programs belong to DHHS"},
+    {"match": {"keyword": "drinking water"}, "owner": "NC Department of Environmental Quality (DEQ)", "reason": "Water infrastructure belongs to DEQ"},
+    {"match": {"keyword": "local government"}, "owner": "Local governments via DNCR pass-through", "reason": "DNCR may pass funds through rather than apply directly"}
+  ]
+}
