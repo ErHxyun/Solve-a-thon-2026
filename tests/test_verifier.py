@@ -30,3 +30,23 @@ def test_fake_quote_triggers_retry_then_low():  # T5
 
 def test_no_evidence_is_low():
     assert check(card([]), OPP, ITEM, PLAN, 1).confidence == "Low"
+
+
+def test_applicant_type_quote_is_verified():
+    from core.schemas import ApplicantType
+
+    opp = OPP.model_copy(update={"applicant_types": [ApplicantType(id="00", description="State governments")]})
+    r = check(card([("State governments", "listing")]), opp, ITEM, PLAN, 1)
+    assert r.verified_quotes == 1
+
+
+def test_card_saying_no_overrides_a_chase_ranking():
+    # live run 2026-11-07: DARRP card read "Applications from state governments will not be considered"
+    # while the scorer suggested Chase (applicant-type codes alone said yes)
+    item = ITEM.model_copy(update={"suggested_decision": "Chase"})
+    c = card([("acquire and preserve threatened Civil War battlefield land", "listing")]).model_copy(
+        update={"can_dncr_apply": "No. Applications from state governments will not be considered."})
+    r = check(c, OPP, item, PLAN, 1)
+    assert r.confidence == "Low" and any("cannot apply" in w and "Chase" in w for w in r.warnings)
+    ok = check(card([("acquire and preserve threatened Civil War battlefield land", "listing")]), OPP, item, PLAN, 1)
+    assert not any("cannot apply" in w for w in ok.warnings)  # "yes" cards are untouched

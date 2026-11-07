@@ -1,0 +1,12 @@
+# Never bake secrets or local runtime data into the image
+.env
+*.env
+.venv/
+data/
+logs/
+.git/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+node_modules/

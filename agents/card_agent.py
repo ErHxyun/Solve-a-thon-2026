@@ -88,9 +88,14 @@ def _is_placeholder_text(text: str) -> bool:
     return not text or text.strip().upper().startswith("TODO")
 
 
+def _applicant_types_text(opp: Opportunity) -> str:
+    """Grants.gov eligible applicant types, as listed on the record (quotable listing text)."""
+    return "; ".join(a.description for a in opp.applicant_types)
+
+
 def _listing_text(opp: Opportunity) -> str:
     """Exactly the text the Verifier searches for source='listing'."""
-    return " ".join([opp.title, opp.description, opp.eligibility_text])
+    return " ".join([opp.title, opp.description, opp.eligibility_text, _applicant_types_text(opp)])
 
 
 @lru_cache(maxsize=1)
@@ -175,7 +180,8 @@ def build_user_prompt(opp: Opportunity, item: ScoredItem, profile: Profile, feed
     parts = [
         "## LISTING TEXT (source = \"listing\"; you may quote ONLY from this block or the PLAN TEXT block)",
         f"Title: {opp.title}",
-        f"Eligibility text: {opp.eligibility_text or 'not stated'}",
+        f"Eligible applicant types: {_applicant_types_text(opp) or 'none listed'}",
+        *([f"Eligibility text: {opp.eligibility_text}"] if opp.eligibility_text else []),
         f"Description: {opp.description[:DESC_CHARS]}",
         "",
         "## PLAN TEXT (source = \"plan\")",
