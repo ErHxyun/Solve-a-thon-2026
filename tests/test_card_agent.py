@@ -237,3 +237,18 @@ def test_run_returns_one_card_per_top_item(opportunities):
     out = card_agent.run({"opportunities": opportunities, "top": top})
     assert [c["opp_id"] for c in out["cards"]] == [t["opp_id"] for t in top]
     assert config.LLM_ENABLED is False
+
+
+def test_applicant_types_are_quotable_listing_text():
+    # live run 2026-11-07: NEH Public Humanities had no free-text eligibility, so the prompt said
+    # "Eligibility text: not stated" and the model concluded eligibility was unclear, although
+    # "State governments" was a listed applicant type.
+    from core.schemas import ApplicantType
+
+    opp = OPP.model_copy(update={"eligibility_text": "", "applicant_types": [
+        ApplicantType(id="00", description="State governments"), ApplicantType(id="12", description="Nonprofits")]})
+    prompt = card_agent.build_user_prompt(opp, ITEM, load_profile())
+    listing = prompt.split("## PLAN TEXT")[0]
+    assert "Eligible applicant types: State governments; Nonprofits" in listing
+    assert "Eligibility text: not stated" not in prompt
+    assert "State governments" in card_agent._listing_text(opp)
