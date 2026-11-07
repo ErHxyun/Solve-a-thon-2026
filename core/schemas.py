@@ -22,6 +22,7 @@ class Objective(BaseModel):
     text: str                              # objective wording from the plan
     page: int                              # plan page for citations
     urgency: Urgency = "normal"
+    urgency_tier: Optional[int] = None     # 0-3 tier from the plan's own wording (scoring rubric U)
     divisions: list[str] = []              # e.g. ["State Parks", "SHPO"]
     keywords: list[str] = []
 
@@ -106,6 +107,15 @@ class ScoredItem(BaseModel):
     division: Optional[str] = None
     already_yours: bool = False            # recurring program DNCR already receives
     watch: bool = False                    # forecast → watch list
+    # Optional, filled by the scoring rubric (agents/fit_scorer.py); other code must not require them
+    final: Optional[float] = None          # Final score 0-100 (= score)
+    components: dict[str, float] = {}      # e.g. A, S, K, U, W, H, H10, H90, penalty
+    second_objective_id: Optional[str] = None
+    route_to: Optional[str] = None         # who should apply (DNCR division or another NC office)
+    suggested_decision: Optional[Literal["Chase", "Waitlist", "Skip", "Route", "You decide"]] = None
+    decision_reason: Optional[str] = None
+    rationale: Optional[str] = None        # plain-English explanation of the score
+    flags: list[str] = []
 
 
 # --------------------------------------------------------------------------- #
