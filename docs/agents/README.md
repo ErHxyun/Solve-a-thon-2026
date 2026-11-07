@@ -1,7 +1,9 @@
 # Multi-Agent Workstream — How We Work
 
-**Lead:** [Name] — owns `core/`, `graphs/`, every code agent (Collector, Gatekeeper, Fit Scorer, Verifier + guard, Alert), and all merges into `main`.
-**LLM-A:** [Name] — Card Agent. **LLM-B:** [Name] — Route Agent + Apply Assist.
+**Lead:** [Name] — owns `core/`, `graphs/`, the code agents Collector, Gatekeeper, Verifier + guard, Alert, and all merges into `main`.
+**Criteria:** [Name] — Fit Scorer (criteria, weights, calibration, ablation). **LLM-A:** [Name] — Card Agent. **LLM-B:** [Name] — Route Agent + Apply Assist.
+
+> Independence rule: whoever writes scoring code (Criteria, Lead) does **not** label the evaluation set. Labels come from two teammates who don't write scoring code.
 
 ## 1. Agents and owners
 
@@ -9,7 +11,7 @@
 |---|---|---|---|---|---|
 | Collector | `agents/collector.py` | [collector.md](collector.md) | Lead | `agent/collector` | Code |
 | Gatekeeper | `agents/gatekeeper.py` | [gatekeeper.md](gatekeeper.md) | Lead | `agent/gatekeeper` | Code |
-| Fit Scorer | `agents/fit_scorer.py` | [fit_scorer.md](fit_scorer.md) | Lead | `agent/fit-scorer` | Code + embeddings |
+| Fit Scorer | `agents/fit_scorer.py` | [fit_scorer.md](fit_scorer.md) | Criteria | `agent/fit-scorer` | Code + embeddings |
 | Card Agent | `agents/card_agent.py` | [card_agent.md](card_agent.md) | LLM-A | `agent/card` | LLM |
 | Verifier (+ guard) | `agents/verifier.py`, `core/guard.py` | [verifier.md](verifier.md) | Lead | `agent/verifier` | Code |
 | Alert | `agents/alert.py` | [alert.md](alert.md) | Lead | `agent/alert` | Code |
