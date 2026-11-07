@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Federal Funds Matchmaker</title>
+<title>DNCR Federal Funds Matchmaker</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #000000; --ink: #1A1A1A; --dim: #58585B; --line: #D1D1D1; --gray: #F6F6F6;
-    --red: #E2382B; --red-text: #C7271B; --ok: #1E6B3A; --ok-bg: #DFF1E5; --warn: #8A3B00; --warn-bg: #FCE6D2;
+    --black: #053131; --ink: #053131; --text: #212529; --dim: #5A5F63; --line: #DCD6CF; --gray: #FAF7F4; --accent: #0093B8; --accent-dark: #005970; --orange-bg: #BD5B00;
+    --red: #F57600; --red-text: #B35600; --ok: #1E6B3A; --ok-bg: #DFF1E5; --warn: #8A3B00; --warn-bg: #FCE6D2;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: #fff; color: var(--ink); font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
+  body { margin: 0; background: #fff; color: var(--text); font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+  .sec:not(.dark) h2, .sec:not(.dark) h3 { color: var(--ink); }
   a { color: var(--ink); } a:hover { color: var(--red-text); }
   button, input, select { font: inherit; color: inherit; }
   .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
@@ -24,44 +25,44 @@
   .red { color: var(--red-text); }
   .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .stack { display: flex; flex-direction: column; gap: 16px; }
-  :focus-visible { outline: 3px solid #4AA3FF; outline-offset: 2px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
   /* header */
   header.top { background: var(--black); color: #fff; position: sticky; top: 0; z-index: 20; }
   @media (max-width: 760px) { header.top { position: static; } .agency-name { margin-left: 0; } }
   header.top .wrap { display: flex; align-items: center; gap: 14px 36px; flex-wrap: wrap; min-height: 76px; padding-top: 8px; padding-bottom: 8px; }
-  .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 800; font-size: 18px; letter-spacing: -.01em; }
+  .brand { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
   .brand:hover { color: #fff; }
-  .brand .logo { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #3B5BDB, #0B1E5B 70%); display: grid; place-items: center; box-shadow: inset 0 0 0 2px rgba(255,255,255,.15); }
+  .brand .logo { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #0093B8, #005970 70%); display: grid; place-items: center; box-shadow: inset 0 0 0 2px rgba(255,255,255,.15); }
   nav.main { display: flex; gap: 4px 26px; flex-wrap: wrap; }
   nav.main a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; padding: 12px 0; border-bottom: 3px solid transparent; }
   nav.main a[aria-current="page"] { border-bottom-color: var(--red); }
   nav.main a:hover { color: #fff; border-bottom-color: #777; }
   .agency-name { margin-left: auto; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; color: #BDBDBD; }
-  .notice { background: #111; color: #BDBDBD; border-top: 1px solid #2A2A2A; }
+  .notice { background: #0A3B3B; color: #C9D3D1; border-top: 1px solid rgba(255,255,255,.1); }
   .notice .wrap { padding-top: 9px; padding-bottom: 9px; }
 
   /* hero */
-  .hero { position: relative; background: #05070C; color: #fff; overflow: hidden; }
+  .hero { position: relative; background: #042A2A; color: #fff; overflow: hidden; }
   .hero-art { position: absolute; inset: 0; background:
-      radial-gradient(ellipse 70% 55% at 78% 112%, rgba(226,56,43,.55), transparent 60%),
-      radial-gradient(ellipse 60% 70% at 85% 10%, rgba(59,91,219,.45), transparent 65%),
+      radial-gradient(ellipse 70% 55% at 78% 112%, rgba(245,118,0,.42), transparent 60%),
+      radial-gradient(ellipse 60% 70% at 85% 10%, rgba(0,147,184,.45), transparent 65%),
       repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px),
       repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 80px),
-      linear-gradient(180deg, #0A0F1E, #000); }
-  .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,0) 100%); }
+      linear-gradient(180deg, #0A4040, #032222); }
+  .hero-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(3,34,34,.88) 0%, rgba(3,34,34,.35) 60%, rgba(3,34,34,0) 100%); }
   .hero-inner { position: relative; padding-top: 120px; padding-bottom: 72px; display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
   .hero.short .hero-inner { padding-top: 80px; padding-bottom: 56px; }
   .eyebrow-light { color: #C9C9C9; }
   .eyebrow-light a { color: #fff; }
-  .hero h1 { margin: 0; font-size: clamp(40px, 6vw, 76px); line-height: 1.02; font-weight: 800; letter-spacing: -.025em; max-width: 15ch; }
+  .hero h1 { margin: 0; font-size: clamp(40px, 6vw, 76px); line-height: 1.02; font-weight: 700; letter-spacing: -.025em; max-width: 15ch; }
   .hero.short h1 { font-size: clamp(36px, 5vw, 60px); max-width: 20ch; }
   .lede { margin: 0; font-size: 19px; color: #E4E4E4; max-width: 58ch; }
 
   .arrow-link { display: inline-flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; text-decoration: none; color: var(--ink); min-height: 44px; }
   .arrow-link.light { color: #fff; }
   .arrow-link:hover .arrow { transform: translateX(3px); }
-  .arrow { width: 24px; height: 24px; border-radius: 50%; background: var(--red); display: inline-grid; place-items: center; transition: transform .15s; flex: 0 0 auto; }
+  .arrow { width: 24px; height: 24px; border-radius: 50%; background: var(--orange-bg); display: inline-grid; place-items: center; transition: transform .15s; flex: 0 0 auto; }
 
   .pipeline { display: flex; gap: 14px 34px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.2); width: 100%; }
   .agent { display: flex; align-items: center; gap: 10px; color: #fff; }
@@ -74,18 +75,18 @@
 
   .hero-stats { display: flex; gap: 20px 56px; flex-wrap: wrap; margin: 8px 0 6px; }
   .hero-stats > div { display: flex; flex-direction: column; gap: 4px; }
-  .big-num { font-size: 52px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+  .big-num { font-size: 52px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
   .hero-stats .mono { color: #BDBDBD; }
 
   /* buttons */
-  .btn { min-height: 46px; padding: 0 20px; border: 2px solid var(--ink); background: transparent; color: var(--ink); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 0; }
+  .btn { min-height: 46px; padding: 0 20px; border: 2px solid var(--ink); background: transparent; color: var(--ink); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; border-radius: 999px; }
   .btn:hover { background: var(--ink); color: #fff; }
   .btn.solid { background: var(--ink); color: #fff; }
-  .btn.solid:hover { background: var(--red-text); border-color: var(--red-text); }
+  .btn.solid:hover { background: var(--orange-bg); border-color: var(--orange-bg); }
   .btn.light { border-color: #fff; color: #fff; }
   .btn.light:hover { background: #fff; color: #000; }
   .btn.light-solid { background: #fff; color: #000; border-color: #fff; }
-  .btn.light-solid:hover { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn.light-solid:hover { background: var(--orange-bg); border-color: var(--orange-bg); color: #fff; }
   .btn.ghost { border-color: transparent; text-decoration: underline; padding: 0 8px; }
   .btn.ghost:hover { background: transparent; color: var(--red-text); }
   .btn.icon { width: 46px; padding: 0; }
@@ -97,7 +98,7 @@
   .sec { padding: 88px 0; }
   .sec.gray { background: var(--gray); }
   @media (max-width: 640px) { .sec { padding: 56px 0; } }
-  .sec h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+  .sec h2 { margin: 0; font-size: clamp(32px, 4vw, 52px); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; }
   .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; flex-wrap: wrap; margin-bottom: 40px; }
   .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px 72px; align-items: start; }
   .body-text { font-size: 18px; color: #333; max-width: 46ch; }
@@ -117,15 +118,15 @@
   .tag-top { display: flex; align-items: center; gap: 10px; font-size: 12px; }
   .sq { width: 10px; height: 10px; background: var(--red); }
   .feature-body { display: flex; flex-direction: column; gap: 8px; }
-  .feature-title { font-size: 24px; font-weight: 800; line-height: 1.12; letter-spacing: -.01em; }
+  .feature-title { font-size: 24px; font-weight: 700; line-height: 1.12; letter-spacing: -.01em; }
   .feature.big .feature-title { font-size: clamp(30px, 3.4vw, 46px); }
   .feature-why { color: #DDD; font-size: 16px; max-width: 46ch; }
-  .bg-a { background: radial-gradient(circle at 80% 20%, #2B4FB8, transparent 55%), radial-gradient(circle at 10% 90%, #7A1E16, transparent 60%), #0B0B12; }
-  .bg-b { background: radial-gradient(circle at 70% 30%, #1E6B5A, transparent 55%), #071210; }
-  .bg-c { background: radial-gradient(circle at 30% 20%, #8A5A12, transparent 55%), #120C05; }
-  .bg-d { background: radial-gradient(circle at 75% 25%, #5B2A86, transparent 55%), #0D0714; }
-  .bg-e { background: radial-gradient(circle at 25% 30%, #2A6E9C, transparent 55%), #050C12; }
-  .bg-f { background: radial-gradient(circle at 70% 70%, #A3332A, transparent 55%), #110606; }
+  .bg-a { background: radial-gradient(circle at 80% 20%, #0093B8, transparent 55%), radial-gradient(circle at 10% 90%, #B35600, transparent 60%), #032A2A; }
+  .bg-b { background: radial-gradient(circle at 70% 30%, #127272, transparent 55%), #031F1F; }
+  .bg-c { background: radial-gradient(circle at 30% 20%, #B35600, transparent 55%), #1A0E04; }
+  .bg-d { background: radial-gradient(circle at 75% 25%, #005970, transparent 55%), #021A20; }
+  .bg-e { background: radial-gradient(circle at 25% 30%, #2E7D5B, transparent 55%), #04140E; }
+  .bg-f { background: radial-gradient(circle at 70% 70%, #BD5B00, transparent 55%), #0A1A1A; }
 
   /* filters + results */
   .layout { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
@@ -137,13 +138,13 @@
   fieldset { border: 0; margin: 0; padding: 0; }
   legend { font-size: 14px; font-weight: 700; padding: 0; margin-bottom: 10px; }
   .check { display: flex; align-items: center; gap: 10px; font-size: 15px; min-height: 32px; cursor: pointer; }
-  .check input { width: 18px; height: 18px; accent-color: #000; margin: 0; }
+  .check input { width: 18px; height: 18px; accent-color: var(--ink); margin: 0; }
 
   .grant { background: #fff; border-top: 4px solid var(--ink); padding: 26px; display: flex; gap: 22px 28px; flex-wrap: wrap; align-items: flex-start; }
   .score-col { width: 76px; display: flex; flex-direction: column; gap: 2px; }
-  .score-num { font-size: 46px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+  .score-num { font-size: 46px; font-weight: 700; line-height: 1; letter-spacing: -.03em; }
   .grant-body { flex: 999 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
-  .grant-title { font-size: 24px; font-weight: 800; line-height: 1.15; text-decoration: none; letter-spacing: -.01em; }
+  .grant-title { font-size: 24px; font-weight: 700; line-height: 1.15; text-decoration: none; letter-spacing: -.01em; }
   .grant-title:hover { text-decoration: underline; }
   .why { margin: 0; font-size: 15px; color: #333; }
   .grant-side { flex: 1 1 210px; display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
@@ -154,7 +155,7 @@
   .status { font-size: 12px; font-weight: 700; padding: 4px 9px; }
   .status.ok { color: var(--ok); background: var(--ok-bg); }
   .status.warn { color: var(--warn); background: var(--warn-bg); }
-  .status.neutral { color: var(--ink); background: #E6E6E6; }
+  .status.neutral { color: var(--ink); background: #EFEAE4; }
   .empty { background: #fff; padding: 56px 24px; text-align: center; color: var(--dim); }
 
   /* detail */
@@ -176,11 +177,11 @@
   .steps li { display: flex; gap: 10px; align-items: baseline; font-weight: 700; font-size: 17px; }
   .steps .mono { color: var(--red); }
   .drop { border: 2px dashed #8A8A8A; padding: 30px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
-  .drop.over { border-color: var(--red); background: #FFF4F3; }
-  .drop-name { font-size: 20px; font-weight: 800; margin-top: 4px; }
+  .drop.over { border-color: var(--red); background: #FFF4EA; }
+  .drop-name { font-size: 20px; font-weight: 700; margin-top: 4px; }
   .goal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
   .goal-card { background: #fff; border-top: 4px solid var(--ink); padding: 22px; display: flex; flex-direction: column; gap: 12px; min-height: 230px; }
-  .goal-title { font-size: 24px; font-weight: 800; line-height: 1.15; letter-spacing: -.01em; }
+  .goal-title { font-size: 24px; font-weight: 700; line-height: 1.15; letter-spacing: -.01em; }
   .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 
   /* tracker */
@@ -189,11 +190,204 @@
   .col { display: flex; flex-direction: column; gap: 12px; min-height: 440px; }
   .col-hd { display: flex; justify-content: space-between; background: var(--ink); color: #fff; padding: 12px 14px; }
   .tcard { background: #fff; padding: 16px; display: flex; flex-direction: column; gap: 8px; border-top: 3px solid var(--red); }
-  .tcard-title { font-size: 17px; font-weight: 800; line-height: 1.2; text-decoration: none; }
+  .tcard-title { font-size: 17px; font-weight: 700; line-height: 1.2; text-decoration: none; }
   .tcard-title:hover { text-decoration: underline; }
   .col-empty { font-size: 14px; color: var(--dim); padding: 6px 2px; }
 
-  footer.foot { background: #000; color: #BDBDBD; padding: 48px 0; }
+  .btn.red { background: var(--orange-bg); border-color: var(--orange-bg); color: #fff; }
+  .btn.red:hover { background: #fff; border-color: #fff; color: #000; }
+  .sec.dark { background: var(--black); color: #fff; }
+  .sec.dark a { color: #fff; }
+  .light-text { color: #D0D0D0; }
+  .sec h3 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+
+  /* stats band */
+  .stats-band { background: #fff; border-bottom: 1px solid var(--line); }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .stats-grid > div { display: flex; flex-direction: column; gap: 6px; padding: 34px 24px 34px 0; border-right: 1px solid var(--line); }
+  .stats-grid > div + div { padding-left: 28px; }
+  .stats-grid > div:last-child { border-right: 0; }
+  .stat-num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -.03em; }
+  @media (max-width: 640px) { .stats-grid > div { border-right: 0; border-bottom: 1px solid var(--line); padding-left: 0 !important; } }
+
+  /* deadlines */
+  .deadlines { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.18); }
+  .deadlines li a { display: flex; gap: 24px; align-items: center; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.18); text-decoration: none; }
+  .deadlines li a:hover .dl-title { text-decoration: underline; }
+  .dl-date { width: 116px; flex: 0 0 auto; display: flex; flex-direction: column; border-left: 4px solid var(--red); padding-left: 14px; }
+  .dl-day { font-size: 42px; font-weight: 700; line-height: 1; }
+  .dl-tba { font-size: 26px; font-weight: 700; line-height: 1.1; }
+  .muted-date { border-left-color: #555; color: #BDBDBD; }
+  .dl-body { display: flex; flex-direction: column; gap: 6px; }
+  .dl-title { font-size: 22px; font-weight: 700; line-height: 1.15; }
+
+  /* criteria + process */
+  .criteria { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border-top: 4px solid var(--ink); }
+  .criterion { padding: 26px 28px 8px 0; display: flex; flex-direction: column; gap: 10px; }
+  .criterion p, .process p { margin: 0; color: #333; font-size: 16px; }
+  .process { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 32px 24px; counter-reset: s; }
+  .process li { display: flex; flex-direction: column; gap: 12px; border-top: 4px solid var(--ink); padding-top: 20px; position: relative; }
+  .process li::before { content: ""; position: absolute; top: -8px; left: 0; width: 12px; height: 12px; background: var(--red); }
+  .step-num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -.03em; color: #C9C9C9; }
+
+  /* quiz + faq */
+  .quiz { display: flex; flex-direction: column; gap: 14px; }
+  .q { background: #fff; padding: 20px 22px; border-top: 3px solid var(--ink); }
+  .q legend { font-size: 17px; font-weight: 700; margin-bottom: 14px; float: left; width: 100%; }
+  .q legend + * { clear: both; }
+  .pill-radio { position: relative; cursor: pointer; }
+  .pill-radio input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .pill-radio span { display: inline-flex; align-items: center; justify-content: center; min-width: 84px; min-height: 44px; border: 2px solid var(--ink); font-weight: 700; padding: 0 16px; }
+  .pill-radio input:checked + span { background: var(--ink); color: #fff; }
+  .pill-radio input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .verdict { margin-top: 28px; background: var(--black); color: #fff; padding: 26px; border-left: 6px solid var(--red); display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .verdict .mono { color: #BDBDBD; }
+  .verdict-title { font-size: 28px; font-weight: 700; line-height: 1.1; }
+  .verdict p { margin: 0 0 6px; color: #DDD; }
+  .verdict .btn.solid { background: #fff; color: #000; border-color: #fff; }
+  .faq details { border-top: 1px solid var(--line); }
+  .faq details:last-child { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 22px 0; font-size: 19px; font-weight: 700; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; width: 28px; height: 28px; border-radius: 50%; background: var(--orange-bg); color: #fff; display: grid; place-items: center; font-weight: 700; flex: 0 0 auto; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { margin: 0 0 22px; color: #333; max-width: 60ch; }
+
+  /* breakdown + readiness */
+  .breakdown { margin-top: 28px; display: flex; flex-direction: column; }
+  .bd-row { display: grid; grid-template-columns: 140px 1fr 56px; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.18); }
+  .bd-row.total { border-bottom: 0; border-top: 2px solid #fff; margin-top: 4px; }
+  .bd-row.total .bd-val { font-size: 32px; }
+  .bd-bar { height: 10px; background: rgba(255,255,255,.12); }
+  .bd-bar span { display: block; height: 100%; background: #fff; }
+  .bd-bar span.neg { background: var(--red); }
+  .bd-val { font-weight: 700; font-size: 20px; text-align: right; }
+  .progress { height: 10px; background: rgba(255,255,255,.18); margin-top: 28px; }
+  .progress span { display: block; height: 100%; background: #3DDC84; transition: width .2s; }
+  .progress.sm { height: 6px; background: #EFEAE4; margin-top: 4px; }
+  .progress.sm span { background: var(--ink); }
+  .check.light input { accent-color: #fff; }
+  .sec.dark .check { min-height: 40px; }
+
+  /* matching run */
+  .run { position: relative; background: #042A2A; color: #fff; overflow: hidden; min-height: calc(100vh - 120px); }
+  .run-inner { position: relative; padding-top: 64px; padding-bottom: 64px; display: flex; flex-direction: column; gap: 24px; }
+  .run-top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+  .run-title { font-size: clamp(34px, 5vw, 64px); font-weight: 700; letter-spacing: -.025em; line-height: 1.05; }
+  .run-bar { height: 6px; background: rgba(255,255,255,.15); max-width: 720px; }
+  .run-bar span { display: block; height: 100%; background: var(--red); transition: width .25s; }
+  .run-grid { display: grid; grid-template-columns: minmax(240px, 340px) minmax(0, 1fr); gap: 32px; align-items: start; }
+  @media (max-width: 820px) { .run-grid { grid-template-columns: 1fr; } }
+  .run-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .run-steps li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-top: 1px solid rgba(255,255,255,.15); color: #8A8A8A; }
+  .run-steps li > span:last-child { display: flex; flex-direction: column; gap: 4px; }
+  .run-steps .led { margin-top: 8px; }
+  .run-steps li.s-done { color: #fff; } .run-steps li.s-done .led { background: #3DDC84; }
+  .run-steps li.s-run { color: #fff; } .run-steps li.s-run .led { background: var(--red); animation: blink .7s steps(2) infinite; }
+  .run-step-label { font-size: 18px; font-weight: 700; }
+  .console { background: rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.15); border-top: 3px solid var(--red); font-family: 'DM Mono', ui-monospace, monospace; font-size: 13px; line-height: 1.75; padding: 18px 20px; height: 420px; overflow-y: auto; color: #D6D6D6; }
+  .ln { white-space: pre-wrap; word-break: break-word; }
+  .ln-agent { display: inline-block; min-width: 92px; color: #6E6E6E; }
+  .ln.ok { color: #7EE2A8; } .ln.warn { color: #F5B971; } .ln.bad { color: #FF8A80; } .ln.dim { color: #8A8A8A; }
+  .ln.strong { color: #fff; font-weight: 500; }
+  .ln.cursor { animation: blink .7s steps(2) infinite; color: var(--red); }
+  @media (prefers-reduced-motion: reduce) { .ln.cursor, .run-steps li.s-run .led { animation: none; } }
+
+  .fund-table { background: #fff; border-top: 4px solid var(--ink); }
+  .fund-row { display: grid; grid-template-columns: 48px minmax(0, 2.4fr) minmax(120px, 1.1fr) 100px 120px; gap: 16px; align-items: baseline; padding: 18px 20px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+  a.fund-row:hover strong { text-decoration: underline; }
+  .fund-hd { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .12em; font-size: 11px; color: var(--dim); padding-top: 14px; padding-bottom: 14px; }
+  .fund-row .r { text-align: right; }
+  .fund-amt { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+  .fund-total { background: var(--ink); color: #fff; border-bottom: 0; }
+  .fund-total .dim { color: #BDBDBD; }
+  .fund-total .fund-amt { font-size: 32px; }
+  .fund-foot { margin: 14px 0 0; font-size: 14px; color: var(--dim); max-width: 80ch; }
+  @media (max-width: 760px) { .fund-row { grid-template-columns: 32px minmax(0, 1fr) auto; } .fund-row > :nth-child(3), .fund-row > :nth-child(4) { display: none; } }
+  .award-note { margin: 0; padding: 14px 0 6px; font-size: 14px; color: var(--dim); border-top: 1px solid var(--line); }
+
+  .q-count { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .q-count .mono { color: #C9D3D1; }
+  .qual-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .qual-chips .pill-radio span { min-width: 0; font-weight: 600; }
+  .src-note { display: inline-block; margin-top: 12px; font-size: 14px; color: var(--dim); }
+  .qual-bar { background: var(--gray); border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .qual-bar .chip { background: #fff; }
+  .goal-pick { cursor: pointer; }
+  .goal-pick.on { box-shadow: inset 0 0 0 2px var(--accent); }
+  .goal-pick input { width: 20px; height: 20px; accent-color: var(--ink); }
+  .obj-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: #333; }
+  .obj-list .mono, .obj .mono { color: var(--red-text); margin-right: 4px; }
+  .obj { margin: 6px 0 0; font-size: 15px; }
+  /* ---- API front end ---- */
+  .rb { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; padding-top: 10px; padding-bottom: 10px; color: #C9D3D1; }
+  .rb strong { color: #fff; font-weight: 600; }
+  .rb-demo { color: #FFB86B !important; }
+  .rb-head { font-weight: 700; color: #fff; }
+  .rb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rb-chip { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.25); padding: 2px 8px; border-radius: 999px; }
+  .rb-chip.hot { background: var(--red); border-color: var(--red); color: #1A0E04; }
+  .rb-lines { flex-basis: 100%; margin: 4px 0 0; padding-left: 18px; font-size: 14px; color: #fff; }
+  .rb-note { margin-left: auto; opacity: .75; }
+  .dcards { display: flex; flex-direction: column; gap: 20px; }
+  .dcard { background: #fff; border-top: 4px solid var(--ink); padding: 26px 28px; display: flex; flex-direction: column; gap: 14px; }
+  .dcard.decided { border-top-color: var(--accent); }
+  .dcard.d-skip { opacity: .72; }
+  .dc-top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .dc-title { margin: 0; font-size: 26px; font-weight: 700; line-height: 1.15; }
+  .dc-title a { text-decoration: none; color: var(--ink); }
+  .dc-title a:hover { text-decoration: underline; }
+  .dc-sub { color: var(--dim); font-size: 16px; }
+  .dc-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 24px; padding: 14px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .dc-meta > div { display: flex; flex-direction: column; gap: 4px; font-size: 15px; font-weight: 600; }
+  .dc-obj { margin: 0; font-size: 15px; color: #333; }
+  .dc-obj .mono { color: var(--red-text); margin-right: 6px; }
+  .dc-summary { margin: 0; font-size: 16px; color: #333; max-width: 90ch; }
+  .dc-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 4px; }
+  .dc-why > div { padding: 14px 16px; }
+  .dc-why p { margin: 6px 0 0; font-size: 15px; }
+  .why-yes { background: var(--ok-bg); color: var(--ok); }
+  .why-no { background: var(--warn-bg); color: var(--warn); }
+  .why-yes p, .why-no p { color: #222; }
+  .q5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px 20px; margin: 0; }
+  .q5 dt { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; font-size: 11px; color: var(--dim); margin-bottom: 4px; }
+  .q5 dd { margin: 0; font-size: 15px; }
+  .q5 ul, ul.plain { margin: 0; padding-left: 18px; }
+  .warnbox { background: #FFF6D6; border-left: 4px solid #C99A00; padding: 10px 14px; font-size: 15px; }
+  .warnbox p { margin: 4px 0; }
+  .evidence summary { cursor: pointer; font-weight: 700; font-size: 15px; padding: 6px 0; }
+  .evidence blockquote { margin: 10px 0; padding: 10px 14px; background: var(--gray); border-left: 3px solid var(--line); }
+  .evidence blockquote p { margin: 6px 0 0; font-size: 15px; }
+  .src { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; padding: 2px 6px; margin-right: 8px; background: var(--ink); color: #fff; }
+  .src-plan { background: var(--accent-dark); }
+  .dc-actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .hint { font-size: 14px; color: var(--dim); max-width: 60ch; }
+  .hint strong { color: var(--ink); }
+  .dbtn.on { background: var(--ink); color: #fff; }
+  .dbtn.d-chase.on { background: var(--ok); border-color: var(--ok); }
+  .dbtn.d-route.on { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .dbtn.d-skip.on { background: #5A5F63; border-color: #5A5F63; }
+  .dbtn:disabled { opacity: .5; cursor: wait; }
+  .status.conf.mid { color: #6A4A00; background: #FFF1C2; }
+  .mini-select { min-height: 36px; font-size: 13px; padding: 0 8px; }
+  .history { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .light-bd { margin-top: 18px; }
+  .light-bd .bd-row { border-bottom-color: var(--line); }
+  .light-bd .bd-bar { background: #EFEAE4; }
+  .light-bd .bd-bar span { background: var(--ink); }
+  .modal-back { position: fixed; inset: 0; background: rgba(3,34,34,.55); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 60; }
+  .modal-back[hidden] { display: none; }
+  .modal { background: #fff; width: min(720px, 100%); max-height: 88vh; overflow: auto; border-top: 6px solid var(--red); }
+  .modal-hd { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: #fff; }
+  .modal-hd h2 { margin: 0; font-size: 22px; color: var(--ink); }
+  .modal-body { padding: 18px 22px 24px; }
+  .modal textarea { width: 100%; min-height: 120px; padding: 10px 12px; border: 1px solid #8A8A8A; font: inherit; font-size: 15px; font-weight: 400; resize: vertical; }
+  .assist h3 { font-size: 16px; margin: 16px 0 6px; color: var(--ink); }
+  .pulse { animation: blink 1s steps(2) infinite; }
+  code { font-family: 'DM Mono', monospace; font-size: .9em; background: rgba(255,255,255,.12); padding: 1px 5px; }
+
+  footer.foot {
+ background: var(--black); color: #BDBDBD; padding: 48px 0; }
   footer.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   footer.foot strong { color: #fff; font-size: 18px; }
 
@@ -206,552 +400,623 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#matches">
+    <a class="brand" href="#today">
       <span class="logo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-7M15 21v-7M2 10l10-6 10 6"/></svg></span>
-      Federal Funds Matchmaker
+      DNCR Federal Funds Matchmaker
     </a>
     <nav class="main" aria-label="Main">
-      <a href="#matches" data-nav="matches">Matches</a>
-      <a href="#tracker" data-nav="tracker">Tracker</a>
-      <a href="#plan" data-nav="plan">Strategic Plan</a>
+      <a href="#today" data-nav="today">Today</a>
+      <a href="#match" data-nav="match">Find Funding</a>
+      <a href="#board" data-nav="board">Board</a>
+      <a href="#how" data-nav="how">How It Works</a>
     </nav>
-    <span class="agency-name" id="agencyName">[NC agency name]</span>
+    <span class="agency-name">NC DNCR · Student prototype</span>
   </div>
-  <div class="notice"><div class="wrap mono small">Prototype · Sample data, not live Grants.gov results</div></div>
+  <div class="notice" id="refreshBar"><div class="wrap mono small">Loading today’s run…</div></div>
 </header>
 
 <main id="app"></main>
 
+<div class="modal-back" id="modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-hd"><h2 id="modalTitle">Draft</h2><button class="btn icon" data-act="close-modal" aria-label="Close">✕</button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
 <footer class="foot">
   <div class="wrap">
-    <div><strong>Federal Funds Matchmaker</strong><div class="mono small" style="margin-top:8px">Solve-a-thon 2026 prototype</div></div>
-    <div class="mono small">Data source (planned): Grants.gov · SAM.gov</div>
+    <div><strong>DNCR Federal Funds Matchmaker</strong><div class="mono small" style="margin-top:8px">Independent student prototype · Solve-a-thon 2026 · Not affiliated with or endorsed by NC DNCR</div></div>
+    <div class="mono small">Data: Grants.gov via our daily pipeline · Plan: DNCR 2025–2029 Strategic Plan</div>
+    <a class="mono small" href="#top" data-act="to-top" style="color:#fff">Return to top ↑</a>
   </div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* =====================================================================
+   DNCR Federal Funds Matchmaker — front end for app/api.py
+   Contract: docs/api.md. Live mode uses /api/*; if the API is not
+   reachable the page falls back to docs/api-samples/*.json (demo mode).
+   Nothing is ever submitted or sent from this page.
+   ===================================================================== */
 
-/* ---------------- Sample data ---------------- */
-const GRANTS = [
-  { id: 'build', title: 'BUILD Discretionary Grants', agency: 'DOT', agencyFull: 'U.S. Department of Transportation',
-    keywords: ['road safety', 'multimodal', 'rural', 'infrastructure', 'freight', 'jobs access'],
-    priorities: { 'road safety': 'Safety improvements on surface transportation networks.', 'multimodal': 'Projects that connect transit, walking, biking and roads.', 'rural': 'Set-aside for projects in rural areas.', 'jobs access': 'Improving access to jobs and economic opportunity.' },
-    costShare: true, eligibleTypes: ['State government', 'County government', 'City or township'], due: '2027-01-30', ceiling: 'See notice', type: 'Discretionary grant' },
-  { id: 'brownfields', title: 'Brownfields Assessment Grants', agency: 'EPA', agencyFull: 'Environmental Protection Agency',
-    keywords: ['site cleanup', 'drinking water', 'stormwater', 'redevelopment'],
-    priorities: { 'site cleanup': 'Inventory and assessment of contaminated properties.', 'drinking water': 'Protecting nearby water sources from contamination.', 'redevelopment': 'Planning reuse of assessed sites.' },
-    costShare: false, eligibleTypes: ['State government', 'County government', 'City or township'], due: '2026-12-15', ceiling: 'See notice', type: 'Competitive grant' },
-  { id: 'rbdg', title: 'Rural Business Development Grants', agency: 'USDA', agencyFull: 'U.S. Department of Agriculture',
-    keywords: ['small business', 'rural', 'tier 1 counties', 'jobs access'],
-    priorities: { 'small business': 'Technical assistance and training for small rural businesses.', 'rural': 'Projects in rural areas below population limits.' },
-    costShare: false, eligibleTypes: ['State government', 'County government', 'City or township', 'Public university'], due: '2027-02-28', ceiling: 'See notice', type: 'Competitive grant' },
-  { id: 'youthbuild', title: 'YouthBuild', agency: 'DOL', agencyFull: 'U.S. Department of Labor',
-    keywords: ['apprenticeships', 'trades training', 'workforce', 'youth'],
-    priorities: { 'apprenticeships': 'Pre-apprenticeship pathways into registered apprenticeships.', 'trades training': 'Construction-skills training on community projects.' },
-    costShare: true, eligibleTypes: ['State government', 'County government', 'City or township', 'Public university'], due: '2027-03-12', ceiling: 'See notice', type: 'Competitive grant' },
-  { id: 'hmgp', title: 'Hazard Mitigation Grant Program', agency: 'FEMA', agencyFull: 'Federal Emergency Management Agency',
-    keywords: ['flood mitigation', 'resilience', 'infrastructure', 'stormwater'],
-    priorities: { 'flood mitigation': 'Projects that reduce long-term flood risk.', 'stormwater': 'Drainage and stormwater upgrades.', 'infrastructure': 'Hardening public facilities against hazards.' },
-    costShare: true, eligibleTypes: ['State government'], due: '2027-01-10', ceiling: 'See notice', type: 'Post-disaster grant' },
-  { id: 'broadband', title: 'Broadband Infrastructure Program (example)', agency: 'NTIA', agencyFull: 'National Telecommunications and Information Administration',
-    keywords: ['broadband', 'rural', 'digital access'],
-    priorities: { 'broadband': 'Deploying high-speed internet to unserved locations.', 'digital access': 'Affordability and adoption programs.' },
-    costShare: true, eligibleTypes: ['State government', 'County government'], due: '2027-04-01', ceiling: 'See notice', type: 'Competitive grant' }
-];
+/* ---------------- API layer ---------------- */
+const API_BASES = location.protocol.startsWith('http') ? ['', 'http://localhost:8000'] : ['http://localhost:8000'];
+const SAMPLES = 'docs/api-samples/';
+const DECISIONS = ['Chase', 'Waitlist', 'Skip', 'Route'];
 
-const DEFAULT_GOALS = [
-  { id: 'g1', title: 'Resilient infrastructure', tags: ['road safety', 'flood mitigation', 'multimodal', 'infrastructure'] },
-  { id: 'g2', title: 'Clean water', tags: ['drinking water', 'stormwater', 'site cleanup'] },
-  { id: 'g3', title: 'Rural economic growth', tags: ['small business', 'tier 1 counties', 'broadband', 'rural'] },
-  { id: 'g4', title: 'Workforce readiness', tags: ['apprenticeships', 'trades training'] }
-];
+const net = {
+  base: null,           // '' or 'http://localhost:8000' once the API answers
+  demo: false,          // true when running on the sample files
+  async json(url, opts) {
+    const r = await fetch(url, opts);
+    if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; }
+    return r.json();
+  },
+  async detect() {
+    for (const b of API_BASES) {
+      try { const h = await this.json(b + '/api/health'); if (h && h.ok) { this.base = b; return h; } } catch (e) { /* try next */ }
+    }
+    this.demo = true; return null;
+  },
+  api(path, opts) { return this.json(this.base + path, opts); }
+};
 
-const COLUMNS = ['Discovered', 'Evaluating', 'Drafting', 'Submitted', 'Awarded / Declined'];
+/* Built-in copy of docs/api-samples (generated from the sample files) — last-resort demo data */
+const EMBEDDED_SAMPLES = {"shortlist":{"last_refreshed":"2026-11-07T20:31:40+00:00","run_status":"succeeded","counts":{"opportunities":40,"passed_gates":12,"scored":12,"cards":3,"cards_retried":0,"low_confidence_cards":0,"alerts":0},"digest":{"date":"2026-11-07","headline":"DNCR today: 3 items on the short list","counts":{"waitlist_opening":0,"closing_soon":0,"waitlist_21_days":0,"new_since_yesterday":0},"lines":[]},"items":[{"opp_id":"361480","title":"Collections Stewardship","funder":"National Endowment for the Humanities","url":"https://www.grants.gov/search-results-detail/361480","status":"posted","close_date":"2026-12-15","days_left":38,"award_ceiling":500000.0,"score":71.4,"confidence":"High","suggested_decision":"Chase","decision_reason":"Final score 71 is at or above the Chase line 60","objective":{"id":"1.5","text":"Support lifelong learning by increasing digital access to collections and professional resources","page":7},"division":"DNCR museums / education","route_to":"DNCR - DNCR museums / education","already_yours":false,"watch":false,"flags":[],"card":{"opp_id":"361480","can_dncr_apply":"[offline placeholder] State governments are listed as eligible applicants.","who_applies":"DNCR – DNCR museums / education (to confirm)","objective_id":"1.5","division":"DNCR museums / education","money_type":"competitive","prerequisites":[],"worth_it":"Award ceiling $500,000; effort not assessed offline.","summary":"The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.","why_fit":"Ranked 71.4 against objective 1.5; plan words found: collections, conservation, digital collections, digital resources, digitization.","why_not_fit":"Offline mode: risks were not assessed — read the eligibility section.","evidence":[{"field":"summary","quote":"The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and","source":"listing"},{"field":"why_fit","quote":"Support lifelong learning by increasing digital access to collections and professional resources","source":"plan"}]},"verification":{"confidence":"High","verified_quotes":2,"total_quotes":2,"warnings":[]},"my_decision":null},{"opp_id":"362715","title":"Outdoor Recreation Legacy Partnership Program (ORLP) Recurring Notice 5 Year","funder":"National Park Service","url":"https://www.grants.gov/search-results-detail/362715","status":"posted","close_date":"2030-11-01","days_left":1455,"award_ceiling":15000000.0,"score":64.8,"confidence":"High","suggested_decision":"Chase","decision_reason":"Final score 65 is at or above the Chase line 60","objective":{"id":"3.5","text":"Increase access to public green spaces like parks, trails and nature preserves within a 10-minute drive","page":10},"division":"State Parks","route_to":"DNCR leads (pass-through to localities)","already_yours":false,"watch":false,"flags":[],"card":{"opp_id":"362715","can_dncr_apply":"[offline placeholder] State governments are listed as eligible applicants.","who_applies":"DNCR – State Parks (to confirm)","objective_id":"3.5","division":"State Parks","money_type":"competitive","prerequisites":["Cost share / match may be required — see the listing","Other steps mentioned (partners, letters or reviews) — see the listing"],"worth_it":"Award ceiling $15 million; effort not assessed offline.","summary":"This Notice of Funding Opportunity (NOFO) invites applications for the Outdoor Recreation Legacy Partnership (ORLP) Program, administered by the National Park Service (NPS). ORLP provides funding to 1) to acquire land and water for parks and other outdoor recreation purposes in qualifying areas, and 2) to develop new or renovate existing outdoor recreation facilities that provide outdoor recreation opportunities to the public in qualifying areas.","why_fit":"Ranked 64.8 against objective 3.5; plan words found: conservation, outdoor recreation, park, parks, recreation.","why_not_fit":"Possible issues: cost share required.","evidence":[{"field":"can_dncr_apply","quote":"§ 8464), the following entities are eligible to apply directly for funding through the ORLP Program:State and Territorial Lead Agencies, in each of the 50 states as well as American Samoa, the District of Columbia,","source":"listing"},{"field":"prerequisites","quote":"ORLP is a program within the Land and Water Conservation Fund (LWCF) State and Local Assistance Program, which provides matching grants to States.","source":"listing"},{"field":"summary","quote":"This Notice of Funding Opportunity (NOFO) invites applications for the Outdoor Recreation Legacy Partnership (ORLP) Program, administered by the National Park Service (NPS).","source":"listing"},{"field":"why_fit","quote":"Increase access to public green spaces like parks, trails and nature preserves within a 10-minute drive","source":"plan"}]},"verification":{"confidence":"High","verified_quotes":4,"total_quotes":4,"warnings":[]},"my_decision":null},{"opp_id":"359225","title":"EDA FY25 Disaster Supplemental","funder":"Economic Development Administration","url":"https://www.grants.gov/search-results-detail/359225","status":"posted","close_date":null,"days_left":null,"award_ceiling":50000000.0,"score":61.5,"confidence":"Medium","suggested_decision":"Route","decision_reason":"NC Commerce should apply, not DNCR","objective":{"id":"5.1","text":"Recover DNCR sites impacted by Hurricane Helene to 80 percent operational by 2028","page":14},"division":"Land & Water Stewardship / Helene recovery","route_to":"NC Commerce","already_yours":false,"watch":true,"flags":["forecast/rolling: no deadline"],"card":{"opp_id":"359225","can_dncr_apply":"[offline placeholder] State governments are not a listed applicant type; the eligibility text mentions states (unclear).","who_applies":"DNCR – Land & Water Stewardship / Helene recovery (to confirm)","objective_id":"5.1","division":"Land & Water Stewardship / Helene recovery","money_type":"one-time disaster","prerequisites":["Cost share / match may be required — see the listing","Other steps mentioned (partners, letters or reviews) — see the listing"],"worth_it":"Award ceiling $50 million; effort not assessed offline.","summary":"Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters occurring in calendar years 2023 and 2024. EDA’s goal under this NOFO is to assist communities recovering from a disaster by realizing opportunities to recover and change the economic trajectory of the community for the better.","why_fit":"Ranked 61.5 against objective 5.1; plan words found: disaster, disaster recovery, hurricane.","why_not_fit":"Possible issues: state eligibility is unclear; cost share required.","evidence":[{"field":"can_dncr_apply","quote":"Eligible applicants under the FY25 Disaster program include a(n): District organization of an EDA-designated Economic Development District (EDD); Indian tribe or a consortium of Indian tribes; State, county, city, or","source":"listing"},{"field":"summary","quote":"Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters","source":"listing"},{"field":"why_fit","quote":"Recover DNCR sites impacted by Hurricane Helene to 80 percent operational by 2028","source":"plan"}]},"verification":{"confidence":"Medium","verified_quotes":3,"total_quotes":3,"warnings":[]},"my_decision":null}]},"opportunity":{"opp_id":"361480","score":71.4,"confidence":"High","breakdown":{"semantic":1.0,"keyword":0.575,"eligibility":1.0,"urgency":0.333,"timing":1.0,"funder":1.0},"objective_id":"1.5","division":"DNCR museums / education","already_yours":false,"watch":false,"final":71.4,"components":{"A":85.8,"S":100.0,"K":57.5,"U":1.0,"W":54.8,"H":78.8,"H10":70.8,"H90":87.6,"penalty":1.0,"negative_words":0.0,"rounds":1.0},"second_objective_id":"3.4","route_to":"DNCR - DNCR museums / education","suggested_decision":"Chase","decision_reason":"Final score 71 is at or above the Chase line 60","rationale":"Final score 71 = plan match 86 x (0.7 + 0.15 x urgency 1/3 + 0.15 x workload 55/100). Plan match: Objective 1.5 (Support lifelong learning by increasing digital access to collections ...), plan p. 7; meaning 100, keywords 57 (matched 'digitization, digital collections, collections, stewardship'). Urgency U = 1 (Objective 1.5 urgency tier (plan p. 7)). Workload: about 79 hours (71-88), standard profile (standard competitive application). Who applies: DNCR - DNCR museums / education. Suggested: Chase because Final score 71 is at or above the Chase line 60.","flags":[],"opportunity":{"id":"361480","source":"grants.gov","number":"20260511-PCS","title":"Collections Stewardship","agency_code":"NEH","agency_name":"National Endowment for the Humanities","top_agency_code":"NEH","status":"posted","open_date":"2026-03-11","close_date":"2026-12-15","days_to_close":38,"applicant_types":[{"id":"12","description":"Nonprofits having a 501(c)(3) status with the IRS, other than institutions of higher education"},{"id":"02","description":"City or township governments"},{"id":"04","description":"Special district governments"},{"id":"00","description":"State governments"},{"id":"20","description":"Private institutions of higher education"},{"id":"07","description":"Native American tribal governments (Federally recognized)"},{"id":"01","description":"County governments"},{"id":"06","description":"Public and State controlled institutions of higher education"}],"eligibility_text":"","funding_instruments":["Grant"],"categories":["Humanities"],"award_floor":50000.0,"award_ceiling":500000.0,"cost_sharing":false,"description":"The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.","cfda":["45.037"],"url":"https://www.grants.gov/search-results-detail/361480","ingested_at":"2026-11-07T20:31:40+00:00","low_quality":false},"checked":{"card":{"opp_id":"361480","can_dncr_apply":"[offline placeholder] State governments are listed as eligible applicants.","who_applies":"DNCR – DNCR museums / education (to confirm)","objective_id":"1.5","division":"DNCR museums / education","money_type":"competitive","prerequisites":[],"worth_it":"Award ceiling $500,000; effort not assessed offline.","summary":"The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.","why_fit":"Ranked 71.4 against objective 1.5; plan words found: collections, conservation, digital collections, digital resources, digitization.","why_not_fit":"Offline mode: risks were not assessed — read the eligibility section.","evidence":[{"field":"summary","quote":"The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and","source":"listing"},{"field":"why_fit","quote":"Support lifelong learning by increasing digital access to collections and professional resources","source":"plan"}]},"verified_quotes":2,"total_quotes":2,"warnings":[],"confidence":"High","needs_retry":false,"verifier_feedback":null,"attempts":1},"days_left":38,"decisions":[]},"route":{"opp_id":"361480","route_to":"DNCR – DNCR museums / education (to confirm)","reason":"Suggested by the decision card","deadline":"2026-12-15","message":"[offline draft] Forwarding 'Collections Stewardship' to DNCR – DNCR museums / education (to confirm). Suggested by the decision card. Details: https://www.grants.gov/search-results-detail/361480"},"assist":{"opp_id":"361480","requirements":["[offline] Read the full NOFO at https://www.grants.gov/search-results-detail/361480"],"sf424_fields_to_gather":["Legal name and UEI (gather internally, never send to AI)","Congressional districts","Project title and description","Proposed start and end dates","Estimated funding (federal, applicant match, other)","Authorized representative (AOR) contact","State review (EO 12372) status"],"outline":["[offline] Project need","Approach","Outcomes","Budget summary"],"timeline":["[offline] Close date: 2026-12-15"],"email_to_division_lead":"[offline draft] Please review 'Collections Stewardship': https://www.grants.gov/search-results-detail/361480","open_questions":[]}};
 
-/* ---------------- State (in memory, with optional localStorage) ---------------- */
+/* Demo mode: sample files + decisions kept in this browser */
+const demo = {
+  shortlist: null, opportunity: {}, route: null, assist: null, decisions: [],
+  builtin: false,
+  async load() {
+    try {
+      this.shortlist = await net.json(SAMPLES + 'shortlist.json');
+      try { const o = await net.json(SAMPLES + 'opportunity.json'); this.opportunity[o.opp_id] = o; } catch (e) {}
+      try { this.route = await net.json(SAMPLES + 'route.json'); } catch (e) {}
+      try { this.assist = await net.json(SAMPLES + 'apply-assist.json'); } catch (e) {}
+    } catch (e) {
+      // Sample files not next to this page (file://, a different folder, a hosted copy): use the built-in copy
+      const E = JSON.parse(JSON.stringify(EMBEDDED_SAMPLES));
+      this.builtin = true; this.shortlist = E.shortlist; this.opportunity[E.opportunity.opp_id] = E.opportunity; this.route = E.route; this.assist = E.assist;
+    }
+    try { this.decisions = JSON.parse(localStorage.getItem('ffm-demo-decisions') || '[]'); } catch (e) { this.decisions = []; }
+  },
+  persist() { try { localStorage.setItem('ffm-demo-decisions', JSON.stringify(this.decisions)); } catch (e) {} },
+  latest(id) { let d = null; this.decisions.forEach(x => { if (x.opp_id === id) d = x; }); return d; }
+};
+
+/* One interface for both modes */
+const data = {
+  async shortlist(params) {
+    if (!net.demo) {
+      const qs = new URLSearchParams(params).toString();
+      return net.api('/api/shortlist?' + qs);
+    }
+    const s = JSON.parse(JSON.stringify(demo.shortlist));
+    s.items.forEach(it => { it.my_decision = demo.latest(it.opp_id); });
+    s.items = s.items.filter(it => !(params.hide_decided_skip && (it.my_decision || {}).decision === 'Skip'));
+    return s;
+  },
+  async opportunity(id) {
+    if (!net.demo) return net.api('/api/opportunities/' + encodeURIComponent(id));
+    const base = demo.opportunity[id];
+    const item = (demo.shortlist.items || []).find(x => x.opp_id === id);
+    if (!base && !item) { const e = new Error('404'); e.status = 404; throw e; }
+    return base ? { ...base, decisions: demo.decisions.filter(d => d.opp_id === id) } : demoDetailFromItem(item);
+  },
+  async decide(id, decision, note = '') {
+    if (!net.demo) return net.api('/api/decisions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ opp_id: id, decision, note }) });
+    const d = { opp_id: id, decision, note, user: 'dncr-grants', at: new Date().toISOString() };
+    demo.decisions.push(d); demo.persist(); return d;
+  },
+  async undo(id) {
+    if (!net.demo) return net.api('/api/decisions/' + encodeURIComponent(id), { method: 'DELETE' });
+    const i = demo.decisions.map(d => d.opp_id).lastIndexOf(id);
+    if (i < 0) { const e = new Error('404'); e.status = 404; throw e; }
+    const removed = demo.decisions.splice(i, 1)[0]; demo.persist();
+    return { undone: removed, now: demo.latest(id) };
+  },
+  async route(id) {
+    if (!net.demo) return net.api('/api/opportunities/' + encodeURIComponent(id) + '/route', { method: 'POST' });
+    if (demo.route && demo.route.opp_id === id) return demo.route;
+    const it = itemById(id);
+    return { opp_id: id, route_to: it.route_to || 'To confirm', reason: it.decision_reason || 'Suggested by the decision card', deadline: it.close_date,
+      message: `[demo draft] Forwarding '${it.title}' to ${it.route_to || 'the right office'}. ${it.decision_reason || ''} Details: ${it.url}` };
+  },
+  async assist(id) {
+    if (!net.demo) return net.api('/api/opportunities/' + encodeURIComponent(id) + '/apply-assist', { method: 'POST' });
+    if (demo.assist && demo.assist.opp_id === id) return demo.assist;
+    const it = itemById(id);
+    return { opp_id: id, requirements: ['[demo] Read the full NOFO at ' + it.url], sf424_fields_to_gather: (demo.assist || {}).sf424_fields_to_gather || [],
+      outline: ['[demo] Project need', 'Approach', 'Outcomes', 'Budget summary'], timeline: ['[demo] Close date: ' + (it.close_date || 'not stated')],
+      email_to_division_lead: `[demo draft] Please review '${it.title}': ${it.url}`, open_questions: [] };
+  }
+};
+function demoDetailFromItem(it) {
+  return { opp_id: it.opp_id, score: it.score, confidence: it.confidence, objective_id: (it.objective || {}).id, division: it.division,
+    suggested_decision: it.suggested_decision, decision_reason: it.decision_reason, rationale: null, components: null, breakdown: null, flags: it.flags,
+    route_to: it.route_to, opportunity: { title: it.title, agency_name: it.funder, url: it.url, status: it.status, close_date: it.close_date, award_ceiling: it.award_ceiling },
+    checked: { card: it.card, verified_quotes: it.verification.verified_quotes, total_quotes: it.verification.total_quotes, warnings: it.verification.warnings, confidence: it.verification.confidence },
+    days_left: it.days_left, decisions: demo.decisions.filter(d => d.opp_id === it.opp_id) };
+}
+
+/* ---------------- State ---------------- */
+const DEFAULT_Q = { divisions: [], money: [], closing: 'any', confidence: 'any', suggested: [], include_low: false, include_skipped: false, hide_decided_skip: true, limit: 15 };
 const store = {
-  get(k, fallback) { try { const v = localStorage.getItem('ffm-' + k); return v ? JSON.parse(v) : fallback; } catch (e) { return fallback; } },
+  get(k, f) { try { const v = localStorage.getItem('ffm-' + k); return v ? JSON.parse(v) : f; } catch (e) { return f; } },
   set(k, v) { try { localStorage.setItem('ffm-' + k, JSON.stringify(v)); } catch (e) {} }
 };
 const state = {
-  goals: store.get('goals', DEFAULT_GOALS),
-  profile: store.get('profile', { agency: '', type: 'State government', area: 'North Carolina — statewide', size: 'Any size', costShare: 'Can provide up to 20%', sam: true }),
-  planFile: store.get('planFile', ''),
-  tracker: store.get('tracker', { build: 'Drafting', brownfields: 'Submitted', rbdg: 'Evaluating' }),
-  filters: { q: '', goals: null, agencies: [], due: 'any', eligibleOnly: false, hideCost: false, sort: 'score' },
-  drafts: {},
-  editing: null
+  ready: false, error: null, health: null,
+  list: null,           // last /api/shortlist response (with the user's API params)
+  all: null,            // board data: everything incl. decided Skips
+  q: Object.assign({}, DEFAULT_Q, store.get('q', {})),
+  detail: {}, run: null, busy: {}
 };
-function save() { store.set('goals', state.goals); store.set('profile', state.profile); store.set('tracker', state.tracker); store.set('planFile', state.planFile); }
+function itemById(id) { return ((state.list || {}).items || []).concat(((state.all || {}).items) || []).find(x => x.opp_id === id) || {}; }
 
-/* ---------------- Matching ---------------- */
-function goalLabel(g, i) { return 'Goal ' + (i + 1) + ' · ' + g.title; }
-function isEligible(grant) {
-  if (!grant.eligibleTypes.includes(state.profile.type)) return false;
-  if (grant.costShare && state.profile.costShare === 'No cost share') return false;
-  return true;
+async function loadShortlist() {
+  const q = state.q;
+  state.list = await data.shortlist({ limit: q.limit, include_low: q.include_low, include_skipped: q.include_skipped, hide_decided_skip: q.hide_decided_skip });
+  renderRefreshBar();
 }
-function scoreGrant(grant) {
-  const kws = grant.keywords.map(k => k.toLowerCase());
-  const perGoal = state.goals.map((g, i) => {
-    const hits = g.tags.filter(t => kws.includes(t.toLowerCase()));
-    return { goal: g, idx: i, hits };
-  }).sort((a, b) => b.hits.length - a.hits.length);
-  const best = perGoal[0] || { hits: [] };
-  const totalHits = new Set(perGoal.flatMap(p => p.hits.map(h => h.toLowerCase()))).size;
-  let score = 40 + best.hits.length * 14 + (totalHits - best.hits.length) * 5;
-  if (isEligible(grant)) score += 8; else score -= 10;
-  if (!state.profile.sam) score -= 5;
-  score = Math.max(5, Math.min(98, score));
-  return { score, best, perGoal: perGoal.filter(p => p.hits.length), eligible: isEligible(grant) };
+async function loadBoard() {
+  state.all = await data.shortlist({ limit: 200, include_low: true, include_skipped: true, hide_decided_skip: false });
 }
-function daysUntil(d) { return Math.ceil((new Date(d + 'T23:59:00') - new Date()) / 86400000); }
-function fmtDate(d) { return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
-function scoreClass(s) { return s >= 80 ? '' : s >= 60 ? 'mid' : 'low'; }
 
-/* ---------------- Helpers ---------------- */
-const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+/* ---------------- Formatting helpers ---------------- */
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const $ = sel => document.querySelector(sel);
 let toastTimer;
-function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200); }
-const ICON_CHECK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
-const ICON_BOOKMARK = (on) => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on ? '#1A4480' : 'none'}" stroke="${on ? '#1A4480' : '#3D4550'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
-
-/* ---------------- Views ---------------- */
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400); }
 const ARROW = '<span class="arrow" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
-const BOOKMARK = on => `<svg width="18" height="18" viewBox="0 0 24 24" fill="${on ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>`;
-const CARD_BG = ['bg-a', 'bg-b', 'bg-c', 'bg-d', 'bg-e', 'bg-f'];
-const shortDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
+function money(n) {
+  if (n == null) return '—';
+  if (n >= 1e9) return '$' + +(n / 1e9).toFixed(1) + 'B';
+  if (n >= 1e6) return '$' + +(n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'K';
+  return '$' + n;
+}
+function fmtDate(d) { if (!d) return ''; const x = new Date(d.length <= 10 ? d + 'T12:00:00' : d); return isNaN(x) ? d : x.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+function fmtWhen(iso) { if (!iso) return 'not yet'; const x = new Date(iso); return isNaN(x) ? iso : x.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
+function closesText(it) {
+  if (it.days_left == null) return { text: 'Rolling / not stated', urgent: false };
+  if (it.days_left < 0) return { text: 'Closed ' + fmtDate(it.close_date), urgent: true };
+  return { text: `Closes in ${it.days_left} day${it.days_left === 1 ? '' : 's'} (${it.close_date})`, urgent: it.days_left <= 14 };
+}
+function objText(it) {
+  const o = it.objective || {};
+  if (!o.id) return it.division || '—';
+  return `Objective ${o.id}${o.page ? ', plan p. ' + o.page : ''}${it.division ? ' · ' + it.division : ''}`;
+}
+function confBadge(c) { const cls = c === 'High' ? 'ok' : c === 'Medium' ? 'mid' : 'warn'; return `<span class="status conf ${cls}">${esc(c || 'Unrated')} confidence</span>`; }
 function hero(eyebrow, title, body, extra = '', size = '') {
   return `<section class="hero ${size}"><div class="hero-art" aria-hidden="true"></div><div class="wrap hero-inner">
-    <div class="mono eyebrow-light">${eyebrow}</div>
-    <h1>${title}</h1>
-    ${body ? `<p class="lede">${body}</p>` : ''}
-    ${extra}
+    <div class="mono eyebrow-light">${eyebrow}</div><h1>${title}</h1>${body ? `<p class="lede">${body}</p>` : ''}${extra}</div></section>`;
+}
+
+/* ---------------- Qualifiers (client-side filters + API params) ---------------- */
+const CONF_RANK = { Low: 0, Medium: 1, High: 2 };
+function passes(it) {
+  const q = state.q; const card = it.card || {};
+  if (q.divisions.length && !q.divisions.includes(it.division)) return false;
+  if (q.money.length && !q.money.includes(card.money_type)) return false;
+  if (q.suggested.length && !q.suggested.includes(it.suggested_decision)) return false;
+  if (q.closing !== 'any') { if (it.days_left == null || it.days_left < 0 || it.days_left > Number(q.closing)) return false; }
+  if (q.confidence !== 'any' && (CONF_RANK[it.confidence] ?? -1) < CONF_RANK[q.confidence]) return false;
+  return true;
+}
+function shown() { return ((state.list || {}).items || []).filter(passes); }
+function optionValues(key) {
+  const items = ((state.all || state.list || {}).items) || [];
+  return [...new Set(items.map(key).filter(Boolean))].sort();
+}
+
+/* ---------------- Refresh bar ---------------- */
+function renderRefreshBar() {
+  const s = state.list || {}; const d = s.digest || {};
+  const c = d.counts || {};
+  const chips = [['closing_soon', 'closing soon'], ['waitlist_opening', 'waitlist opening'], ['waitlist_21_days', 'waitlist ≥21 days'], ['new_since_yesterday', 'new since yesterday']]
+    .map(([k, l]) => `<span class="rb-chip ${c[k] ? 'hot' : ''}">${c[k] || 0} ${l}</span>`).join('');
+  $('#refreshBar').innerHTML = `<div class="wrap rb">
+    <span class="mono small">${net.demo ? `<strong class="rb-demo">Demo data${demo.builtin ? ' (built-in)' : ''}</strong> · ` : ''}Last refreshed: <strong>${esc(fmtWhen(s.last_refreshed))}</strong>${s.run_status ? ' · run ' + esc(s.run_status) : ''}</span>
+    <span class="rb-head">${esc(d.headline || '')}</span>
+    <span class="rb-chips">${chips}</span>
+    ${(d.lines || []).length ? `<ul class="rb-lines">${d.lines.map(l => `<li>${esc(typeof l === 'string' ? l : (l.text || JSON.stringify(l)))}</li>`).join('')}</ul>` : ''}
+    <span class="mono small rb-note">Student prototype — not an official DNCR website</span>
+  </div>`;
+}
+
+/* ---------------- Views ---------------- */
+function viewToday() {
+  const s = state.list; const items = shown(); const c = s.counts || {};
+  const funnel = [[c.opportunities, 'Collected from Grants.gov'], [c.passed_gates, 'Passed gates'], [c.scored, 'Scored vs. DNCR plan'], [c.cards, 'Decision cards']];
+  const decided = items.filter(i => i.my_decision).length;
+  return hero('Today · ' + fmtDate(((s.digest || {}).date) || (s.last_refreshed || '').slice(0, 10)), 'Today’s short list',
+      `${items.length} item${items.length === 1 ? '' : 's'} to decide. Each card explains the fit in plain English with quotes you can check. You decide: Chase, Waitlist, Skip or Route — nothing is ever submitted or sent.`,
+      `<div class="row" style="gap:14px 28px"><a class="btn red" href="#match">Set qualifiers & run match</a><a class="arrow-link light" href="#board">Open the board ${ARROW}</a></div>`, 'short') + `
+  <section class="stats-band" aria-label="Pipeline funnel"><div class="wrap stats-grid">
+    ${funnel.map(([n, l]) => `<div><span class="stat-num">${n == null ? '—' : n}</span><span class="mono small">${l}</span></div>`).join('')}
+    <div><span class="stat-num">${decided}/${items.length}</span><span class="mono small">Decided today</span></div>
+  </div></section>
+  ${qualifierSummary()}
+  <section class="sec gray"><div class="wrap">
+    <div class="sec-head"><h2>Decide</h2><button class="btn" data-act="reload">Reload</button></div>
+    <div class="dcards">${items.length ? items.map(decisionCard).join('') : `<div class="empty">Nothing on the short list matches your qualifiers. <a href="#match">Edit qualifiers</a></div>`}</div>
   </div></section>`;
 }
 
-function ranked() { return GRANTS.map(g => ({ g, m: scoreGrant(g) })).sort((a, b) => b.m.score - a.m.score); }
-
-function viewMatches() {
-  const f = state.filters;
-  if (f.goals === null) f.goals = state.goals.map(g => g.id);
-  const agencies = [...new Set(GRANTS.map(g => g.agency))];
-  let list = GRANTS.map(g => ({ g, m: scoreGrant(g) }));
-  list = list.filter(({ g, m }) => {
-    if (f.q) { const q = f.q.toLowerCase(); if (![g.title, g.agencyFull, g.agency, ...g.keywords].join(' ').toLowerCase().includes(q)) return false; }
-    if (f.agencies.length && !f.agencies.includes(g.agency)) return false;
-    if (f.eligibleOnly && !m.eligible) return false;
-    if (f.hideCost && g.costShare) return false;
-    if (f.due !== 'any' && daysUntil(g.due) > Number(f.due)) return false;
-    if (state.goals.length && !m.perGoal.some(p => f.goals.includes(p.goal.id))) return false;
-    return true;
-  });
-  list.sort((a, b) => f.sort === 'due' ? a.g.due.localeCompare(b.g.due) : b.m.score - a.m.score);
-  const top = ranked().slice(0, 5);
-
-  return hero('Federal Funds Matchmaker · North Carolina',
-    'Federal funding,<br>matched to your strategic plan',
-    'Every open federal opportunity, scored against the goals in your agency’s strategic plan — with the reason it fits.',
-    `<a class="arrow-link light" href="#plan">Update your strategic plan ${ARROW}</a>
-     <div class="pipeline" id="pipeline" aria-label="Agent pipeline">${pipelineHTML()}</div>`) + `
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head"><h2>Top Matches</h2><a class="arrow-link" href="#tracker">Open the tracker ${ARROW}</a></div>
-      <div class="feature-grid">
-        ${top.map(({ g, m }, i) => `
-          <a class="feature ${i === 0 ? 'big' : ''} ${CARD_BG[GRANTS.indexOf(g) % CARD_BG.length]}" href="#grant-${g.id}">
-            <span class="mono tag-top"><span class="sq" aria-hidden="true"></span>${m.score} Match · ${esc(g.agency)}</span>
-            <span class="feature-body">
-              <span class="mono small">Due ${shortDate(g.due)}</span>
-              <span class="feature-title">${esc(g.title)}</span>
-              ${i === 0 && m.best.hits.length ? `<span class="feature-why">Supports ${esc(goalLabel(m.best.goal, m.best.idx))} — ${m.best.hits.map(esc).join(', ')}</span>` : ''}
-            </span>
-          </a>`).join('')}
-      </div>
+function decisionCard(it) {
+  const card = it.card || {}; const v = it.verification || {}; const cl = closesText(it);
+  const mine = (it.my_decision || {}).decision; const busy = state.busy[it.opp_id];
+  const tags = [card.money_type, it.already_yours && 'Already yours', it.watch && 'Watch', ...(it.flags || [])].filter(Boolean);
+  const q5 = [['Can DNCR apply?', card.can_dncr_apply], ['Who applies?', card.who_applies || it.route_to], ['Money type', card.money_type],
+    ['Prerequisites', (card.prerequisites || []).length ? '<ul>' + card.prerequisites.map(p => `<li>${esc(p)}</li>`).join('') + '</ul>' : 'None listed', true], ['Worth it?', card.worth_it]];
+  return `<article class="dcard ${mine ? 'decided d-' + mine.toLowerCase() : ''}" id="card-${esc(it.opp_id)}">
+    <div class="dc-top">
+      <div class="row" style="gap:8px">${confBadge(it.confidence)}${tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+      <a class="arrow-link" href="#item-${esc(it.opp_id)}" style="font-size:15px">Details ${ARROW}</a>
     </div>
-  </section>
-
-  <section class="sec gray">
-    <div class="wrap">
-      <div class="sec-head"><h2>All Opportunities</h2>
-        <div class="row"><button class="btn" data-act="copy-list">Copy list</button><button class="btn solid" data-act="rerun">Re-run matching</button></div>
-      </div>
-      <div class="layout">
-        <aside class="filters" aria-label="Filters">
-          <label class="field">Search
-            <input type="search" id="f-q" placeholder="Keyword, agency, or topic" value="${esc(f.q)}">
-          </label>
-          <fieldset>
-            <legend>Strategic goal</legend>
-            ${state.goals.length ? state.goals.map((g, i) => `<label class="check"><input type="checkbox" data-goal="${g.id}" ${f.goals.includes(g.id) ? 'checked' : ''}>${esc(goalLabel(g, i))}</label>`).join('') : '<p class="muted small-text">No goals yet. <a href="#plan">Add them</a>.</p>'}
-          </fieldset>
-          <fieldset>
-            <legend>Federal agency</legend>
-            ${agencies.map(a => `<label class="check"><input type="checkbox" data-agency="${a}" ${f.agencies.includes(a) ? 'checked' : ''}>${a}</label>`).join('')}
-          </fieldset>
-          <label class="field">Deadline
-            <select id="f-due">
-              ${[['any', 'Any time'], ['30', 'Next 30 days'], ['60', 'Next 60 days'], ['90', 'Next 90 days'], ['180', 'Next 6 months']].map(([v, t]) => `<option value="${v}" ${f.due === v ? 'selected' : ''}>${t}</option>`).join('')}
-            </select>
-          </label>
-          <fieldset>
-            <legend>Eligibility</legend>
-            <label class="check"><input type="checkbox" id="f-elig" ${f.eligibleOnly ? 'checked' : ''}>Only show likely eligible</label>
-            <label class="check"><input type="checkbox" id="f-cost" ${f.hideCost ? 'checked' : ''}>Hide cost-share required</label>
-          </fieldset>
-          <button class="btn ghost" data-act="reset-filters">Reset filters</button>
-        </aside>
-
-        <div class="results" aria-label="Results">
-          <div class="row" style="justify-content:space-between">
-            <span class="mono small dim">${list.length} of ${GRANTS.length} opportunities</span>
-            <label class="row small-text">Sort by
-              <select id="f-sort">
-                <option value="score" ${f.sort === 'score' ? 'selected' : ''}>Match score</option>
-                <option value="due" ${f.sort === 'due' ? 'selected' : ''}>Deadline</option>
-              </select>
-            </label>
-          </div>
-          ${list.length ? list.map(({ g, m }) => grantCard(g, m)).join('') : `<div class="empty">No opportunities match these filters.<br><button class="btn" data-act="reset-filters" style="margin-top:16px">Reset filters</button></div>`}
-        </div>
-      </div>
+    <h3 class="dc-title"><a href="#item-${esc(it.opp_id)}">${esc(it.title)}</a></h3>
+    <div class="dc-sub">${esc(it.funder)} · <a href="${esc(it.url)}" target="_blank" rel="noopener">Open listing ↗</a></div>
+    <div class="dc-meta">
+      <div><span class="mono small dim">Deadline</span><span class="${cl.urgent ? 'due' : ''}">${esc(cl.text)}</span></div>
+      <div><span class="mono small dim">Award ceiling</span><span>${money(it.award_ceiling)}</span></div>
+      <div><span class="mono small dim">Plan fit</span><span>${esc(objText(it))}</span></div>
+      <div><span class="mono small dim">Who applies</span><span>${esc(it.route_to || '—')}</span></div>
     </div>
-  </section>`;
-}
-
-let pipelineStep = 4;
-function pipelineHTML() {
-  const agents = [['Plan Parser', state.goals.length + ' goals'], ['Grant Scout', GRANTS.length + ' opportunities'], ['Eligibility Checker', 'screened'], ['Alignment Scorer', 'scored']];
-  return agents.map(([n, s], i) => {
-    const st = i < pipelineStep ? 'done' : i === pipelineStep ? 'run' : 'wait';
-    return `<span class="agent ${st}"><span class="led" aria-hidden="true"></span><span class="mono">${n}</span><span class="agent-status">${st === 'done' ? s : st === 'run' ? 'working…' : 'waiting'}</span></span>`;
-  }).join('');
-}
-
-function grantCard(g, m) {
-  const days = daysUntil(g.due);
-  const best = m.best;
-  const pr = best.hits.length && g.priorities[best.hits[0]];
-  const why = best.hits.length
-    ? `Your goal “${esc(best.goal.title)}” mentions <strong>${best.hits.map(esc).join(', ')}</strong>${pr ? '; this program prioritizes ' + esc(pr.charAt(0).toLowerCase() + pr.slice(1)) : '.'}`
-    : 'No direct keyword overlap with your goals.';
-  const saved = state.tracker[g.id];
-  return `
-  <article class="grant">
-    <div class="score-col"><span class="score-num">${m.score}</span><span class="mono small">Match</span></div>
-    <div class="grant-body">
-      <div class="mono small dim">${esc(g.agency)} · ${esc(g.type)} · ALN [00.000]</div>
-      <a class="grant-title" href="#grant-${g.id}">${esc(g.title)}</a>
-      <p class="why">${why}</p>
-      <div class="row">${m.perGoal.map(p => `<span class="chip">${esc(goalLabel(p.goal, p.idx))}</span>`).join('')}</div>
+    ${(it.objective || {}).text ? `<p class="dc-obj"><span class="mono small">Objective ${esc(it.objective.id)}</span> ${esc(it.objective.text)}</p>` : ''}
+    ${card.summary ? `<p class="dc-summary">${esc(card.summary)}</p>` : '<p class="dc-summary dim">No decision card was written for this item.</p>'}
+    <div class="dc-why">
+      <div class="why-yes"><div class="mono small">Why it fits</div><p>${esc(card.why_fit || '—')}</p></div>
+      <div class="why-no"><div class="mono small">Why it might not</div><p>${esc(card.why_not_fit || 'Not assessed — read the eligibility section.')}</p></div>
     </div>
-    <div class="grant-side">
-      <div class="kv"><span class="mono small dim">Deadline</span><span class="due">${shortDate(g.due)}${days >= 0 ? ` · ${days}d` : ' · closed'}</span></div>
-      <div class="kv"><span class="mono small dim">Award</span><span>${esc(g.ceiling)}</span></div>
-      <div class="row">${m.eligible ? '<span class="status ok">Likely eligible</span>' : '<span class="status warn">Check eligibility</span>'}${g.costShare ? '<span class="status neutral">Cost share</span>' : ''}</div>
-      <div class="row" style="flex-wrap:nowrap;margin-top:6px">
-        <a class="arrow-link" href="#grant-${g.id}">Details ${ARROW}</a>
-        <button class="btn icon ${saved ? 'on' : ''}" data-act="toggle-save" data-id="${g.id}" aria-pressed="${saved ? 'true' : 'false'}" aria-label="${saved ? 'Remove from tracker' : 'Save to tracker'}" style="margin-left:auto">${BOOKMARK(!!saved)}</button>
+    <dl class="q5">${q5.map(([k, val, raw]) => `<div><dt>${k}</dt><dd>${raw ? val : esc(val || '—')}</dd></div>`).join('')}</dl>
+    ${(v.warnings || []).length ? `<div class="warnbox">${v.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
+    ${(card.evidence || []).length ? `<details class="evidence"><summary>Evidence · ${v.verified_quotes || 0}/${v.total_quotes || card.evidence.length} quotes verified</summary>
+      ${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
+    <div class="dc-actions">
+      ${it.suggested_decision ? `<span class="hint" title="${esc(it.decision_reason || '')}">Suggested: <strong>${esc(it.suggested_decision)}</strong>${it.decision_reason ? ' — ' + esc(it.decision_reason) : ''}</span>` : ''}
+      <div class="row" role="group" aria-label="Decision for ${esc(it.title)}">
+        ${DECISIONS.map(d => `<button class="btn dbtn d-${d.toLowerCase()} ${mine === d ? 'on' : ''}" data-act="decide" data-id="${esc(it.opp_id)}" data-d="${d}" aria-pressed="${mine === d}" ${busy ? 'disabled' : ''}>${d}</button>`).join('')}
+        ${mine ? `<button class="btn ghost" data-act="undo" data-id="${esc(it.opp_id)}" ${busy ? 'disabled' : ''}>Undo</button>` : ''}
       </div>
     </div>
   </article>`;
 }
 
+function qualifierSummary() {
+  const q = state.q;
+  const chips = [q.divisions.length ? q.divisions.join(', ') : 'All divisions', q.money.length ? q.money.join(', ') : 'Any money type',
+    q.closing === 'any' ? 'Any deadline' : 'Closes ≤ ' + q.closing + ' days', q.confidence === 'any' ? 'Any confidence' : q.confidence + '+ confidence',
+    q.suggested.length ? 'Suggested: ' + q.suggested.join('/') : 'All suggestions', q.include_low ? 'Low included' : 'Low hidden', q.hide_decided_skip ? 'My Skips hidden' : 'My Skips shown'];
+  return `<section class="qual-bar" aria-label="Active qualifiers"><div class="wrap row" style="justify-content:space-between">
+    <div class="row" style="gap:8px"><span class="mono small dim">Qualifiers</span>${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>
+    <a class="arrow-link" href="#match" style="font-size:16px">Edit qualifiers ${ARROW}</a></div></section>`;
+}
+
+function viewQualify() {
+  const q = state.q;
+  const all = ((state.all || {}).items) || [];
+  const divisions = optionValues(i => i.division), money = optionValues(i => (i.card || {}).money_type);
+  const n = all.filter(i => (q.include_low || i.confidence !== 'Low') && (q.include_skipped || i.suggested_decision !== 'Skip') && (!q.hide_decided_skip || (i.my_decision || {}).decision !== 'Skip')).filter(passes).length;
+  const chip = (attr, val, label, on, type = 'checkbox', name = '') => `<label class="pill-radio"><input type="${type}" ${name ? `name="${name}"` : ''} ${attr}="${esc(val)}" ${on ? 'checked' : ''}><span>${esc(label)}</span></label>`;
+  return hero('Find funding · Step 1 of 2', 'Set your qualifiers', 'Narrow today’s short list before you decide. Qualifiers use the fields the pipeline writes for every item.',
+    `<div class="q-count"><span class="big-num">${n}</span><span class="mono small">items pass your qualifiers</span></div>
+     <div class="row" style="gap:14px 28px"><button class="btn red" data-act="run-match">Run match</button><button class="btn light" data-act="reset-q">Reset qualifiers</button></div>`, 'short') + `
+  <section class="sec"><div class="wrap split">
+    <div><div class="mono small red">01 · Division</div><h2>Which DNCR division?</h2><p class="body-text">From the Fit Scorer’s division for each item. Leave empty for all.</p></div>
+    <div class="qual-chips">${divisions.length ? divisions.map(d => chip('data-q-div', d, d, q.divisions.includes(d))).join('') : '<p class="dim">No divisions in today’s data.</p>'}</div>
+  </div></section>
+  <section class="sec gray"><div class="wrap split">
+    <div><div class="mono small red">02 · Money</div><h2>What kind of money?</h2><p class="body-text">From each decision card’s money type.</p></div>
+    <div class="qual-chips">${money.length ? money.map(m => chip('data-q-money', m, m, q.money.includes(m))).join('') : '<p class="dim">No money types in today’s data.</p>'}</div>
+  </div></section>
+  <section class="sec"><div class="wrap split">
+    <div><div class="mono small red">03 · Timing & confidence</div><h2>How soon, how sure?</h2><p class="body-text">Deadline window and the Verifier’s confidence after quote checking.</p></div>
+    <div class="stack" style="gap:22px">
+      <label class="field">Closes within<select id="q-closing">${[['any', 'Any time (incl. rolling)'], ['14', '14 days'], ['30', '30 days'], ['60', '60 days'], ['90', '90 days'], ['180', '6 months']].map(([v, l]) => `<option value="${v}" ${q.closing === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+      <fieldset><legend>Minimum confidence</legend><div class="row">${[['any', 'Any'], ['Medium', 'Medium+'], ['High', 'High']].map(([v, l]) => chip('data-q-conf', v, l, q.confidence === v, 'radio', 'q-conf')).join('')}</div></fieldset>
+    </div>
+  </div></section>
+  <section class="sec gray"><div class="wrap split">
+    <div><div class="mono small red">04 · Suggestions</div><h2>Which suggestions?</h2><p class="body-text">The scorer suggests a decision for each item; you still decide. These options are sent to the API.</p></div>
+    <div class="stack" style="gap:18px">
+      <div class="qual-chips">${DECISIONS.map(d => chip('data-q-sug', d, 'Suggested ' + d, q.suggested.includes(d))).join('')}</div>
+      <label class="check"><input type="checkbox" id="q-low" ${q.include_low ? 'checked' : ''}>Include Low-confidence items</label>
+      <label class="check"><input type="checkbox" id="q-skipped" ${q.include_skipped ? 'checked' : ''}>Include items the scorer suggests Skip</label>
+      <label class="check"><input type="checkbox" id="q-hide" ${q.hide_decided_skip ? 'checked' : ''}>Hide items I already skipped</label>
+      <div class="row"><button class="btn solid" data-act="run-match">Run match with ${n} item${n === 1 ? '' : 's'}</button><button class="btn ghost" data-act="reset-q">Reset</button></div>
+    </div>
+  </div></section>`;
+}
+
+const BOARD_COLS = ['Undecided', 'Chase', 'Waitlist', 'Route', 'Skip'];
+function viewBoard() {
+  const items = ((state.all || {}).items) || [];
+  const col = it => (it.my_decision || {}).decision || 'Undecided';
+  return hero('Board', 'Decision board', 'Every item from today’s run, grouped by your decision. Change a decision here or undo it.', '', 'short') + `
+  <section class="sec gray"><div class="wrap">
+    <div class="board-scroll"><div class="board">
+      ${BOARD_COLS.map(c => { const list = items.filter(i => col(i) === c); return `<section class="col" aria-label="${c}">
+        <div class="col-hd"><span class="mono">${c}</span><span class="mono">${list.length}</span></div>
+        ${list.length ? list.map(it => { const cl = closesText(it); return `<div class="tcard">
+          <div class="mono small dim">${esc(it.confidence)} · ${esc((it.card || {}).money_type || '')}</div>
+          <a class="tcard-title" href="#item-${esc(it.opp_id)}">${esc(it.title)}</a>
+          <span class="small-text dim">${esc(it.funder)}</span>
+          <span class="${cl.urgent ? 'due ' : ''}small-text">${esc(cl.text)}</span>
+          ${it.suggested_decision && c === 'Undecided' ? `<span class="mono small">Suggested: ${esc(it.suggested_decision)}</span>` : ''}
+          <div class="row" style="gap:6px">
+            <label class="sr-only" for="mv-${esc(it.opp_id)}">Decision for ${esc(it.title)}</label>
+            <select id="mv-${esc(it.opp_id)}" data-move="${esc(it.opp_id)}" class="mini-select">${['', ...DECISIONS].map(d => `<option value="${d}" ${(c === d || (!d && c === 'Undecided')) ? 'selected' : ''}>${d || 'Decide…'}</option>`).join('')}</select>
+            ${c !== 'Undecided' ? `<button class="btn sm ghost" data-act="undo" data-id="${esc(it.opp_id)}">Undo</button>` : ''}
+          </div></div>`; }).join('') : '<div class="col-empty">Nothing here.</div>'}
+      </section>`; }).join('')}
+    </div></div>
+  </div></section>`;
+}
+
 function viewDetail(id) {
-  const g = GRANTS.find(x => x.id === id);
-  if (!g) return hero('Not found', 'Opportunity not found', '', `<a class="arrow-link light" href="#matches">Back to matches ${ARROW}</a>`, 'short');
-  const m = scoreGrant(g);
-  const p = state.profile;
-  const strength = n => n >= 3 ? 'Strong fit' : n === 2 ? 'Good fit' : 'Partial fit';
-  const elig = [
-    [g.eligibleTypes.includes(p.type), 'Applicant type', g.eligibleTypes.includes(p.type) ? `${p.type} is an eligible applicant.` : `${p.type} is not listed — eligible: ${g.eligibleTypes.join(', ')}.`],
-    [true, 'Location', 'North Carolina is within the eligible area.'],
-    [!g.costShare, 'Cost share', g.costShare ? `A non-federal match is required — confirm [percent] against your capacity (${p.costShare.toLowerCase()}).` : 'No cost share required.'],
-    [p.sam, 'SAM.gov registration', p.sam ? 'UEI on file in your profile.' : 'Register in SAM.gov before applying; it can take several weeks.']
-  ];
-  const saved = state.tracker[g.id];
-  const days = daysUntil(g.due);
-  return hero(`<a href="#matches">Matches</a> / ${esc(g.agency)}`, esc(g.title), esc(g.agencyFull) + ' · ' + esc(g.type),
+  const d = state.detail[id];
+  if (!d) return hero('Loading', 'Loading…', '', '', 'short');
+  if (d.error) return hero('Not available', d.error === 404 ? 'This item is not in today’s results' : 'Could not load this item', '', `<a class="arrow-link light" href="#today">Back to today ${ARROW}</a>`, 'short');
+  const o = d.opportunity || {}; const ch = d.checked || {}; const card = ch.card || {}; const it = itemById(id);
+  const mine = (it.my_decision || (d.decisions || []).slice(-1)[0] || {}).decision;
+  const comp = d.components || {}; const br = d.breakdown || {};
+  const compLabels = { A: 'Plan match (A)', S: 'Semantic (S)', K: 'Keyword (K)', U: 'Urgency (U)', W: 'Workload (W)', H: 'History (H)', H10: 'History, 10-day (H10)', H90: 'History, 90-day (H90)', penalty: 'Penalty multiplier', negative_words: 'Negative words', rounds: 'Rounds' };
+  return hero(`<a href="#today">Today</a> / ${esc(o.agency_code || o.agency_name || '')}`, esc(o.title || it.title || id), esc(o.agency_name || '') + (o.number ? ' · ' + esc(o.number) : ''),
     `<div class="hero-stats">
-       <div><span class="big-num">${m.score}</span><span class="mono small">Match score</span></div>
-       <div><span class="big-num">${days >= 0 ? days : '—'}</span><span class="mono small">Days to deadline</span></div>
-       <div><span class="big-num">${m.perGoal.length}</span><span class="mono small">Goals supported</span></div>
+       <div><span class="big-num">${d.final != null ? d.final : d.score != null ? d.score : '—'}</span><span class="mono small">Score</span></div>
+       <div><span class="big-num">${d.days_left != null ? d.days_left : '—'}</span><span class="mono small">${d.days_left != null ? 'Days left' : 'Rolling / not stated'}</span></div>
+       <div><span class="big-num">${esc(ch.confidence || d.confidence || '—')}</span><span class="mono small">Confidence</span></div>
      </div>
-     <div class="row">
-       <button class="btn light-solid" data-act="toggle-save" data-id="${g.id}">${saved ? 'In tracker · ' + esc(saved) : 'Add to tracker'}</button>
-       <button class="btn light" data-act="draft" data-id="${g.id}">Draft concept summary</button>
-       <a class="arrow-link light" href="https://www.grants.gov/search-grants" target="_blank" rel="noopener">Search on Grants.gov ${ARROW}</a>
-     </div>`) + `
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head"><h2>Why This Matches</h2><span class="mono small dim">Plan language ↔ funding notice priorities</span></div>
-      <div class="stack">
-        ${m.perGoal.length ? m.perGoal.map(pg => `
-          <div class="align-row">
-            <div class="align-hd"><span class="mono">${esc(goalLabel(pg.goal, pg.idx))}</span><span class="mono">${strength(pg.hits.length)}</span></div>
-            <div class="align-cols">
-              <div><div class="mono small dim">Your plan says</div><div class="row" style="margin:10px 0 8px">${pg.hits.map(h => `<span class="chip">${esc(h)}</span>`).join('')}</div><div class="dim">“[Excerpt from strategic plan, p. #]”</div></div>
-              <div><div class="mono small dim">Funding notice priority</div><p>${pg.hits.map(h => esc(g.priorities[h] || ('Mentions ' + h + '.'))).join('<br>')}</p></div>
-            </div>
-          </div>`).join('') : '<p class="dim">None of your goals’ keywords appear in this notice.</p>'}
-      </div>
+     <div class="row">${DECISIONS.map(x => `<button class="btn ${mine === x ? 'light-solid' : 'light'}" data-act="decide" data-id="${esc(id)}" data-d="${x}">${x}</button>`).join('')}
+       <a class="arrow-link light" href="${esc(o.url || it.url || '#')}" target="_blank" rel="noopener">Open listing ${ARROW}</a></div>`) + `
+  <section class="sec"><div class="wrap split">
+    <div>
+      <h2>Score</h2>
+      ${d.rationale ? `<p class="body-text">${esc(d.rationale)}</p>` : ''}
+      <p class="note">Suggested <strong>${esc(d.suggested_decision || '—')}</strong>${d.decision_reason ? ' — ' + esc(d.decision_reason) : ''}</p>
+      ${Object.keys(br).length ? `<div class="breakdown light-bd">${Object.entries(br).map(([k, v]) => `<div class="bd-row"><span class="mono small">${esc(k)}</span><span class="bd-bar"><span style="width:${Math.max(0, Math.min(1, v)) * 100}%"></span></span><span class="bd-val">${Math.round(v * 100)}%</span></div>`).join('')}</div>` : ''}
     </div>
-  </section>
-
-  <section class="sec gray">
-    <div class="wrap split">
-      <div>
-        <h2>Eligibility Check</h2>
-        <ul class="checklist">
-          ${elig.map(([ok, label, note]) => `<li><span class="status ${ok ? 'ok' : 'warn'}">${ok ? 'Pass' : 'Verify'}</span><span><strong>${label}.</strong> <span class="dim">${esc(note)}</span></span></li>`).join('')}
-        </ul>
-        <p class="note">${m.perGoal.length ? `Strongest fit is ${esc(goalLabel(m.best.goal, m.best.idx))}. ` : 'Weak fit with current goals. '}${elig.some(e => !e[0]) ? 'Resolve the items marked “Verify” before drafting.' : 'No eligibility blockers found.'}</p>
-      </div>
-      <div class="facts">
-        ${[['Award ceiling', g.ceiling], ['Cost share', g.costShare ? 'Required' : 'None'], ['Funding type', g.type], ['Agency', g.agencyFull], ['Notice posted', '[Date]'], ['Questions due', '[Date]'], ['Application due', shortDate(g.due)]].map(([k, v]) => `<div class="kv"><span class="mono small dim">${k}</span><span>${esc(v)}</span></div>`).join('')}
-      </div>
+    <div class="facts">
+      ${Object.entries(comp).map(([k, v]) => `<div class="kv"><span class="mono small dim">${esc(compLabels[k] || k)}</span><span>${esc(v)}</span></div>`).join('') || '<p class="dim">Score components are available when the API is running.</p>'}
+      ${d.second_objective_id ? `<div class="kv"><span class="mono small dim">Second objective</span><span>${esc(d.second_objective_id)}</span></div>` : ''}
     </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head"><h2>Concept Summary</h2><span class="mono small dim">Draft Writer · review before use</span></div>
-      <div class="draft">${state.drafts[g.id] ? esc(state.drafts[g.id]) : '<span class="dim">Generate a one-page project concept that ties this opportunity to your plan’s goals.</span>'}</div>
-      <div class="row" style="margin-top:16px">
-        ${state.drafts[g.id] ? `<button class="btn" data-act="copy-draft" data-id="${g.id}">Copy draft</button>` : `<button class="btn solid" data-act="draft" data-id="${g.id}">Draft concept summary</button>`}
-      </div>
+  </div></section>
+  <section class="sec gray"><div class="wrap split">
+    <div>
+      <h2>Decision card</h2>
+      <p class="body-text">${esc(card.summary || 'No card for this item.')}</p>
+      <div class="dc-why"><div class="why-yes"><div class="mono small">Why it fits</div><p>${esc(card.why_fit || '—')}</p></div><div class="why-no"><div class="mono small">Why it might not</div><p>${esc(card.why_not_fit || '—')}</p></div></div>
+      ${(ch.warnings || []).length ? `<div class="warnbox">${ch.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
+      ${(card.evidence || []).length ? `<details class="evidence" open><summary>Evidence · ${ch.verified_quotes || 0}/${ch.total_quotes || 0} quotes verified</summary>${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
     </div>
-  </section>`;
+    <div class="facts">
+      ${[['Status', o.status], ['Opens', fmtDate(o.open_date)], ['Closes', o.close_date ? fmtDate(o.close_date) : 'Rolling / not stated'], ['Award floor', money(o.award_floor)], ['Award ceiling', money(o.award_ceiling)],
+        ['Cost sharing', o.cost_sharing == null ? '—' : o.cost_sharing ? 'Required' : 'Not required'], ['Instruments', (o.funding_instruments || []).join(', ')], ['Categories', (o.categories || []).join(', ')], ['Assistance listing', (o.cfda || []).join(', ')],
+        ['Objective', d.objective_id ? 'Objective ' + d.objective_id : '—'], ['Division', d.division], ['Route to', d.route_to], ['Can DNCR apply?', card.can_dncr_apply], ['Money type', card.money_type], ['Worth it?', card.worth_it]]
+        .map(([k, v]) => `<div class="kv"><span class="mono small dim">${k}</span><span>${esc(v || '—')}</span></div>`).join('')}
+      ${(o.applicant_types || []).length ? `<details class="evidence"><summary>Eligible applicant types (${o.applicant_types.length})</summary><ul class="plain">${o.applicant_types.map(a => `<li>${esc(a.description || a)}</li>`).join('')}</ul></details>` : ''}
+    </div>
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><h2>Decision history</h2></div>
+    ${(d.decisions || []).length ? `<ul class="history">${d.decisions.map(x => `<li><strong>${esc(x.decision)}</strong> <span class="dim">${esc(fmtWhen(x.at || x.created_at || x.timestamp))}${x.user ? ' · ' + esc(x.user) : ''}</span>${x.note ? ' — ' + esc(x.note) : ''}</li>`).join('')}</ul>` : '<p class="dim">No decisions yet.</p>'}
+  </div></section>`;
 }
 
-function viewPlan() {
-  const p = state.profile;
-  return hero('Agency profile', 'Your Strategic Plan', 'Upload the plan once. Its goals and keywords drive every match score.',
-    `<ol class="steps" aria-label="Setup steps"><li><span class="mono">01</span>Upload plan</li><li><span class="mono">02</span>Review goals</li><li><span class="mono">03</span>Eligibility profile</li></ol>`, 'short') + `
-
-  <section class="sec">
-    <div class="wrap split">
-      <div>
-        <div class="mono small red">01</div>
-        <h2>Upload the Plan</h2>
-        <p class="body-text">Plan Parser reads the document and pulls out each goal, the page it came from, and the keywords used to match funding notices.</p>
-      </div>
-      <div class="stack">
-        <div class="drop" id="drop">
-          <div style="flex:1 1 220px">
-            <div class="mono small dim">${state.planFile ? 'Uploaded' : 'PDF · DOCX · TXT'}</div>
-            <div class="drop-name">${state.planFile ? esc(state.planFile) : 'Drop your strategic plan here'}</div>
-          </div>
-          <label class="btn solid" style="cursor:pointer">${state.planFile ? 'Replace file' : 'Choose file'}<input type="file" id="planInput" accept=".pdf,.doc,.docx,.txt" class="sr-only"></label>
-        </div>
-        <label class="field">Or paste a link to the plan<input type="url" id="planUrl" placeholder="https://"></label>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec gray">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="mono small red">02</div><h2>Goals We Found</h2></div><button class="btn" data-act="add-goal">+ Add a goal</button></div>
-      <div class="goal-grid">
-      ${state.goals.map((g, i) => state.editing === g.id ? `
-        <form class="goal-card" data-form="${g.id}">
-          <label class="field">Goal title<input type="text" name="title" value="${esc(g.title)}" required></label>
-          <label class="field">Keywords (comma-separated)<input type="text" name="tags" value="${esc(g.tags.join(', '))}"></label>
-          <div class="row"><button class="btn solid" type="submit">Save goal</button><button class="btn" type="button" data-act="cancel-edit">Cancel</button></div>
-        </form>` : `
-        <div class="goal-card">
-          <div class="mono small dim">Goal ${String(i + 1).padStart(2, '0')} · Source p. [#]</div>
-          <div class="goal-title">${esc(g.title)}</div>
-          <div class="row">${g.tags.map(t => `<span class="chip">${esc(t)}</span>`).join('') || '<span class="dim small-text">No keywords</span>'}</div>
-          <div class="row" style="margin-top:auto;padding-top:8px">
-            <button class="btn" data-act="edit-goal" data-id="${g.id}">Edit</button>
-            <button class="btn ghost" data-act="remove-goal" data-id="${g.id}" aria-label="Remove ${esc(g.title)}">Remove</button>
-          </div>
-        </div>`).join('')}
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap split">
-      <div>
-        <div class="mono small red">03</div>
-        <h2>Eligibility Profile</h2>
-        <p class="body-text">Eligibility Checker screens every opportunity against these answers before it is scored.</p>
-      </div>
-      <div class="stack">
-        <div class="grid2">
-          <label class="field">Agency name<input type="text" data-prof="agency" value="${esc(p.agency)}" placeholder="e.g. NC Department of …"></label>
-          <label class="field">Applicant type<select data-prof="type">${['State government', 'County government', 'City or township', 'Public university'].map(o => `<option ${p.type === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
-          <label class="field">Service area<input type="text" data-prof="area" value="${esc(p.area)}"></label>
-          <label class="field">Cost-share capacity<select data-prof="costShare">${['Can provide up to 20%', 'Can provide over 20%', 'No cost share'].map(o => `<option ${p.costShare === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
-        </div>
-        <label class="check"><input type="checkbox" data-prof="sam" ${p.sam ? 'checked' : ''}>Active SAM.gov registration (UEI on file)</label>
-        <div class="row" style="margin-top:8px">
-          <a class="btn solid" href="#matches" data-act="find">Find matches</a>
-          <button class="btn ghost" data-act="reset-sample">Reset to sample data</button>
-        </div>
-      </div>
-    </div>
-  </section>`;
+const HOW_STEPS = [
+  ['Collector', 'Reads the whole Grants.gov feed every morning.', 'Code'],
+  ['Gatekeeper', 'Drops what DNCR cannot or should not pursue (rules).', 'Code'],
+  ['Fit Scorer', 'Scores each item against the DNCR 2025–2029 Strategic Plan objectives.', 'Embeddings'],
+  ['Card Agent + Verifier', 'Writes a plain-English card with quotes; the Verifier checks every quote exists.', 'LLM + code'],
+  ['You decide', 'Chase, Waitlist, Skip or Route. Route and Chase open drafts you can edit and copy.', 'On click']
+];
+const FAQ = [
+  ['Where does the data come from?', 'The daily pipeline reads Grants.gov, scores items against the DNCR 2025–2029 Strategic Plan and writes today’s short list. This page reads it from the API (/api/shortlist).'],
+  ['Does anything get submitted or sent?', 'No. Decisions are recorded in our own log. Route and Apply Assist only produce drafts that you copy yourself.'],
+  ['What do the four decisions mean?', 'Chase: pursue it (opens a starter pack). Waitlist: watch for the next window. Skip: not for DNCR. Route: another office should apply (opens a forwarding draft).'],
+  ['Why is there a “why it might not” on every card?', 'So the risks are always visible next to the fit. Read the eligibility section before chasing.'],
+  ['Is this an official DNCR tool?', 'No. It is an independent student prototype for Solve-a-thon 2026 and is not affiliated with or endorsed by NC DNCR.']
+];
+function viewHow() {
+  return hero('How it works', 'From Grants.gov to one decision', 'A daily pipeline does the reading, screening and first drafts. A person makes every decision.', '', 'short') + `
+  <section class="sec"><div class="wrap"><div class="sec-head"><h2>The Process</h2></div>
+    <ol class="process">${HOW_STEPS.map(([t, d, k], i) => `<li><span class="step-num">${String(i + 1).padStart(2, '0')}</span><h3>${t}</h3><p>${d}</p><span class="mono small dim">${k}</span></li>`).join('')}</ol>
+  </div></section>
+  <section class="sec gray"><div class="wrap split"><div><h2>Frequently Asked Questions</h2></div>
+    <div class="faq">${FAQ.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
+  </div></section>`;
 }
 
-function viewTracker() {
-  const byCol = Object.fromEntries(COLUMNS.map(c => [c, []]));
-  Object.entries(state.tracker).forEach(([id, col]) => { const g = GRANTS.find(x => x.id === id); if (g && byCol[col]) byCol[col].push(g); });
-  const total = Object.keys(state.tracker).length;
-  return hero('Pipeline', 'Application Tracker', 'Move opportunities from discovery to award.',
-    `<div class="hero-stats">${COLUMNS.slice(0, 4).map(c => `<div><span class="big-num">${byCol[c].length}</span><span class="mono small">${c}</span></div>`).join('')}</div>`, 'short') + `
-  <section class="sec gray">
-    <div class="wrap">
-      <div class="sec-head"><h2>${total} Opportunities</h2><a class="arrow-link" href="#matches">Find more ${ARROW}</a></div>
-      <div class="board-scroll"><div class="board">
-        ${COLUMNS.map((c, ci) => `
-          <section class="col" aria-label="${c}">
-            <div class="col-hd"><span class="mono">${c}</span><span class="mono">${byCol[c].length}</span></div>
-            ${byCol[c].length ? byCol[c].sort((a, b) => a.due.localeCompare(b.due)).map(g => {
-              const s = scoreGrant(g).score, d = daysUntil(g.due);
-              return `<div class="tcard">
-                <div class="mono small dim">${s} Match · ${g.agency}</div>
-                <a class="tcard-title" href="#grant-${g.id}">${esc(g.title)}</a>
-                <span class="due small-text">Due ${shortDate(g.due)}${d >= 0 && d <= 45 ? ' · soon' : ''}</span>
-                <div class="row" style="gap:6px">
-                  <button class="btn sm" data-act="move" data-id="${g.id}" data-dir="-1" ${ci === 0 ? 'disabled' : ''} aria-label="Move ${esc(g.title)} back">←</button>
-                  <button class="btn sm" data-act="move" data-id="${g.id}" data-dir="1" ${ci === COLUMNS.length - 1 ? 'disabled' : ''} aria-label="Move ${esc(g.title)} forward">→</button>
-                  <button class="btn sm ghost" data-act="toggle-save" data-id="${g.id}" style="margin-left:auto">Remove</button>
-                </div>
-              </div>`;
-            }).join('') : '<div class="col-empty">Nothing here yet.</div>'}
-          </section>`).join('')}
-      </div></div>
-    </div>
-  </section>`;
+/* ---------------- Matching run (replays today’s pipeline + applies qualifiers) ---------------- */
+const RUN_STEPS = [['Collector', 'Collecting from Grants.gov'], ['Gatekeeper', 'Applying gates'], ['Fit Scorer', 'Scoring against DNCR’s plan'], ['Card Agent', 'Writing & verifying cards'], ['Qualifiers', 'Applying your qualifiers']];
+function buildRunScript() {
+  const s = state.list || {}; const c = s.counts || {}; const all = ((state.all || {}).items) || []; const items = shown();
+  const L = []; const add = (step, text, tone = '') => L.push({ step, text, tone });
+  add(0, `Last pipeline run: ${fmtWhen(s.last_refreshed)} · status ${s.run_status || 'unknown'}`, 'dim');
+  add(0, `${c.opportunities ?? '?'} opportunities collected`, 'strong');
+  add(1, `${(c.opportunities ?? 0) - (c.passed_gates ?? 0)} dropped by eligibility and timing gates`, 'warn');
+  add(1, `${c.passed_gates ?? '?'} passed gates`, 'strong');
+  all.slice().sort((a, b) => b.score - a.score).forEach(it => add(2, `${it.title} → ${it.score} (Objective ${(it.objective || {}).id || '—'})`, it.score >= 60 ? 'ok' : ''));
+  add(2, `${c.scored ?? all.length} scored`, 'strong');
+  all.filter(i => i.card).forEach(it => add(3, `${it.title} — ${it.verification.verified_quotes}/${it.verification.total_quotes} quotes verified · ${it.confidence}`, it.confidence === 'High' ? 'ok' : it.confidence === 'Low' ? 'bad' : 'warn'));
+  add(3, `${c.cards ?? '?'} cards written${c.cards_retried ? ' (' + c.cards_retried + ' retried)' : ''} · ${c.alerts ?? 0} alerts`, 'strong');
+  ((state.list || {}).items || []).forEach(it => { const ok = passes(it); add(4, `${ok ? '✓' : '✕'} ${it.title}`, ok ? 'ok' : 'bad'); });
+  add(4, `${items.length} item${items.length === 1 ? '' : 's'} pass your qualifiers`, 'strong');
+  return L;
+}
+function startRun() {
+  if (state.run && state.run.timer) clearTimeout(state.run.timer);
+  state.run = { lines: buildRunScript(), shown: 0, started: Date.now(), timer: null };
+  if (location.hash !== '#today') location.hash = 'today'; else render();
+  window.scrollTo(0, 0); tickRun();
+}
+function tickRun() {
+  const run = state.run; if (!run) return;
+  if (run.shown >= run.lines.length) { run.timer = setTimeout(finishRun, 800); updateRunPanel(); return; }
+  run.shown++; updateRunPanel();
+  run.timer = setTimeout(tickRun, run.lines[run.shown - 1].tone === 'strong' ? 600 : 240);
+}
+function finishRun() { if (!state.run) return; clearTimeout(state.run.timer); state.run = null; render(); window.scrollTo(0, 0); toast('Short list ready'); }
+function runPanelInner() {
+  const run = state.run; const pct = Math.round(run.shown / run.lines.length * 100);
+  const cur = run.shown ? run.lines[run.shown - 1].step : 0; const done = run.shown >= run.lines.length;
+  const st = RUN_STEPS.map((_, i) => done || i < cur ? 'done' : i === cur ? 'run' : 'wait');
+  return `<div class="run-top"><div class="mono small eyebrow-light">${done ? 'Complete' : 'Replaying today’s run'} · ${((Date.now() - run.started) / 1000).toFixed(1)}s</div>
+    <div class="run-title">${done ? 'Short list ready' : RUN_STEPS[cur][1] + '…'}</div>
+    <div class="run-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="Progress"><span style="width:${pct}%"></span></div></div>
+    <div class="run-grid"><ol class="run-steps">${RUN_STEPS.map(([a, l], i) => `<li class="s-${st[i]}"><span class="led" aria-hidden="true"></span><span><span class="run-step-label">${l}</span><span class="mono small">${a} · ${st[i] === 'done' ? 'done' : st[i] === 'run' ? 'working' : 'waiting'}</span></span></li>`).join('')}</ol>
+    <div class="console" id="console" aria-live="polite">${run.lines.slice(0, run.shown).map(l => `<div class="ln ${l.tone}"><span class="ln-agent">${RUN_STEPS[l.step][0].split(' ')[0].toLowerCase()}</span>${esc(l.text)}</div>`).join('')}${done ? '' : '<div class="ln cursor">▍</div>'}</div></div>`;
+}
+function updateRunPanel() { const p = document.getElementById('runPanel'); if (!p) return; p.innerHTML = runPanelInner(); const c = document.getElementById('console'); if (c) c.scrollTop = c.scrollHeight; }
+function viewRun() { return `<section class="run"><div class="hero-art" aria-hidden="true"></div><div class="wrap run-inner"><div id="runPanel">${runPanelInner()}</div><button class="btn light" data-act="skip-run" style="align-self:flex-start">Skip to results</button></div></section>`; }
+
+/* ---------------- Modal (drafts) ---------------- */
+let lastFocus = null;
+function openModal(title, html) {
+  lastFocus = document.activeElement;
+  $('#modalTitle').textContent = title; $('#modalBody').innerHTML = html; $('#modal').hidden = false;
+  document.body.style.overflow = 'hidden';
+  const f = $('#modal textarea') || $('#modal [data-act="close-modal"]'); if (f) f.focus();
+}
+function closeModal() { $('#modal').hidden = true; document.body.style.overflow = ''; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+const loadingHtml = msg => `<p class="dim">${esc(msg)}</p><div class="run-bar"><span style="width:40%" class="pulse"></span></div>`;
+function routeHtml(r) {
+  return `<p class="mono small dim">Route Agent draft · nothing is sent</p>
+    <div class="facts" style="padding:0 0 4px">${[['Route to', r.route_to], ['Reason', r.reason], ['Deadline', r.deadline ? fmtDate(r.deadline) : 'Rolling / not stated']].map(([k, v]) => `<div class="kv"><span class="mono small dim">${k}</span><span>${esc(v || '—')}</span></div>`).join('')}</div>
+    <label class="field" style="margin-top:14px">Message (edit before copying)<textarea id="draftText" rows="8">${esc(r.message || '')}</textarea></label>
+    <div class="row" style="margin-top:14px"><button class="btn solid" data-act="copy-text" data-target="draftText">Copy message</button><button class="btn ghost" data-act="close-modal">Close</button></div>`;
+}
+function assistHtml(a) {
+  const list = (t, xs) => (xs || []).length ? `<h3>${t}</h3><ul class="plain">${xs.map(x => `<li>${esc(typeof x === 'string' ? x : JSON.stringify(x))}</li>`).join('')}</ul>` : '';
+  const all = ['Requirements:', ...(a.requirements || []).map(x => '- ' + x), '', 'SF-424 fields to gather:', ...(a.sf424_fields_to_gather || []).map(x => '- ' + x), '', 'Outline:', ...(a.outline || []).map(x => '- ' + x), '', 'Timeline:', ...(a.timeline || []).map(x => '- ' + x), '', 'Open questions:', ...(a.open_questions || []).map(x => '- ' + x)].join('\n');
+  return `<p class="mono small dim">Apply Assist starter pack · scaffolding only, nothing is submitted</p>
+    <div class="assist">${list('Requirements', a.requirements)}${list('SF-424 fields to gather', a.sf424_fields_to_gather)}${list('Outline', a.outline)}${list('Timeline', a.timeline)}${list('Open questions', a.open_questions)}</div>
+    <label class="field" style="margin-top:14px">Email to the division lead (edit before copying)<textarea id="draftText" rows="6">${esc(a.email_to_division_lead || '')}</textarea></label>
+    <textarea id="packText" hidden>${esc(all)}</textarea>
+    <div class="row" style="margin-top:14px"><button class="btn solid" data-act="copy-text" data-target="draftText">Copy email</button><button class="btn" data-act="copy-text" data-target="packText">Copy starter pack</button><button class="btn ghost" data-act="close-modal">Close</button></div>`;
+}
+
+/* ---------------- Actions ---------------- */
+function setDecisionLocal(id, dec) {
+  [state.list, state.all].forEach(s => ((s || {}).items || []).forEach(it => { if (it.opp_id === id) it.my_decision = dec; }));
+  if (state.detail[id] && !state.detail[id].error) { const h = state.detail[id].decisions || (state.detail[id].decisions = []); if (dec) h.push(dec); }
+}
+async function decide(id, decision) {
+  if (state.busy[id]) return;
+  state.busy[id] = true; rerenderKeep();
+  try {
+    const d = await data.decide(id, decision);
+    setDecisionLocal(id, d);
+    toast(`${decision} recorded${net.demo ? ' (demo)' : ''}`);
+    if (decision === 'Route' || decision === 'Chase') {
+      openModal(decision === 'Route' ? 'Route draft' : 'Starter pack', loadingHtml(decision === 'Route' ? 'Route Agent is drafting…' : 'Apply Assist is preparing the starter pack…'));
+      try {
+        const r = decision === 'Route' ? await data.route(id) : await data.assist(id);
+        if (!$('#modal').hidden) $('#modalBody').innerHTML = decision === 'Route' ? routeHtml(r) : assistHtml(r);
+      } catch (e) {
+        $('#modalBody').innerHTML = `<p>${e.status === 409 ? 'No decision card exists for this item, so no draft can be made.' : 'The draft could not be generated (' + esc(e.message) + ').'}</p><button class="btn" data-act="close-modal">Close</button>`;
+      }
+    }
+  } catch (e) { toast('Could not record the decision (' + e.message + ')'); }
+  finally { delete state.busy[id]; rerenderKeep(); }
+}
+async function undo(id) {
+  if (state.busy[id]) return;
+  state.busy[id] = true; rerenderKeep();
+  try {
+    const r = await data.undo(id);
+    [state.list, state.all].forEach(s => ((s || {}).items || []).forEach(it => { if (it.opp_id === id) it.my_decision = r.now || null; }));
+    delete state.detail[id];
+    toast('Decision undone');
+  } catch (e) { toast(e.status === 404 ? 'Nothing to undo' : 'Undo failed (' + e.message + ')'); }
+  finally { delete state.busy[id]; rerenderKeep(); }
+}
+async function copyFrom(targetId) {
+  const el = document.getElementById(targetId); if (!el) return;
+  try { await navigator.clipboard.writeText(el.value); toast('Copied to clipboard'); }
+  catch (e) { el.hidden = false; el.select(); toast('Press Ctrl/Cmd+C to copy'); }
 }
 
 /* ---------------- Router ---------------- */
-function render() {
-  const h = (location.hash || '#matches').slice(1);
-  let html, nav;
-  if (h.startsWith('grant-')) { html = viewDetail(h.slice(6)); nav = 'matches'; }
-  else if (h === 'tracker') { html = viewTracker(); nav = 'tracker'; }
-  else if (h === 'plan') { html = viewPlan(); nav = 'plan'; }
-  else { html = viewMatches(); nav = 'matches'; }
-  $('#app').innerHTML = html;
-  document.querySelectorAll('[data-nav]').forEach(a => { if (a.dataset.nav === nav) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
-  $('#agencyName').textContent = state.profile.agency || '[NC agency name]';
+async function render() {
+  const h = (location.hash || '#today').slice(1);
+  const navOf = h.startsWith('item-') ? 'today' : h;
+  document.querySelectorAll('[data-nav]').forEach(a => { if (a.dataset.nav === navOf) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  const app = $('#app');
+  if (!state.ready) { app.innerHTML = state.error ? errorView() : hero('Loading', 'Loading today’s short list…', '', '', 'short'); return; }
+  if (h.startsWith('item-')) {
+    const id = decodeURIComponent(h.slice(5));
+    if (!state.detail[id]) { app.innerHTML = viewDetail(id); try { state.detail[id] = await data.opportunity(id); } catch (e) { state.detail[id] = { error: e.status || 'error' }; } }
+    app.innerHTML = viewDetail(id);
+  } else if (h === 'match') app.innerHTML = viewQualify();
+  else if (h === 'board') app.innerHTML = viewBoard();
+  else if (h === 'how') app.innerHTML = viewHow();
+  else app.innerHTML = state.run ? viewRun() : viewToday();
   bindView();
 }
-window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+function rerenderKeep() { const y = window.scrollY; render().then(() => window.scrollTo(0, y)); }
+function errorView() {
+  return hero('Cannot load data', 'The API is not reachable', 'Start the backend and reload: <code>python pipeline.py</code> then <code>uvicorn app.api:app --reload --port 8000</code>, and open http://localhost:8000.', `<p class="mono small eyebrow-light">${esc(state.error)}</p>`, 'short');
+}
+window.addEventListener('hashchange', () => {
+  if (state.run && location.hash !== '#today' && location.hash !== '') { clearTimeout(state.run.timer); state.run = null; }
+  render(); window.scrollTo(0, 0);
+});
 
 /* ---------------- Events ---------------- */
 function bindView() {
-  const f = state.filters;
-  const on = (sel, ev, fn) => { const el = $(sel); if (el) el.addEventListener(ev, fn); };
-  on('#f-q', 'input', e => { f.q = e.target.value; rerenderKeepFocus('#f-q'); });
-  on('#f-due', 'change', e => { f.due = e.target.value; render(); });
-  on('#f-sort', 'change', e => { f.sort = e.target.value; render(); });
-  on('#f-elig', 'change', e => { f.eligibleOnly = e.target.checked; render(); });
-  on('#f-cost', 'change', e => { f.hideCost = e.target.checked; render(); });
-  document.querySelectorAll('[data-goal]').forEach(el => el.addEventListener('change', e => {
-    const id = e.target.dataset.goal; f.goals = e.target.checked ? [...f.goals, id] : f.goals.filter(x => x !== id); render();
-  }));
-  document.querySelectorAll('[data-agency]').forEach(el => el.addEventListener('change', e => {
-    const a = e.target.dataset.agency; f.agencies = e.target.checked ? [...f.agencies, a] : f.agencies.filter(x => x !== a); render();
-  }));
-  document.querySelectorAll('[data-prof]').forEach(el => el.addEventListener(el.type === 'text' ? 'input' : 'change', e => {
-    const k = e.target.dataset.prof; state.profile[k] = e.target.type === 'checkbox' ? e.target.checked : e.target.value; save();
-    if (k === 'agency') $('#agencyName').textContent = state.profile.agency || '[NC agency name]';
-  }));
-  document.querySelectorAll('[data-form]').forEach(form => form.addEventListener('submit', e => {
-    e.preventDefault();
-    const g = state.goals.find(x => x.id === form.dataset.form); const fd = new FormData(form);
-    g.title = String(fd.get('title')).trim() || g.title;
-    g.tags = String(fd.get('tags')).split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
-    state.editing = null; save(); render(); toast('Goal saved — matches updated');
-  }));
-  const input = $('#planInput');
-  if (input) input.addEventListener('change', e => { const file = e.target.files[0]; if (file) planUploaded(file.name); });
-  const drop = $('#drop');
-  if (drop) {
-    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('over'); });
-    drop.addEventListener('dragleave', () => drop.classList.remove('over'));
-    drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); const file = e.dataTransfer.files[0]; if (file) planUploaded(file.name); });
-  }
+  const q = state.q;
+  const keep = () => { store.set('q', q); rerenderKeep(); };
+  const toggleIn = (arr, v, on) => on ? [...new Set([...arr, v])] : arr.filter(x => x !== v);
+  document.querySelectorAll('[data-q-div]').forEach(el => el.addEventListener('change', e => { q.divisions = toggleIn(q.divisions, e.target.dataset.qDiv, e.target.checked); keep(); }));
+  document.querySelectorAll('[data-q-money]').forEach(el => el.addEventListener('change', e => { q.money = toggleIn(q.money, e.target.dataset.qMoney, e.target.checked); keep(); }));
+  document.querySelectorAll('[data-q-sug]').forEach(el => el.addEventListener('change', e => { q.suggested = toggleIn(q.suggested, e.target.dataset.qSug, e.target.checked); keep(); }));
+  document.querySelectorAll('[data-q-conf]').forEach(el => el.addEventListener('change', e => { q.confidence = e.target.dataset.qConf; keep(); }));
+  const on = (sel, fn) => { const el = $(sel); if (el) el.addEventListener('change', fn); };
+  on('#q-closing', e => { q.closing = e.target.value; keep(); });
+  on('#q-low', e => { q.include_low = e.target.checked; keep(); });
+  on('#q-skipped', e => { q.include_skipped = e.target.checked; keep(); });
+  on('#q-hide', e => { q.hide_decided_skip = e.target.checked; keep(); });
+  document.querySelectorAll('[data-move]').forEach(el => el.addEventListener('change', e => { const v = e.target.value; if (v) decide(e.target.dataset.move, v); }));
 }
-function rerenderKeepFocus(sel) {
-  const el = $(sel); const pos = el ? el.selectionStart : 0; render(); const n = $(sel); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (e) {} }
-}
-function planUploaded(name) { state.planFile = name; save(); render(); toast('Plan uploaded — Plan Parser would extract goals here'); }
-
-function runPipeline() {
-  pipelineStep = 0;
-  const tick = () => {
-    const el = $('#pipeline'); if (el) el.innerHTML = pipelineHTML();
-    if (pipelineStep < 4) { pipelineStep++; setTimeout(tick, 600); } else { render(); toast('Matching complete'); }
-  };
-  tick();
-}
-
-function draftFor(g) {
-  const m = scoreGrant(g); const p = state.profile;
-  const goals = m.perGoal.map(pg => goalLabel(pg.goal, pg.idx)).join('; ') || '[goal]';
-  return `PROJECT CONCEPT — ${g.title}
-Applicant: ${p.agency || '[Agency name]'} (${p.type}), ${p.area}
-
-1. Need
-[Describe the problem in North Carolina, with local data.]
-
-2. Alignment with our strategic plan
-This project advances ${goals}. Overlapping priorities: ${m.perGoal.flatMap(pg => pg.hits).join(', ') || '[keywords]'}.
-
-3. Proposed activities
-[2–4 activities that respond to the ${g.agency} notice's priorities.]
-
-4. Budget & match
-Request: [amount]. ${g.costShare ? 'Non-federal match: [amount / source].' : 'No cost share required.'}
-
-5. Timeline
-Application due ${fmtDate(g.due)}. Project period: [start – end].`;
-}
-
 document.addEventListener('click', async e => {
+  if (e.target.id === 'modal') { closeModal(); return; }
   const b = e.target.closest('[data-act]'); if (!b) return;
   const act = b.dataset.act, id = b.dataset.id;
-  if (act === 'toggle-save') {
-    e.preventDefault();
-    if (state.tracker[id]) { delete state.tracker[id]; toast('Removed from tracker'); }
-    else { state.tracker[id] = 'Discovered'; toast('Saved to tracker · Discovered'); }
-    save(); render();
-  } else if (act === 'move') {
-    const i = COLUMNS.indexOf(state.tracker[id]) + Number(b.dataset.dir);
-    if (i >= 0 && i < COLUMNS.length) { state.tracker[id] = COLUMNS[i]; save(); render(); }
-  } else if (act === 'reset-filters') {
-    Object.assign(state.filters, { q: '', goals: state.goals.map(g => g.id), agencies: [], due: 'any', eligibleOnly: false, hideCost: false }); render();
-  } else if (act === 'rerun') { runPipeline();
-  } else if (act === 'draft') {
-    const g = GRANTS.find(x => x.id === id); state.drafts[id] = draftFor(g); render(); toast('Draft generated (template)');
-  } else if (act === 'copy-draft' || act === 'copy-list') {
-    const text = act === 'copy-draft' ? state.drafts[id]
-      : GRANTS.map(g => ({ g, s: scoreGrant(g).score })).sort((a, b) => b.s - a.s).map(({ g, s }) => `${s}\t${g.title}\t${g.agency}\tdue ${g.due}`).join('\n');
-    try { await navigator.clipboard.writeText(text); toast('Copied to clipboard'); } catch (err) { toast('Copy was blocked by the browser'); }
-  } else if (act === 'edit-goal') { state.editing = id; render();
-  } else if (act === 'cancel-edit') { state.editing = null; render();
-  } else if (act === 'remove-goal') {
-    state.goals = state.goals.filter(g => g.id !== id); state.filters.goals = state.filters.goals ? state.filters.goals.filter(x => x !== id) : null; save(); render(); toast('Goal removed');
-  } else if (act === 'add-goal') {
-    const g = { id: 'g' + Date.now(), title: 'New goal', tags: [] }; state.goals.push(g);
-    if (state.filters.goals) state.filters.goals.push(g.id); state.editing = g.id; save(); render();
-  } else if (act === 'reset-sample') {
-    state.goals = JSON.parse(JSON.stringify(DEFAULT_GOALS)); state.tracker = { build: 'Drafting', brownfields: 'Submitted', rbdg: 'Evaluating' }; state.planFile = ''; state.filters.goals = null; save(); render(); toast('Reset to sample data');
-  } else if (act === 'find') { state.filters.goals = null; }
+  if (act === 'decide') { e.preventDefault(); decide(id, b.dataset.d); }
+  else if (act === 'undo') { e.preventDefault(); undo(id); }
+  else if (act === 'close-modal') closeModal();
+  else if (act === 'copy-text') copyFrom(b.dataset.target);
+  else if (act === 'run-match') { e.preventDefault(); await reloadAll(); startRun(); }
+  else if (act === 'reset-q') { state.q = JSON.parse(JSON.stringify(DEFAULT_Q)); store.set('q', state.q); rerenderKeep(); toast('Qualifiers reset'); }
+  else if (act === 'skip-run') finishRun();
+  else if (act === 'reload') { await reloadAll(); render(); toast('Reloaded'); }
+  else if (act === 'to-top') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#modal').hidden) closeModal(); });
 
-render();
+/* ---------------- Boot ---------------- */
+async function reloadAll() {
+  state.detail = {};
+  await Promise.all([loadShortlist(), loadBoard()]);
+}
+(async function boot() {
+  render();
+  try {
+    state.health = await net.detect();
+    if (net.demo) await demo.load();
+    await reloadAll();
+    state.ready = true;
+  } catch (e) {
+    state.error = (net.demo ? 'Demo data not found (' + SAMPLES + '): ' : '') + e.message;
+  }
+  render();
+})();
 </script>
 </body>
 </html>
