@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P2 |
+| Owner | lead |
 | Branch | `agent/alert` |
 | Code | `agents/alert.py` |
 | Type | Code (date math) |

@@ -1,4 +1,4 @@
-"""Alert (owner: P2). Spec: docs/agents/alert.md"""
+"""Alert (owner: lead). Spec: docs/agents/alert.md"""
 from agents import alert
 from core import storage
 

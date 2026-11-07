@@ -1,4 +1,4 @@
-"""Alert — deadline and watch-list alerts.  Owner: P2
+"""Alert — deadline and watch-list alerts.  Owner: lead
 Spec: docs/agents/alert.md
 """
 from __future__ import annotations
@@ -31,7 +31,7 @@ def run(state: dict) -> dict:
         if opp.status == "posted" and opp.days_to_close is not None and opp.days_to_close <= WAITLIST_WARN_DAYS:
             alerts.append(Alert(opp_id=opp_id, kind="waitlist_21_days", days_to_close=opp.days_to_close,
                                 message=f"Waitlisted item closes in {opp.days_to_close} days"))
-        # TODO(P2): 'waitlist_opening' when a waitlisted forecast becomes posted
+        # TODO(lead): 'waitlist_opening' when a waitlisted forecast becomes posted
 
     storage.write_json("opportunities/previous_ids.json", list(opps.keys()))
     out = [a.model_dump() for a in alerts]
