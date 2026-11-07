@@ -1,0 +1,21 @@
+{
+  "agency": "dncr",
+  "name": "NC Department of Natural and Cultural Resources",
+  "mission": "TODO (P1): copy the mission statement from the 2025-2029 Strategic Plan",
+  "source_url": "https://www.osbm.nc.gov/documents/files/strategic-plan-dncr/open",
+  "keywords": ["state parks", "trails", "outdoor recreation", "historic preservation", "battlefield", "museum", "collections", "archives", "library", "arts", "aquarium", "zoo", "natural heritage", "conservation", "Helene", "disaster recovery", "digitization", "America 250", "broadband"],
+  "known_funders": ["DOI-NPS", "NEA", "NEH", "IMLS", "DOC-NOAA", "USDA-FS", "DOI-FWS", "DOT-FHWA"],
+  "objectives": [
+    {"goal_id": "1", "objective_id": "1.1", "text": "TODO (P1): Education objective text from plan", "page": 0, "urgency": "normal", "divisions": [], "keywords": ["K-12", "teachers", "field trips", "curriculum"]},
+    {"goal_id": "1", "objective_id": "1.5", "text": "TODO (P1): digital learning / digitization objective text from plan", "page": 0, "urgency": "normal", "divisions": ["State Archives", "State Library", "Museums"], "keywords": ["digitization", "digital learning", "collections"]},
+    {"goal_id": "2", "objective_id": "2.3", "text": "TODO (P1): local economies objective text (elevated urgency)", "page": 0, "urgency": "elevated", "divisions": [], "keywords": ["community hub", "arts", "music", "outdoor"]},
+    {"goal_id": "2", "objective_id": "2.4", "text": "TODO (P1): broadband at sites by 2027 objective text", "page": 0, "urgency": "elevated", "divisions": [], "keywords": ["broadband", "connectivity"]},
+    {"goal_id": "3", "objective_id": "3.2", "text": "TODO (P1): America 250 (2026) objective text", "page": 0, "urgency": "elevated", "divisions": ["Historic Sites", "Museums"], "keywords": ["America 250", "semiquincentennial", "revolution"]},
+    {"goal_id": "3", "objective_id": "3.5", "text": "TODO (P1): green space for all objective text", "page": 0, "urgency": "elevated", "divisions": ["State Parks", "Land and Water Fund"], "keywords": ["outdoor recreation", "underserved", "parks", "trails"]},
+    {"goal_id": "3", "objective_id": "3.6", "text": "TODO (P1): protection / ecological restoration objective text", "page": 0, "urgency": "elevated", "divisions": ["Natural Heritage", "State Parks", "SHPO"], "keywords": ["restoration", "battlefield", "land acquisition", "conservation"]},
+    {"goal_id": "4", "objective_id": "4.3", "text": "TODO (P1): operations objective text (mostly internal; rarely federally funded)", "page": 0, "urgency": "normal", "divisions": [], "keywords": []},
+    {"goal_id": "5", "objective_id": "5.1", "text": "TODO (P1): Helene recovery — 80% of affected sites recovered by 2028", "page": 0, "urgency": "highest", "divisions": ["State Parks", "Historic Sites", "SHPO"], "keywords": ["Helene", "hurricane", "disaster", "recovery", "emergency supplemental"]},
+    {"goal_id": "5", "objective_id": "5.2", "text": "TODO (P1): support arts in western NC after Helene", "page": 0, "urgency": "highest", "divisions": ["Arts Council"], "keywords": ["western North Carolina", "arts", "Helene"]}
+  ],
+  "_todo": "P1: replace every TODO with the exact plan wording and page number (pp. 7-12), add the remaining objectives (25 total). Urgency values come from the Field Notes table."
+}
