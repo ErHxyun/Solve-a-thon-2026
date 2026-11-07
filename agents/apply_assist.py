@@ -1,4 +1,4 @@
-"""Apply Assist — builds a starter pack when the user clicks Chase.  Owner: P1
+"""Apply Assist — builds a starter pack when the user clicks Chase.  Owner: LLM-B
 Spec: docs/agents/apply_assist.md
 
 Drafts SCAFFOLDING only (requirements checklist, SF-424 fields to gather, outline,

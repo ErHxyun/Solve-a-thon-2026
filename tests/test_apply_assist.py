@@ -1,4 +1,4 @@
-"""Apply Assist (owner: P1). Spec: docs/agents/apply_assist.md"""
+"""Apply Assist (owner: LLM-B). Spec: docs/agents/apply_assist.md"""
 from agents import apply_assist
 from core.guard import scrub
 from core.schemas import Card, Opportunity

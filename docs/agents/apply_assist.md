@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P1 |
+| Owner | LLM-B |
 | Branch | `agent/apply-assist` |
 | Code | `agents/apply_assist.py`, prompt `prompts/apply_assist.md`, `reference/process_map.json` |
 | Type | LLM (deployment `chat`, reasoning_effort medium) |
