@@ -48,9 +48,18 @@ def test_prompt_separates_quotable_text_from_facts(opportunities):
 
 
 def test_placeholder_plan_text_is_not_offered_for_quoting():
-    # dncr_profile.json still holds "TODO (P1)" wording; the model must not quote it
-    prompt = card_agent.build_user_prompt(OPP, ITEM, load_profile())
+    # an objective whose wording is still a "TODO" placeholder must never be offered as quotable plan text
+    profile = load_profile()
+    placeholder = profile.model_copy(update={"objectives": [
+        o.model_copy(update={"text": "TODO: copy the plan wording"}) if o.objective_id == "1.5" else o
+        for o in profile.objectives]})
+    prompt = card_agent.build_user_prompt(OPP, ITEM, placeholder)
     assert "TODO" not in prompt and "do not quote the plan" in prompt
+
+
+def test_real_plan_text_is_offered_for_quoting():
+    prompt = card_agent.build_user_prompt(OPP, ITEM, load_profile())
+    assert "## PLAN TEXT" in prompt and "Objective 1.5" in prompt and "TODO" not in prompt
 
 
 # ---- money type hint ----------------------------------------------------- #
