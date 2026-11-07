@@ -7,6 +7,8 @@ Spec: docs/agents/verifier.md
 """
 from __future__ import annotations
 
+import re
+
 from rapidfuzz import fuzz
 
 from core.reference import load_profile
@@ -19,7 +21,8 @@ MAX_ATTEMPTS = 2
 def _source_text(opp: Opportunity, objective_text: str, source: str) -> str:
     if source == "plan":
         return objective_text
-    return " ".join([opp.title, opp.description, opp.eligibility_text])
+    applicant_types = "; ".join(a.description for a in opp.applicant_types)
+    return " ".join([opp.title, opp.description, opp.eligibility_text, applicant_types])
 
 
 def check(card: Card, opp: Opportunity, item: ScoredItem, objective_text: str, attempts: int) -> CheckedCard:
@@ -40,6 +43,11 @@ def check(card: Card, opp: Opportunity, item: ScoredItem, objective_text: str, a
         warnings.append("Card has no evidence quotes")
     if card.objective_id and item.objective_id and card.objective_id != item.objective_id:
         warnings.append(f"Card objective {card.objective_id} differs from ranked objective {item.objective_id}")
+    # The card read the full eligibility text; if it says DNCR can't apply, that beats the ranking rules.
+    card_says_no = bool(re.match(r"\s*no\b", card.can_dncr_apply, re.I))
+    if card_says_no:
+        warnings.append("Card says DNCR cannot apply" + (f", but the ranking suggests {item.suggested_decision}"
+                                                         if item.suggested_decision in ("Chase", "You decide", "Waitlist") else ""))
 
     needs_retry = bool(bad_quotes) and attempts < MAX_ATTEMPTS and total > 0
     if total and verified == total and not warnings:
@@ -47,6 +55,8 @@ def check(card: Card, opp: Opportunity, item: ScoredItem, objective_text: str, a
     elif total and verified / total >= 0.5:
         confidence = "Medium" if item.confidence == "High" else item.confidence
     else:
+        confidence = "Low"
+    if card_says_no:
         confidence = "Low"
 
     return CheckedCard(
