@@ -371,10 +371,10 @@ This deletes only *our* resource group, not the organizers' networking resources
 | chat-astra (gpt-6-astra) | ✅ 200 | ❌ 400 | ✅ 200 | 1.67s / 2.07s |
 | chat-fallback (gpt-4.1) | ✅ 200 | ✅ 200 | ✅ 200 | 0.96s / 0.75s |
 | embed (text-embedding-3-large) | ✅ vector returned | — | — | — |
-| Container Registry | `acrffm_____` | ☐ |
-| Container Apps env | `cae-ffm` | ☐ |
-| Web app | `app-ffm-web` → URL: ______ | ☐ |
-| Daily job | `job-ffm-refresh` | ☐ |
+| Container Registry | `acrffm10352` | ✅ 2026-11-07 |
+| Container Apps env | `cae-ffm` (+ Log Analytics `workspace-rgffmteam70uo`) | ✅ 2026-11-07 |
+| Web app | `app-ffm-web` → https://app-ffm-web.salmonsea-3965c0e7.eastus.azurecontainerapps.io | ✅ 2026-11-07 |
+| Daily job | `job-ffm-refresh` (10:00 UTC) — first run: 1,364 listings, 893 pass gates, 15 cards | ✅ 2026-11-07 |
 
 ---
 
@@ -394,5 +394,6 @@ Anything surprising: errors, fixes, decisions, and especially **places where AI 
 | 2026-11-07 | Lead | Content check: all 4 GPT-6 deployments return "pong", finish_reason "stop", 0 reasoning tokens; `reasoning_effort: "low"` accepted (200) | Gateway rules: GPT-6 → no `temperature`, send `reasoning_effort` + generous `max_completion_tokens`; gpt-4.1 → `temperature: 0`. Recheck reasoning-token use on real card prompts (a trivial prompt shows 0) | — |
 | 2026-11-07 | Lead | New Cloud Shell session: `az ... keys list -g rg-ffm-team` → ResourceGroupNotFound | Each new session defaults to another subscription; run `az account set --subscription unc-sdis-solveathon-team01` first | — |
 | 2026-11-07 | Lead | Azure OpenAI key1 was pasted into a chat by mistake | Treated as leaked: `az cognitiveservices account keys regenerate --key-name key1`, new key typed only into the git-ignored `.env` | — |
+| 2026-11-07 | Lead | Deployed with docs/deploy.md; image build 1m37s (1.6 MB context thanks to .dockerignore). Ran the job-create block twice → two executions in parallel | Harmless (same output, last write wins), but only run `job start` once | — |
 | 2026-11-07 | P2 | Ran the variable block twice; got SUFFIX 22772, then 10352 | Every run of `$RANDOM` makes a new suffix. Nothing was created with 22772, so we keep **10352**. After the first run, always hard-code the suffix | — |
 | | | | | |
