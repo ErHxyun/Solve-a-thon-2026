@@ -1,0 +1,137 @@
+{
+  "opp_id": "361480",
+  "score": 71.4,
+  "confidence": "High",
+  "breakdown": {
+    "semantic": 1.0,
+    "keyword": 0.575,
+    "eligibility": 1.0,
+    "urgency": 0.333,
+    "timing": 1.0,
+    "funder": 1.0
+  },
+  "objective_id": "1.5",
+  "division": "DNCR museums / education",
+  "already_yours": false,
+  "watch": false,
+  "final": 71.4,
+  "components": {
+    "A": 85.8,
+    "S": 100.0,
+    "K": 57.5,
+    "U": 1.0,
+    "W": 54.8,
+    "H": 78.8,
+    "H10": 70.8,
+    "H90": 87.6,
+    "penalty": 1.0,
+    "negative_words": 0.0,
+    "rounds": 1.0
+  },
+  "second_objective_id": "3.4",
+  "route_to": "DNCR - DNCR museums / education",
+  "suggested_decision": "Chase",
+  "decision_reason": "Final score 71 is at or above the Chase line 60",
+  "rationale": "Final score 71 = plan match 86 x (0.7 + 0.15 x urgency 1/3 + 0.15 x workload 55/100). Plan match: Objective 1.5 (Support lifelong learning by increasing digital access to collections ...), plan p. 7; meaning 100, keywords 57 (matched 'digitization, digital collections, collections, stewardship'). Urgency U = 1 (Objective 1.5 urgency tier (plan p. 7)). Workload: about 79 hours (71-88), standard profile (standard competitive application). Who applies: DNCR - DNCR museums / education. Suggested: Chase because Final score 71 is at or above the Chase line 60.",
+  "flags": [],
+  "opportunity": {
+    "id": "361480",
+    "source": "grants.gov",
+    "number": "20260511-PCS",
+    "title": "Collections Stewardship",
+    "agency_code": "NEH",
+    "agency_name": "National Endowment for the Humanities",
+    "top_agency_code": "NEH",
+    "status": "posted",
+    "open_date": "2026-03-11",
+    "close_date": "2026-12-15",
+    "days_to_close": 38,
+    "applicant_types": [
+      {
+        "id": "12",
+        "description": "Nonprofits having a 501(c)(3) status with the IRS, other than institutions of higher education"
+      },
+      {
+        "id": "02",
+        "description": "City or township governments"
+      },
+      {
+        "id": "04",
+        "description": "Special district governments"
+      },
+      {
+        "id": "00",
+        "description": "State governments"
+      },
+      {
+        "id": "20",
+        "description": "Private institutions of higher education"
+      },
+      {
+        "id": "07",
+        "description": "Native American tribal governments (Federally recognized)"
+      },
+      {
+        "id": "01",
+        "description": "County governments"
+      },
+      {
+        "id": "06",
+        "description": "Public and State controlled institutions of higher education"
+      }
+    ],
+    "eligibility_text": "",
+    "funding_instruments": [
+      "Grant"
+    ],
+    "categories": [
+      "Humanities"
+    ],
+    "award_floor": 50000.0,
+    "award_ceiling": 500000.0,
+    "cost_sharing": false,
+    "description": "The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.",
+    "cfda": [
+      "45.037"
+    ],
+    "url": "https://www.grants.gov/search-results-detail/361480",
+    "ingested_at": "2026-11-07T20:31:40+00:00",
+    "low_quality": false
+  },
+  "checked": {
+    "card": {
+      "opp_id": "361480",
+      "can_dncr_apply": "[offline placeholder] State governments are listed as eligible applicants.",
+      "who_applies": "DNCR – DNCR museums / education (to confirm)",
+      "objective_id": "1.5",
+      "division": "DNCR museums / education",
+      "money_type": "competitive",
+      "prerequisites": [],
+      "worth_it": "Award ceiling $500,000; effort not assessed offline.",
+      "summary": "The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.",
+      "why_fit": "Ranked 71.4 against objective 1.5; plan words found: collections, conservation, digital collections, digital resources, digitization.",
+      "why_not_fit": "Offline mode: risks were not assessed — read the eligibility section.",
+      "evidence": [
+        {
+          "field": "summary",
+          "quote": "The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and",
+          "source": "listing"
+        },
+        {
+          "field": "why_fit",
+          "quote": "Support lifelong learning by increasing digital access to collections and professional resources",
+          "source": "plan"
+        }
+      ]
+    },
+    "verified_quotes": 2,
+    "total_quotes": 2,
+    "warnings": [],
+    "confidence": "High",
+    "needs_retry": false,
+    "verifier_feedback": null,
+    "attempts": 1
+  },
+  "days_left": 38,
+  "decisions": []
+}

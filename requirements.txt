@@ -83,3 +83,5 @@ xxhash==4.0.2
 zstandard==0.25.0
 et_xmlfile==2.0.0
 openpyxl==3.1.5
+fastapi==0.162.2
+annotated-doc==0.0.5

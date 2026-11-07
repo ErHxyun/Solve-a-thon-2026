@@ -1,0 +1,217 @@
+{
+  "last_refreshed": "2026-11-07T20:31:40+00:00",
+  "run_status": "succeeded",
+  "counts": {
+    "opportunities": 40,
+    "passed_gates": 12,
+    "scored": 12,
+    "cards": 3,
+    "cards_retried": 0,
+    "low_confidence_cards": 0,
+    "alerts": 0
+  },
+  "digest": {
+    "date": "2026-11-07",
+    "headline": "DNCR today: 3 items on the short list",
+    "counts": {
+      "waitlist_opening": 0,
+      "closing_soon": 0,
+      "waitlist_21_days": 0,
+      "new_since_yesterday": 0
+    },
+    "lines": []
+  },
+  "items": [
+    {
+      "opp_id": "361480",
+      "title": "Collections Stewardship",
+      "funder": "National Endowment for the Humanities",
+      "url": "https://www.grants.gov/search-results-detail/361480",
+      "status": "posted",
+      "close_date": "2026-12-15",
+      "days_left": 38,
+      "award_ceiling": 500000.0,
+      "score": 71.4,
+      "confidence": "High",
+      "suggested_decision": "Chase",
+      "decision_reason": "Final score 71 is at or above the Chase line 60",
+      "objective": {
+        "id": "1.5",
+        "text": "Support lifelong learning by increasing digital access to collections and professional resources",
+        "page": 7
+      },
+      "division": "DNCR museums / education",
+      "route_to": "DNCR - DNCR museums / education",
+      "already_yours": false,
+      "watch": false,
+      "flags": [],
+      "card": {
+        "opp_id": "361480",
+        "can_dncr_apply": "[offline placeholder] State governments are listed as eligible applicants.",
+        "who_applies": "DNCR – DNCR museums / education (to confirm)",
+        "objective_id": "1.5",
+        "division": "DNCR museums / education",
+        "money_type": "competitive",
+        "prerequisites": [],
+        "worth_it": "Award ceiling $500,000; effort not assessed offline.",
+        "summary": "The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and digital collections important for research, teaching, and public engagement in the humanities. Planning and implementation projects may include conservation and preservation; digitization and description; enhancement of long-standing digital resources in the humanities; and preservation services or education and training for students and professionals in collections stewardship.",
+        "why_fit": "Ranked 71.4 against objective 1.5; plan words found: collections, conservation, digital collections, digital resources, digitization.",
+        "why_not_fit": "Offline mode: risks were not assessed — read the eligibility section.",
+        "evidence": [
+          {
+            "field": "summary",
+            "quote": "The National Endowment for the Humanities (NEH) Division of Collections & Infrastructure is accepting applications for Collections Stewardship, a program to advance the preservation and availability of physical and",
+            "source": "listing"
+          },
+          {
+            "field": "why_fit",
+            "quote": "Support lifelong learning by increasing digital access to collections and professional resources",
+            "source": "plan"
+          }
+        ]
+      },
+      "verification": {
+        "confidence": "High",
+        "verified_quotes": 2,
+        "total_quotes": 2,
+        "warnings": []
+      },
+      "my_decision": null
+    },
+    {
+      "opp_id": "362715",
+      "title": "Outdoor Recreation Legacy Partnership Program (ORLP) Recurring Notice 5 Year",
+      "funder": "National Park Service",
+      "url": "https://www.grants.gov/search-results-detail/362715",
+      "status": "posted",
+      "close_date": "2030-11-01",
+      "days_left": 1455,
+      "award_ceiling": 15000000.0,
+      "score": 64.8,
+      "confidence": "High",
+      "suggested_decision": "Chase",
+      "decision_reason": "Final score 65 is at or above the Chase line 60",
+      "objective": {
+        "id": "3.5",
+        "text": "Increase access to public green spaces like parks, trails and nature preserves within a 10-minute drive",
+        "page": 10
+      },
+      "division": "State Parks",
+      "route_to": "DNCR leads (pass-through to localities)",
+      "already_yours": false,
+      "watch": false,
+      "flags": [],
+      "card": {
+        "opp_id": "362715",
+        "can_dncr_apply": "[offline placeholder] State governments are listed as eligible applicants.",
+        "who_applies": "DNCR – State Parks (to confirm)",
+        "objective_id": "3.5",
+        "division": "State Parks",
+        "money_type": "competitive",
+        "prerequisites": [
+          "Cost share / match may be required — see the listing",
+          "Other steps mentioned (partners, letters or reviews) — see the listing"
+        ],
+        "worth_it": "Award ceiling $15 million; effort not assessed offline.",
+        "summary": "This Notice of Funding Opportunity (NOFO) invites applications for the Outdoor Recreation Legacy Partnership (ORLP) Program, administered by the National Park Service (NPS). ORLP provides funding to 1) to acquire land and water for parks and other outdoor recreation purposes in qualifying areas, and 2) to develop new or renovate existing outdoor recreation facilities that provide outdoor recreation opportunities to the public in qualifying areas.",
+        "why_fit": "Ranked 64.8 against objective 3.5; plan words found: conservation, outdoor recreation, park, parks, recreation.",
+        "why_not_fit": "Possible issues: cost share required.",
+        "evidence": [
+          {
+            "field": "can_dncr_apply",
+            "quote": "§ 8464), the following entities are eligible to apply directly for funding through the ORLP Program:State and Territorial Lead Agencies, in each of the 50 states as well as American Samoa, the District of Columbia,",
+            "source": "listing"
+          },
+          {
+            "field": "prerequisites",
+            "quote": "ORLP is a program within the Land and Water Conservation Fund (LWCF) State and Local Assistance Program, which provides matching grants to States.",
+            "source": "listing"
+          },
+          {
+            "field": "summary",
+            "quote": "This Notice of Funding Opportunity (NOFO) invites applications for the Outdoor Recreation Legacy Partnership (ORLP) Program, administered by the National Park Service (NPS).",
+            "source": "listing"
+          },
+          {
+            "field": "why_fit",
+            "quote": "Increase access to public green spaces like parks, trails and nature preserves within a 10-minute drive",
+            "source": "plan"
+          }
+        ]
+      },
+      "verification": {
+        "confidence": "High",
+        "verified_quotes": 4,
+        "total_quotes": 4,
+        "warnings": []
+      },
+      "my_decision": null
+    },
+    {
+      "opp_id": "359225",
+      "title": "EDA FY25 Disaster Supplemental",
+      "funder": "Economic Development Administration",
+      "url": "https://www.grants.gov/search-results-detail/359225",
+      "status": "posted",
+      "close_date": null,
+      "days_left": null,
+      "award_ceiling": 50000000.0,
+      "score": 61.5,
+      "confidence": "Medium",
+      "suggested_decision": "Route",
+      "decision_reason": "NC Commerce should apply, not DNCR",
+      "objective": {
+        "id": "5.1",
+        "text": "Recover DNCR sites impacted by Hurricane Helene to 80 percent operational by 2028",
+        "page": 14
+      },
+      "division": "Land & Water Stewardship / Helene recovery",
+      "route_to": "NC Commerce",
+      "already_yours": false,
+      "watch": true,
+      "flags": [
+        "forecast/rolling: no deadline"
+      ],
+      "card": {
+        "opp_id": "359225",
+        "can_dncr_apply": "[offline placeholder] State governments are not a listed applicant type; the eligibility text mentions states (unclear).",
+        "who_applies": "DNCR – Land & Water Stewardship / Helene recovery (to confirm)",
+        "objective_id": "5.1",
+        "division": "Land & Water Stewardship / Helene recovery",
+        "money_type": "one-time disaster",
+        "prerequisites": [
+          "Cost share / match may be required — see the listing",
+          "Other steps mentioned (partners, letters or reviews) — see the listing"
+        ],
+        "worth_it": "Award ceiling $50 million; effort not assessed offline.",
+        "summary": "Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters occurring in calendar years 2023 and 2024. EDA’s goal under this NOFO is to assist communities recovering from a disaster by realizing opportunities to recover and change the economic trajectory of the community for the better.",
+        "why_fit": "Ranked 61.5 against objective 5.1; plan words found: disaster, disaster recovery, hurricane.",
+        "why_not_fit": "Possible issues: state eligibility is unclear; cost share required.",
+        "evidence": [
+          {
+            "field": "can_dncr_apply",
+            "quote": "Eligible applicants under the FY25 Disaster program include a(n): District organization of an EDA-designated Economic Development District (EDD); Indian tribe or a consortium of Indian tribes; State, county, city, or",
+            "source": "listing"
+          },
+          {
+            "field": "summary",
+            "quote": "Through this Disaster NOFO, EDA will award investments in regions experiencing severe economic distress or other economic harm resulting from hurricanes, wildfires, tornadoes, floods, and other natural disasters",
+            "source": "listing"
+          },
+          {
+            "field": "why_fit",
+            "quote": "Recover DNCR sites impacted by Hurricane Helene to 80 percent operational by 2028",
+            "source": "plan"
+          }
+        ]
+      },
+      "verification": {
+        "confidence": "Medium",
+        "verified_quotes": 3,
+        "total_quotes": 3,
+        "warnings": []
+      },
+      "my_decision": null
+    }
+  ]
+}

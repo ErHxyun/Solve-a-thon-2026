@@ -1,0 +1,26 @@
+{
+  "opp_id": "361480",
+  "requirements": [
+    "[offline] Read the full NOFO at https://www.grants.gov/search-results-detail/361480"
+  ],
+  "sf424_fields_to_gather": [
+    "Legal name and UEI (gather internally, never send to AI)",
+    "Congressional districts",
+    "Project title and description",
+    "Proposed start and end dates",
+    "Estimated funding (federal, applicant match, other)",
+    "Authorized representative (AOR) contact",
+    "State review (EO 12372) status"
+  ],
+  "outline": [
+    "[offline] Project need",
+    "Approach",
+    "Outcomes",
+    "Budget summary"
+  ],
+  "timeline": [
+    "[offline] Close date: 2026-12-15"
+  ],
+  "email_to_division_lead": "[offline draft] Please review 'Collections Stewardship': https://www.grants.gov/search-results-detail/361480",
+  "open_questions": []
+}
