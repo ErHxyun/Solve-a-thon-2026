@@ -1,0 +1,585 @@
+{
+ "agency": "dncr",
+ "name": "NC Department of Natural and Cultural Resources",
+ "mission": "TODO (Criteria): copy the mission statement from the 2025-2029 Strategic Plan",
+ "source_url": "https://www.osbm.nc.gov/documents/files/strategic-plan-dncr/open",
+ "keywords": [
+  "250th",
+  "access for",
+  "admission",
+  "america 250",
+  "america250",
+  "american revolution",
+  "archaeolog",
+  "archival",
+  "archives",
+  "artifacts",
+  "artificial intelligence",
+  "artistic",
+  "artists",
+  "arts",
+  "battlefield",
+  "branding",
+  "broadband",
+  "capital improvement",
+  "classroom",
+  "climate adaptation",
+  "climate resilience",
+  "climate risk",
+  "collections",
+  "community engagement",
+  "connectivity",
+  "conservation",
+  "conservation easement",
+  "cultural",
+  "cultural tourism",
+  "curriculum",
+  "deferred maintenance",
+  "digital collections",
+  "digital equity",
+  "digital humanities",
+  "digital resources",
+  "digital skills",
+  "digitization",
+  "disaster",
+  "disaster recovery",
+  "discount",
+  "ecosystem",
+  "ecosystem resilience",
+  "educator",
+  "exhibit",
+  "exhibition",
+  "extracurricular",
+  "field trip",
+  "flood mitigation",
+  "folk",
+  "forest",
+  "forest legacy",
+  "forestry",
+  "green space",
+  "habitat",
+  "helene",
+  "helene recovery",
+  "heritage",
+  "heritage tourism",
+  "historic",
+  "historic building",
+  "historic preservation",
+  "humanities",
+  "hurricane",
+  "internal communication",
+  "internal policy",
+  "internet",
+  "interpretation",
+  "invasive species",
+  "k-12",
+  "land acquisition",
+  "libraries",
+  "lifelong learning",
+  "main street",
+  "marketing",
+  "museum",
+  "museums",
+  "music",
+  "natural heritage",
+  "nature preserve",
+  "online resources",
+  "open access",
+  "open space",
+  "outdoor recreation",
+  "outdoor tourism",
+  "park",
+  "parks",
+  "preservation",
+  "professional development",
+  "public engagement",
+  "public lands",
+  "public participation",
+  "rebrand",
+  "recreation",
+  "renovation",
+  "resilience",
+  "restoration",
+  "revolutionary",
+  "school visits",
+  "semiquincentennial",
+  "seniors",
+  "staff vacancy",
+  "stem education",
+  "stewardship",
+  "storm damage",
+  "student access",
+  "teacher",
+  "teacher training",
+  "tourism",
+  "trail",
+  "trails",
+  "tree planting",
+  "urban and community forestry",
+  "veterans",
+  "visitation",
+  "visitors",
+  "western north carolina",
+  "wetland",
+  "wetlands",
+  "wildlife"
+ ],
+ "known_funders": [
+  "DOI-NPS",
+  "NEA",
+  "NEH",
+  "IMLS",
+  "DOC-NOAA",
+  "USDA-FS",
+  "DOI-FWS",
+  "DOT-FHWA"
+ ],
+ "objectives": [
+  {
+   "goal_id": "1",
+   "objective_id": "1.1",
+   "text": "Support and retain K-12 educators with professional development and year-round educator training",
+   "page": 6,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR museums / education"
+   ],
+   "keywords": [
+    "educator",
+    "teacher",
+    "professional development",
+    "k-12",
+    "stem education",
+    "teacher training"
+   ]
+  },
+  {
+   "goal_id": "1",
+   "objective_id": "1.2",
+   "text": "Increase access to DNCR sites through field trip funds and support services for students in all 100 counties",
+   "page": 6,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR museums / education"
+   ],
+   "keywords": [
+    "field trip",
+    "student access",
+    "school visits"
+   ]
+  },
+  {
+   "goal_id": "1",
+   "objective_id": "1.3",
+   "text": "Increase classroom engagement through curriculum development, classroom visits, virtual field trips and extracurricular programs",
+   "page": 6,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR museums / education"
+   ],
+   "keywords": [
+    "curriculum",
+    "classroom",
+    "extracurricular",
+    "k-12"
+   ]
+  },
+  {
+   "goal_id": "1",
+   "objective_id": "1.4",
+   "text": "Improve educational opportunities at DNCR sites through exhibit updates and site lesson plans",
+   "page": 7,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR museums / education"
+   ],
+   "keywords": [
+    "exhibit",
+    "exhibition",
+    "museum",
+    "museums",
+    "interpretation",
+    "artifacts"
+   ]
+  },
+  {
+   "goal_id": "1",
+   "objective_id": "1.5",
+   "text": "Support lifelong learning by increasing digital access to collections and professional resources",
+   "page": 7,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR museums / education"
+   ],
+   "keywords": [
+    "digitization",
+    "digital collections",
+    "collections",
+    "archives",
+    "archival",
+    "lifelong learning",
+    "stewardship",
+    "libraries"
+   ]
+  },
+  {
+   "goal_id": "2",
+   "objective_id": "2.1",
+   "text": "Increase web and social media traffic and site visitation and cultural tourism",
+   "page": 8,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR marketing"
+   ],
+   "keywords": [
+    "tourism",
+    "visitation",
+    "visitors",
+    "marketing"
+   ]
+  },
+  {
+   "goal_id": "2",
+   "objective_id": "2.2",
+   "text": "Establish local partnerships with tourism boards, planners, businesses and communities",
+   "page": 8,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR sites"
+   ],
+   "keywords": [
+    "cultural tourism",
+    "heritage tourism",
+    "main street"
+   ]
+  },
+  {
+   "goal_id": "2",
+   "objective_id": "2.3",
+   "text": "Foster local economies by supporting arts and music, history, libraries, sciences and outdoor recreation through grants in all 100 counties",
+   "page": 8,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "Arts Council / State Library"
+   ],
+   "keywords": [
+    "arts",
+    "music",
+    "humanities",
+    "cultural",
+    "folk",
+    "heritage",
+    "artists",
+    "artistic"
+   ]
+  },
+  {
+   "goal_id": "2",
+   "objective_id": "2.4",
+   "text": "Ensure all sites have internet and broadband access and expand digital skills statewide",
+   "page": 9,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "DNCR IT"
+   ],
+   "keywords": [
+    "broadband",
+    "internet",
+    "digital equity",
+    "digital skills",
+    "connectivity"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.1",
+   "text": "Keep capital projects on schedule and in budget; facility construction and renovation",
+   "page": 10,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR capital projects"
+   ],
+   "keywords": [
+    "historic building",
+    "renovation",
+    "capital improvement"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.2",
+   "text": "Lead research and storytelling for America's 250th anniversary (A250) through 2026",
+   "page": 10,
+   "urgency": "highest",
+   "urgency_tier": 3,
+   "divisions": [
+    "Archives & History (A250)"
+   ],
+   "keywords": [
+    "america 250",
+    "america250",
+    "semiquincentennial",
+    "250th",
+    "revolutionary",
+    "american revolution"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.3",
+   "text": "Study admission discounts for EBT, veteran and senior visitors to broaden access",
+   "page": 10,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR sites"
+   ],
+   "keywords": [
+    "admission",
+    "discount",
+    "veterans",
+    "seniors",
+    "access for"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.4",
+   "text": "Expand digital resource offerings across divisions to make work more accessible",
+   "page": 10,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR digital"
+   ],
+   "keywords": [
+    "digital resources",
+    "online resources",
+    "digital humanities",
+    "open access"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.5",
+   "text": "Increase access to public green spaces like parks, trails and nature preserves within a 10-minute drive",
+   "page": 10,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "State Parks"
+   ],
+   "keywords": [
+    "park",
+    "parks",
+    "trail",
+    "trails",
+    "green space",
+    "outdoor recreation",
+    "recreation",
+    "nature preserve",
+    "public lands",
+    "open space"
+   ]
+  },
+  {
+   "goal_id": "3",
+   "objective_id": "3.6",
+   "text": "Lead restoration and protection of natural and cultural resources: historic preservation, battlefields, habitat and land conservation",
+   "page": 11,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "Natural Heritage / Historic Preservation Office"
+   ],
+   "keywords": [
+    "historic preservation",
+    "preservation",
+    "restoration",
+    "conservation",
+    "habitat",
+    "battlefield",
+    "historic",
+    "archaeolog",
+    "land acquisition",
+    "natural heritage",
+    "wildlife",
+    "ecosystem",
+    "invasive species",
+    "forest legacy"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.1",
+   "text": "Analyze responsible use of artificial intelligence and launch AI pilot programs",
+   "page": 12,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "artificial intelligence"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.2",
+   "text": "Identify and address agency-wide internal policy gaps",
+   "page": 12,
+   "urgency": "normal",
+   "urgency_tier": 0,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "internal policy"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.3",
+   "text": "Decrease staff vacancies, reduce deferred maintenance and improve department safety",
+   "page": 12,
+   "urgency": "normal",
+   "urgency_tier": 0,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "deferred maintenance",
+    "staff vacancy"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.4",
+   "text": "Launch the DNCR rebrand and staff onboarding",
+   "page": 12,
+   "urgency": "normal",
+   "urgency_tier": 0,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "rebrand",
+    "branding"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.5",
+   "text": "Improve internal communication and cross-division collaboration",
+   "page": 12,
+   "urgency": "normal",
+   "urgency_tier": 0,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "internal communication"
+   ]
+  },
+  {
+   "goal_id": "4",
+   "objective_id": "4.6",
+   "text": "Provide public participation and engagement in planning initiatives",
+   "page": 13,
+   "urgency": "normal",
+   "urgency_tier": 1,
+   "divisions": [
+    "DNCR administration"
+   ],
+   "keywords": [
+    "public participation",
+    "community engagement",
+    "public engagement"
+   ]
+  },
+  {
+   "goal_id": "5",
+   "objective_id": "5.1",
+   "text": "Recover DNCR sites impacted by Hurricane Helene to 80 percent operational by 2028",
+   "page": 14,
+   "urgency": "highest",
+   "urgency_tier": 3,
+   "divisions": [
+    "Land & Water Stewardship / Helene recovery"
+   ],
+   "keywords": [
+    "helene",
+    "hurricane",
+    "disaster recovery",
+    "storm damage",
+    "disaster"
+   ]
+  },
+  {
+   "goal_id": "5",
+   "objective_id": "5.2",
+   "text": "Support western North Carolina economic recovery for arts, libraries and outdoor tourism after Helene",
+   "page": 14,
+   "urgency": "highest",
+   "urgency_tier": 3,
+   "divisions": [
+    "Land & Water Stewardship / Helene recovery"
+   ],
+   "keywords": [
+    "western north carolina",
+    "helene recovery",
+    "outdoor tourism"
+   ]
+  },
+  {
+   "goal_id": "5",
+   "objective_id": "5.3",
+   "text": "Evaluate climate hazards and risks across DNCR sites and embed resilience in planning",
+   "page": 14,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "Land & Water Stewardship / Helene recovery"
+   ],
+   "keywords": [
+    "climate resilience",
+    "climate risk",
+    "resilience",
+    "flood mitigation",
+    "climate adaptation"
+   ]
+  },
+  {
+   "goal_id": "5",
+   "objective_id": "5.4",
+   "text": "Manage climate mitigation, resilience and adaptation of North Carolina ecosystems; tree planting and conservation acreage",
+   "page": 14,
+   "urgency": "elevated",
+   "urgency_tier": 2,
+   "divisions": [
+    "Land & Water Stewardship / Helene recovery"
+   ],
+   "keywords": [
+    "ecosystem resilience",
+    "tree planting",
+    "forest",
+    "forestry",
+    "wetland",
+    "wetlands",
+    "urban and community forestry",
+    "conservation easement"
+   ]
+  }
+ ],
+ "_note": "Objectives, pages, urgency tiers (0-3) and phrases come from the team's scoring rubric (DNCR Grant Scoring Rules, Final). Objective text is a summary of the plan wording; replace with verbatim plan text where quotes are needed."
+}

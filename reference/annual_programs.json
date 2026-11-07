@@ -1,0 +1,10 @@
+{
+  "_note": "Recurring federal programs DNCR already receives. Matches get tagged 'already yours' instead of being ranked as new leads. P1/P2: verify CFDA/ALN numbers against SAM.gov assistance listings.",
+  "programs": [
+    {"name": "IMLS LSTA Grants to States", "cfda": "45.310", "division": "State Library", "type": "formula"},
+    {"name": "Land and Water Conservation Fund (State Assistance)", "cfda": "15.916", "division": "State Parks", "type": "pass-through"},
+    {"name": "Recreational Trails Program (FHWA)", "cfda": "20.219", "division": "State Parks", "type": "pass-through"},
+    {"name": "NEA Partnership Agreements", "cfda": "45.025", "division": "Arts Council", "type": "formula"},
+    {"name": "Historic Preservation Fund Grants-in-Aid", "cfda": "15.904", "division": "SHPO", "type": "formula"}
+  ]
+}

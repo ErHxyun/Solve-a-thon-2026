@@ -1,0 +1,4 @@
+# Normalize line endings; shell scripts must stay LF or the Docker container fails to start
+* text=auto
+*.sh text eol=lf
+Dockerfile text eol=lf
