@@ -7,7 +7,7 @@
 | Code | `agents/collector.py` |
 | Type | Code (no LLM) |
 | Runs | Daily batch (first node) |
-| Status | Baseline works on fixture + live search |
+| Status | Full live pull done (state-eligible filter, paging, parallel fetch, cache, keyword baseline) |
 
 ## 1. Description
 Reads the federal feed so the grants developer doesn't have to. Pulls posted and forecasted opportunities from Grants.gov, fetches each record's details (eligibility, description, award size, dates), normalizes them into `Opportunity` records, and de-duplicates. Replaces "open the Grants.gov email digest every morning." Serves **R1** (runs daily) and **R4** (a broad pull, not only keyword hits).
@@ -29,12 +29,12 @@ Reads the federal feed so the grants developer doesn't have to. Pulls posted and
 
 ## 4. Procedure
 - ✅ `search()`, `fetch_detail()`, `normalize()`, fixture mode
-- ☐ Paging: loop `startRecordNum` until `hitCount` or a cap (e.g., 1,000)
-- ☐ Broad pull: `keyword=""` with `eligibilities="00"` (state governments) to catch what keyword search misses (feeds the R4 "missed by keyword" metric)
-- ☐ Concurrency for `fetch_detail` (5–8 threads) + retry with backoff (`tenacity`)
-- ☐ Cache details by id in storage; refetch only new or changed records (`lastUpdatedDate`)
-- ☐ Return counts for the run log: searched, unique, fetched, failed, low_quality
-- ☐ Keyword-baseline output (`baseline/keyword_hits.json`) for evaluation
+- ✅ Full pull: `search_all()` pages 250 at a time through every posted/forecasted listing with `eligibilities=00|25|99` (state governments, others, unrestricted), up to `COLLECTOR_CAP` (5,000); de-dups hits across pages
+- ✅ Parallel detail fetch (`COLLECTOR_WORKERS`, default 8) with retry + backoff on timeouts / 429 / 5xx; one failed record never stops the run; zero records fails the run
+- ✅ Detail cache in storage `cache/grants/{id}.json`, reused for `COLLECTOR_CACHE_HOURS` (20) — a same-day rerun is fast
+- ✅ Keyword baseline: `baseline/{date}/keyword_hits.json` (what typing plan keywords into Grants.gov returns) for the "missed by keyword search" metric
+- ✅ Counts in `runs/collector_latest.json`: searched, listed, cached, fetched, failed, normalized, low_quality, seconds
+- ☐ Use `lastUpdatedDate` to refetch only changed records instead of a time window
 
 ## 5. Validation
 - Every normalized record must validate as `Opportunity` (Pydantic). Invalid → log id + error, skip, count as failed.
