@@ -1,4 +1,4 @@
-"""Sensitive-data guard (owner: P2). Test case T7 in the test plan."""
+"""Sensitive-data guard (owner: lead). Test case T7 in the test plan."""
 from core.guard import scrub
 
 

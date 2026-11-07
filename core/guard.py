@@ -4,7 +4,7 @@ Runs on EVERY text before it is sent to an LLM (called by core/llm.py).
 Grant listings are public, but user notes or pasted text could contain
 identifiers that must never leave the state's control.
 
-Owner: P2. Add patterns here; add a test in tests/test_guard.py for each one.
+Owner: lead. Add patterns here; add a test in tests/test_guard.py for each one.
 """
 from __future__ import annotations
 

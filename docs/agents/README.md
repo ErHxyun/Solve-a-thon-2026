@@ -1,19 +1,20 @@
 # Multi-Agent Workstream — How We Work
 
-**Lead:** [Name] (owns `core/`, `graphs/`, Card Agent, and all merges into `main`)
+**Lead:** [Name] — owns `core/`, `graphs/`, every code agent (Collector, Gatekeeper, Fit Scorer, Verifier + guard, Alert), and all merges into `main`.
+**LLM-A:** [Name] — Card Agent. **LLM-B:** [Name] — Route Agent + Apply Assist.
 
 ## 1. Agents and owners
 
 | Agent | File | Spec | Owner | Branch | Type |
 |---|---|---|---|---|---|
-| Collector | `agents/collector.py` | [collector.md](collector.md) | P2 | `agent/collector` | Code |
-| Gatekeeper | `agents/gatekeeper.py` | [gatekeeper.md](gatekeeper.md) | P3 | `agent/gatekeeper` | Code |
-| Fit Scorer | `agents/fit_scorer.py` | [fit_scorer.md](fit_scorer.md) | P3 | `agent/fit-scorer` | Code + embeddings |
-| Card Agent | `agents/card_agent.py` | [card_agent.md](card_agent.md) | Lead | `agent/card` | LLM |
-| Verifier (+ guard) | `agents/verifier.py`, `core/guard.py` | [verifier.md](verifier.md) | P2 | `agent/verifier` | Code |
-| Alert | `agents/alert.py` | [alert.md](alert.md) | P2 | `agent/alert` | Code |
-| Route Agent | `agents/route_agent.py` | [route_agent.md](route_agent.md) | P3 | `agent/route` | LLM, on click |
-| Apply Assist | `agents/apply_assist.py` | [apply_assist.md](apply_assist.md) | P1 | `agent/apply-assist` | LLM, on click |
+| Collector | `agents/collector.py` | [collector.md](collector.md) | Lead | `agent/collector` | Code |
+| Gatekeeper | `agents/gatekeeper.py` | [gatekeeper.md](gatekeeper.md) | Lead | `agent/gatekeeper` | Code |
+| Fit Scorer | `agents/fit_scorer.py` | [fit_scorer.md](fit_scorer.md) | Lead | `agent/fit-scorer` | Code + embeddings |
+| Card Agent | `agents/card_agent.py` | [card_agent.md](card_agent.md) | LLM-A | `agent/card` | LLM |
+| Verifier (+ guard) | `agents/verifier.py`, `core/guard.py` | [verifier.md](verifier.md) | Lead | `agent/verifier` | Code |
+| Alert | `agents/alert.py` | [alert.md](alert.md) | Lead | `agent/alert` | Code |
+| Route Agent | `agents/route_agent.py` | [route_agent.md](route_agent.md) | LLM-B | `agent/route` | LLM, on click |
+| Apply Assist | `agents/apply_assist.py` | [apply_assist.md](apply_assist.md) | LLM-B | `agent/apply-assist` | LLM, on click |
 
 Each agent branch already holds a **working baseline** of that agent that runs offline. Your job is to make it good: fill the TODOs, meet your spec's quality bar, and grow your tests.
 
@@ -51,7 +52,7 @@ git pull
 
 **Rules:**
 1. Edit only your files: `agents/<yours>.py`, `prompts/<yours>.md`, `tests/test_<yours>.py`, `docs/agents/<yours>.md`, and reference files your spec says you own.
-2. Need a change in `core/` (schemas, llm, storage) or `graphs/`? Ask the lead. Adding an **optional** field to a schema is usually fine. Renaming or removing one breaks others.
+2. Need a change in `core/` (schemas, llm, storage) or `graphs/`? Ask the lead. LLM tool-calling support (`chat_with_tools`), if we add it, also goes into `core/llm.py` via the lead. Adding an **optional** field to a schema is usually fine. Renaming or removing one breaks others.
 3. Never import `openai` directly. All LLM calls go through `core.llm.chat_json()` / `core.llm.embed()`.
 4. Never commit `.env`, keys, or connection strings.
 5. Commit small and often; push your branch at least every hour so the lead can see progress.
@@ -84,8 +85,8 @@ On-click agents (Route, Apply Assist) are called by the UI with `(Opportunity, C
 | Role | Who | What |
 |---|---|---|
 | Test lead | P1 | Owns this test plan; tracks issues |
-| Testers | P3 ↔ P4 (cross-test) | Run each other's test cases; record actual vs expected |
-| Integration tester | P2 | `tests/test_pipeline_smoke.py` + full pipeline after every merge |
+| Testers | LLM-A ↔ LLM-B (cross-test); Lead reviews both LLM agents | Run each other's test cases; record actual vs expected |
+| Integration tester | Lead | `tests/test_pipeline_smoke.py` + full pipeline after every merge |
 | User acceptance | P5 | Acts as the DNCR user on the UI |
 
 | # | Test case | Expected | Covered by |

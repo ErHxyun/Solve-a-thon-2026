@@ -1,4 +1,4 @@
-"""Integration smoke test (owner: P2 as integration tester).
+"""Integration smoke test (owner: lead as integration tester).
 The whole graph must run end to end offline on the fixture. Run before every merge to main."""
 from core import config, storage
 from core.schemas import CheckedCard, ScoredItem
