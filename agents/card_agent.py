@@ -1,4 +1,4 @@
-"""Card Agent — turns each top-N item into a plain-English decision card.  Owner: lead
+"""Card Agent — turns each top-N item into a plain-English decision card.  Owner: LLM-A
 Spec: docs/agents/card_agent.md
 
 The card answers the user's 5 questions (can DNCR apply / which objective & division /

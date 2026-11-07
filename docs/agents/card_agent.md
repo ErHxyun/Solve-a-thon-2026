@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | Lead |
+| Owner | LLM-A |
 | Branch | `agent/card` |
 | Code | `agents/card_agent.py`, prompt `prompts/card_agent.md` |
 | Type | LLM — deployment `chat` (gpt-6.1-terra), fallback `chat-fallback` (gpt-4.1) |

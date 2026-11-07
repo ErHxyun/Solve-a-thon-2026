@@ -1,4 +1,4 @@
-"""Card Agent (owner: lead). Spec: docs/agents/card_agent.md"""
+"""Card Agent (owner: LLM-A). Spec: docs/agents/card_agent.md"""
 from agents import card_agent
 from core.reference import load_profile
 from core.schemas import Card, Opportunity, ScoreBreakdown, ScoredItem
