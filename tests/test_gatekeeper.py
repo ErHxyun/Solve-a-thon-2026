@@ -1,4 +1,4 @@
-"""Gatekeeper (owner: P3). Test cases T1, T2 in the test plan. Add a test for every rule you add."""
+"""Gatekeeper (owner: lead). Test cases T1, T2 in the test plan. Add a test for every rule you add."""
 from agents.gatekeeper import check
 from core.schemas import ApplicantType, Opportunity
 

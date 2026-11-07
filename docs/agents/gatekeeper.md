@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P3 |
+| Owner | lead |
 | Branch | `agent/gatekeeper` |
 | Code | `agents/gatekeeper.py` |
 | Type | Code (rules) |

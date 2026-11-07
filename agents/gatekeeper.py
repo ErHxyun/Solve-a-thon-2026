@@ -1,4 +1,4 @@
-"""Gatekeeper — 3 hard gates before ranking.  Owner: P3
+"""Gatekeeper — 3 hard gates before ranking.  Owner: lead
 Spec: docs/agents/gatekeeper.md
 
 Baseline rules included so the pipeline runs end to end. P3 refines:
@@ -12,7 +12,7 @@ STATE_GOV = "00"
 UNRESTRICTED = "99"
 OTHERS_SEE_TEXT = "25"
 
-# TODO(P3): extend from known false positives (e.g., BLM Youth Conservation Corps)
+# TODO(lead): extend from known false positives (e.g., BLM Youth Conservation Corps)
 REGION_LOCK_TERMS = ["bureau of land management lands", "blm-managed lands", "gulf coast states", "alaska only", "hawaii only", "u.s. territories only"]
 NIH_PREFIXES = ("HHS-NIH",)
 RESEARCH_TERMS = ["research project grant", "basic research", "principal investigator", "r01", "r21"]
