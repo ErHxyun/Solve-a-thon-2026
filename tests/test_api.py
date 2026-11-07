@@ -1,0 +1,74 @@
+"""Web API (owner: lead). Runs the offline pipeline into a temp folder, then calls every endpoint."""
+import pytest
+from fastapi.testclient import TestClient
+
+
+@pytest.fixture
+def client():
+    import pipeline
+    from app.api import app
+
+    assert pipeline.main() == 0  # fills tmp storage: scored/, runs/, alerts/
+    return TestClient(app)
+
+
+def first_id(client) -> str:
+    items = client.get("/api/shortlist").json()["items"]
+    assert items, "short list is empty"
+    return items[0]["opp_id"]
+
+
+def test_health(client):
+    assert client.get("/api/health").json()["ok"] is True
+
+
+def test_shortlist_shape(client):
+    body = client.get("/api/shortlist").json()
+    assert body["last_refreshed"] and body["run_status"] == "succeeded"
+    item = body["items"][0]
+    for key in ("title", "funder", "url", "days_left", "score", "confidence", "suggested_decision",
+                "objective", "route_to", "card", "verification", "my_decision"):
+        assert key in item
+    assert all(i["suggested_decision"] != "Skip" for i in body["items"])
+
+
+def test_shortlist_can_include_skipped(client):
+    small = len(client.get("/api/shortlist").json()["items"])
+    big = len(client.get("/api/shortlist?include_skipped=true&include_low=true&limit=200").json()["items"])
+    assert big >= small
+
+
+def test_opportunity_detail(client):
+    opp_id = first_id(client)
+    body = client.get(f"/api/opportunities/{opp_id}").json()
+    assert body["opportunity"]["id"] == opp_id and "rationale" in body and body["decisions"] == []
+    assert client.get("/api/opportunities/nope").status_code == 404
+
+
+def test_decision_then_undo(client):  # T9: Skip then undo
+    opp_id = first_id(client)
+    r = client.post("/api/decisions", json={"opp_id": opp_id, "decision": "Skip", "note": "not ours"})
+    assert r.status_code == 201
+    assert opp_id not in [i["opp_id"] for i in client.get("/api/shortlist").json()["items"]]  # skipped = hidden
+    undone = client.delete(f"/api/decisions/{opp_id}").json()
+    assert undone["undone"]["decision"] == "Skip" and undone["now"] is None
+    assert opp_id in [i["opp_id"] for i in client.get("/api/shortlist").json()["items"]]  # back again
+
+
+def test_bad_decision_rejected(client):
+    opp_id = first_id(client)
+    assert client.post("/api/decisions", json={"opp_id": opp_id, "decision": "Submit"}).status_code == 422
+    assert client.post("/api/decisions", json={"opp_id": "nope", "decision": "Chase"}).status_code == 404
+
+
+def test_route_and_apply_assist_offline(client):
+    opp_id = first_id(client)
+    route = client.post(f"/api/opportunities/{opp_id}/route").json()
+    assert route["opp_id"] == opp_id and route["message"]
+    pack = client.post(f"/api/opportunities/{opp_id}/apply-assist").json()
+    assert pack["opp_id"] == opp_id and pack["sf424_fields_to_gather"]
+
+
+def test_alerts_and_run(client):
+    assert "alerts" in client.get("/api/alerts").json()
+    assert client.get("/api/run").json()["status"] == "succeeded"
