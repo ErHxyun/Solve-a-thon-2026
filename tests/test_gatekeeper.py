@@ -36,3 +36,25 @@ def test_blm_region_lock_fails():  # T2
 def test_fixture_has_some_passes_and_some_failures(opportunities):
     results = [check(Opportunity(**o)) for o in opportunities]
     assert any(r.passed for r in results) and any(not r.passed for r in results)
+
+
+# ---------- rubric gates (DNCR Grant Scoring Rules, Final) ----------
+def test_other_region_fails_unless_nc_covered():
+    great_lakes = make(title="Great Lakes Restoration Initiative: Community Forest")
+    assert not check(great_lakes).passed
+    southeast = make(title="Gulf of Mexico and Southeast Atlantic habitat")
+    assert check(southeast).passed  # text also covers the Southeast / Atlantic
+
+
+def test_foreign_mission_fails():
+    assert not check(make(agency_name="U.S. Mission to Cambodia")).passed
+
+
+def test_stale_forecast_fails():
+    from datetime import date
+
+    old = make(title="Climate Program Office for FY 2012", status="forecasted", days_to_close=None)
+    r = check(old, today=date(2026, 11, 7))
+    assert not r.passed and any("stale" in x for x in r.reasons)
+    fresh = make(title="Climate Program Office FY 2026", status="forecasted", days_to_close=None)
+    assert check(fresh, today=date(2026, 11, 7)).passed
