@@ -1,4 +1,4 @@
-"""Verifier — deterministic checks on every card.  Owner: P2
+"""Verifier — deterministic checks on every card.  Owner: lead
 Spec: docs/agents/verifier.md
 
 1. Every evidence quote must appear in its source text (fuzzy match >= QUOTE_THRESHOLD)
@@ -12,7 +12,7 @@ from rapidfuzz import fuzz
 from core.reference import load_profile
 from core.schemas import Card, CheckedCard, Opportunity, ScoredItem
 
-QUOTE_THRESHOLD = 90   # partial_ratio score; TODO(P2): tune on real cards
+QUOTE_THRESHOLD = 90   # partial_ratio score; TODO(lead): tune on real cards
 MAX_ATTEMPTS = 2
 
 

@@ -1,4 +1,4 @@
-"""Verifier (owner: P2). Test case T5 in the test plan: a planted fake quote must be caught."""
+"""Verifier (owner: lead). Test case T5 in the test plan: a planted fake quote must be caught."""
 from agents.verifier import check
 from core.schemas import Card, Evidence, Opportunity, ScoreBreakdown, ScoredItem
 

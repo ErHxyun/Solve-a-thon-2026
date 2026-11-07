@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Owner | P2 |
+| Owner | lead |
 | Branch | `agent/verifier` |
 | Code | `agents/verifier.py`, `core/guard.py` |
 | Type | Code (no LLM) |
