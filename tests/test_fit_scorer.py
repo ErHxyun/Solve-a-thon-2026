@@ -109,3 +109,16 @@ def test_already_yours_needs_title_not_only_cfda():
     orlp = Opportunity(id="1", number="N", title="Outdoor Recreation Legacy Partnership Program", cfda=["15.916"])
     nea = Opportunity(id="2", number="N", title="NEA Partnership Agreements", cfda=["45.025"])
     assert not fs._already_yours(orlp) and fs._already_yours(nea)
+
+
+def test_excel_report_builds(tmp_path):
+    from openpyxl import load_workbook
+
+    from scripts import score_report
+
+    opps, gates, items, cal = score_report.build(10)
+    out = tmp_path / "report.xlsx"
+    score_report.write(out, opps, gates, items, cal, 10)
+    wb = load_workbook(out)
+    assert wb.sheetnames == ["Top 10", "How scored", "Funnel", "DNCR objectives"]
+    assert wb["Top 10"].cell(5, 3).value  # first ranked title
