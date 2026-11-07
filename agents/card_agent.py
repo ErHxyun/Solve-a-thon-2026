@@ -11,8 +11,11 @@ Design (v2):
   never quoted, so the model can't "quote" a line the Verifier will never find.
 - Code, not the model, owns ids, the ranked objective, and every date / dollar figure:
   figures in the card that aren't in the source trigger one self-repair call, then get masked.
-- Cards are cached by a hash of (prompt version, deployment, prompt text), so an unchanged
-  listing costs nothing the next morning and an offline demo can replay real cards.
+- Cards are cached by a hash of (prompt version, deployment, listing text + facts, matched
+  objective) — never days left or score, which change daily — so an unchanged listing costs
+  nothing the next morning and an offline demo can replay real cards.
+- If the model names a different objective than the ranking, the ranked one stays on the card
+  and the disagreement is written into why_not_fit, so a person still sees it.
 - When the LLM is off or fails, an *extractive* offline card is built: every quote is an
   exact substring of the source, so the Verifier and UI still work end to end.
 """
@@ -32,7 +35,7 @@ from core.llm import LLMUnavailable, chat_json
 from core.reference import load_profile
 from core.schemas import Card, Evidence, Objective, Opportunity, Profile, ScoredItem
 
-PROMPT_VERSION = "v2"
+PROMPT_VERSION = "v2.1"   # bump on any prompt change: it invalidates the card cache
 SYSTEM_PROMPT = (config.PROMPTS_DIR / "card_agent.md").read_text(encoding="utf-8")
 MAX_WORKERS = 5          # keep below Azure OpenAI rate limits
 DESC_CHARS = 6000        # listing description sent to the model
@@ -142,11 +145,13 @@ def money_type_hint(opp: Opportunity, item: ScoredItem) -> tuple[str, str]:
 
 
 def facts_block(opp: Opportunity, item: ScoredItem) -> list[str]:
+    """Only facts that stay the same while the listing does. Days left and ranking score change
+    every morning; they are shown by the app, never baked into the card (and never in the cache key)."""
     hint, why = money_type_hint(opp, item)
     if opp.status == "forecasted":
-        timing = "Forecast only (not open yet)"
+        timing = "Forecast only (not open yet)" + (f"; expected close {opp.close_date}" if opp.close_date else "")
     elif opp.close_date:
-        timing = f"Closes {opp.close_date} ({opp.days_to_close} days from today)" if opp.days_to_close is not None else f"Closes {opp.close_date}"
+        timing = f"Closes {opp.close_date}"
     else:
         timing = "No close date stated (rolling or not stated)"
     return [
@@ -158,7 +163,6 @@ def facts_block(opp: Opportunity, item: ScoredItem) -> list[str]:
         f"- CFDA / assistance listing: {', '.join(opp.cfda) or 'not stated'}",
         f"- Recurring program DNCR already receives: {'yes' if item.already_yours else 'no'}",
         f"- Money type hint (from rules, may be wrong): {hint} — {why}",
-        f"- Ranking: score {item.score}, confidence {item.confidence}" + (" — forecast, watch list" if item.watch else ""),
     ]
 
 
@@ -246,7 +250,19 @@ def _mask_figures(card: Card, figures: list[str]) -> Card:
     return card.model_copy(update=updates)
 
 
-def finalize(card: Card, opp: Opportunity, item: ScoredItem) -> Card:
+def objective_disagreement(card: Card, item: ScoredItem, profile: Optional[Profile]) -> Optional[str]:
+    """Plain-English note when the model picked a different objective than the ranking.
+    The ranked objective stays on the card (UI and scores agree); the disagreement stays visible."""
+    picked, ranked = (card.objective_id or "").strip(), item.objective_id
+    if not picked or not ranked or picked == ranked:
+        return None
+    known = {o.objective_id for o in profile.objectives} if profile else set()
+    if picked in known:
+        return f"Card writer thought objective {picked} fits better than the ranked objective {ranked} — check which one applies."
+    return f"Card writer named objective {picked}, which is not in the DNCR plan; kept the ranked objective {ranked}."
+
+
+def finalize(card: Card, opp: Opportunity, item: ScoredItem, profile: Optional[Profile] = None) -> Card:
     """Code-owned fields and cleanup. Never drops a quote: judging quotes is the Verifier's job."""
     seen: set[tuple[str, str]] = set()
     evidence: list[Evidence] = []
@@ -256,11 +272,15 @@ def finalize(card: Card, opp: Opportunity, item: ScoredItem) -> Card:
         if quote and key not in seen:
             seen.add(key)
             evidence.append(Evidence(field=ev.field, quote=quote, source=ev.source))
+    why_not_fit = card.why_not_fit.strip()
+    note = objective_disagreement(card, item, profile)
+    if note:
+        why_not_fit = f"{why_not_fit} {note}".strip()
     return card.model_copy(update={
         "opp_id": opp.id,                                          # never trust the model with ids
-        "objective_id": item.objective_id or card.objective_id,    # the ranked objective wins
+        "objective_id": item.objective_id or card.objective_id,    # ranked objective stays; disagreement noted above
         "division": card.division if card.division and card.division != "not stated" else (item.division or "not stated"),
-        "why_not_fit": card.why_not_fit.strip() or "not stated",
+        "why_not_fit": why_not_fit or "not stated",
         "evidence": evidence,
     })
 
@@ -325,8 +345,29 @@ def placeholder_card(opp: Opportunity, item: ScoredItem, profile: Optional[Profi
 # --------------------------------------------------------------------------- #
 # Cache
 # --------------------------------------------------------------------------- #
-def cache_key(user_prompt: str, deployment: Optional[str]) -> str:
-    raw = "|".join([PROMPT_VERSION, deployment or config.AOAI_CHAT_DEPLOYMENT, SYSTEM_PROMPT, user_prompt])
+def cache_inputs(opp: Opportunity, item: ScoredItem, profile: Profile, deployment: Optional[str]) -> dict:
+    """Everything the card is written from — and nothing that changes daily.
+
+    In: prompt version + system prompt, deployment, the listing text and listing facts,
+    the matched objective (id + wording), already_yours.
+    Out on purpose: days_to_close, score, confidence, watch, ingested_at (they change every
+    morning or whenever weights change; the app shows them next to the card).
+    """
+    obj = _objective(profile, item.objective_id)
+    return {
+        "prompt": [PROMPT_VERSION, hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()],
+        "deployment": deployment or config.AOAI_CHAT_DEPLOYMENT,
+        "listing": opp.model_dump(include={
+            "title", "eligibility_text", "description", "agency_code", "agency_name", "status", "close_date",
+            "award_floor", "award_ceiling", "cost_sharing", "funding_instruments", "cfda", "applicant_types",
+        }),
+        "objective": [item.objective_id, obj.text if obj else "", list(obj.divisions) if obj else []],
+        "already_yours": item.already_yours,
+    }
+
+
+def cache_key(opp: Opportunity, item: ScoredItem, profile: Profile, deployment: Optional[str]) -> str:
+    raw = json.dumps(cache_inputs(opp, item, profile, deployment), sort_keys=True, ensure_ascii=False, default=str)
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
 
 
@@ -346,7 +387,7 @@ def _call(opp: Opportunity, item: ScoredItem, profile: Profile, feedback: Option
         deployment=deployment,
         reasoning_effort="low",
     )
-    return finalize(card, opp, item)
+    return finalize(card, opp, item, profile)
 
 
 def make_card(
@@ -358,8 +399,7 @@ def make_card(
     deployment: Optional[str] = None,
     use_cache: bool = True,
 ) -> Card:
-    user_prompt = build_user_prompt(opp, item, profile, feedback)
-    key = cache_key(user_prompt, deployment)
+    key = cache_key(opp, item, profile, deployment)
     if use_cache and feedback is None:
         cached = storage.read_json(_cache_path(opp.id, key), default=None)
         if cached:

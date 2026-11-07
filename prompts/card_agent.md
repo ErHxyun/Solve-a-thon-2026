@@ -35,4 +35,8 @@ Fill every field:
 Rules:
 - If the text doesn't say something, write "not stated". Never guess.
 - Never write a date, deadline, dollar amount or eligibility code that isn't in the text you were given.
+- Don't say how many days are left and don't mention scores: the app shows those next to your card
+  and they change every day.
+- If you believe a different DNCR objective fits better than the one you were given, still use the
+  given objective_id, and say which objective you'd pick (and why) in why_not_fit.
 - Plain English. No jargon, no scores, no acronyms without spelling them out once.

@@ -96,8 +96,27 @@ def test_ranked_objective_wins_and_quotes_are_cleaned(monkeypatch):
     monkeypatch.setattr(card_agent, "chat_json", lambda **kw: fake)
     card = card_agent.make_card(OPP, ITEM, load_profile())
     assert card.objective_id == "1.5"
-    assert card.why_not_fit == "not stated"
+    assert "objective 9.9, which is not in the DNCR plan" in card.why_not_fit   # invented id: kept visible
     assert [e.quote for e in card.evidence] == ["Preserve humanities collections."]
+
+
+def test_empty_why_not_fit_becomes_not_stated(monkeypatch):
+    monkeypatch.setattr(card_agent, "chat_json", lambda **kw: _llm_card(why_not_fit="  "))
+    assert card_agent.make_card(OPP, ITEM, load_profile()).why_not_fit == "not stated"
+
+
+def test_objective_disagreement_stays_visible(monkeypatch):
+    """Review 2026-11-07: overwriting objective_id hid the model's disagreement from the Verifier and the user."""
+    monkeypatch.setattr(card_agent, "chat_json", lambda **kw: _llm_card(objective_id="5.1", why_not_fit="Competitive."))
+    card = card_agent.make_card(OPP, ITEM, load_profile())
+    assert card.objective_id == "1.5"                                      # UI and score stay consistent
+    assert card.why_not_fit.startswith("Competitive.")
+    assert "objective 5.1 fits better than the ranked objective 1.5" in card.why_not_fit
+
+
+def test_agreeing_objective_adds_no_note(monkeypatch):
+    monkeypatch.setattr(card_agent, "chat_json", lambda **kw: _llm_card(objective_id="1.5", why_not_fit="Competitive."))
+    assert card_agent.make_card(OPP, ITEM, load_profile()).why_not_fit == "Competitive."
 
 
 # ---- invented figures ---------------------------------------------------- #
@@ -148,6 +167,42 @@ def test_cache_skips_second_llm_call(monkeypatch):
     first = card_agent.make_card(OPP, ITEM, load_profile())
     second = card_agent.make_card(OPP, ITEM, load_profile())
     assert len(calls) == 1 and first == second
+
+
+def test_cache_hits_next_day_when_only_days_left_and_score_change(monkeypatch, opportunities):
+    """Review 2026-11-07: days_to_close and score change daily, so they must not be in the key."""
+    calls = []
+    monkeypatch.setattr(card_agent, "chat_json", lambda **kw: calls.append(1) or _llm_card("363771"))
+    opp = _opp(opportunities, "363771")
+    today = _item(opp.id, score=72.0, confidence="High", objective_id="1.5")
+    card_agent.make_card(opp, today, load_profile())
+    tomorrow_opp = opp.model_copy(update={"days_to_close": opp.days_to_close - 1, "ingested_at": "2026-11-08T11:00:00+00:00"})
+    reweighted = today.model_copy(update={"score": 64.5, "confidence": "Medium", "watch": True})
+    card_agent.make_card(tomorrow_opp, reweighted, load_profile())
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize("change", ["description", "close_date", "award_ceiling", "objective"])
+def test_cache_misses_when_card_inputs_change(monkeypatch, opportunities, change):
+    calls = []
+    monkeypatch.setattr(card_agent, "chat_json", lambda **kw: calls.append(1) or _llm_card("363771"))
+    opp = _opp(opportunities, "363771")
+    item = _item(opp.id, objective_id="1.5")
+    card_agent.make_card(opp, item, load_profile())
+    if change == "objective":
+        item = item.model_copy(update={"objective_id": "3.2"})
+    else:
+        opp = opp.model_copy(update={change: {"description": opp.description + " Amended.",
+                                               "close_date": "2026-12-01", "award_ceiling": 90000.0}[change]})
+    card_agent.make_card(opp, item, load_profile())
+    assert len(calls) == 2
+
+
+def test_prompt_has_no_daily_values(opportunities):
+    opp = _opp(opportunities, "361480")  # days_to_close = 38 in the fixture
+    item = _item(opp.id, score=81.6, objective_id="1.5")
+    prompt = card_agent.build_user_prompt(opp, item, load_profile())
+    assert "81.6" not in prompt and "days from today" not in prompt and "Closes 2026-12-15" in prompt
 
 
 def test_retry_with_feedback_bypasses_cache(monkeypatch):
