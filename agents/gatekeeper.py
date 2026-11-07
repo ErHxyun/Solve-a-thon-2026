@@ -4,7 +4,7 @@ Spec: docs/agents/gatekeeper.md
 Gates from "DNCR Grant Scoring Rules (Final)" (pass / fail, never scored):
   G1 applicant: state governments eligible (00), unrestricted (99), or "Others (25)" whose text mentions states (flagged)
   G2 region:    not limited to another region / land type / country
-  G3 status:    posted or forecasted, deadline not passed, forecast not stale
+  G3 status:    posted or forecasted, deadline not passed, forecast / rolling listing not stale
 """
 from __future__ import annotations
 
@@ -63,9 +63,10 @@ def check(opp: Opportunity, today: date | None = None) -> GateResult:
         reasons.append("Closed or past deadline")
     years = [int(y) for y in re.findall(r"20[0-3]\d", f"{opp.title} {opp.number}")]
     this_year = (today or date.today()).year
-    if opp.status == "forecasted" and years and max(years) <= this_year - STALE_FORECAST_YEARS:
+    no_deadline = opp.status == "forecasted" or not opp.close_date  # forecasts and "rolling" posts never expire
+    if no_deadline and years and max(years) <= this_year - STALE_FORECAST_YEARS:
         open_or_coming = False
-        reasons.append(f"G3 Status: stale forecast (newest year mentioned is {max(years)})")
+        reasons.append(f"G3 Status: stale listing with no deadline (newest year mentioned is {max(years)})")
 
     # Gate 3: not research for researchers (penalty, not removal)
     penalty = 1.0

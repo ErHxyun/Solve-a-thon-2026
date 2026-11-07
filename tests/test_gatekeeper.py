@@ -58,3 +58,13 @@ def test_stale_forecast_fails():
     assert not r.passed and any("stale" in x for x in r.reasons)
     fresh = make(title="Climate Program Office FY 2026", status="forecasted", days_to_close=None)
     assert check(fresh, today=date(2026, 11, 7)).passed
+
+
+def test_stale_rolling_post_fails():  # found in the first live run: NOAA-OAR-CPO-2012-2003041, posted, no close date
+    from datetime import date
+
+    old = make(title="Climate Program Office for FY 2012", number="NOAA-OAR-CPO-2012-2003041", status="posted",
+               days_to_close=None, close_date=None)
+    assert not check(old, today=date(2026, 11, 7)).passed
+    dated = make(title="Program FY 2012 legacy name", status="posted", close_date="2027-01-15", days_to_close=69)
+    assert check(dated, today=date(2026, 11, 7)).passed  # a real future deadline is not stale
