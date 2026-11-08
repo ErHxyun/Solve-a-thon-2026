@@ -35,7 +35,7 @@ from core.llm import LLMUnavailable, chat_json
 from core.reference import load_profile
 from core.schemas import Card, Evidence, Objective, Opportunity, Profile, ScoredItem
 
-PROMPT_VERSION = "v2.1"   # bump on any prompt change: it invalidates the card cache
+PROMPT_VERSION = "v2.2"   # bump on any prompt change (system prompt OR user-prompt layout): it invalidates the card cache
 SYSTEM_PROMPT = (config.PROMPTS_DIR / "card_agent.md").read_text(encoding="utf-8")
 MAX_WORKERS = 5          # keep below Azure OpenAI rate limits
 DESC_CHARS = 6000        # listing description sent to the model
