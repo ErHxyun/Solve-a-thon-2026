@@ -37,7 +37,7 @@ Makes sure short windows are not missed (the ESHPF grant had only 31 days). Flag
 - ✅ Thresholds from env: `ALERT_CLOSING_SOON_DAYS` (10), `ALERT_WAITLIST_WARN_DAYS` (21); not in `core/config.py` to keep `core/` untouched
 - ✅ Daily digest (`alerts/digest.json`): headline + counts + one line per alert, for the morning email
 - ✅ Chase reminders, Skip silences, latest decision wins (undo works)
-- ☐ Email sending (roadmap: Azure Communication Services); the digest is the content
+- ✅ Email sending moved to the Notifier (`agents/notifier.py`, docs/agents/notifier.md): weekly digest + same-day urgent email via ACS or SMTP
 - ☐ UI shows `alerts/latest.json` at the top (frontend)
 
 ## 5. Validation
