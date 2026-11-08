@@ -394,6 +394,67 @@
   .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #000; color: #fff; padding: 14px 20px; font-size: 14px; border-left: 4px solid var(--red); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; }
   .toast.show { opacity: 1; }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---- compact grant card (P0 redesign) ---- */
+  .gcards { display: flex; flex-direction: column; gap: 18px; }
+  .gcard { background: #fff; border-top: 4px solid var(--ink); padding: 22px 26px; display: flex; flex-direction: column; gap: 14px; }
+  .gcard.mine-chase { border-top-color: var(--accent); }
+  .gcard.mine-skip { opacity: .7; }
+  .gc-head { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; }
+  .gc-titles { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .gc-tags { gap: 8px; }
+  .gc-tags .rank { color: var(--ink); font-weight: 500; }
+  .chip.tag { border-color: var(--red-text); color: var(--red-text); }
+  .gc-title { margin: 0; font-size: 24px; line-height: 1.18; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .gc-title a { color: var(--ink); text-decoration: none; }
+  .gc-title a:hover { text-decoration: underline; }
+  .gc-sub { color: var(--dim); font-size: 15px; }
+  .score-badge { flex: 0 0 auto; width: 78px; height: 78px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; box-shadow: inset 0 0 0 4px var(--red); }
+  .score-badge:hover, .score-badge:focus-visible { color: #fff; background: #0A4A4A; }
+  .sb-num { font-size: 30px; font-weight: 700; line-height: 1; }
+  .sb-lbl { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; margin-top: 3px; color: #D8E2E0; }
+  .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .kpis > div { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px 12px 0; }
+  .kpis > div + div { border-left: 1px solid var(--line); padding-left: 16px; }
+  .kpi-num { font-size: 26px; font-weight: 700; color: var(--ink); line-height: 1.15; overflow-wrap: anywhere; }
+  .kpi-num small { font-size: 15px; font-weight: 600; color: var(--dim); }
+  .kpi-lbl { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; font-size: 11px; color: var(--dim); }
+  .kpi-num.due, .kpi-lbl.due { color: var(--red-text); }
+  .gc-purpose { margin: 0; font-size: 16px; color: #333; max-width: 95ch; }
+  .gc-risk { margin: 0; font-size: 15px; font-weight: 600; color: var(--warn); background: var(--warn-bg); padding: 8px 12px; }
+  .gc-actions { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+  .gc-actions .gc-more { margin-left: auto; }
+  .ai-pill { font-size: 14px; padding: 6px 12px; border-radius: 999px; background: #EFEAE4; color: var(--ink); border: 1px dashed var(--ink); cursor: help; }
+  .ai-pill.light { background: rgba(255,255,255,.12); color: #fff; border-color: #fff; }
+  .btn.act { min-height: 44px; }
+  .btn.act.on { background: var(--ink); color: #fff; }
+  .btn.light.act.on { background: #fff; color: var(--ink); }
+  .btn.act-dismiss:not(.on) { border-color: var(--dim); color: var(--dim); }
+  .gc-details { border-top: 1px dashed var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .list-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px 24px; flex-wrap: wrap; margin-bottom: 10px; }
+  .search input { width: min(420px, 100%); min-height: 46px; padding: 0 14px; border: 2px solid var(--ink); border-radius: 999px; background: #fff; font-size: 16px; }
+  .search { width: min(420px, 100%); }
+  .hint-line { margin: 4px 0 14px; font-size: 15px; color: var(--dim); }
+  .ff-grid { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 32px; align-items: start; }
+  .ff-filters { background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 140px; max-height: calc(100vh - 160px); overflow: auto; }
+  .ff-filters fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .ff-filters .search, .ff-filters .search input { width: 100%; }
+  .big-count { margin: 0; font-size: 22px; color: var(--ink); }
+  .big-count strong { font-size: 34px; }
+  .field.sort select { min-width: 220px; }
+  .conf-help summary { cursor: pointer; }
+  @media (max-width: 960px) { .ff-grid { grid-template-columns: 1fr; } .ff-filters { position: static; max-height: none; } }
+  @media (max-width: 640px) {
+    .gcard { padding: 18px 16px; }
+    .gc-title { font-size: 20px; }
+    .score-badge { width: 64px; height: 64px; } .sb-num { font-size: 24px; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .kpis > div:nth-child(3) { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+    .kpi-num { font-size: 21px; }
+    .gc-actions .row { width: 100%; }
+    .gc-actions .act-track { flex: 1 1 100%; }
+    .gc-actions .gc-more { margin-left: 0; }
+  }
 </style>
 </head>
 <body>
@@ -407,7 +468,7 @@
     <nav class="main" aria-label="Main">
       <a href="#today" data-nav="today">Today</a>
       <a href="#match" data-nav="match">Find Funding</a>
-      <a href="#board" data-nav="board">Board</a>
+      <a href="#board" data-nav="board">My Tracker</a>
       <a href="#how" data-nav="how">How It Works</a>
     </nav>
     <span class="agency-name">NC DNCR · Student prototype</span>
@@ -543,27 +604,49 @@ function demoDetailFromItem(it) {
 }
 
 /* ---------------- State ---------------- */
-const DEFAULT_Q = { divisions: [], money: [], closing: 'any', confidence: 'any', suggested: [], include_low: false, include_skipped: false, hide_decided_skip: true, limit: 15 };
+/* What the user does is stored with the existing decision API, so Alert / Notifier keep working:
+   Start tracking -> Chase, Save -> Waitlist, Dismiss -> Skip, Draft forward note -> Route.
+   The model's suggestion (suggested_decision) is never changed by these actions. */
+const ACTIONS = [
+  { key: 'Track', decision: 'Chase', label: 'Start tracking', on: 'Tracking ✓' },
+  { key: 'Save', decision: 'Waitlist', label: '☆ Save', on: '★ Saved' },
+  { key: 'Dismiss', decision: 'Skip', label: 'Dismiss', on: 'Dismissed' }
+];
+const MY_LABEL = { Chase: 'Tracking', Waitlist: 'Saved', Skip: 'Dismissed', Route: 'Forwarded' };
+const SUGGESTIONS = ['Chase', 'You decide', 'Waitlist', 'Route', 'Skip'];
+const MONEY = ['Formula', 'State-only competition', 'Open competition', 'Unknown'];
+const MONEY_HELP = {
+  'Formula': 'Every state gets a share; almost certain if eligible',
+  'State-only competition': 'Only states compete; limited awards',
+  'Open competition': 'Anyone can apply, incl. universities and nonprofits',
+  'Unknown': 'The listing doesn’t say'
+};
+const CONF_HELP = {
+  High: 'High: at or above the Chase line, a deadline is posted, and every quote on the card was found in the listing or the plan.',
+  Medium: 'Medium: fits the plan but is below the Chase line, has no deadline yet, or a quote or warning needs a look.',
+  Low: 'Low: weak plan match, fewer than half the quotes verified, or the card says DNCR cannot apply.'
+};
+const DEFAULT_Q = { divisions: [], money: [], closing: 'any', confidence: 'any', suggested: ['Chase', 'You decide', 'Waitlist', 'Route'], hide_dismissed: true, sort: 'priority' };
 const store = {
   get(k, f) { try { const v = localStorage.getItem('ffm-' + k); return v ? JSON.parse(v) : f; } catch (e) { return f; } },
   set(k, v) { try { localStorage.setItem('ffm-' + k, JSON.stringify(v)); } catch (e) {} }
 };
 const state = {
   ready: false, error: null, health: null,
-  list: null,           // last /api/shortlist response (with the user's API params)
-  all: null,            // board data: everything incl. decided Skips
-  q: Object.assign({}, DEFAULT_Q, store.get('q', {})),
-  detail: {}, run: null, busy: {}
+  list: null,           // last /api/shortlist response: every scored item, loaded once
+  q: Object.assign({}, DEFAULT_Q, store.get('q2', {})),
+  search: '', open: {},  // search text; which cards have details expanded
+  detail: {}, busy: {}
 };
-function itemById(id) { return ((state.list || {}).items || []).concat(((state.all || {}).items) || []).find(x => x.opp_id === id) || {}; }
+function allItems() { return ((state.list || {}).items) || []; }
+function itemById(id) { return allItems().find(x => x.opp_id === id) || {}; }
+function mine(it) { return (it.my_decision || {}).decision || null; }
 
-async function loadShortlist() {
-  const q = state.q;
-  state.list = await data.shortlist({ limit: q.limit, include_low: q.include_low, include_skipped: q.include_skipped, hide_decided_skip: q.hide_decided_skip });
+async function loadAll() {
+  // One request; every filter, sort and search after this runs on the data already in the page.
+  state.list = await data.shortlist({ limit: 200, include_low: true, include_skipped: true, hide_decided_skip: false });
+  allItems().forEach(it => { it.tags = it.tags || []; it.money_category = it.money_category || 'Unknown'; it.number = it.number || ''; if (it.plan_match === undefined) it.plan_match = null; });
   renderRefreshBar();
-}
-async function loadBoard() {
-  state.all = await data.shortlist({ limit: 200, include_low: true, include_skipped: true, hide_decided_skip: false });
 }
 
 /* ---------------- Formatting helpers ---------------- */
@@ -586,33 +669,67 @@ function closesText(it) {
   if (it.days_left < 0) return { text: 'Closed ' + fmtDate(it.close_date), urgent: true };
   return { text: `Closes in ${it.days_left} day${it.days_left === 1 ? '' : 's'} (${it.close_date})`, urgent: it.days_left <= 14 };
 }
+function deadlineKpi(it) {
+  if (!it.close_date) return { big: 'Rolling', small: 'No deadline posted', urgent: false };
+  const d = it.days_left;
+  const small = d == null ? 'Deadline' : d < 0 ? 'Closed' : d === 0 ? 'Closes today' : `${d} day${d === 1 ? '' : 's'} left`;
+  return { big: fmtDate(it.close_date), small, urgent: d != null && d <= 14 };
+}
+function firstSentence(t, max = 190) {
+  t = String(t || '').replace(/\s+/g, ' ').trim(); if (!t) return '';
+  const m = t.match(/^(.{40,}?[.!?])\s/); let s = m ? m[1] : t;
+  return s.length > max ? s.slice(0, max - 1).replace(/\s+\S*$/, '') + '…' : s;
+}
 function objText(it) {
   const o = it.objective || {};
   if (!o.id) return it.division || '—';
   return `Objective ${o.id}${o.page ? ', plan p. ' + o.page : ''}${it.division ? ' · ' + it.division : ''}`;
 }
-function confBadge(c) { const cls = c === 'High' ? 'ok' : c === 'Medium' ? 'mid' : 'warn'; return `<span class="status conf ${cls}">${esc(c || 'Unrated')} confidence</span>`; }
+function confBadge(c) { const cls = c === 'High' ? 'ok' : c === 'Medium' ? 'mid' : 'warn'; return `<span class="status conf ${cls}" title="${esc(CONF_HELP[c] || '')}">${esc(c || 'Unrated')} confidence</span>`; }
 function hero(eyebrow, title, body, extra = '', size = '') {
   return `<section class="hero ${size}"><div class="hero-art" aria-hidden="true"></div><div class="wrap hero-inner">
     <div class="mono eyebrow-light">${eyebrow}</div><h1>${title}</h1>${body ? `<p class="lede">${body}</p>` : ''}${extra}</div></section>`;
 }
+/* The one line a person must see before acting: a hard gate first, then softer checks. */
+function blocker(it) {
+  const card = it.card || {}; const w = (it.verification || {}).warnings || [];
+  const can = String(card.can_dncr_apply || '').replace(/^\[[^\]]*\]\s*/, '');
+  if (/^\s*no\b/i.test(can)) return 'Eligibility: ' + firstSentence(can, 150);
+  if (w.length) return w[0];
+  if (can && !/^\s*yes\b/i.test(can)) return 'Eligibility to confirm: ' + firstSentence(can, 150);
+  const f = (it.flags || []).find(x => /eligib|unclear|wrong/i.test(x)); if (f) return f;
+  if (it.suggested_decision === 'Route') return 'Suggested owner: ' + (it.route_to || 'another office') + ' — confirm before acting';
+  const pre = (card.prerequisites || [])[0]; if (pre) return 'Before applying: ' + pre;
+  return '';
+}
 
-/* ---------------- Qualifiers (client-side filters + API params) ---------------- */
+/* ---------------- Filters, search and sort (all on loaded data — nothing is re-run) ---------------- */
 const CONF_RANK = { Low: 0, Medium: 1, High: 2 };
+function matchesSearch(it) {
+  const s = state.search.trim().toLowerCase(); if (!s) return true;
+  return [it.title, it.number, it.funder, it.opp_id].some(x => String(x || '').toLowerCase().includes(s));
+}
 function passes(it) {
-  const q = state.q; const card = it.card || {};
+  const q = state.q;
   if (q.divisions.length && !q.divisions.includes(it.division)) return false;
-  if (q.money.length && !q.money.includes(card.money_type)) return false;
+  if (q.money.length && !q.money.includes(it.money_category)) return false;
   if (q.suggested.length && !q.suggested.includes(it.suggested_decision)) return false;
   if (q.closing !== 'any') { if (it.days_left == null || it.days_left < 0 || it.days_left > Number(q.closing)) return false; }
   if (q.confidence !== 'any' && (CONF_RANK[it.confidence] ?? -1) < CONF_RANK[q.confidence]) return false;
+  if (q.hide_dismissed && mine(it) === 'Skip') return false;
   return true;
 }
-function shown() { return ((state.list || {}).items || []).filter(passes); }
-function optionValues(key) {
-  const items = ((state.all || state.list || {}).items) || [];
-  return [...new Set(items.map(key).filter(Boolean))].sort();
-}
+// Priority = the Fit Scorer's Final score. Ties: sooner deadline, then opportunity id (deterministic).
+const byPriority = (a, b) => (b.score - a.score) || ((a.days_left ?? 1e9) - (b.days_left ?? 1e9)) || String(a.opp_id).localeCompare(String(b.opp_id));
+const SORTS = {
+  priority: ['Priority (high → low)', byPriority],
+  deadline: ['Deadline (soonest first)', (a, b) => ((a.days_left == null || a.days_left < 0 ? 1e9 : a.days_left) - (b.days_left == null || b.days_left < 0 ? 1e9 : b.days_left)) || byPriority(a, b)],
+  funding: ['Award ceiling (high → low)', (a, b) => ((b.award_ceiling ?? -1) - (a.award_ceiling ?? -1)) || byPriority(a, b)],
+  confidence: ['Confidence (High → Low)', (a, b) => ((CONF_RANK[b.confidence] ?? -1) - (CONF_RANK[a.confidence] ?? -1)) || byPriority(a, b)]
+};
+function todayItems() { return allItems().filter(i => i.suggested_decision === 'Chase' && mine(i) !== 'Skip').filter(matchesSearch).sort(byPriority); }
+function findItems() { return allItems().filter(passes).filter(matchesSearch).sort(SORTS[state.q.sort] ? SORTS[state.q.sort][1] : byPriority); }
+function optionValues(key) { return [...new Set(allItems().map(key).filter(Boolean))].sort(); }
 
 /* ---------------- Refresh bar ---------------- */
 function renderRefreshBar() {
@@ -621,138 +738,147 @@ function renderRefreshBar() {
   const chips = [['closing_soon', 'closing soon'], ['waitlist_opening', 'waitlist opening'], ['waitlist_21_days', 'waitlist ≥21 days'], ['new_since_yesterday', 'new since yesterday']]
     .map(([k, l]) => `<span class="rb-chip ${c[k] ? 'hot' : ''}">${c[k] || 0} ${l}</span>`).join('');
   $('#refreshBar').innerHTML = `<div class="wrap rb">
-    <span class="mono small">${net.demo ? `<strong class="rb-demo">Demo data${demo.builtin ? ' (built-in)' : ''}</strong> · ` : ''}Last refreshed: <strong>${esc(fmtWhen(s.last_refreshed))}</strong>${s.run_status ? ' · run ' + esc(s.run_status) : ''}</span>
+    <span class="mono small">${net.demo ? `<strong class="rb-demo">Demo data${demo.builtin ? ' (built-in)' : ''}</strong> · ` : ''}Scored as of: <strong>${esc(fmtWhen(s.last_refreshed))}</strong>${s.run_status ? ' · run ' + esc(s.run_status) : ''}</span>
     <span class="rb-head">${esc(d.headline || '')}</span>
     <span class="rb-chips">${chips}</span>
     ${(d.lines || []).length ? `<ul class="rb-lines">${d.lines.map(l => `<li>${esc(typeof l === 'string' ? l : (l.text || JSON.stringify(l)))}</li>`).join('')}</ul>` : ''}
     <span class="mono small rb-note">Student prototype — not an official DNCR website</span>
   </div>`;
+  const n = allItems().filter(i => ['Chase', 'Waitlist', 'Route'].includes(mine(i))).length;
+  const t = document.querySelector('[data-nav="board"]'); if (t) t.textContent = `My Tracker${n ? ' (' + n + ')' : ''}`;
 }
 
-/* ---------------- Views ---------------- */
-function viewToday() {
-  const s = state.list; const items = shown(); const c = s.counts || {};
-  const funnel = [[c.opportunities, 'Collected from Grants.gov'], [c.passed_gates, 'Passed gates'], [c.scored, 'Scored vs. DNCR plan'], [c.cards, 'Decision cards']];
-  const decided = items.filter(i => i.my_decision).length;
-  return hero('Today · ' + fmtDate(((s.digest || {}).date) || (s.last_refreshed || '').slice(0, 10)), 'Today’s short list',
-      `${items.length} item${items.length === 1 ? '' : 's'} to decide. Each card explains the fit in plain English with quotes you can check. You decide: Chase, Waitlist, Skip or Route — nothing is ever submitted or sent.`,
-      `<div class="row" style="gap:14px 28px"><a class="btn red" href="#match">Set qualifiers & run match</a><a class="arrow-link light" href="#board">Open the board ${ARROW}</a></div>`, 'short') + `
-  <section class="stats-band" aria-label="Pipeline funnel"><div class="wrap stats-grid">
-    ${funnel.map(([n, l]) => `<div><span class="stat-num">${n == null ? '—' : n}</span><span class="mono small">${l}</span></div>`).join('')}
-    <div><span class="stat-num">${decided}/${items.length}</span><span class="mono small">Decided today</span></div>
-  </div></section>
-  ${qualifierSummary()}
-  <section class="sec gray"><div class="wrap">
-    <div class="sec-head"><h2>Decide</h2><button class="btn" data-act="reload">Reload</button></div>
-    <div class="dcards">${items.length ? items.map(decisionCard).join('') : `<div class="empty">Nothing on the short list matches your qualifiers. <a href="#match">Edit qualifiers</a></div>`}</div>
-  </div></section>`;
+/* ---------------- Compact grant card ---------------- */
+function actionButtons(it, compact) {
+  const m = mine(it); const busy = state.busy[it.opp_id] ? 'disabled' : '';
+  const btns = ACTIONS.map(a => `<button class="btn ${compact ? 'sm' : ''} act act-${a.key.toLowerCase()} ${m === a.decision ? 'on' : ''}" data-act="${m === a.decision ? 'undo' : 'decide'}" data-id="${esc(it.opp_id)}" data-d="${a.decision}" aria-pressed="${m === a.decision}" ${busy}>${m === a.decision ? a.on : a.label}</button>`);
+  if (it.suggested_decision === 'Route' || m === 'Route') btns.push(`<button class="btn ${compact ? 'sm' : ''} act ${m === 'Route' ? 'on' : ''}" data-act="${m === 'Route' ? 'undo' : 'decide'}" data-id="${esc(it.opp_id)}" data-d="Route" aria-pressed="${m === 'Route'}" ${busy}>${m === 'Route' ? 'Forwarded ✓' : 'Draft forward note'}</button>`);
+  return btns.join('');
 }
-
-function decisionCard(it) {
-  const card = it.card || {}; const v = it.verification || {}; const cl = closesText(it);
-  const mine = (it.my_decision || {}).decision; const busy = state.busy[it.opp_id];
-  const tags = [card.money_type, it.already_yours && 'Already yours', it.watch && 'Watch', ...(it.flags || [])].filter(Boolean);
-  const q5 = [['Can DNCR apply?', card.can_dncr_apply], ['Who applies?', card.who_applies || it.route_to], ['Money type', card.money_type],
+function aiPill(it) {
+  const s = it.suggested_decision || 'Not assessed';
+  return `<span class="ai-pill ai-${esc(s.replace(/\s+/g, '-').toLowerCase())}" title="${esc(it.decision_reason || '')}">AI suggestion: <strong>${esc(s)}</strong></span>`;
+}
+function grantCard(it, rank) {
+  const card = it.card || {}; const v = it.verification || {}; const dl = deadlineKpi(it); const open = !!state.open[it.opp_id];
+  const id = esc(it.opp_id); const score = Math.round(it.score);
+  const purpose = firstSentence(card.summary) || 'No decision card yet — cards are written for today’s top 15. Open the listing or full details.';
+  const risk = blocker(it);
+  const q5 = [['Can DNCR apply?', card.can_dncr_apply], ['Who applies?', card.who_applies || it.route_to], ['Money type', it.money_category + (it.tags.length ? ' · ' + it.tags.join(', ') : '')],
     ['Prerequisites', (card.prerequisites || []).length ? '<ul>' + card.prerequisites.map(p => `<li>${esc(p)}</li>`).join('') + '</ul>' : 'None listed', true], ['Worth it?', card.worth_it]];
-  return `<article class="dcard ${mine ? 'decided d-' + mine.toLowerCase() : ''}" id="card-${esc(it.opp_id)}">
-    <div class="dc-top">
-      <div class="row" style="gap:8px">${confBadge(it.confidence)}${tags.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
-      <a class="arrow-link" href="#item-${esc(it.opp_id)}" style="font-size:15px">Details ${ARROW}</a>
-    </div>
-    <h3 class="dc-title"><a href="#item-${esc(it.opp_id)}">${esc(it.title)}</a></h3>
-    <div class="dc-sub">${esc(it.funder)} · <a href="${esc(it.url)}" target="_blank" rel="noopener">Open listing ↗</a></div>
-    <div class="dc-meta">
-      <div><span class="mono small dim">Deadline</span><span class="${cl.urgent ? 'due' : ''}">${esc(cl.text)}</span></div>
-      <div><span class="mono small dim">Award ceiling</span><span>${money(it.award_ceiling)}</span></div>
-      <div><span class="mono small dim">Plan fit</span><span>${esc(objText(it))}</span></div>
-      <div><span class="mono small dim">Who applies</span><span>${esc(it.route_to || '—')}</span></div>
-    </div>
-    ${(it.objective || {}).text ? `<p class="dc-obj"><span class="mono small">Objective ${esc(it.objective.id)}</span> ${esc(it.objective.text)}</p>` : ''}
-    ${card.summary ? `<p class="dc-summary">${esc(card.summary)}</p>` : '<p class="dc-summary dim">No decision card was written for this item.</p>'}
-    <div class="dc-why">
-      <div class="why-yes"><div class="mono small">Why it fits</div><p>${esc(card.why_fit || '—')}</p></div>
-      <div class="why-no"><div class="mono small">Why it might not</div><p>${esc(card.why_not_fit || 'Not assessed — read the eligibility section.')}</p></div>
-    </div>
-    <dl class="q5">${q5.map(([k, val, raw]) => `<div><dt>${k}</dt><dd>${raw ? val : esc(val || '—')}</dd></div>`).join('')}</dl>
-    ${(v.warnings || []).length ? `<div class="warnbox">${v.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
-    ${(card.evidence || []).length ? `<details class="evidence"><summary>Evidence · ${v.verified_quotes || 0}/${v.total_quotes || card.evidence.length} quotes verified</summary>
-      ${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
-    <div class="dc-actions">
-      ${it.suggested_decision ? `<span class="hint" title="${esc(it.decision_reason || '')}">Suggested: <strong>${esc(it.suggested_decision)}</strong>${it.decision_reason ? ' — ' + esc(it.decision_reason) : ''}</span>` : ''}
-      <div class="row" role="group" aria-label="Decision for ${esc(it.title)}">
-        ${DECISIONS.map(d => `<button class="btn dbtn d-${d.toLowerCase()} ${mine === d ? 'on' : ''}" data-act="decide" data-id="${esc(it.opp_id)}" data-d="${d}" aria-pressed="${mine === d}" ${busy ? 'disabled' : ''}>${d}</button>`).join('')}
-        ${mine ? `<button class="btn ghost" data-act="undo" data-id="${esc(it.opp_id)}" ${busy ? 'disabled' : ''}>Undo</button>` : ''}
+  return `<article class="gcard ${mine(it) ? 'mine mine-' + mine(it).toLowerCase() : ''}" id="card-${id}">
+    <div class="gc-head">
+      <div class="gc-titles">
+        <div class="row gc-tags">${rank ? `<span class="rank mono small">#${rank}</span>` : ''}<span class="chip" title="${esc(MONEY_HELP[it.money_category] || '')}">${esc(it.money_category)}</span>${(it.tags || []).map(t => `<span class="chip tag">${esc(t)}</span>`).join('')}${confBadge(it.confidence)}${mine(it) ? `<span class="status neutral">${esc(MY_LABEL[mine(it)])}</span>` : ''}</div>
+        <h3 class="gc-title"><a href="#item-${id}">${esc(it.title)}</a></h3>
+        <div class="gc-sub">${esc(it.funder)}${it.number ? ' · ' + esc(it.number) : ''} · <a href="${esc(it.url)}" target="_blank" rel="noopener">Open listing ↗</a></div>
       </div>
+      <a class="score-badge" href="#item-${id}" aria-label="Priority score ${score} out of 100. How it was calculated" title="Priority = plan match × (0.30 + 0.20 chance + 0.30 value + 0.15 urgency + 0.05 workload). Chase line: 38.">
+        <span class="sb-num">${score}</span><span class="sb-lbl">Priority</span></a>
+    </div>
+    <div class="kpis">
+      <div><span class="kpi-num">${it.award_ceiling != null ? money(it.award_ceiling) : 'Not stated'}</span><span class="kpi-lbl">Award ceiling (per award)</span></div>
+      <div><span class="kpi-num ${dl.urgent ? 'due' : ''}">${esc(dl.big)}</span><span class="kpi-lbl ${dl.urgent ? 'due' : ''}">${esc(dl.small)}</span></div>
+      <div><span class="kpi-num">${it.plan_match != null ? Math.round(it.plan_match) + '<small>/100</small>' : 'Not assessed'}</span><span class="kpi-lbl">Plan match${(it.objective || {}).id ? ' · Objective ' + esc(it.objective.id) : ''}</span></div>
+    </div>
+    <p class="gc-purpose">${esc(purpose)}</p>
+    ${risk ? `<p class="gc-risk"><span aria-hidden="true">⚠</span> ${esc(risk)}</p>` : ''}
+    <div class="gc-actions">
+      ${aiPill(it)}
+      <div class="row" role="group" aria-label="My actions for ${esc(it.title)}">${actionButtons(it, true)}</div>
+      <button class="btn ghost sm gc-more" data-act="toggle" data-id="${id}" aria-expanded="${open}" aria-controls="det-${id}">${open ? 'Hide details ▴' : 'Details ▾'}</button>
+    </div>
+    <div class="gc-details" id="det-${id}" ${open ? '' : 'hidden'}>
+      ${it.decision_reason ? `<p class="note">Why <strong>${esc(it.suggested_decision)}</strong>? ${esc(it.decision_reason)}</p>` : ''}
+      ${(it.objective || {}).text ? `<p class="dc-obj"><span class="mono small">${esc(objText(it))}</span> ${esc(it.objective.text)}</p>` : ''}
+      ${card.summary ? `<p class="dc-summary">${esc(card.summary)}</p>` : ''}
+      ${card.why_fit || card.why_not_fit ? `<div class="dc-why"><div class="why-yes"><div class="mono small">Why it fits</div><p>${esc(card.why_fit || '—')}</p></div><div class="why-no"><div class="mono small">Why it might not</div><p>${esc(card.why_not_fit || 'Not assessed — read the eligibility section.')}</p></div></div>` : ''}
+      ${it.card ? `<dl class="q5">${q5.map(([k, val, raw]) => `<div><dt>${k}</dt><dd>${raw ? val : esc(val || '—')}</dd></div>`).join('')}</dl>` : ''}
+      ${(v.warnings || []).length ? `<div class="warnbox">${v.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
+      ${(card.evidence || []).length ? `<details class="evidence"><summary>Evidence · ${v.verified_quotes || 0}/${v.total_quotes || card.evidence.length} quotes verified</summary>
+        ${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
+      <a class="arrow-link" href="#item-${id}" style="font-size:15px">Full score breakdown ${ARROW}</a>
     </div>
   </article>`;
 }
+function searchBox(id) {
+  return `<label class="search"><span class="sr-only">Search grants</span><input type="search" id="${id}" value="${esc(state.search)}" placeholder="Search by grant name, number or agency" autocomplete="off"></label>`;
+}
+function resultsHtml(items, emptyHtml) { return items.length ? items.map((it, i) => grantCard(it, i + 1)).join('') : emptyHtml; }
 
-function qualifierSummary() {
-  const q = state.q;
-  const chips = [q.divisions.length ? q.divisions.join(', ') : 'All divisions', q.money.length ? q.money.join(', ') : 'Any money type',
-    q.closing === 'any' ? 'Any deadline' : 'Closes ≤ ' + q.closing + ' days', q.confidence === 'any' ? 'Any confidence' : q.confidence + '+ confidence',
-    q.suggested.length ? 'Suggested: ' + q.suggested.join('/') : 'All suggestions', q.include_low ? 'Low included' : 'Low hidden', q.hide_decided_skip ? 'My Skips hidden' : 'My Skips shown'];
-  return `<section class="qual-bar" aria-label="Active qualifiers"><div class="wrap row" style="justify-content:space-between">
-    <div class="row" style="gap:8px"><span class="mono small dim">Qualifiers</span>${chips.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div>
-    <a class="arrow-link" href="#match" style="font-size:16px">Edit qualifiers ${ARROW}</a></div></section>`;
+/* ---------------- Views ---------------- */
+function viewToday() {
+  const s = state.list; const items = todayItems(); const c = s.counts || {};
+  const funnel = [[c.opportunities, 'Collected from Grants.gov'], [c.passed_gates, 'Passed gates'], [c.scored, 'Scored vs. DNCR plan'], [c.cards, 'Decision cards']];
+  const tracking = allItems().filter(i => mine(i) === 'Chase').length;
+  const total = allItems().filter(i => i.suggested_decision === 'Chase').length;
+  return hero('Today · ' + fmtDate(((s.digest || {}).date) || (s.last_refreshed || '').slice(0, 10)), 'Today’s short list',
+      `${total} grant${total === 1 ? '' : 's'} the scorer suggests you <strong>Chase</strong>, ranked by priority. The AI suggests; you decide — nothing is ever submitted or sent.`,
+      `<div class="row" style="gap:14px 28px"><a class="btn red" href="#match">Set filters</a><a class="arrow-link light" href="#board">My Tracker ${ARROW}</a></div>`, 'short') + `
+  <section class="stats-band" aria-label="Pipeline funnel"><div class="wrap stats-grid">
+    ${funnel.map(([n, l]) => `<div><span class="stat-num">${n == null ? '—' : n}</span><span class="mono small">${l}</span></div>`).join('')}
+    <div><span class="stat-num">${tracking}</span><span class="mono small">You are tracking</span></div>
+  </div></section>
+  <section class="sec gray"><div class="wrap">
+    <div class="list-head">
+      <div><h2 style="margin:0">Ranked by priority</h2><p class="small-text dim" style="margin:4px 0 0">Priority is the scorer’s Final score; confidence is how well the card’s evidence checked out — they measure different things.</p></div>
+      ${searchBox('search-today')}
+    </div>
+    <p class="hint-line">Want something specific? <a href="#match">Set filters</a> to narrow by division, money type, deadline or confidence.</p>
+    <p class="mono small dim" id="count-today" aria-live="polite">${items.length} grant${items.length === 1 ? '' : 's'}</p>
+    <div class="gcards" id="results-today">${resultsHtml(items, `<div class="empty">${state.search ? 'No suggested-Chase grant matches “' + esc(state.search) + '”. <button class="btn sm" data-act="clear-search">Clear search</button>' : 'No grant is suggested Chase today. <a href="#match">Explore all grants</a>'}</div>`)}</div>
+  </div></section>`;
 }
 
+function filterEmpty() {
+  return `<div class="empty"><strong>No grants match these filters.</strong> Try widening the deadline window or lowering the confidence threshold.<div style="margin-top:14px"><button class="btn solid" data-act="reset-q">Reset filters</button></div></div>`;
+}
 function viewQualify() {
-  const q = state.q;
-  const all = ((state.all || {}).items) || [];
-  const divisions = optionValues(i => i.division), money = optionValues(i => (i.card || {}).money_type);
-  const n = all.filter(i => (q.include_low || i.confidence !== 'Low') && (q.include_skipped || i.suggested_decision !== 'Skip') && (!q.hide_decided_skip || (i.my_decision || {}).decision !== 'Skip')).filter(passes).length;
-  const chip = (attr, val, label, on, type = 'checkbox', name = '') => `<label class="pill-radio"><input type="${type}" ${name ? `name="${name}"` : ''} ${attr}="${esc(val)}" ${on ? 'checked' : ''}><span>${esc(label)}</span></label>`;
-  return hero('Find funding · Step 1 of 2', 'Set your qualifiers', 'Narrow today’s short list before you decide. Qualifiers use the fields the pipeline writes for every item.',
-    `<div class="q-count"><span class="big-num">${n}</span><span class="mono small">items pass your qualifiers</span></div>
-     <div class="row" style="gap:14px 28px"><button class="btn red" data-act="run-match">Run match</button><button class="btn light" data-act="reset-q">Reset qualifiers</button></div>`, 'short') + `
-  <section class="sec"><div class="wrap split">
-    <div><div class="mono small red">01 · Division</div><h2>Which DNCR division?</h2><p class="body-text">From the Fit Scorer’s division for each item. Leave empty for all.</p></div>
-    <div class="qual-chips">${divisions.length ? divisions.map(d => chip('data-q-div', d, d, q.divisions.includes(d))).join('') : '<p class="dim">No divisions in today’s data.</p>'}</div>
-  </div></section>
-  <section class="sec gray"><div class="wrap split">
-    <div><div class="mono small red">02 · Money</div><h2>What kind of money?</h2><p class="body-text">From each decision card’s money type.</p></div>
-    <div class="qual-chips">${money.length ? money.map(m => chip('data-q-money', m, m, q.money.includes(m))).join('') : '<p class="dim">No money types in today’s data.</p>'}</div>
-  </div></section>
-  <section class="sec"><div class="wrap split">
-    <div><div class="mono small red">03 · Timing & confidence</div><h2>How soon, how sure?</h2><p class="body-text">Deadline window and the Verifier’s confidence after quote checking.</p></div>
-    <div class="stack" style="gap:22px">
-      <label class="field">Closes within<select id="q-closing">${[['any', 'Any time (incl. rolling)'], ['14', '14 days'], ['30', '30 days'], ['60', '60 days'], ['90', '90 days'], ['180', '6 months']].map(([v, l]) => `<option value="${v}" ${q.closing === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-      <fieldset><legend>Minimum confidence</legend><div class="row">${[['any', 'Any'], ['Medium', 'Medium+'], ['High', 'High']].map(([v, l]) => chip('data-q-conf', v, l, q.confidence === v, 'radio', 'q-conf')).join('')}</div></fieldset>
-    </div>
-  </div></section>
-  <section class="sec gray"><div class="wrap split">
-    <div><div class="mono small red">04 · Suggestions</div><h2>Which suggestions?</h2><p class="body-text">The scorer suggests a decision for each item; you still decide. These options are sent to the API.</p></div>
-    <div class="stack" style="gap:18px">
-      <div class="qual-chips">${DECISIONS.map(d => chip('data-q-sug', d, 'Suggested ' + d, q.suggested.includes(d))).join('')}</div>
-      <label class="check"><input type="checkbox" id="q-low" ${q.include_low ? 'checked' : ''}>Include Low-confidence items</label>
-      <label class="check"><input type="checkbox" id="q-skipped" ${q.include_skipped ? 'checked' : ''}>Include items the scorer suggests Skip</label>
-      <label class="check"><input type="checkbox" id="q-hide" ${q.hide_decided_skip ? 'checked' : ''}>Hide items I already skipped</label>
-      <div class="row"><button class="btn solid" data-act="run-match">Run match with ${n} item${n === 1 ? '' : 's'}</button><button class="btn ghost" data-act="reset-q">Reset</button></div>
+  const q = state.q; const items = findItems();
+  const divisions = optionValues(i => i.division);
+  const chip = (attr, val, label, on, type = 'checkbox', name = '', help = '') => `<label class="pill-radio" ${help ? `title="${esc(help)}"` : ''}><input type="${type}" ${name ? `name="${name}"` : ''} ${attr}="${esc(val)}" ${on ? 'checked' : ''}><span>${esc(label)}</span></label>`;
+  return hero('Find funding', 'Explore all grants', 'Filters work on today’s scored results instantly — nothing is collected or re-scored.', '', 'short') + `
+  <section class="sec gray ff"><div class="wrap ff-grid">
+    <aside class="ff-filters" aria-label="Filters">
+      ${searchBox('search-find')}
+      <fieldset><legend class="mono small red">01 · Division</legend><div class="qual-chips">${divisions.length ? divisions.map(d => chip('data-q-div', d, d, q.divisions.includes(d))).join('') : '<p class="dim">No divisions in today’s data.</p>'}</div><p class="small-text dim">None selected = all.</p></fieldset>
+      <fieldset><legend class="mono small red">02 · Money type</legend><div class="qual-chips">${MONEY.map(m => chip('data-q-money', m, m, q.money.includes(m), 'checkbox', '', MONEY_HELP[m])).join('')}</div><p class="small-text dim">How the money is split (from the scorer’s chance rules). “One-time” is shown as a tag on the card.</p></fieldset>
+      <fieldset><legend class="mono small red">03 · Timing &amp; confidence</legend>
+        <label class="field">Closes within<select id="q-closing">${[['any', 'Any time (incl. rolling)'], ['14', '14 days'], ['30', '30 days'], ['60', '60 days'], ['90', '90 days'], ['180', '6 months']].map(([v, l]) => `<option value="${v}" ${q.closing === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+        <div class="field">Minimum confidence<div class="row">${[['any', 'Any'], ['Medium', 'Medium or High'], ['High', 'High only']].map(([v, l]) => chip('data-q-conf', v, l, q.confidence === v, 'radio', 'q-conf')).join('')}</div></div>
+        <details class="conf-help"><summary class="small-text">What do High / Medium / Low mean?</summary><ul class="plain small-text">${['High', 'Medium', 'Low'].map(k => `<li>${esc(CONF_HELP[k])}</li>`).join('')}</ul><p class="small-text dim">Confidence is about the evidence, not the chance of winning.</p></details>
+      </fieldset>
+      <fieldset><legend class="mono small red">04 · AI suggestion</legend><div class="qual-chips">${SUGGESTIONS.map(d => chip('data-q-sug', d, d, q.suggested.includes(d))).join('')}</div>
+        <label class="check"><input type="checkbox" id="q-hide" ${q.hide_dismissed ? 'checked' : ''}>Hide items I already dismissed</label></fieldset>
+      <button class="btn ghost" data-act="reset-q">Reset filters</button>
+    </aside>
+    <div class="ff-results">
+      <div class="list-head"><p class="big-count" id="count-find" aria-live="polite"><strong>${items.length}</strong> grant${items.length === 1 ? '' : 's'}</p>
+        <label class="field sort">Sort by<select id="q-sort">${Object.entries(SORTS).map(([k, [l]]) => `<option value="${k}" ${q.sort === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div>
+      <div class="gcards" id="results-find">${resultsHtml(items, filterEmpty())}</div>
     </div>
   </div></section>`;
 }
 
-const BOARD_COLS = ['Undecided', 'Chase', 'Waitlist', 'Route', 'Skip'];
+const TRACK_COLS = [['Chase', 'Tracking', 'Grants you are working on (Start tracking)'], ['Waitlist', 'Saved', 'Bookmarked to look at later'], ['Route', 'Forwarded', 'Sent to another office'], ['Skip', 'Dismissed', 'Hidden from your lists']];
 function viewBoard() {
-  const items = ((state.all || {}).items) || [];
-  const col = it => (it.my_decision || {}).decision || 'Undecided';
-  return hero('Board', 'Decision board', 'Every item from today’s run, grouped by your decision. Change a decision here or undo it.', '', 'short') + `
+  const items = allItems();
+  return hero('My Tracker', 'My Tracker', 'Grants you saved, started tracking, forwarded or dismissed. The AI suggestion stays as it was; your choice is kept separately. Nothing here submits an application.', '', 'short') + `
   <section class="sec gray"><div class="wrap">
     <div class="board-scroll"><div class="board">
-      ${BOARD_COLS.map(c => { const list = items.filter(i => col(i) === c); return `<section class="col" aria-label="${c}">
-        <div class="col-hd"><span class="mono">${c}</span><span class="mono">${list.length}</span></div>
+      ${TRACK_COLS.map(([dec, label, help]) => { const list = items.filter(i => mine(i) === dec).sort(SORTS.deadline[1]); return `<section class="col" aria-label="${label}">
+        <div class="col-hd"><span class="mono" title="${esc(help)}">${label}</span><span class="mono">${list.length}</span></div>
         ${list.length ? list.map(it => { const cl = closesText(it); return `<div class="tcard">
-          <div class="mono small dim">${esc(it.confidence)} · ${esc((it.card || {}).money_type || '')}</div>
+          <div class="mono small dim">Priority ${Math.round(it.score)} · ${esc(it.money_category)}</div>
           <a class="tcard-title" href="#item-${esc(it.opp_id)}">${esc(it.title)}</a>
           <span class="small-text dim">${esc(it.funder)}</span>
           <span class="${cl.urgent ? 'due ' : ''}small-text">${esc(cl.text)}</span>
-          ${it.suggested_decision && c === 'Undecided' ? `<span class="mono small">Suggested: ${esc(it.suggested_decision)}</span>` : ''}
+          <span class="mono small">AI suggestion: ${esc(it.suggested_decision || '—')}</span>
           <div class="row" style="gap:6px">
-            <label class="sr-only" for="mv-${esc(it.opp_id)}">Decision for ${esc(it.title)}</label>
-            <select id="mv-${esc(it.opp_id)}" data-move="${esc(it.opp_id)}" class="mini-select">${['', ...DECISIONS].map(d => `<option value="${d}" ${(c === d || (!d && c === 'Undecided')) ? 'selected' : ''}>${d || 'Decide…'}</option>`).join('')}</select>
-            ${c !== 'Undecided' ? `<button class="btn sm ghost" data-act="undo" data-id="${esc(it.opp_id)}">Undo</button>` : ''}
-          </div></div>`; }).join('') : '<div class="col-empty">Nothing here.</div>'}
+            <label class="sr-only" for="mv-${esc(it.opp_id)}">Move ${esc(it.title)}</label>
+            <select id="mv-${esc(it.opp_id)}" data-move="${esc(it.opp_id)}" class="mini-select">${TRACK_COLS.map(([d, l]) => `<option value="${d}" ${d === dec ? 'selected' : ''}>${l}</option>`).join('')}</select>
+            <button class="btn sm ghost" data-act="undo" data-id="${esc(it.opp_id)}">Undo</button>
+          </div></div>`; }).join('') : '<div class="col-empty">Nothing here yet.</div>'}
       </section>`; }).join('')}
     </div></div>
   </div></section>`;
@@ -763,22 +889,22 @@ function viewDetail(id) {
   if (!d) return hero('Loading', 'Loading…', '', '', 'short');
   if (d.error) return hero('Not available', d.error === 404 ? 'This item is not in today’s results' : 'Could not load this item', '', `<a class="arrow-link light" href="#today">Back to today ${ARROW}</a>`, 'short');
   const o = d.opportunity || {}; const ch = d.checked || {}; const card = ch.card || {}; const it = itemById(id);
-  const mine = (it.my_decision || (d.decisions || []).slice(-1)[0] || {}).decision;
   const comp = d.components || {}; const br = d.breakdown || {};
-  const compLabels = { A: 'Plan match (A)', S: 'Semantic (S)', K: 'Keyword (K)', U: 'Urgency (U)', W: 'Workload (W)', H: 'History (H)', H10: 'History, 10-day (H10)', H90: 'History, 90-day (H90)', penalty: 'Penalty multiplier', negative_words: 'Negative words', rounds: 'Rounds' };
+  const compLabels = { A: 'Plan match (A)', S: 'Meaning (S)', K: 'Keywords (K)', P: 'Chance (P)', V: 'Value (V)', U: 'Urgency (U, 0–3)', W: 'Workload score (W)', H: 'Hours, median (H)', H10: 'Hours, 10th pct', H90: 'Hours, 90th pct', award: 'Typical award ($)', P_case: 'Chance case', entity_floor: 'Agency-type floor applied', penalty: 'Research penalty', negative_words: 'Negative words', rounds: 'Rounds merged' };
   return hero(`<a href="#today">Today</a> / ${esc(o.agency_code || o.agency_name || '')}`, esc(o.title || it.title || id), esc(o.agency_name || '') + (o.number ? ' · ' + esc(o.number) : ''),
     `<div class="hero-stats">
-       <div><span class="big-num">${d.final != null ? d.final : d.score != null ? d.score : '—'}</span><span class="mono small">Score</span></div>
+       <div><span class="big-num">${d.final != null ? Math.round(d.final) : d.score != null ? Math.round(d.score) : '—'}</span><span class="mono small">Priority</span></div>
+       <div><span class="big-num">${comp.A != null ? Math.round(comp.A) : '—'}</span><span class="mono small">Plan match</span></div>
        <div><span class="big-num">${d.days_left != null ? d.days_left : '—'}</span><span class="mono small">${d.days_left != null ? 'Days left' : 'Rolling / not stated'}</span></div>
        <div><span class="big-num">${esc(ch.confidence || d.confidence || '—')}</span><span class="mono small">Confidence</span></div>
      </div>
-     <div class="row">${DECISIONS.map(x => `<button class="btn ${mine === x ? 'light-solid' : 'light'}" data-act="decide" data-id="${esc(id)}" data-d="${x}">${x}</button>`).join('')}
+     <div class="row">${it.opp_id ? aiPill(it).replace('ai-pill', 'ai-pill light') + actionButtons(it, false).replace(/class="btn /g, 'class="btn light ') : ''}
        <a class="arrow-link light" href="${esc(o.url || it.url || '#')}" target="_blank" rel="noopener">Open listing ${ARROW}</a></div>`) + `
   <section class="sec"><div class="wrap split">
     <div>
       <h2>Score</h2>
       ${d.rationale ? `<p class="body-text">${esc(d.rationale)}</p>` : ''}
-      <p class="note">Suggested <strong>${esc(d.suggested_decision || '—')}</strong>${d.decision_reason ? ' — ' + esc(d.decision_reason) : ''}</p>
+      <p class="note">AI suggestion <strong>${esc(d.suggested_decision || '—')}</strong>${d.decision_reason ? ' — ' + esc(d.decision_reason) : ''}</p>
       ${Object.keys(br).length ? `<div class="breakdown light-bd">${Object.entries(br).map(([k, v]) => `<div class="bd-row"><span class="mono small">${esc(k)}</span><span class="bd-bar"><span style="width:${Math.max(0, Math.min(1, v)) * 100}%"></span></span><span class="bd-val">${Math.round(v * 100)}%</span></div>`).join('')}</div>` : ''}
     </div>
     <div class="facts">
@@ -797,29 +923,30 @@ function viewDetail(id) {
     <div class="facts">
       ${[['Status', o.status], ['Opens', fmtDate(o.open_date)], ['Closes', o.close_date ? fmtDate(o.close_date) : 'Rolling / not stated'], ['Award floor', money(o.award_floor)], ['Award ceiling', money(o.award_ceiling)],
         ['Cost sharing', o.cost_sharing == null ? '—' : o.cost_sharing ? 'Required' : 'Not required'], ['Instruments', (o.funding_instruments || []).join(', ')], ['Categories', (o.categories || []).join(', ')], ['Assistance listing', (o.cfda || []).join(', ')],
-        ['Objective', d.objective_id ? 'Objective ' + d.objective_id : '—'], ['Division', d.division], ['Route to', d.route_to], ['Can DNCR apply?', card.can_dncr_apply], ['Money type', card.money_type], ['Worth it?', card.worth_it]]
+        ['Objective', d.objective_id ? 'Objective ' + d.objective_id : '—'], ['Division', d.division], ['Route to', d.route_to], ['Can DNCR apply?', card.can_dncr_apply], ['Money type', it.money_category || card.money_type], ['Worth it?', card.worth_it]]
         .map(([k, v]) => `<div class="kv"><span class="mono small dim">${k}</span><span>${esc(v || '—')}</span></div>`).join('')}
       ${(o.applicant_types || []).length ? `<details class="evidence"><summary>Eligible applicant types (${o.applicant_types.length})</summary><ul class="plain">${o.applicant_types.map(a => `<li>${esc(a.description || a)}</li>`).join('')}</ul></details>` : ''}
     </div>
   </div></section>
   <section class="sec"><div class="wrap">
-    <div class="sec-head"><h2>Decision history</h2></div>
-    ${(d.decisions || []).length ? `<ul class="history">${d.decisions.map(x => `<li><strong>${esc(x.decision)}</strong> <span class="dim">${esc(fmtWhen(x.at || x.created_at || x.timestamp))}${x.user ? ' · ' + esc(x.user) : ''}</span>${x.note ? ' — ' + esc(x.note) : ''}</li>`).join('')}</ul>` : '<p class="dim">No decisions yet.</p>'}
+    <div class="sec-head"><h2>My action history</h2></div>
+    ${(d.decisions || []).length ? `<ul class="history">${d.decisions.map(x => `<li><strong>${esc(MY_LABEL[x.decision] || x.decision)}</strong> <span class="dim">${esc(fmtWhen(x.at || x.created_at || x.timestamp))}${x.user ? ' · ' + esc(x.user) : ''}</span>${x.note ? ' — ' + esc(x.note) : ''}</li>`).join('')}</ul>` : '<p class="dim">No actions yet.</p>'}
   </div></section>`;
 }
 
 const HOW_STEPS = [
   ['Collector', 'Reads the whole Grants.gov feed every morning.', 'Code'],
   ['Gatekeeper', 'Drops what DNCR cannot or should not pursue (rules).', 'Code'],
-  ['Fit Scorer', 'Scores each item against the DNCR 2025–2029 Strategic Plan objectives.', 'Embeddings'],
+  ['Fit Scorer', 'Scores each item against the DNCR 2025–2029 Strategic Plan: plan match, chance, value, urgency, workload.', 'Code'],
   ['Card Agent + Verifier', 'Writes a plain-English card with quotes; the Verifier checks every quote exists.', 'LLM + code'],
-  ['You decide', 'Chase, Waitlist, Skip or Route. Route and Chase open drafts you can edit and copy.', 'On click']
+  ['You decide', 'Save, Start tracking or Dismiss. Tracking opens a starter pack; a Route suggestion offers a forwarding draft.', 'On click']
 ];
 const FAQ = [
-  ['Where does the data come from?', 'The daily pipeline reads Grants.gov, scores items against the DNCR 2025–2029 Strategic Plan and writes today’s short list. This page reads it from the API (/api/shortlist).'],
-  ['Does anything get submitted or sent?', 'No. Decisions are recorded in our own log. Route and Apply Assist only produce drafts that you copy yourself.'],
-  ['What do the four decisions mean?', 'Chase: pursue it (opens a starter pack). Waitlist: watch for the next window. Skip: not for DNCR. Route: another office should apply (opens a forwarding draft).'],
-  ['Why is there a “why it might not” on every card?', 'So the risks are always visible next to the fit. Read the eligibility section before chasing.'],
+  ['Where does the data come from?', 'The daily pipeline reads Grants.gov, scores items against the DNCR 2025–2029 Strategic Plan and writes today’s results. This page reads them from the API (/api/shortlist). Filters, search and sorting never re-run the pipeline.'],
+  ['Does anything get submitted or sent?', 'No. Your actions are recorded in our own log. Forwarding notes and starter packs are drafts you copy yourself.'],
+  ['What is the difference between the AI suggestion and my action?', 'The AI suggestion (Chase, You decide, Waitlist, Route or Skip) comes from the scoring rules and never changes when you click. Your actions — Save, Start tracking, Dismiss — are kept separately in My Tracker.'],
+  ['What is the priority score?', 'Priority = plan match × (0.30 + 0.20 chance + 0.30 value + 0.15 urgency + 0.05 workload), 0–100. The scorer suggests Chase at 38 or above when DNCR should apply itself and a deadline is posted.'],
+  ['What does confidence mean?', CONF_HELP.High + ' ' + CONF_HELP.Medium + ' ' + CONF_HELP.Low + ' It is about the evidence, not the chance of winning.'],
   ['Is this an official DNCR tool?', 'No. It is an independent student prototype for Solve-a-thon 2026 and is not affiliated with or endorsed by NC DNCR.']
 ];
 function viewHow() {
@@ -831,49 +958,6 @@ function viewHow() {
     <div class="faq">${FAQ.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
   </div></section>`;
 }
-
-/* ---------------- Matching run (replays today’s pipeline + applies qualifiers) ---------------- */
-const RUN_STEPS = [['Collector', 'Collecting from Grants.gov'], ['Gatekeeper', 'Applying gates'], ['Fit Scorer', 'Scoring against DNCR’s plan'], ['Card Agent', 'Writing & verifying cards'], ['Qualifiers', 'Applying your qualifiers']];
-function buildRunScript() {
-  const s = state.list || {}; const c = s.counts || {}; const all = ((state.all || {}).items) || []; const items = shown();
-  const L = []; const add = (step, text, tone = '') => L.push({ step, text, tone });
-  add(0, `Last pipeline run: ${fmtWhen(s.last_refreshed)} · status ${s.run_status || 'unknown'}`, 'dim');
-  add(0, `${c.opportunities ?? '?'} opportunities collected`, 'strong');
-  add(1, `${(c.opportunities ?? 0) - (c.passed_gates ?? 0)} dropped by eligibility and timing gates`, 'warn');
-  add(1, `${c.passed_gates ?? '?'} passed gates`, 'strong');
-  all.slice().sort((a, b) => b.score - a.score).forEach(it => add(2, `${it.title} → ${it.score} (Objective ${(it.objective || {}).id || '—'})`, it.score >= 38 ? 'ok' : ''));
-  add(2, `${c.scored ?? all.length} scored`, 'strong');
-  all.filter(i => i.card).forEach(it => add(3, `${it.title} — ${it.verification.verified_quotes}/${it.verification.total_quotes} quotes verified · ${it.confidence}`, it.confidence === 'High' ? 'ok' : it.confidence === 'Low' ? 'bad' : 'warn'));
-  add(3, `${c.cards ?? '?'} cards written${c.cards_retried ? ' (' + c.cards_retried + ' retried)' : ''} · ${c.alerts ?? 0} alerts`, 'strong');
-  ((state.list || {}).items || []).forEach(it => { const ok = passes(it); add(4, `${ok ? '✓' : '✕'} ${it.title}`, ok ? 'ok' : 'bad'); });
-  add(4, `${items.length} item${items.length === 1 ? '' : 's'} pass your qualifiers`, 'strong');
-  return L;
-}
-function startRun() {
-  if (state.run && state.run.timer) clearTimeout(state.run.timer);
-  state.run = { lines: buildRunScript(), shown: 0, started: Date.now(), timer: null };
-  if (location.hash !== '#today') location.hash = 'today'; else render();
-  window.scrollTo(0, 0); tickRun();
-}
-function tickRun() {
-  const run = state.run; if (!run) return;
-  if (run.shown >= run.lines.length) { run.timer = setTimeout(finishRun, 800); updateRunPanel(); return; }
-  run.shown++; updateRunPanel();
-  run.timer = setTimeout(tickRun, run.lines[run.shown - 1].tone === 'strong' ? 600 : 240);
-}
-function finishRun() { if (!state.run) return; clearTimeout(state.run.timer); state.run = null; render(); window.scrollTo(0, 0); toast('Short list ready'); }
-function runPanelInner() {
-  const run = state.run; const pct = Math.round(run.shown / run.lines.length * 100);
-  const cur = run.shown ? run.lines[run.shown - 1].step : 0; const done = run.shown >= run.lines.length;
-  const st = RUN_STEPS.map((_, i) => done || i < cur ? 'done' : i === cur ? 'run' : 'wait');
-  return `<div class="run-top"><div class="mono small eyebrow-light">${done ? 'Complete' : 'Replaying today’s run'} · ${((Date.now() - run.started) / 1000).toFixed(1)}s</div>
-    <div class="run-title">${done ? 'Short list ready' : RUN_STEPS[cur][1] + '…'}</div>
-    <div class="run-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="Progress"><span style="width:${pct}%"></span></div></div>
-    <div class="run-grid"><ol class="run-steps">${RUN_STEPS.map(([a, l], i) => `<li class="s-${st[i]}"><span class="led" aria-hidden="true"></span><span><span class="run-step-label">${l}</span><span class="mono small">${a} · ${st[i] === 'done' ? 'done' : st[i] === 'run' ? 'working' : 'waiting'}</span></span></li>`).join('')}</ol>
-    <div class="console" id="console" aria-live="polite">${run.lines.slice(0, run.shown).map(l => `<div class="ln ${l.tone}"><span class="ln-agent">${RUN_STEPS[l.step][0].split(' ')[0].toLowerCase()}</span>${esc(l.text)}</div>`).join('')}${done ? '' : '<div class="ln cursor">▍</div>'}</div></div>`;
-}
-function updateRunPanel() { const p = document.getElementById('runPanel'); if (!p) return; p.innerHTML = runPanelInner(); const c = document.getElementById('console'); if (c) c.scrollTop = c.scrollHeight; }
-function viewRun() { return `<section class="run"><div class="hero-art" aria-hidden="true"></div><div class="wrap run-inner"><div id="runPanel">${runPanelInner()}</div><button class="btn light" data-act="skip-run" style="align-self:flex-start">Skip to results</button></div></section>`; }
 
 /* ---------------- Modal (drafts) ---------------- */
 let lastFocus = null;
@@ -903,7 +987,7 @@ function assistHtml(a) {
 
 /* ---------------- Actions ---------------- */
 function setDecisionLocal(id, dec) {
-  [state.list, state.all].forEach(s => ((s || {}).items || []).forEach(it => { if (it.opp_id === id) it.my_decision = dec; }));
+  allItems().forEach(it => { if (it.opp_id === id) it.my_decision = dec; });
   if (state.detail[id] && !state.detail[id].error) { const h = state.detail[id].decisions || (state.detail[id].decisions = []); if (dec) h.push(dec); }
 }
 async function decide(id, decision) {
@@ -912,17 +996,18 @@ async function decide(id, decision) {
   try {
     const d = await data.decide(id, decision);
     setDecisionLocal(id, d);
-    toast(`${decision} recorded${net.demo ? ' (demo)' : ''}`);
+    renderRefreshBar();
+    toast(`${MY_LABEL[decision] || decision} — see My Tracker${net.demo ? ' (demo)' : ''}`);
     if (decision === 'Route' || decision === 'Chase') {
-      openModal(decision === 'Route' ? 'Route draft' : 'Starter pack', loadingHtml(decision === 'Route' ? 'Route Agent is drafting…' : 'Apply Assist is preparing the starter pack…'));
+      openModal(decision === 'Route' ? 'Forwarding draft' : 'Starter pack', loadingHtml(decision === 'Route' ? 'Route Agent is drafting…' : 'Apply Assist is preparing the starter pack…'));
       try {
         const r = decision === 'Route' ? await data.route(id) : await data.assist(id);
         if (!$('#modal').hidden) $('#modalBody').innerHTML = decision === 'Route' ? routeHtml(r) : assistHtml(r);
       } catch (e) {
-        $('#modalBody').innerHTML = `<p>${e.status === 409 ? 'No decision card exists for this item, so no draft can be made.' : 'The draft could not be generated (' + esc(e.message) + ').'}</p><button class="btn" data-act="close-modal">Close</button>`;
+        $('#modalBody').innerHTML = `<p>${e.status === 409 ? 'No decision card exists for this item yet (cards are written for today’s top 15), so no draft can be made. It is still in My Tracker.' : 'The draft could not be generated (' + esc(e.message) + ').'}</p><button class="btn" data-act="close-modal">Close</button>`;
       }
     }
-  } catch (e) { toast('Could not record the decision (' + e.message + ')'); }
+  } catch (e) { toast('Could not save that (' + e.message + ')'); }
   finally { delete state.busy[id]; rerenderKeep(); }
 }
 async function undo(id) {
@@ -930,9 +1015,10 @@ async function undo(id) {
   state.busy[id] = true; rerenderKeep();
   try {
     const r = await data.undo(id);
-    [state.list, state.all].forEach(s => ((s || {}).items || []).forEach(it => { if (it.opp_id === id) it.my_decision = r.now || null; }));
+    allItems().forEach(it => { if (it.opp_id === id) it.my_decision = r.now || null; });
     delete state.detail[id];
-    toast('Decision undone');
+    renderRefreshBar();
+    toast('Undone');
   } catch (e) { toast(e.status === 404 ? 'Nothing to undo' : 'Undo failed (' + e.message + ')'); }
   finally { delete state.busy[id]; rerenderKeep(); }
 }
@@ -956,22 +1042,36 @@ async function render() {
   } else if (h === 'match') app.innerHTML = viewQualify();
   else if (h === 'board') app.innerHTML = viewBoard();
   else if (h === 'how') app.innerHTML = viewHow();
-  else app.innerHTML = state.run ? viewRun() : viewToday();
+  else app.innerHTML = viewToday();
   bindView();
 }
-function rerenderKeep() { const y = window.scrollY; render().then(() => window.scrollTo(0, y)); }
+function rerenderKeep() {
+  const y = window.scrollY; const f = document.activeElement; const fid = f && f.id; const pos = f && f.selectionStart;
+  render().then(() => { window.scrollTo(0, y); if (fid) { const el = document.getElementById(fid); if (el) { el.focus(); if (pos != null && el.setSelectionRange) try { el.setSelectionRange(pos, pos); } catch (e) {} } } });
+}
 function errorView() {
   return hero('Cannot load data', 'The API is not reachable', 'Start the backend and reload: <code>python pipeline.py</code> then <code>uvicorn app.api:app --reload --port 8000</code>, and open http://localhost:8000.', `<p class="mono small eyebrow-light">${esc(state.error)}</p>`, 'short');
 }
-window.addEventListener('hashchange', () => {
-  if (state.run && location.hash !== '#today' && location.hash !== '') { clearTimeout(state.run.timer); state.run = null; }
-  render(); window.scrollTo(0, 0);
-});
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+
+/* Search updates only the result list, so the input keeps focus while typing. */
+function updateResults() {
+  const h = (location.hash || '#today').slice(1);
+  if (h === 'match') {
+    const items = findItems();
+    $('#results-find').innerHTML = resultsHtml(items, filterEmpty());
+    $('#count-find').innerHTML = `<strong>${items.length}</strong> grant${items.length === 1 ? '' : 's'}`;
+  } else if ($('#results-today')) {
+    const items = todayItems();
+    $('#results-today').innerHTML = resultsHtml(items, `<div class="empty">No suggested-Chase grant matches “${esc(state.search)}”. <button class="btn sm" data-act="clear-search">Clear search</button></div>`);
+    $('#count-today').textContent = `${items.length} grant${items.length === 1 ? '' : 's'}`;
+  }
+}
 
 /* ---------------- Events ---------------- */
 function bindView() {
   const q = state.q;
-  const keep = () => { store.set('q', q); rerenderKeep(); };
+  const keep = () => { store.set('q2', q); rerenderKeep(); };
   const toggleIn = (arr, v, on) => on ? [...new Set([...arr, v])] : arr.filter(x => x !== v);
   document.querySelectorAll('[data-q-div]').forEach(el => el.addEventListener('change', e => { q.divisions = toggleIn(q.divisions, e.target.dataset.qDiv, e.target.checked); keep(); }));
   document.querySelectorAll('[data-q-money]').forEach(el => el.addEventListener('change', e => { q.money = toggleIn(q.money, e.target.dataset.qMoney, e.target.checked); keep(); }));
@@ -979,9 +1079,9 @@ function bindView() {
   document.querySelectorAll('[data-q-conf]').forEach(el => el.addEventListener('change', e => { q.confidence = e.target.dataset.qConf; keep(); }));
   const on = (sel, fn) => { const el = $(sel); if (el) el.addEventListener('change', fn); };
   on('#q-closing', e => { q.closing = e.target.value; keep(); });
-  on('#q-low', e => { q.include_low = e.target.checked; keep(); });
-  on('#q-skipped', e => { q.include_skipped = e.target.checked; keep(); });
-  on('#q-hide', e => { q.hide_decided_skip = e.target.checked; keep(); });
+  on('#q-sort', e => { q.sort = e.target.value; keep(); });
+  on('#q-hide', e => { q.hide_dismissed = e.target.checked; keep(); });
+  document.querySelectorAll('input[type=search]').forEach(el => el.addEventListener('input', e => { state.search = e.target.value; updateResults(); }));
   document.querySelectorAll('[data-move]').forEach(el => el.addEventListener('change', e => { const v = e.target.value; if (v) decide(e.target.dataset.move, v); }));
 }
 document.addEventListener('click', async e => {
@@ -990,11 +1090,15 @@ document.addEventListener('click', async e => {
   const act = b.dataset.act, id = b.dataset.id;
   if (act === 'decide') { e.preventDefault(); decide(id, b.dataset.d); }
   else if (act === 'undo') { e.preventDefault(); undo(id); }
+  else if (act === 'toggle') {
+    const open = !state.open[id]; state.open[id] = open;
+    const det = document.getElementById('det-' + id); if (det) det.hidden = !open;
+    b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'Hide details ▴' : 'Details ▾';
+  }
   else if (act === 'close-modal') closeModal();
   else if (act === 'copy-text') copyFrom(b.dataset.target);
-  else if (act === 'run-match') { e.preventDefault(); await reloadAll(); startRun(); }
-  else if (act === 'reset-q') { state.q = JSON.parse(JSON.stringify(DEFAULT_Q)); store.set('q', state.q); rerenderKeep(); toast('Qualifiers reset'); }
-  else if (act === 'skip-run') finishRun();
+  else if (act === 'reset-q') { state.q = JSON.parse(JSON.stringify(DEFAULT_Q)); state.search = ''; store.set('q2', state.q); rerenderKeep(); toast('Filters reset'); }
+  else if (act === 'clear-search') { state.search = ''; rerenderKeep(); }
   else if (act === 'reload') { await reloadAll(); render(); toast('Reloaded'); }
   else if (act === 'to-top') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
 });
@@ -1003,7 +1107,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('#modal
 /* ---------------- Boot ---------------- */
 async function reloadAll() {
   state.detail = {};
-  await Promise.all([loadShortlist(), loadBoard()]);
+  await loadAll();
 }
 (async function boot() {
   render();

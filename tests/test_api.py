@@ -72,3 +72,18 @@ def test_route_and_apply_assist_offline(client):
 def test_alerts_and_run(client):
     assert "alerts" in client.get("/api/alerts").json()
     assert client.get("/api/run").json()["status"] == "succeeded"
+
+
+def test_money_category_is_exclusive():
+    from app.api import money_category
+    opp = {"applicant_types": [{"id": "00"}, {"id": "12"}]}
+    assert money_category({"components": {"P_case": "1 formula"}, "opportunity": opp}) == "Formula"
+    assert money_category({"components": {"P_case": "2 states only"}, "opportunity": opp}) == "State-only competition"
+    assert money_category({"components": {"P_case": "3 open"}, "opportunity": opp}) == "Open competition"
+    assert money_category({"components": {"P_case": "3 open"}, "opportunity": {"applicant_types": [{"id": "00"}]}}) == "Unknown"
+    assert money_category({"components": {}, "opportunity": {"id": "1", "number": "N", "title": "t", "applicant_types": [{"id": "00", "description": "State governments"}]}}) == "State-only competition"
+
+
+def test_shortlist_has_search_and_card_fields(client):
+    item = client.get("/api/shortlist").json()["items"][0]
+    assert {"number", "plan_match", "money_category", "tags"} <= set(item)

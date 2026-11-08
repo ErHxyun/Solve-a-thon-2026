@@ -10,6 +10,7 @@ Pilot scope: no sign-in (one user). Roadmap: Entra ID sign-in, per-user decision
 from __future__ import annotations
 
 import os
+import re
 import threading
 from datetime import date
 from typing import Any, Literal, Optional
@@ -19,6 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
+from agents.fit_scorer import win_probability
 from core import config, storage
 from core.reference import load_profile
 from core.schemas import Card, Decision, Opportunity, RouteDraft, StarterPack
@@ -81,6 +83,10 @@ class ShortlistItem(BaseModel):
     card: Optional[dict[str, Any]]    # core.schemas.Card, or None if no card was written
     verification: VerificationOut
     my_decision: Optional[dict[str, Any]]  # latest Decision for this item, or None
+    number: str = ""                       # Grants.gov opportunity number (for search)
+    plan_match: Optional[float] = None     # Fit Scorer A, 0-100 (not the Final score)
+    money_category: str = "Unknown"        # Formula | State-only competition | Open competition | Unknown
+    tags: list[str] = []                   # e.g. One-time
 
 
 class ShortlistOut(BaseModel):
@@ -129,11 +135,44 @@ def _objectives() -> dict[str, Any]:
     return {o.objective_id: o for o in load_profile().objectives}
 
 
+ONE_TIME = re.compile(r"\b(disaster|supplemental|emergency|one-time|hurricane)\b", re.I)
+
+
+def money_category(row: dict) -> str:
+    """How the money is split, from the Fit Scorer's chance case (deterministic, no LLM).
+    Each item gets exactly one: Formula | State-only competition | Open competition | Unknown."""
+    case = str((row.get("components") or {}).get("P_case") or "")
+    if not case:
+        try:
+            case = win_probability(Opportunity(**row["opportunity"]))[1]
+        except Exception:  # noqa: BLE001 - an odd record is shown as Unknown, never breaks the list
+            case = ""
+    types = {a.get("id") for a in row["opportunity"].get("applicant_types") or []}
+    if case.startswith("1"):
+        return "Formula"
+    if case.startswith("2"):
+        return "State-only competition"
+    if case.startswith("3") and types - {"00", "25"}:   # other applicant types besides states / "others"
+        return "Open competition"
+    return "Unknown"
+
+
+def _tags(row: dict) -> list[str]:
+    opp = row["opportunity"]
+    card = (row.get("checked") or {}).get("card") or {}
+    one_time = ONE_TIME.search(opp.get("title", "")) or "one-time" in str(card.get("money_type", ""))
+    return ["One-time"] if one_time else []
+
+
 def _to_item(row: dict, objectives: dict, decided: dict[str, dict]) -> ShortlistItem:
     opp = row["opportunity"]
     checked = row.get("checked") or {}
     ob = objectives.get(row.get("objective_id") or "")
     return ShortlistItem(
+        number=opp.get("number", ""),
+        plan_match=(row.get("components") or {}).get("A"),
+        money_category=money_category(row),
+        tags=_tags(row),
         opp_id=row["opp_id"],
         title=opp["title"],
         funder=opp.get("agency_name") or opp.get("agency_code", ""),
