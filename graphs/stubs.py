@@ -67,3 +67,9 @@ class alert:  # noqa: N801
     def run(state: dict) -> dict:
         storage.write_json("alerts/latest.json", [])
         return {"alerts": []}
+
+
+class notifier:  # noqa: N801
+    @staticmethod
+    def run(state: dict) -> dict:
+        return {"notification": {"kind": None, "status": "stub: notifier not merged yet"}}

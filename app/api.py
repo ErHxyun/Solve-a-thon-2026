@@ -16,7 +16,7 @@ from typing import Any, Literal, Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel, Field
 
 from core import config, storage
@@ -223,6 +223,21 @@ def alerts() -> dict:
 def run_status() -> dict:
     """Last pipeline run: time, status, counts (the funnel)."""
     return storage.read_json("runs/latest.json", default={}) or {}
+
+
+@app.get("/api/email/preview", response_class=HTMLResponse)
+def email_preview(kind: Literal["weekly", "urgent"] = "weekly") -> HTMLResponse:
+    """The email the notifier rendered on the last run (nothing is sent from here)."""
+    preview = storage.read_json(f"notify/preview/{kind}.json", default=None)
+    if not preview:
+        raise HTTPException(404, f"no {kind} email preview yet (it appears after the next pipeline run)")
+    return HTMLResponse(preview["html"])
+
+
+@app.get("/api/email/status")
+def email_status() -> dict:
+    """What the notifier did on the last run: kind, status, recipients count (never addresses or keys)."""
+    return storage.read_json("notify/latest.json", default={"status": "no run yet"})
 
 
 @app.get("/api/decisions")
