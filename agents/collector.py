@@ -200,6 +200,7 @@ def normalize(detail: dict[str, Any], today: date | None = None) -> Opportunity:
         categories=[c.get("description", "") for c in body.get("fundingActivityCategories", [])],
         award_floor=_num(body.get("awardFloor")),
         award_ceiling=_num(body.get("awardCeiling")),
+        expected_awards=_awards(body.get("numberOfAwards")),
         cost_sharing=body.get("costSharing"),
         description=_strip_html(body.get("forecastDesc") if is_forecast else body.get("synopsisDesc")),
         cfda=[c.get("cfdaNumber", "") for c in detail.get("cfdas", [])],
@@ -207,6 +208,12 @@ def normalize(detail: dict[str, Any], today: date | None = None) -> Opportunity:
     )
     opp.low_quality = not (opp.title and opp.description)
     return opp
+
+
+def _awards(value: Any) -> int | None:
+    """Expected number of awards; 0, blank or a placeholder like 9999 means 'not stated'."""
+    n = _num(value)
+    return int(n) if n and 0 < n < 9999 else None
 
 
 def _num(value: Any) -> float | None:
