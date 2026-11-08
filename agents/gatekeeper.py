@@ -16,7 +16,7 @@ from core.schemas import GateResult, Opportunity
 # G2: other regions (checked on title + eligibility text), unless the text also covers NC
 OTHER_REGION = re.compile(r"\b(gulf (coast|of mexico|states)|great lakes|chesapeake|pacific islands?|western states|"
                           r"alaska|hawai.?i|puerto rico|guam|u\.?s\.? virgin islands|delta regional|colorado river|"
-                          r"northern border|mekong|appropriate to the (state|region) of)\b", re.I)
+                          r"northern border|mekong|appropriate to the (state|region) of|restore act)\b", re.I)
 NC_OK = re.compile(r"north carolina|southeast|appalachia|atlantic|all (50 )?states|nationwide|alaska native|"
                    r"american indian|native hawaiian", re.I)
 FOREIGN_AGENCY = re.compile(r"U\.S\. Mission to|Embassy|Bureau of Democracy", re.I)

@@ -841,7 +841,7 @@ function buildRunScript() {
   add(0, `${c.opportunities ?? '?'} opportunities collected`, 'strong');
   add(1, `${(c.opportunities ?? 0) - (c.passed_gates ?? 0)} dropped by eligibility and timing gates`, 'warn');
   add(1, `${c.passed_gates ?? '?'} passed gates`, 'strong');
-  all.slice().sort((a, b) => b.score - a.score).forEach(it => add(2, `${it.title} → ${it.score} (Objective ${(it.objective || {}).id || '—'})`, it.score >= 60 ? 'ok' : ''));
+  all.slice().sort((a, b) => b.score - a.score).forEach(it => add(2, `${it.title} → ${it.score} (Objective ${(it.objective || {}).id || '—'})`, it.score >= 38 ? 'ok' : ''));
   add(2, `${c.scored ?? all.length} scored`, 'strong');
   all.filter(i => i.card).forEach(it => add(3, `${it.title} — ${it.verification.verified_quotes}/${it.verification.total_quotes} quotes verified · ${it.confidence}`, it.confidence === 'High' ? 'ok' : it.confidence === 'Low' ? 'bad' : 'warn'));
   add(3, `${c.cards ?? '?'} cards written${c.cards_retried ? ' (' + c.cards_retried + ' retried)' : ''} · ${c.alerts ?? 0} alerts`, 'strong');

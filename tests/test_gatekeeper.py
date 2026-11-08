@@ -68,3 +68,8 @@ def test_stale_rolling_post_fails():  # found in the first live run: NOAA-OAR-CP
     assert not check(old, today=date(2026, 11, 7)).passed
     dated = make(title="Program FY 2012 legacy name", status="posted", close_date="2027-01-15", days_to_close=69)
     assert check(dated, today=date(2026, 11, 7)).passed  # a real future deadline is not stale
+
+
+def test_restore_act_is_gulf_only():
+    from agents import gatekeeper as gk
+    assert gk.OTHER_REGION.search("RESTORE Act Centers of Excellence Research Grants Program")
