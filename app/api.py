@@ -299,10 +299,27 @@ RADAR_BAR = """<style>
 .ffm-bar a:hover{border-bottom-color:#777}.ffm-bar .note{margin-left:auto;font:12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#BDBDBD}
 @media(max-width:640px){.ffm-bar .in{padding:8px 16px}.ffm-bar .note{margin-left:0}}
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <div class="ffm-bar"><nav class="in" aria-label="Main"><a class="brand" href="/#today">DNCR Federal Funds Matchmaker</a>
 <a href="/#today">Today</a><a href="/#match">Find Funding</a><a href="/#board">My Tracker</a><a href="/radar" aria-current="page">Radar</a><a href="/#how">How It Works</a>
 <span class="note">NC DNCR · Student prototype</span></nav></div>"""
+
+
+# Same look as index.html: always light, the app's teal / orange / neutrals and fonts. In <head>, so the charts read
+# these colors on first render; the more specific selector beats the template's own :root and its dark mode.
+RADAR_THEME = """<style>
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #FAF7F4; --card: #ffffff; --card-2: #F4EFEA; --fill: rgba(5,49,49,0.08); --fill-2: rgba(5,49,49,0.16);
+  --label: #053131; --label-2: #5A5F63; --label-3: #8A8F93; --sep: #DCD6CF;
+  --blue: #0093B8; --red: #C24A00; --green: #1E6B3A; --green-soft: rgba(30,107,58,0.12); --gray: #A9A49E; --orange: #F57600;
+  --nav: rgba(250,247,244,0.92); --shadow: 0 1px 2px rgba(5,49,49,0.05), 0 8px 24px rgba(5,49,49,0.06);
+  --sys: 'Source Sans 3', system-ui, sans-serif; --round: 'Source Sans 3', system-ui, sans-serif; --mono: 'DM Mono', ui-monospace, monospace;
+}
+:root[data-theme="light"] body { background: var(--bg); color: var(--text, #212529); }
+:root[data-theme="light"] h1, :root[data-theme="light"] h2 { color: var(--label); }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">"""
 
 
 def _radar_page_data(out: dict) -> str:
@@ -328,9 +345,9 @@ def radar_page() -> HTMLResponse:
                 '<p>The radar appears after the next daily pipeline run.</p><p><a href="/#today">Back to today</a></p></main>')
     else:
         body = RADAR_TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", _radar_page_data(out))
-    page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+    page = ('<!doctype html>\n<html lang="en" data-theme="light">\n<head>\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-            '</head>\n<body style="margin:0">\n' + RADAR_BAR + body + '\n</body>\n</html>\n')
+            + RADAR_THEME + '\n</head>\n<body style="margin:0">\n' + RADAR_BAR + body + '\n</body>\n</html>\n')
     return HTMLResponse(page, headers={"Cache-Control": "no-cache"})
 
 
