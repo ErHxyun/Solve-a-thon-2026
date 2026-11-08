@@ -63,6 +63,7 @@ class Opportunity(BaseModel):
     categories: list[str] = []
     award_floor: Optional[float] = None
     award_ceiling: Optional[float] = None
+    expected_awards: Optional[int] = None  # Grants.gov numberOfAwards (None = not stated / 0)
     cost_sharing: Optional[bool] = None
     description: str = ""                  # plain text (HTML stripped)
     cfda: list[str] = []
