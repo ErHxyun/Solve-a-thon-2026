@@ -26,6 +26,10 @@ Opening `index.html` with VS Code Live Server (port 5500) also works: CORS allow
 | GET | `/api/decisions` | Full decision log |
 | POST | `/api/opportunities/{opp_id}/route` | Route Agent draft: `{route_to, reason, deadline, message}` — show it in an editable box with a Copy button |
 | POST | `/api/opportunities/{opp_id}/apply-assist` | Starter pack after Chase: `{requirements[], sf424_fields_to_gather[], outline[], timeline[], email_to_division_lead, open_questions[]}` |
+| POST | `/api/opportunities/{opp_id}/card` | Write + verify a decision card for an item outside the morning top 15 (one LLM call, retried once with Verifier feedback, cached in `cards/on_demand/`). Returns the checked card |
+| GET | `/api/tracker` | The user's application records |
+| PUT | `/api/tracker/{opp_id}` | Partial update: `stage` (saved · reviewing · preparing · internal_approval · submitted · awarded · declined · closed), `owner`, `next_action`, `next_action_due` (YYYY-MM-DD), `notes`, `my_decision` (pursue · monitor · decline · undecided), `eligibility` (verified · ineligible · pending). Every change is appended to `history`; stage saved → decision Waitlist, active stages → Chase |
+| GET | `/api/email/preview?kind=weekly\|urgent` · `/api/email/status` | Notifier email preview (HTML) and last status |
 | GET | `/api/alerts` | `{alerts: [...], digest: {...}}` |
 | GET | `/api/run` | Last pipeline run: `finished_at`, `status`, `counts` (funnel) |
 | GET | `/api/health` | `{ok, storage, llm_enabled}` |
@@ -57,7 +61,13 @@ Build the page against these files first; switch to the live API when it runs.
 | `card.evidence[]` | expandable quotes with source "listing" / "plan" |
 | `verification.warnings[]` | yellow warnings |
 | `already_yours`, `watch`, `flags[]` | small tags |
-| `my_decision` | highlight the chosen button; show Undo |
+| `my_decision` | the user's action: Chase = Tracking, Waitlist = Saved, Skip = Dismissed, Route = Forwarded. Never overwrites `suggested_decision` |
+| `number`, `plan_match` | search key; Plan match tile (Fit Scorer A, 0–100 — not the Final score) |
+| `money_category`, `tags` | one of Formula / State-only competition / Open competition / Unknown (from the scorer's chance case); `One-time` tag |
+| `funding_mechanism`, `competition_scope` | the same facts split in two: Formula / Competitive / Unknown, and State-only / Open to multiple applicant types / Unknown |
+| `eligibility` | verified (a person marked it) · pending · ineligible · unknown (no card) |
+| `factors` | A, S, K, P, V, U, W, H, H10, H90, award, P_case — for the score breakdown |
+| `tracker`, `card_on_demand` | the user's application record (or null); card was written on click |
 
 Plain English on the card; numbers (score components) only in the detail view.
 

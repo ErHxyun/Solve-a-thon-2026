@@ -27,6 +27,12 @@ from core.schemas import Card, Decision, Opportunity, RouteDraft, StarterPack
 
 SCORED_PATH = f"scored/{config.AGENCY}/latest.json"
 DECISIONS_PATH = f"decisions/{config.AGENCY}.json"
+TRACKER_PATH = f"tracker/{config.AGENCY}.json"          # opp_id -> the user's application record
+ON_DEMAND_PATH = f"cards/on_demand/{config.AGENCY}.json"  # opp_id -> checked card written on click
+STAGES = ["saved", "reviewing", "preparing", "internal_approval", "submitted", "awarded", "declined", "closed"]
+ACTIVE_STAGES = {"reviewing", "preparing", "internal_approval", "submitted"}
+_tracker_lock = threading.Lock()
+_card_lock = threading.Lock()
 INDEX_HTML = config.ROOT / "index.html"
 _decisions_lock = threading.Lock()  # one replica: a process lock is enough for the pilot
 
@@ -35,7 +41,7 @@ app = FastAPI(title="Federal Funds Matchmaker — DNCR", version="0.1.0",
 
 # CORS only matters when the page is opened from another origin during development (e.g. VS Code Live Server)
 _origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5500,http://127.0.0.1:5500").split(",") if o.strip()]
-app.add_middleware(CORSMiddleware, allow_origins=_origins, allow_methods=["GET", "POST", "DELETE"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=_origins, allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["*"])
 
 
 # --------------------------------------------------------------------------- #
@@ -45,6 +51,18 @@ class DecisionIn(BaseModel):
     opp_id: str
     decision: Literal["Chase", "Waitlist", "Skip", "Route"]
     note: str = Field(default="", max_length=2000)
+    user: str = "dncr-grants"
+
+
+class TrackerIn(BaseModel):
+    """Partial update of the user's record; only the fields sent are changed. Nothing is submitted anywhere."""
+    stage: Optional[Literal["saved", "reviewing", "preparing", "internal_approval", "submitted", "awarded", "declined", "closed"]] = None
+    owner: Optional[str] = Field(default=None, max_length=200)
+    next_action: Optional[str] = Field(default=None, max_length=500)
+    next_action_due: Optional[str] = Field(default=None, max_length=10)   # ISO date
+    notes: Optional[str] = Field(default=None, max_length=5000)
+    my_decision: Optional[Literal["pursue", "monitor", "decline", "undecided"]] = None
+    eligibility: Optional[Literal["verified", "ineligible", "pending"]] = None   # the person's check, not the model's
     user: str = "dncr-grants"
 
 
@@ -87,6 +105,12 @@ class ShortlistItem(BaseModel):
     plan_match: Optional[float] = None     # Fit Scorer A, 0-100 (not the Final score)
     money_category: str = "Unknown"        # Formula | State-only competition | Open competition | Unknown
     tags: list[str] = []                   # e.g. One-time
+    funding_mechanism: str = "Unknown"     # Formula | Competitive | Unknown
+    competition_scope: str = "Unknown"     # State-only | Open to multiple applicant types | Unknown
+    eligibility: str = "unknown"           # verified (a person checked) | pending | ineligible | unknown (no card)
+    factors: dict[str, Any] = {}           # Fit Scorer components: A, P, V, U, W, H, H10, H90, award, P_case
+    tracker: Optional[dict[str, Any]] = None   # the user's application record, if any
+    card_on_demand: bool = False           # card was written on click (not in the morning top 15)
 
 
 class ShortlistOut(BaseModel):
@@ -101,7 +125,17 @@ class ShortlistOut(BaseModel):
 # Helpers
 # --------------------------------------------------------------------------- #
 def _rows() -> list[dict]:
-    return storage.read_json(SCORED_PATH, default=[])
+    rows = storage.read_json(SCORED_PATH, default=[])
+    extra = storage.read_json(ON_DEMAND_PATH, default={}) or {}
+    if extra:
+        for r in rows:
+            if not r.get("checked") and r["opp_id"] in extra:
+                r["checked"], r["card_on_demand"] = extra[r["opp_id"]], True
+    return rows
+
+
+def _tracker() -> dict[str, dict]:
+    return storage.read_json(TRACKER_PATH, default={}) or {}
 
 
 def _row(opp_id: str) -> dict:
@@ -141,12 +175,7 @@ ONE_TIME = re.compile(r"\b(disaster|supplemental|emergency|one-time|hurricane)\b
 def money_category(row: dict) -> str:
     """How the money is split, from the Fit Scorer's chance case (deterministic, no LLM).
     Each item gets exactly one: Formula | State-only competition | Open competition | Unknown."""
-    case = str((row.get("components") or {}).get("P_case") or "")
-    if not case:
-        try:
-            case = win_probability(Opportunity(**row["opportunity"]))[1]
-        except Exception:  # noqa: BLE001 - an odd record is shown as Unknown, never breaks the list
-            case = ""
+    case = _case(row)
     types = {a.get("id") for a in row["opportunity"].get("applicant_types") or []}
     if case.startswith("1"):
         return "Formula"
@@ -157,6 +186,41 @@ def money_category(row: dict) -> str:
     return "Unknown"
 
 
+def _case(row: dict) -> str:
+    case = str((row.get("components") or {}).get("P_case") or "")
+    if not case:
+        try:
+            case = win_probability(Opportunity(**row["opportunity"]))[1]
+        except Exception:  # noqa: BLE001
+            case = ""
+    return case
+
+
+def funding_mechanism(row: dict) -> str:
+    case = _case(row)
+    return "Formula" if case.startswith("1") else "Competitive" if case[:1] in ("2", "3") else "Unknown"
+
+
+def competition_scope(row: dict) -> str:
+    types = {a.get("id") for a in row["opportunity"].get("applicant_types") or []}
+    if types == {"00"}:
+        return "State-only"
+    if types - {"00", "25"}:
+        return "Open to multiple applicant types"
+    return "Unknown"
+
+
+def eligibility_state(row: dict, record: Optional[dict]) -> str:
+    """verified only when a person marked it; the model can only say pending / ineligible."""
+    if record and record.get("eligibility") in ("verified", "ineligible"):
+        return record["eligibility"]
+    card = (row.get("checked") or {}).get("card") or {}
+    if not card:
+        return "unknown"
+    can = re.sub(r"^\[[^\]]*\]\s*", "", str(card.get("can_dncr_apply") or ""))
+    return "ineligible" if re.match(r"\s*no\b", can, re.I) else "pending"
+
+
 def _tags(row: dict) -> list[str]:
     opp = row["opportunity"]
     card = (row.get("checked") or {}).get("card") or {}
@@ -164,11 +228,22 @@ def _tags(row: dict) -> list[str]:
     return ["One-time"] if one_time else []
 
 
-def _to_item(row: dict, objectives: dict, decided: dict[str, dict]) -> ShortlistItem:
+FACTOR_KEYS = ("A", "S", "K", "P", "V", "U", "W", "H", "H10", "H90", "award", "P_case", "penalty", "entity_floor")
+
+
+def _to_item(row: dict, objectives: dict, decided: dict[str, dict], tracker: Optional[dict] = None) -> ShortlistItem:
     opp = row["opportunity"]
     checked = row.get("checked") or {}
     ob = objectives.get(row.get("objective_id") or "")
+    record = (tracker or {}).get(row["opp_id"])
+    comps = row.get("components") or {}
     return ShortlistItem(
+        funding_mechanism=funding_mechanism(row),
+        competition_scope=competition_scope(row),
+        eligibility=eligibility_state(row, record),
+        factors={k: comps[k] for k in FACTOR_KEYS if k in comps},
+        tracker=record,
+        card_on_demand=bool(row.get("card_on_demand")),
         number=opp.get("number", ""),
         plan_match=(row.get("components") or {}).get("A"),
         money_category=money_category(row),
@@ -211,7 +286,7 @@ def _card_for(row: dict) -> Card:
 @app.get("/", include_in_schema=False)
 def index():
     if INDEX_HTML.exists():
-        return FileResponse(INDEX_HTML)
+        return FileResponse(INDEX_HTML, headers={"Cache-Control": "no-cache"})  # always revalidate after a deploy
     return JSONResponse({"message": "index.html not found; API docs at /docs"})
 
 
@@ -227,12 +302,12 @@ def shortlist(include_skipped: bool = Query(False, description="also return item
               limit: int = Query(15, ge=1, le=200)) -> ShortlistOut:
     """The morning short list, best first, plus last-refreshed time and alert digest."""
     run = storage.read_json("runs/latest.json", default={}) or {}
-    objectives, decided = _objectives(), _latest_decisions()
+    objectives, decided, tracker = _objectives(), _latest_decisions(), _tracker()
     items = []
     for row in _rows():
         if not include_skipped and row.get("suggested_decision") == "Skip":
             continue
-        item = _to_item(row, objectives, decided)
+        item = _to_item(row, objectives, decided, tracker)
         if not include_low and item.confidence == "Low":
             continue
         if hide_decided_skip and (item.my_decision or {}).get("decision") == "Skip":
@@ -249,7 +324,7 @@ def opportunity(opp_id: str) -> dict:
     """Everything about one item: listing, score breakdown and rationale, card, verification, decision history."""
     row = _row(opp_id)
     return {**row, "days_left": _days_left(row["opportunity"].get("close_date")),
-            "decisions": [d for d in _decisions() if d["opp_id"] == opp_id]}
+            "decisions": [d for d in _decisions() if d["opp_id"] == opp_id], "tracker": _tracker().get(opp_id)}
 
 
 @app.get("/api/alerts")
@@ -293,6 +368,13 @@ def add_decision(body: DecisionIn) -> dict:
         log = _decisions()
         log.append(d.model_dump())
         storage.write_json(DECISIONS_PATH, log)
+    # Save starts a tracker record at "saved"; Start tracking moves it to "reviewing" (never backwards)
+    if body.decision in ("Waitlist", "Chase"):
+        current = (_tracker().get(body.opp_id) or {}).get("stage")
+        if body.decision == "Waitlist" and current is None:
+            _update_tracker(body.opp_id, TrackerIn(stage="saved", user=body.user), sync_decision=False)
+        elif body.decision == "Chase" and current in (None, "saved"):
+            _update_tracker(body.opp_id, TrackerIn(stage="reviewing", user=body.user), sync_decision=False)
     return d.model_dump()
 
 
@@ -307,6 +389,78 @@ def undo_decision(opp_id: str) -> dict:
         removed = log.pop(idx)
         storage.write_json(DECISIONS_PATH, log)
     return {"undone": removed, "now": _latest_decisions().get(opp_id)}
+
+
+def _now() -> str:
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def _update_tracker(opp_id: str, body: TrackerIn, sync_decision: bool = True) -> dict:
+    changes = body.model_dump(exclude_none=True, exclude={"user"})
+    with _tracker_lock:
+        tracker = _tracker()
+        rec = tracker.get(opp_id) or {"opp_id": opp_id, "stage": "saved", "created_at": _now(), "history": []}
+        for field, value in changes.items():
+            if rec.get(field) != value:
+                rec["history"].append({"at": _now(), "user": body.user, "field": field, "from": rec.get(field), "to": value})
+                rec[field] = value
+        rec["updated_at"] = _now()
+        tracker[opp_id] = rec
+        storage.write_json(TRACKER_PATH, tracker)
+    # keep the decision log (read by Alert / Notifier) in step with the stage
+    if sync_decision and "stage" in changes:
+        want = "Waitlist" if changes["stage"] == "saved" else "Chase" if changes["stage"] in ACTIVE_STAGES else None
+        if want and (_latest_decisions().get(opp_id) or {}).get("decision") != want:
+            with _decisions_lock:
+                log = _decisions()
+                log.append(Decision(opp_id=opp_id, decision=want, note=f"stage: {changes['stage']}", user=body.user).model_dump())
+                storage.write_json(DECISIONS_PATH, log)
+    return rec
+
+
+@app.get("/api/tracker")
+def list_tracker() -> list[dict]:
+    """The user's application records (stage, owner, next action, notes, history)."""
+    return list(_tracker().values())
+
+
+@app.put("/api/tracker/{opp_id}")
+def update_tracker(opp_id: str, body: TrackerIn) -> dict:
+    """Change stage / owner / next action / notes / my decision / eligibility check. Every change is logged."""
+    _row(opp_id)  # 404 if unknown
+    if body.next_action_due:
+        try:
+            date.fromisoformat(body.next_action_due)
+        except ValueError:
+            raise HTTPException(422, "next_action_due must be YYYY-MM-DD")
+    return _update_tracker(opp_id, body)
+
+
+@app.post("/api/opportunities/{opp_id}/card")
+def card_on_demand(opp_id: str) -> dict:
+    """Write and verify a decision card for an item outside the morning top 15 (one LLM call, cached)."""
+    from agents import card_agent, verifier
+    from core.schemas import ScoredItem
+
+    row = _row(opp_id)
+    if row.get("checked"):
+        return row["checked"]
+    with _card_lock:
+        extra = storage.read_json(ON_DEMAND_PATH, default={}) or {}
+        if opp_id in extra:
+            return extra[opp_id]
+        opp, item, profile = Opportunity(**row["opportunity"]), ScoredItem(**row), load_profile()
+        objective = _objectives().get(item.objective_id or "")
+        text = objective.text if objective else ""
+        card = card_agent.make_card(opp, item, profile)
+        checked = verifier.check(card, opp, item, text, 1)
+        if checked.needs_retry:   # same evaluator-optimizer loop as the batch: one retry with the Verifier's feedback
+            card = card_agent.make_card(opp, item, profile, checked.verifier_feedback)
+            checked = verifier.check(card, opp, item, text, 2)
+        extra[opp_id] = checked.model_dump()
+        storage.write_json(ON_DEMAND_PATH, extra)
+    return extra[opp_id]
 
 
 @app.post("/api/opportunities/{opp_id}/route", response_model=RouteDraft)

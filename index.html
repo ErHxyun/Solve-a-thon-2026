@@ -455,6 +455,50 @@
     .gc-actions .act-track { flex: 1 1 100%; }
     .gc-actions .gc-more { margin-left: 0; }
   }
+
+  /* ---- P1/P2: eligibility, grouped details, tracker, stale data ---- */
+  .gcard .btn.sm, .trow .btn.sm, .gc-details .btn.sm { min-height: 44px; }
+  button.score-badge { border: 0; cursor: pointer; font: inherit; }
+  .status.mid { color: #6A4A00; background: #FFF1C2; }
+  .rb-stale { flex-basis: 100%; background: #FFF1C2; color: #4A3300; padding: 8px 12px; font-size: 14px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .rb-stale .btn.light { color: #4A3300; border-color: #4A3300; min-height: 36px; }
+  .nocard { background: var(--gray); padding: 14px 16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+  .nocard p { margin: 0; }
+  .dgroups { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+  .dgroup { border: 1px solid var(--line); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .dgroup h4 { margin: 0; font-size: 17px; color: var(--ink); }
+  .dgroup p { margin: 0; font-size: 15px; }
+  .dgroup:focus { outline: 3px solid var(--accent); }
+  .kvs { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; font-size: 15px; }
+  .kvs dt { color: var(--dim); font-size: 13px; }
+  .kvs dd { margin: 0; }
+  .kvs ul { margin: 0; padding-left: 18px; }
+  .formula { font-family: 'DM Mono', monospace; font-size: 13px !important; background: var(--gray); padding: 8px 10px; }
+  .ftable { border-collapse: collapse; font-size: 14px; width: 100%; }
+  .ftable th, .ftable td { text-align: left; padding: 5px 8px 5px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .ftable th { font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; color: var(--dim); font-weight: 400; }
+  .stage-strip { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; padding-top: 22px; padding-bottom: 8px; }
+  .stage-strip > div { display: flex; flex-direction: column; gap: 4px; padding: 0 10px; border-right: 1px solid rgba(255,255,255,.15); }
+  .stage-strip .mono { color: #C9D3D1; }
+  @media (max-width: 860px) { .stage-strip { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 14px; } }
+  .tfilters { gap: 12px 22px; align-items: flex-end; margin-bottom: 18px; }
+  .tfilters select { min-width: 170px; }
+  .trows { display: flex; flex-direction: column; gap: 14px; }
+  .trow { background: #fff; border-left: 4px solid var(--ink); padding: 16px 18px; display: grid; grid-template-columns: minmax(240px, 1.1fr) 2fr; gap: 12px 24px; }
+  .trow-main { display: flex; flex-direction: column; gap: 4px; }
+  .trow-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; }
+  .tfield { display: flex; flex-direction: column; gap: 4px; }
+  .tfield.wide { grid-column: span 2; }
+  .tfield input, .tfield select { min-height: 44px; width: 100%; }
+  .trow-foot { grid-column: 1 / -1; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 8px; }
+  .ai-pill.sm { font-size: 12px; padding: 3px 9px; }
+  .due { color: var(--red-text); }
+  .tsmalls { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+  .tsmall { background: #fff; padding: 10px 16px; }
+  .tsmall summary { cursor: pointer; font-weight: 700; }
+  .tsmall li { padding: 6px 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  @media (max-width: 860px) { .trow { grid-template-columns: 1fr; } .trow-fields { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .trow-fields { grid-template-columns: 1fr; } .tfield.wide { grid-column: auto; } .kvs { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -529,7 +573,7 @@ const EMBEDDED_SAMPLES = {"shortlist":{"last_refreshed":"2026-11-07T20:31:40+00:
 
 /* Demo mode: sample files + decisions kept in this browser */
 const demo = {
-  shortlist: null, opportunity: {}, route: null, assist: null, decisions: [],
+  shortlist: null, opportunity: {}, route: null, assist: null, decisions: [], tracker: {},
   builtin: false,
   async load() {
     try {
@@ -543,8 +587,18 @@ const demo = {
       this.builtin = true; this.shortlist = E.shortlist; this.opportunity[E.opportunity.opp_id] = E.opportunity; this.route = E.route; this.assist = E.assist;
     }
     try { this.decisions = JSON.parse(localStorage.getItem('ffm-demo-decisions') || '[]'); } catch (e) { this.decisions = []; }
+    try { this.tracker = JSON.parse(localStorage.getItem('ffm-demo-tracker') || '{}'); } catch (e) { this.tracker = {}; }
   },
-  persist() { try { localStorage.setItem('ffm-demo-decisions', JSON.stringify(this.decisions)); } catch (e) {} },
+  persist() { try { localStorage.setItem('ffm-demo-decisions', JSON.stringify(this.decisions)); localStorage.setItem('ffm-demo-tracker', JSON.stringify(this.tracker)); } catch (e) {} },
+  track(id, patch) {   // same rules as PUT /api/tracker in app/api.py
+    const now = new Date().toISOString();
+    const rec = this.tracker[id] || { opp_id: id, stage: 'saved', created_at: now, history: [] };
+    Object.entries(patch).forEach(([k, v]) => { if (rec[k] !== v) { rec.history.push({ at: now, user: 'dncr-grants', field: k, from: rec[k] ?? null, to: v }); rec[k] = v; } });
+    rec.updated_at = now; this.tracker[id] = rec;
+    if (patch.stage) { const want = patch.stage === 'saved' ? 'Waitlist' : ['reviewing', 'preparing', 'internal_approval', 'submitted'].includes(patch.stage) ? 'Chase' : null;
+      if (want && (this.latest(id) || {}).decision !== want) this.decisions.push({ opp_id: id, decision: want, note: 'stage: ' + patch.stage, user: 'dncr-grants', at: now }); }
+    this.persist(); return rec;
+  },
   latest(id) { let d = null; this.decisions.forEach(x => { if (x.opp_id === id) d = x; }); return d; }
 };
 
@@ -556,7 +610,7 @@ const data = {
       return net.api('/api/shortlist?' + qs);
     }
     const s = JSON.parse(JSON.stringify(demo.shortlist));
-    s.items.forEach(it => { it.my_decision = demo.latest(it.opp_id); });
+    s.items.forEach(it => { it.my_decision = demo.latest(it.opp_id); it.tracker = demo.tracker[it.opp_id] || null; if (it.tracker && ['verified', 'ineligible'].includes(it.tracker.eligibility)) it.eligibility = it.tracker.eligibility; });
     s.items = s.items.filter(it => !(params.hide_decided_skip && (it.my_decision || {}).decision === 'Skip'));
     return s;
   },
@@ -570,7 +624,19 @@ const data = {
   async decide(id, decision, note = '') {
     if (!net.demo) return net.api('/api/decisions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ opp_id: id, decision, note }) });
     const d = { opp_id: id, decision, note, user: 'dncr-grants', at: new Date().toISOString() };
-    demo.decisions.push(d); demo.persist(); return d;
+    demo.decisions.push(d); demo.persist();
+    const cur = (demo.tracker[id] || {}).stage;
+    if (decision === 'Waitlist' && !cur) demo.track(id, { stage: 'saved' });
+    if (decision === 'Chase' && (!cur || cur === 'saved')) demo.track(id, { stage: 'reviewing' });
+    return d;
+  },
+  async track(id, patch) {
+    if (!net.demo) return net.api('/api/tracker/' + encodeURIComponent(id), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(patch) });
+    return demo.track(id, patch);
+  },
+  async writeCard(id) {
+    if (!net.demo) return net.api('/api/opportunities/' + encodeURIComponent(id) + '/card', { method: 'POST' });
+    const e = new Error('cards can only be written when the API is running'); e.status = 503; throw e;
   },
   async undo(id) {
     if (!net.demo) return net.api('/api/decisions/' + encodeURIComponent(id), { method: 'DELETE' });
@@ -636,6 +702,7 @@ const state = {
   list: null,           // last /api/shortlist response: every scored item, loaded once
   q: Object.assign({}, DEFAULT_Q, store.get('q2', {})),
   search: '', open: {},  // search text; which cards have details expanded
+  tf: { view: 'all', stage: 'all', owner: 'all', due30: false },   // My Tracker filters
   detail: {}, busy: {}
 };
 function allItems() { return ((state.list || {}).items) || []; }
@@ -645,7 +712,9 @@ function mine(it) { return (it.my_decision || {}).decision || null; }
 async function loadAll() {
   // One request; every filter, sort and search after this runs on the data already in the page.
   state.list = await data.shortlist({ limit: 200, include_low: true, include_skipped: true, hide_decided_skip: false });
-  allItems().forEach(it => { it.tags = it.tags || []; it.money_category = it.money_category || 'Unknown'; it.number = it.number || ''; if (it.plan_match === undefined) it.plan_match = null; });
+  allItems().forEach(it => { it.tags = it.tags || []; it.money_category = it.money_category || 'Unknown'; it.number = it.number || ''; if (it.plan_match === undefined) it.plan_match = null;
+    it.factors = it.factors || {}; it.tracker = it.tracker || null; it.eligibility = it.eligibility || (it.card ? 'pending' : 'unknown');
+    it.funding_mechanism = it.funding_mechanism || 'Unknown'; it.competition_scope = it.competition_scope || 'Unknown'; });
   renderRefreshBar();
 }
 
@@ -705,6 +774,7 @@ function blocker(it) {
 
 /* ---------------- Filters, search and sort (all on loaded data — nothing is re-run) ---------------- */
 const CONF_RANK = { Low: 0, Medium: 1, High: 2 };
+const STALE_HOURS = 26;   // the job runs daily at 10:00 UTC; older than this means a run was missed
 function matchesSearch(it) {
   const s = state.search.trim().toLowerCase(); if (!s) return true;
   return [it.title, it.number, it.funder, it.opp_id].some(x => String(x || '').toLowerCase().includes(s));
@@ -735,6 +805,8 @@ function optionValues(key) { return [...new Set(allItems().map(key).filter(Boole
 function renderRefreshBar() {
   const s = state.list || {}; const d = s.digest || {};
   const c = d.counts || {};
+  const ageH = s.last_refreshed ? (Date.now() - new Date(s.last_refreshed)) / 36e5 : null;
+  const stale = ageH != null && ageH > STALE_HOURS ? (ageH >= 48 ? Math.floor(ageH / 24) + ' days' : Math.round(ageH) + ' hours') : '';
   const chips = [['closing_soon', 'closing soon'], ['waitlist_opening', 'waitlist opening'], ['waitlist_21_days', 'waitlist ≥21 days'], ['new_since_yesterday', 'new since yesterday']]
     .map(([k, l]) => `<span class="rb-chip ${c[k] ? 'hot' : ''}">${c[k] || 0} ${l}</span>`).join('');
   $('#refreshBar').innerHTML = `<div class="wrap rb">
@@ -742,9 +814,10 @@ function renderRefreshBar() {
     <span class="rb-head">${esc(d.headline || '')}</span>
     <span class="rb-chips">${chips}</span>
     ${(d.lines || []).length ? `<ul class="rb-lines">${d.lines.map(l => `<li>${esc(typeof l === 'string' ? l : (l.text || JSON.stringify(l)))}</li>`).join('')}</ul>` : ''}
+    ${stale ? `<span class="rb-stale" role="status">⚠ These results are ${stale} old — the daily refresh may not have run. <button class="btn sm light" data-act="reload">Reload results</button> <span class="small-text">(reloads the page data; does not re-run the pipeline)</span></span>` : ''}
     <span class="mono small rb-note">Student prototype — not an official DNCR website</span>
   </div>`;
-  const n = allItems().filter(i => ['Chase', 'Waitlist', 'Route'].includes(mine(i))).length;
+  const n = trackedItems().length;
   const t = document.querySelector('[data-nav="board"]'); if (t) t.textContent = `My Tracker${n ? ' (' + n + ')' : ''}`;
 }
 
@@ -759,22 +832,35 @@ function aiPill(it) {
   const s = it.suggested_decision || 'Not assessed';
   return `<span class="ai-pill ai-${esc(s.replace(/\s+/g, '-').toLowerCase())}" title="${esc(it.decision_reason || '')}">AI suggestion: <strong>${esc(s)}</strong></span>`;
 }
+const ELIG = {
+  verified: ['ok', 'Eligibility verified', 'A person on the team confirmed DNCR can apply.'],
+  pending: ['mid', 'Eligibility pending', 'The card found no hard block, but nobody has confirmed it yet.'],
+  ineligible: ['warn', 'Ineligible', 'The card or a person found that DNCR cannot apply.'],
+  unknown: ['neutral', 'Eligibility not assessed', 'No decision card yet, so eligibility was not read.']
+};
+const STAGES = [['saved', 'Saved'], ['reviewing', 'Reviewing'], ['preparing', 'Preparing'], ['internal_approval', 'Internal approval'], ['submitted', 'Submitted'], ['awarded', 'Awarded'], ['declined', 'Declined'], ['closed', 'Closed']];
+const STAGE_LABEL = Object.fromEntries(STAGES);
+const MY_DECISIONS = [['undecided', 'Undecided'], ['pursue', 'Pursue'], ['monitor', 'Monitor'], ['decline', 'Decline']];
+function eligChip(it) { const [cls, label, help] = ELIG[it.eligibility] || ELIG.unknown; return `<span class="status ${cls}" title="${esc(help)}">${esc(label)}</span>`; }
+function myStatus(it) {
+  const m = mine(it); if (!m) return '';
+  const st = it.tracker && it.tracker.stage && (m === 'Chase' || m === 'Waitlist') ? ' · ' + STAGE_LABEL[it.tracker.stage] : '';
+  return `<span class="status neutral">${esc(MY_LABEL[m] + st)}</span>`;
+}
 function grantCard(it, rank) {
-  const card = it.card || {}; const v = it.verification || {}; const dl = deadlineKpi(it); const open = !!state.open[it.opp_id];
+  const card = it.card || {}; const dl = deadlineKpi(it); const open = !!state.open[it.opp_id];
   const id = esc(it.opp_id); const score = Math.round(it.score);
-  const purpose = firstSentence(card.summary) || 'No decision card yet — cards are written for today’s top 15. Open the listing or full details.';
+  const purpose = firstSentence(card.summary) || 'No decision card yet — cards are written for today’s top 15. Open Details to write one for this grant.';
   const risk = blocker(it);
-  const q5 = [['Can DNCR apply?', card.can_dncr_apply], ['Who applies?', card.who_applies || it.route_to], ['Money type', it.money_category + (it.tags.length ? ' · ' + it.tags.join(', ') : '')],
-    ['Prerequisites', (card.prerequisites || []).length ? '<ul>' + card.prerequisites.map(p => `<li>${esc(p)}</li>`).join('') + '</ul>' : 'None listed', true], ['Worth it?', card.worth_it]];
   return `<article class="gcard ${mine(it) ? 'mine mine-' + mine(it).toLowerCase() : ''}" id="card-${id}">
     <div class="gc-head">
       <div class="gc-titles">
-        <div class="row gc-tags">${rank ? `<span class="rank mono small">#${rank}</span>` : ''}<span class="chip" title="${esc(MONEY_HELP[it.money_category] || '')}">${esc(it.money_category)}</span>${(it.tags || []).map(t => `<span class="chip tag">${esc(t)}</span>`).join('')}${confBadge(it.confidence)}${mine(it) ? `<span class="status neutral">${esc(MY_LABEL[mine(it)])}</span>` : ''}</div>
+        <div class="row gc-tags">${rank ? `<span class="rank mono small">#${rank}</span>` : ''}<span class="chip" title="${esc(MONEY_HELP[it.money_category] || '')}">${esc(it.money_category)}</span>${(it.tags || []).map(t => `<span class="chip tag">${esc(t)}</span>`).join('')}${eligChip(it)}${confBadge(it.confidence)}${myStatus(it)}</div>
         <h3 class="gc-title"><a href="#item-${id}">${esc(it.title)}</a></h3>
         <div class="gc-sub">${esc(it.funder)}${it.number ? ' · ' + esc(it.number) : ''} · <a href="${esc(it.url)}" target="_blank" rel="noopener">Open listing ↗</a></div>
       </div>
-      <a class="score-badge" href="#item-${id}" aria-label="Priority score ${score} out of 100. How it was calculated" title="Priority = plan match × (0.30 + 0.20 chance + 0.30 value + 0.15 urgency + 0.05 workload). Chase line: 38.">
-        <span class="sb-num">${score}</span><span class="sb-lbl">Priority</span></a>
+      <button class="score-badge" data-act="score" data-id="${id}" aria-label="Priority score ${score} out of 100. Show how it was calculated" aria-controls="det-${id}">
+        <span class="sb-num">${score}</span><span class="sb-lbl">Priority</span></button>
     </div>
     <div class="kpis">
       <div><span class="kpi-num">${it.award_ceiling != null ? money(it.award_ceiling) : 'Not stated'}</span><span class="kpi-lbl">Award ceiling (per award)</span></div>
@@ -788,18 +874,50 @@ function grantCard(it, rank) {
       <div class="row" role="group" aria-label="My actions for ${esc(it.title)}">${actionButtons(it, true)}</div>
       <button class="btn ghost sm gc-more" data-act="toggle" data-id="${id}" aria-expanded="${open}" aria-controls="det-${id}">${open ? 'Hide details ▴' : 'Details ▾'}</button>
     </div>
-    <div class="gc-details" id="det-${id}" ${open ? '' : 'hidden'}>
-      ${it.decision_reason ? `<p class="note">Why <strong>${esc(it.suggested_decision)}</strong>? ${esc(it.decision_reason)}</p>` : ''}
-      ${(it.objective || {}).text ? `<p class="dc-obj"><span class="mono small">${esc(objText(it))}</span> ${esc(it.objective.text)}</p>` : ''}
-      ${card.summary ? `<p class="dc-summary">${esc(card.summary)}</p>` : ''}
-      ${card.why_fit || card.why_not_fit ? `<div class="dc-why"><div class="why-yes"><div class="mono small">Why it fits</div><p>${esc(card.why_fit || '—')}</p></div><div class="why-no"><div class="mono small">Why it might not</div><p>${esc(card.why_not_fit || 'Not assessed — read the eligibility section.')}</p></div></div>` : ''}
-      ${it.card ? `<dl class="q5">${q5.map(([k, val, raw]) => `<div><dt>${k}</dt><dd>${raw ? val : esc(val || '—')}</dd></div>`).join('')}</dl>` : ''}
-      ${(v.warnings || []).length ? `<div class="warnbox">${v.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
-      ${(card.evidence || []).length ? `<details class="evidence"><summary>Evidence · ${v.verified_quotes || 0}/${v.total_quotes || card.evidence.length} quotes verified</summary>
-        ${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
-      <a class="arrow-link" href="#item-${id}" style="font-size:15px">Full score breakdown ${ARROW}</a>
-    </div>
+    <div class="gc-details" id="det-${id}" ${open ? '' : 'hidden'}>${open ? detailsHtml(it) : ''}</div>
   </article>`;
+}
+/* Six groups, in the order a grants person checks them. Nothing here is computed in the browser except
+   arithmetic on fields the pipeline wrote (weeks of work = hours / 10). */
+function detailsHtml(it) {
+  const card = it.card || {}; const v = it.verification || {}; const f = it.factors || {}; const id = esc(it.opp_id);
+  const kv = rows => `<dl class="kvs">${rows.filter(r => r[1] != null && r[1] !== '').map(([k, val, raw]) => `<div><dt>${k}</dt><dd>${raw ? val : esc(val)}</dd></div>`).join('')}</dl>`;
+  const group = (n, title, body, gid = '') => `<section class="dgroup" ${gid ? `id="${gid}"` : ''}><h4><span class="mono small red">${n}</span> ${title}</h4>${body}</section>`;
+  const busy = state.busy['card-' + it.opp_id];
+  const noCard = !it.card ? `<div class="nocard"><p>No decision card yet — the morning run writes cards for the top 15 only.</p>
+      <button class="btn solid sm" data-act="write-card" data-id="${id}" ${busy ? 'disabled' : ''}>${busy ? 'Writing and checking the card…' : 'Write decision card (one AI call, quotes checked)'}</button></div>` : '';
+  const pct = v.total_quotes ? Math.round(100 * v.verified_quotes / v.total_quotes) : null;
+  const hours = f.H != null ? `about ${Math.round(f.H)} hours (${Math.round(f.H10)}–${Math.round(f.H90)})` : null;
+  const weeks = f.H != null ? Math.ceil(f.H / 10) : null;
+  const tight = weeks != null && it.days_left != null && it.days_left >= 0 && weeks * 7 > it.days_left;
+  const factors = [['A', 'Plan match', '0–100', 'How closely the listing matches a DNCR plan objective'], ['P', 'Chance', '0–1', 'Formula = 1; states only = awards ÷ 56; else 0.25 (estimate)'],
+    ['V', 'Value', '0–1', 'Log of the typical award, $10K = 0 … $3M = 1'], ['U', 'Urgency', '0–3', 'Urgency tier of the matched objective'], ['W', 'Workload', '0–100', 'Fewer hands-on hours = higher']];
+  const elig = it.eligibility || 'unknown';
+  return `${noCard}
+    ${it.decision_reason ? `<p class="note">Why <strong>${esc(it.suggested_decision)}</strong>? ${esc(it.decision_reason)}${it.card_on_demand ? ' · card written on request' : ''}</p>` : ''}
+    <div class="dgroups">
+    ${group('01', 'Strategic fit', `${(it.objective || {}).text ? `<p class="dc-obj"><span class="mono small">${esc(objText(it))}</span> ${esc(it.objective.text)}</p>` : ''}
+      ${card.why_fit ? `<p><strong>Why it fits.</strong> ${esc(card.why_fit)}</p>` : ''}${card.summary ? `<p class="dim small-text">${esc(card.summary)}</p>` : ''}`)}
+    ${group('02', 'Eligibility &amp; blockers', `<p>${eligChip(it)} <span class="small-text dim">${esc((ELIG[elig] || ELIG.unknown)[2])}</span></p>
+      ${kv([['Can DNCR apply?', card.can_dncr_apply], ['Who applies?', card.who_applies || it.route_to], ['Prerequisites', (card.prerequisites || []).length ? '<ul>' + card.prerequisites.map(p => `<li>${esc(p)}</li>`).join('') + '</ul>' : (it.card ? 'None listed' : null), true]])}
+      ${card.why_not_fit ? `<p><strong>Why it might not.</strong> ${esc(card.why_not_fit)}</p>` : ''}
+      ${(v.warnings || []).length ? `<div class="warnbox">${v.warnings.map(w => `<p>⚠ ${esc(w)}</p>`).join('')}</div>` : ''}
+      <div class="row"><span class="small-text dim">My check:</span>
+        <button class="btn sm ${elig === 'verified' ? 'solid' : ''}" data-act="elig" data-id="${id}" data-v="verified">Mark verified</button>
+        <button class="btn sm ${elig === 'ineligible' && (it.tracker || {}).eligibility === 'ineligible' ? 'solid' : ''}" data-act="elig" data-id="${id}" data-v="ineligible">Mark ineligible</button>
+        ${(it.tracker || {}).eligibility && (it.tracker || {}).eligibility !== 'pending' ? `<button class="btn sm ghost" data-act="elig" data-id="${id}" data-v="pending">Reset</button>` : ''}</div>`)}
+    ${group('03', 'Funding &amp; competition', kv([['Award ceiling (per award)', it.award_ceiling != null ? money(it.award_ceiling) : 'Not stated'], ['Typical award used for value', f.award ? money(f.award) : 'Not stated (neutral value used)'],
+      ['Funding mechanism', it.funding_mechanism], ['Who competes', it.competition_scope], ['Special purpose', (it.tags || []).join(', ') || 'None tagged'], ['Worth it?', card.worth_it]]))}
+    ${group('04', 'Effort &amp; timing', kv([['Deadline', it.close_date ? fmtDate(it.close_date) + (it.days_left != null ? (it.days_left < 0 ? ' (closed)' : ` (${it.days_left} days left)`) : '') : 'Rolling / not stated'],
+      ['Hands-on work (estimate)', hours], ['At 10 h/week', weeks != null ? `about ${weeks} week${weeks === 1 ? '' : 's'}` : null], ['Suggested owner', it.route_to || it.division]])
+      + (tight ? '<p class="gc-risk">⚠ Tight: the estimated work takes longer than the time left.</p>' : '') + '<p class="small-text dim">Hours are a simulation by application type, not a promise.</p>')}
+    ${group('05', 'Scoring breakdown', f.A != null ? `<p class="formula">Priority <strong>${Math.round(it.score)}</strong> = plan match ${Math.round(f.A)} × (0.30 + 0.20 × ${(+f.P).toFixed(2)} + 0.30 × ${(+f.V).toFixed(2)} + 0.15 × ${f.U}/3 + 0.05 × ${Math.round(f.W)}/100)</p>
+      <table class="ftable"><thead><tr><th>Factor</th><th>Value</th><th>Scale</th><th>Meaning</th></tr></thead><tbody>${factors.map(([k, n, sc, m]) => `<tr><td>${n} (${k})</td><td>${f[k] != null ? esc(k === 'P' || k === 'V' ? (+f[k]).toFixed(2) : Math.round(f[k])) : '—'}</td><td>${sc}</td><td>${m}</td></tr>`).join('')}</tbody></table>
+      ${f.P_case ? `<p class="small-text dim">Chance case: ${esc(f.P_case)}.</p>` : ''}<a class="arrow-link" href="#item-${id}" style="font-size:15px">Full rationale ${ARROW}</a>` : '<p class="dim">The breakdown is not available for this run.</p>', 'score-' + id)}
+    ${group('06', 'Evidence &amp; sources', `${pct != null ? `<p><strong>Evidence completeness: ${v.verified_quotes}/${v.total_quotes} quotes verified (${pct}%)</strong> <span class="small-text dim">— how much of the card was found word-for-word in the listing or the plan; not a chance of winning.</span></p>` : '<p class="dim">No quotes to check yet.</p>'}
+      ${(card.evidence || []).length ? `<details class="evidence"><summary>Show quotes</summary>${card.evidence.map(e => `<blockquote><span class="src src-${esc(e.source)}">${esc(e.source)}</span><span class="mono small dim">${esc(e.field)}</span><p>“${esc(e.quote)}”</p></blockquote>`).join('')}</details>` : ''}
+      <p><a href="${esc(it.url)}" target="_blank" rel="noopener">Official listing on Grants.gov ↗</a> · <span class="small-text dim">Scored ${esc(fmtWhen((state.list || {}).last_refreshed))}</span></p>`)}
+    </div>`;
 }
 function searchBox(id) {
   return `<label class="search"><span class="sr-only">Search grants</span><input type="search" id="${id}" value="${esc(state.search)}" placeholder="Search by grant name, number or agency" autocomplete="off"></label>`;
@@ -860,30 +978,73 @@ function viewQualify() {
   </div></section>`;
 }
 
-const TRACK_COLS = [['Chase', 'Tracking', 'Grants you are working on (Start tracking)'], ['Waitlist', 'Saved', 'Bookmarked to look at later'], ['Route', 'Forwarded', 'Sent to another office'], ['Skip', 'Dismissed', 'Hidden from your lists']];
+function trackedItems() { return allItems().filter(i => i.tracker && ['Chase', 'Waitlist'].includes(mine(i))); }
+function trackerPasses(it) {
+  const t = state.tf; const r = it.tracker || {};
+  if (t.view === 'active' && r.stage === 'saved') return false;
+  if (t.view === 'saved' && r.stage !== 'saved') return false;
+  if (t.stage !== 'all' && r.stage !== t.stage) return false;
+  if (t.owner !== 'all' && (r.owner || '') !== (t.owner === '(unassigned)' ? '' : t.owner)) return false;
+  if (t.due30 && !(it.days_left != null && it.days_left >= 0 && it.days_left <= 30)) return false;
+  return true;
+}
+function trackerRow(it) {
+  const r = it.tracker || {}; const id = esc(it.opp_id); const cl = closesText(it);
+  const overdue = r.next_action_due && r.next_action_due < new Date().toISOString().slice(0, 10);
+  const sel = (field, opts, val, label) => `<label class="tfield"><span class="mono small dim">${label}</span><select data-tr="${field}" data-id="${id}">${opts.map(([v, l]) => `<option value="${v}" ${val === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+  return `<article class="trow" id="tr-${id}">
+    <div class="trow-main">
+      <div class="row gc-tags"><span class="ai-pill sm" title="${esc(it.decision_reason || '')}">AI suggestion: <strong>${esc(it.suggested_decision || '—')}</strong></span>${eligChip(it)}<span class="mono small dim">Priority ${Math.round(it.score)}</span></div>
+      <a class="tcard-title" href="#item-${id}">${esc(it.title)}</a>
+      <span class="small-text dim">${esc(it.funder)}${it.number ? ' · ' + esc(it.number) : ''}</span>
+      <span class="small-text ${cl.urgent ? 'due' : ''}">${esc(cl.text)}</span>
+    </div>
+    <div class="trow-fields">
+      ${sel('stage', STAGES, r.stage || 'saved', 'Stage')}
+      ${sel('my_decision', MY_DECISIONS, r.my_decision || 'undecided', 'My decision')}
+      <label class="tfield"><span class="mono small dim">Owner</span><input list="owners" data-tr="owner" data-id="${id}" value="${esc(r.owner || '')}" placeholder="Unassigned"></label>
+      <label class="tfield wide"><span class="mono small dim">Next action</span><input data-tr="next_action" data-id="${id}" value="${esc(r.next_action || '')}" placeholder="e.g. Confirm eligibility"></label>
+      <label class="tfield"><span class="mono small dim ${overdue ? 'due' : ''}">Due${overdue ? ' (overdue)' : ''}</span><input type="date" data-tr="next_action_due" data-id="${id}" value="${esc(r.next_action_due || '')}"></label>
+    </div>
+    <div class="trow-foot"><span class="mono small dim">Updated ${esc(fmtWhen(r.updated_at))}</span>
+      <button class="btn sm ghost" data-act="notes" data-id="${id}">Notes &amp; history${(r.history || []).length ? ' (' + r.history.length + ')' : ''}</button>
+      <button class="btn sm ghost" data-act="remove" data-id="${id}">Remove</button></div>
+  </article>`;
+}
 function viewBoard() {
-  const items = allItems();
-  return hero('My Tracker', 'My Tracker', 'Grants you saved, started tracking, forwarded or dismissed. The AI suggestion stays as it was; your choice is kept separately. Nothing here submits an application.', '', 'short') + `
+  const tracked = trackedItems(); const t = state.tf;
+  const counts = Object.fromEntries(STAGES.map(([k]) => [k, tracked.filter(i => i.tracker.stage === k).length]));
+  const list = tracked.filter(trackerPasses).sort(SORTS.deadline[1]);
+  const owners = [...new Set(tracked.map(i => (i.tracker.owner || '')).filter(Boolean))].sort();
+  const suggestions = [...new Set(allItems().map(i => i.division).concat(allItems().map(i => i.route_to)).filter(Boolean))].sort();
+  const forwarded = allItems().filter(i => mine(i) === 'Route'), dismissed = allItems().filter(i => mine(i) === 'Skip');
+  const small = (arr, label) => `<details class="tsmall"><summary>${label} (${arr.length})</summary>${arr.length ? `<ul class="plain">${arr.map(it => `<li><a href="#item-${esc(it.opp_id)}">${esc(it.title)}</a> <span class="dim small-text">AI suggestion: ${esc(it.suggested_decision || '—')}</span> <button class="btn sm ghost" data-act="undo" data-id="${esc(it.opp_id)}">Undo</button></li>`).join('')}</ul>` : '<p class="dim">None.</p>'}</details>`;
+  const fsel = (key, opts) => `<select data-tf="${key}">${opts.map(([v, l]) => `<option value="${v}" ${t[key] === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+  return hero('My Tracker', 'My Tracker', 'Grants you saved or are working on: stage, owner, next action and notes. The AI suggestion stays as it was. Nothing here submits an application.', '', 'short') + `
+  <section class="stats-band" aria-label="Workflow counts"><div class="wrap stage-strip">
+    ${STAGES.map(([k, l]) => `<div><span class="stat-num">${counts[k]}</span><span class="mono small">${l}</span></div>`).join('')}
+  </div><div class="wrap"><p class="mono small" style="color:#C9D3D1;margin:0;padding-bottom:14px">Workflow counts, not success rates.</p></div></section>
   <section class="sec gray"><div class="wrap">
-    <div class="board-scroll"><div class="board">
-      ${TRACK_COLS.map(([dec, label, help]) => { const list = items.filter(i => mine(i) === dec).sort(SORTS.deadline[1]); return `<section class="col" aria-label="${label}">
-        <div class="col-hd"><span class="mono" title="${esc(help)}">${label}</span><span class="mono">${list.length}</span></div>
-        ${list.length ? list.map(it => { const cl = closesText(it); return `<div class="tcard">
-          <div class="mono small dim">Priority ${Math.round(it.score)} · ${esc(it.money_category)}</div>
-          <a class="tcard-title" href="#item-${esc(it.opp_id)}">${esc(it.title)}</a>
-          <span class="small-text dim">${esc(it.funder)}</span>
-          <span class="${cl.urgent ? 'due ' : ''}small-text">${esc(cl.text)}</span>
-          <span class="mono small">AI suggestion: ${esc(it.suggested_decision || '—')}</span>
-          <div class="row" style="gap:6px">
-            <label class="sr-only" for="mv-${esc(it.opp_id)}">Move ${esc(it.title)}</label>
-            <select id="mv-${esc(it.opp_id)}" data-move="${esc(it.opp_id)}" class="mini-select">${TRACK_COLS.map(([d, l]) => `<option value="${d}" ${d === dec ? 'selected' : ''}>${l}</option>`).join('')}</select>
-            <button class="btn sm ghost" data-act="undo" data-id="${esc(it.opp_id)}">Undo</button>
-          </div></div>`; }).join('') : '<div class="col-empty">Nothing here yet.</div>'}
-      </section>`; }).join('')}
-    </div></div>
+    <div class="tfilters row">
+      <label class="field">Show${fsel('view', [['all', 'All tracked'], ['active', 'In progress (not just saved)'], ['saved', 'Saved only']])}</label>
+      <label class="field">Stage${fsel('stage', [['all', 'Any stage'], ...STAGES])}</label>
+      <label class="field">Owner${fsel('owner', [['all', 'Anyone'], ['(unassigned)', 'Unassigned'], ...owners.map(o => [o, o])])}</label>
+      <label class="check"><input type="checkbox" data-tf-due ${t.due30 ? 'checked' : ''}>Deadline within 30 days</label>
+      <span class="mono small dim">${list.length} of ${tracked.length}</span>
+    </div>
+    <datalist id="owners">${suggestions.map(o => `<option value="${esc(o)}">`).join('')}</datalist>
+    <div class="trows">${list.length ? list.map(trackerRow).join('') : `<div class="empty">${tracked.length ? 'Nothing matches these tracker filters.' : 'Nothing tracked yet. Use <strong>☆ Save</strong> or <strong>Start tracking</strong> on any grant.'} <a href="#today">Back to today</a></div>`}</div>
+    <div class="tsmalls">${small(forwarded, 'Forwarded to another office')}${small(dismissed, 'Dismissed')}</div>
   </div></section>`;
 }
-
+function notesHtml(it) {
+  const r = it.tracker || {};
+  return `<p class="mono small dim">${esc(it.title)}</p>
+    <label class="field">Notes<textarea id="notesText" rows="6">${esc(r.notes || '')}</textarea></label>
+    <div class="row" style="margin:12px 0 18px"><button class="btn solid" data-act="save-notes" data-id="${esc(it.opp_id)}">Save notes</button><button class="btn ghost" data-act="close-modal">Close</button></div>
+    <h3 style="margin:0 0 8px">Activity</h3>
+    ${(r.history || []).length ? `<ul class="history">${r.history.slice().reverse().map(h => `<li><strong>${esc(h.field.replaceAll('_', ' '))}</strong>: ${esc(h.from == null ? '—' : (STAGE_LABEL[h.from] || h.from))} → ${esc(STAGE_LABEL[h.to] || h.to)} <span class="dim">${esc(fmtWhen(h.at))} · ${esc(h.user || '')}</span></li>`).join('')}</ul>` : '<p class="dim">No changes yet.</p>'}`;
+}
 function viewDetail(id) {
   const d = state.detail[id];
   if (!d) return hero('Loading', 'Loading…', '', '', 'short');
@@ -947,6 +1108,7 @@ const FAQ = [
   ['What is the difference between the AI suggestion and my action?', 'The AI suggestion (Chase, You decide, Waitlist, Route or Skip) comes from the scoring rules and never changes when you click. Your actions — Save, Start tracking, Dismiss — are kept separately in My Tracker.'],
   ['What is the priority score?', 'Priority = plan match × (0.30 + 0.20 chance + 0.30 value + 0.15 urgency + 0.05 workload), 0–100. The scorer suggests Chase at 38 or above when DNCR should apply itself and a deadline is posted.'],
   ['What does confidence mean?', CONF_HELP.High + ' ' + CONF_HELP.Medium + ' ' + CONF_HELP.Low + ' It is about the evidence, not the chance of winning.'],
+  ['What is My Tracker?', 'Every grant you Save or Start tracking gets one record: stage (Saved → Reviewing → Preparing → Internal approval → Submitted → Awarded / Declined / Closed), owner, next action with a due date, notes and a log of every change. A rerun of the pipeline never resets it.'],
   ['Is this an official DNCR tool?', 'No. It is an independent student prototype for Solve-a-thon 2026 and is not affiliated with or endorsed by NC DNCR.']
 ];
 function viewHow() {
@@ -996,7 +1158,7 @@ async function decide(id, decision) {
   try {
     const d = await data.decide(id, decision);
     setDecisionLocal(id, d);
-    renderRefreshBar();
+    await loadAll();
     toast(`${MY_LABEL[decision] || decision} — see My Tracker${net.demo ? ' (demo)' : ''}`);
     if (decision === 'Route' || decision === 'Chase') {
       openModal(decision === 'Route' ? 'Forwarding draft' : 'Starter pack', loadingHtml(decision === 'Route' ? 'Route Agent is drafting…' : 'Apply Assist is preparing the starter pack…'));
@@ -1017,10 +1179,27 @@ async function undo(id) {
     const r = await data.undo(id);
     allItems().forEach(it => { if (it.opp_id === id) it.my_decision = r.now || null; });
     delete state.detail[id];
-    renderRefreshBar();
+    await loadAll();
     toast('Undone');
   } catch (e) { toast(e.status === 404 ? 'Nothing to undo' : 'Undo failed (' + e.message + ')'); }
   finally { delete state.busy[id]; rerenderKeep(); }
+}
+async function track(id, patch, msg) {
+  try {
+    const rec = await data.track(id, patch);
+    allItems().forEach(it => { if (it.opp_id === id) it.tracker = rec; });
+    if ('stage' in patch || 'eligibility' in patch) await loadAll();   // the API also syncs the decision log / eligibility
+    delete state.detail[id];
+    if (msg) toast(msg);
+    rerenderKeep();
+  } catch (e) { toast('Could not save (' + e.message + ')'); }
+}
+async function writeCard(id) {
+  const key = 'card-' + id; if (state.busy[key]) return;
+  state.busy[key] = true; state.open[id] = true; rerenderKeep();
+  try { await data.writeCard(id); await loadAll(); toast('Card written and quotes checked'); }
+  catch (e) { toast(e.status === 503 ? 'Cards can only be written when the API is running' : 'Could not write the card (' + e.message + ')'); }
+  finally { delete state.busy[key]; rerenderKeep(); }
 }
 async function copyFrom(targetId) {
   const el = document.getElementById(targetId); if (!el) return;
@@ -1082,7 +1261,18 @@ function bindView() {
   on('#q-sort', e => { q.sort = e.target.value; keep(); });
   on('#q-hide', e => { q.hide_dismissed = e.target.checked; keep(); });
   document.querySelectorAll('input[type=search]').forEach(el => el.addEventListener('input', e => { state.search = e.target.value; updateResults(); }));
-  document.querySelectorAll('[data-move]').forEach(el => el.addEventListener('change', e => { const v = e.target.value; if (v) decide(e.target.dataset.move, v); }));
+  document.querySelectorAll('[data-tr]').forEach(el => el.addEventListener('change', e => {
+    const f = e.target.dataset.tr; track(e.target.dataset.id, { [f]: e.target.value }, f === 'stage' ? 'Stage: ' + STAGE_LABEL[e.target.value] : 'Saved');
+  }));
+  document.querySelectorAll('[data-tf]').forEach(el => el.addEventListener('change', e => { state.tf[e.target.dataset.tf] = e.target.value; rerenderKeep(); }));
+  document.querySelectorAll('[data-tf-due]').forEach(el => el.addEventListener('change', e => { state.tf.due30 = e.target.checked; rerenderKeep(); }));
+}
+function openDetails(id, focusScore) {
+  state.open[id] = true;
+  const det = document.getElementById('det-' + id); const it = itemById(id);
+  if (det) { det.innerHTML = detailsHtml(it); det.hidden = false; }
+  const b = document.querySelector(`[data-act="toggle"][data-id="${CSS.escape(id)}"]`); if (b) { b.setAttribute('aria-expanded', 'true'); b.textContent = 'Hide details ▴'; }
+  if (focusScore) { const g = document.getElementById('score-' + id); if (g) { g.scrollIntoView({ block: 'center' }); g.setAttribute('tabindex', '-1'); g.focus({ preventScroll: true }); } }
 }
 document.addEventListener('click', async e => {
   if (e.target.id === 'modal') { closeModal(); return; }
@@ -1091,10 +1281,15 @@ document.addEventListener('click', async e => {
   if (act === 'decide') { e.preventDefault(); decide(id, b.dataset.d); }
   else if (act === 'undo') { e.preventDefault(); undo(id); }
   else if (act === 'toggle') {
-    const open = !state.open[id]; state.open[id] = open;
-    const det = document.getElementById('det-' + id); if (det) det.hidden = !open;
-    b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'Hide details ▴' : 'Details ▾';
+    if (state.open[id]) { state.open[id] = false; const det = document.getElementById('det-' + id); if (det) { det.hidden = true; det.innerHTML = ''; } b.setAttribute('aria-expanded', 'false'); b.textContent = 'Details ▾'; }
+    else openDetails(id, false);
   }
+  else if (act === 'score') openDetails(id, true);
+  else if (act === 'write-card') writeCard(id);
+  else if (act === 'elig') { const it = itemById(id); const patch = { eligibility: b.dataset.v }; if (!it.tracker) patch.stage = 'saved'; track(id, patch, b.dataset.v === 'pending' ? 'Eligibility check reset' : 'Eligibility marked ' + b.dataset.v + (it.tracker ? '' : ' · saved to My Tracker')); }
+  else if (act === 'notes') openModal('Notes & history', notesHtml(itemById(id)));
+  else if (act === 'save-notes') { const v = ($('#notesText') || {}).value || ''; await track(id, { notes: v }, 'Notes saved'); if (!$('#modal').hidden) $('#modalBody').innerHTML = notesHtml(itemById(id)); }
+  else if (act === 'remove') { if (confirm('Remove this grant from My Tracker? It moves to Dismissed; you can undo it there.')) decide(id, 'Skip'); }
   else if (act === 'close-modal') closeModal();
   else if (act === 'copy-text') copyFrom(b.dataset.target);
   else if (act === 'reset-q') { state.q = JSON.parse(JSON.stringify(DEFAULT_Q)); state.search = ''; store.set('q2', state.q); rerenderKeep(); toast('Filters reset'); }

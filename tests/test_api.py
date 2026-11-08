@@ -87,3 +87,45 @@ def test_money_category_is_exclusive():
 def test_shortlist_has_search_and_card_fields(client):
     item = client.get("/api/shortlist").json()["items"][0]
     assert {"number", "plan_match", "money_category", "tags"} <= set(item)
+
+
+def test_save_then_track_moves_one_tracker_record(client):
+    oid = first_id(client)
+    client.post("/api/decisions", json={"opp_id": oid, "decision": "Waitlist"})
+    assert client.get("/api/tracker").json()[0]["stage"] == "saved"
+    client.post("/api/decisions", json={"opp_id": oid, "decision": "Chase"})
+    recs = client.get("/api/tracker").json()
+    assert len(recs) == 1 and recs[0]["stage"] == "reviewing"           # same record, no duplicate
+    item = next(i for i in client.get("/api/shortlist").json()["items"] if i["opp_id"] == oid)
+    assert item["tracker"]["stage"] == "reviewing" and item["suggested_decision"]  # AI suggestion untouched
+
+
+def test_tracker_update_logs_history_and_syncs_decision(client):
+    oid = first_id(client)
+    r = client.put(f"/api/tracker/{oid}", json={"stage": "preparing", "owner": "State Parks", "next_action": "Confirm match",
+                                                 "next_action_due": "2026-11-20", "eligibility": "verified", "my_decision": "pursue"})
+    rec = r.json()
+    assert rec["owner"] == "State Parks" and {h["field"] for h in rec["history"]} >= {"stage", "owner", "eligibility"}
+    assert client.get("/api/decisions").json()[-1]["decision"] == "Chase"   # Alert / Notifier see it as chased
+    item = next(i for i in client.get("/api/shortlist").json()["items"] if i["opp_id"] == oid)
+    assert item["eligibility"] == "verified"
+    assert client.put(f"/api/tracker/{oid}", json={"next_action_due": "soon"}).status_code == 422
+    assert client.put(f"/api/tracker/{oid}", json={"stage": "won"}).status_code == 422
+    assert client.put("/api/tracker/nope", json={"stage": "saved"}).status_code == 404
+
+
+def test_card_on_demand_for_item_outside_top(client):
+    items = client.get("/api/shortlist?include_skipped=true&include_low=true&limit=200").json()["items"]
+    target = next(i for i in items if not i["card"])
+    checked = client.post(f"/api/opportunities/{target['opp_id']}/card").json()
+    assert checked["card"]["opp_id"] == target["opp_id"]
+    again = next(i for i in client.get("/api/shortlist?include_skipped=true&include_low=true&limit=200").json()["items"]
+                 if i["opp_id"] == target["opp_id"])
+    assert again["card"] and again["card_on_demand"] is True
+
+
+def test_funding_fields_are_separate(client):
+    item = client.get("/api/shortlist").json()["items"][0]
+    assert item["funding_mechanism"] in ("Formula", "Competitive", "Unknown")
+    assert item["competition_scope"] in ("State-only", "Open to multiple applicant types", "Unknown")
+    assert item["eligibility"] in ("verified", "pending", "ineligible", "unknown") and "A" in item["factors"]
