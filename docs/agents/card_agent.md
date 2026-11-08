@@ -7,7 +7,7 @@
 | Code | `agents/card_agent.py`, prompt `prompts/card_agent.md`, eval `scripts/eval_card_agent.py` |
 | Type | LLM — deployment `chat` (gpt-6.1-terra), fallback `chat-fallback` (gpt-4.1) |
 | Runs | Daily batch, top N only (≤ 15 calls/day + ≤ 15 retries) |
-| Status | Prompt v2.1 + code-owned facts, figure check, cache, extractive offline card; review fixes (cache key, objective disagreement) done; 28 card tests (38 in suite) pass; **not yet run against the live model** (needs `.env` from lead) |
+| Status | Prompt v2.2 (v2.1 + applicant types in the listing block) + code-owned facts, figure check, cache, extractive offline card; review fixes (cache key, objective disagreement) done; 28 card tests (38 in suite) pass; **not yet run against the live model** (needs `.env` from lead) |
 
 ## 1. Description
 Turns each short-listed opportunity into a plain-English decision card that answers the user's five questions without opening the listing: (1) can DNCR apply and who should, (2) which objective and division, (3) what kind of money, (4) how much time and what must happen first, (5) is it worth it, plus **why it might NOT fit**. Every claim is backed by verbatim quotes the Verifier checks. Replaces "read the NOFO synopsis and summarize it for the division." Serves **R3** and **R8**.
