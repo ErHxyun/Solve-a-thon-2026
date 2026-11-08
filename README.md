@@ -34,7 +34,8 @@ The other 834 are suggested Skip and stay searchable. A run takes about 3 minute
 3. The AI suggestion (Chase / You decide / Waitlist / Route / Skip) is read-only. The person **Saves**, **Starts tracking** (opens an application starter pack), **Dismisses**, or **drafts a forwarding note** to the office that should apply.
 4. **My Tracker** keeps one record per grant: stage (Saved → Reviewing → Preparing → Internal approval → Submitted → Awarded / Declined / Closed), owner, next action and due date, notes, and a change log.
 5. **Find Funding** filters, sorts and searches all scored grants instantly — nothing is re-run. Grants outside the morning top 15 can get a card on click.
-6. A **weekly email** (plus a same-day email only when something can't wait) summarizes what changed; previews at `/api/email/preview`.
+6. **Radar** shows where federal money is growing or fading by policy area (open and forecast listings vs. those closed in the last 12 months) and how each area fits the plan.
+7. A **weekly email** (plus a same-day email only when something can't wait) summarizes what changed; previews at `/api/email/preview`.
 
 ## Architecture
 
@@ -46,7 +47,7 @@ flowchart LR
   F --> A[Card Agent<br/>GPT-6.1]
   A --> V[Verifier<br/>code]
   V -- quotes not found, once --> R[card_retry] --> V
-  V --> AL[Alert<br/>code] --> N[Notifier<br/>code] --> P[publish] --> B[(Azure Blob)]
+  V --> AL[Alert<br/>code] --> N[Notifier<br/>code] --> P[publish] --> RD[Radar<br/>code] --> B[(Azure Blob)]
   B --> API[FastAPI] --> UI[index.html] --> H((Person decides))
   UI -. on click .-> RA[Route Agent / Apply Assist / card on demand<br/>GPT-6.1]
 ```
@@ -63,6 +64,7 @@ flowchart LR
 | Fit Scorer | code | A = plan match (TF-IDF meaning + IDF keywords, research penalty, agency-type floor); P chance, V value, U urgency, W workload; **Final = A × (0.30 + 0.20 P + 0.30 V + 0.15 U/3 + 0.05 W/100)**; suggests Skip / Route / Waitlist / Chase / You decide; who should apply |
 | Card Agent | LLM | Writes the card from LISTING and PLAN text only; facts are computed and never quoted; cached by prompt version |
 | Verifier | code | Every quote must be found in its source (fuzzy ≥ 90); flags a card that says DNCR cannot apply; sets confidence |
+| Radar | code | Growth and DNCR fit by policy area from open, forecast and recently closed listings; served at `/radar` |
 | Alert / Notifier | code | Closing soon, waitlist opening, new since yesterday; weekly + urgent email (ACS or SMTP; preview by default) |
 | Route Agent / Apply Assist | LLM, on click | Forwarding note to the right NC office; starter pack (requirements, SF-424 fields to gather, outline, timeline) |
 
@@ -78,7 +80,7 @@ copy .env.example .env                 # offline defaults; add Azure values priv
 $env:PYTHONUTF8 = "1"                  # needed if your folder path has non-English characters
 python pipeline.py                     # offline: 40 real Grants.gov records in tests/fixtures/
 uvicorn app.api:app --port 8000        # open http://localhost:8000
-pytest                                 # 155 tests, all offline
+pytest                                 # 162 tests, all offline
 ```
 
 macOS / Linux: `source .venv/bin/activate`, `cp .env.example .env`, `export PYTHONUTF8=1`.

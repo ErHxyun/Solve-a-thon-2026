@@ -34,6 +34,7 @@ ACTIVE_STAGES = {"reviewing", "preparing", "internal_approval", "submitted"}
 _tracker_lock = threading.Lock()
 _card_lock = threading.Lock()
 INDEX_HTML = config.ROOT / "index.html"
+RADAR_TEMPLATE = config.ROOT / "radar" / "radar_template.html"
 _decisions_lock = threading.Lock()  # one replica: a process lock is enough for the pilot
 
 app = FastAPI(title="Federal Funds Matchmaker — DNCR", version="0.1.0",
@@ -288,6 +289,58 @@ def index():
     if INDEX_HTML.exists():
         return FileResponse(INDEX_HTML, headers={"Cache-Control": "no-cache"})  # always revalidate after a deploy
     return JSONResponse({"message": "index.html not found; API docs at /docs"})
+
+
+RADAR_BAR = """<style>
+.ffm-bar{background:#053131;color:#fff;font-family:'Source Sans 3',system-ui,sans-serif}
+.ffm-bar .in{max-width:1320px;margin:0 auto;padding:10px 40px;display:flex;gap:10px 30px;align-items:center;flex-wrap:wrap}
+.ffm-bar a{color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:8px 0;border-bottom:3px solid transparent}
+.ffm-bar a.brand{font-size:18px;margin-right:6px}.ffm-bar a[aria-current]{border-bottom-color:#F57600}
+.ffm-bar a:hover{border-bottom-color:#777}.ffm-bar .note{margin-left:auto;font:12px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#BDBDBD}
+@media(max-width:640px){.ffm-bar .in{padding:8px 16px}.ffm-bar .note{margin-left:0}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap" rel="stylesheet">
+<div class="ffm-bar"><nav class="in" aria-label="Main"><a class="brand" href="/#today">DNCR Federal Funds Matchmaker</a>
+<a href="/#today">Today</a><a href="/#match">Find Funding</a><a href="/#board">My Tracker</a><a href="/radar" aria-current="page">Radar</a><a href="/#how">How It Works</a>
+<span class="note">NC DNCR · Student prototype</span></nav></div>"""
+
+
+def _radar_page_data(out: dict) -> str:
+    """Template inserts titles with innerHTML: escape text fields; keep </script> from closing the data block."""
+    import copy
+    import html as _html
+    import json as _json
+
+    out = copy.deepcopy(out)
+    for k in ("all", "eligible"):
+        for a in (out.get(k) or {}).get("areas", []):
+            for e in a.get("examples", []):
+                e["title"], e["agency"] = _html.escape(e.get("title") or ""), _html.escape(e.get("agency") or "")
+    return _json.dumps(out, separators=(",", ":")).replace("</", "<\\/")
+
+
+@app.get("/radar", include_in_schema=False, response_class=HTMLResponse)
+def radar_page() -> HTMLResponse:
+    """Grant Topic Radar, filled with the latest pipeline data (radar/latest.json)."""
+    out = storage.read_json("radar/latest.json", default=None)
+    if not out or not RADAR_TEMPLATE.exists():
+        body = ('<main style="max-width:720px;margin:60px auto;font-family:system-ui;padding:0 16px"><h1>Grant Topic Radar</h1>'
+                '<p>The radar appears after the next daily pipeline run.</p><p><a href="/#today">Back to today</a></p></main>')
+    else:
+        body = RADAR_TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", _radar_page_data(out))
+    page = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            '</head>\n<body style="margin:0">\n' + RADAR_BAR + body + '\n</body>\n</html>\n')
+    return HTMLResponse(page, headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/api/radar")
+def radar_data() -> dict:
+    """Where federal grant money is growing or fading, by policy area (built by the daily pipeline)."""
+    out = storage.read_json("radar/latest.json", default=None)
+    if not out:
+        raise HTTPException(404, "no radar yet (it appears after the next pipeline run)")
+    return out
 
 
 @app.get("/api/health")

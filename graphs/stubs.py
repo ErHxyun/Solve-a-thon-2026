@@ -73,3 +73,9 @@ class notifier:  # noqa: N801
     @staticmethod
     def run(state: dict) -> dict:
         return {"notification": {"kind": None, "status": "stub: notifier not merged yet"}}
+
+
+class radar:  # noqa: N801
+    @staticmethod
+    def run(state: dict) -> dict:
+        return {"radar": {"status": "stub: radar not merged yet"}}

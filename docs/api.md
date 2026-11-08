@@ -30,6 +30,7 @@ Opening `index.html` with VS Code Live Server (port 5500) also works: CORS allow
 | GET | `/api/tracker` | The user's application records |
 | PUT | `/api/tracker/{opp_id}` | Partial update: `stage` (saved · reviewing · preparing · internal_approval · submitted · awarded · declined · closed), `owner`, `next_action`, `next_action_due` (YYYY-MM-DD), `notes`, `my_decision` (pursue · monitor · decline · undecided), `eligibility` (verified · ineligible · pending). Every change is appended to `history`; stage saved → decision Waitlist, active stages → Chase |
 | GET | `/api/email/preview?kind=weekly\|urgent` · `/api/email/status` | Notifier email preview (HTML) and last status |
+| GET | `/radar` · `/api/radar` | Grant Topic Radar page (app nav → Radar) and its data: growth and DNCR fit by policy area, rebuilt daily |
 | GET | `/api/alerts` | `{alerts: [...], digest: {...}}` |
 | GET | `/api/run` | Last pipeline run: `finished_at`, `status`, `counts` (funnel) |
 | GET | `/api/health` | `{ok, storage, llm_enabled}` |

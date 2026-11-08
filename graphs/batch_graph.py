@@ -1,6 +1,6 @@
 """Daily batch workflow as an explicit LangGraph state graph.  Owner: lead
 
-START → collector → gatekeeper → fit_scorer → card_agent → verifier ─┬─→ alert → notifier → publish → END
+START → collector → gatekeeper → fit_scorer → card_agent → verifier ─┬─→ alert → notifier → publish → radar → END
                                                    ▲                  │ quotes failed (once)
                                                    └── card_retry ◄───┘
 
@@ -41,6 +41,7 @@ card_agent = _load("card_agent")
 verifier = _load("verifier")
 alert = _load("alert")
 notifier = _load("notifier")
+radar = _load("radar")
 if MISSING_AGENTS:
     print(f"[graph] using stubs for: {', '.join(MISSING_AGENTS)}")
 
@@ -56,6 +57,7 @@ class PipelineState(TypedDict, total=False):
     card_feedback: dict[str, str]     # opp_id -> verifier feedback
     alerts: list[dict]
     notification: dict                # what the notifier emailed (or why not)
+    radar: dict                       # Grant Topic Radar build status (radar/latest.json)
     published: int
 
 
@@ -102,6 +104,7 @@ def build_graph():
     g.add_node("alert", alert.run)
     g.add_node("notifier", notifier.run)
     g.add_node("publish", publish)
+    g.add_node("radar", radar.run)
 
     g.add_edge(START, "collector")
     g.add_edge("collector", "gatekeeper")
@@ -112,7 +115,8 @@ def build_graph():
     g.add_edge("card_retry", "verifier")
     g.add_edge("alert", "notifier")
     g.add_edge("notifier", "publish")
-    g.add_edge("publish", END)
+    g.add_edge("publish", "radar")
+    g.add_edge("radar", END)
     return g.compile()
 
 

@@ -398,7 +398,7 @@ function render() { const d = DATA[mode], v = view(d);
   $("#lede").textContent = scope === "dncr" ? "Where federal grant money is growing or fading across DNCR's six plan areas."
     : "The rest of the federal pipeline, for comparison and for grants another agency should lead.";
   widgets(v); matrix(v); growth(v); chips(v); cloud(v); list(v);
-  $("#foot").textContent = `Grants.gov snapshot, ${d.n.toLocaleString()} listings, as of ${DATA.as_of}. Growth = share of grants open or forecast vs. recently closed (1.0× = average). Fit = average plan-match score A (0–100).`; }
+  $("#foot").textContent = `${DATA.source || "Grants.gov snapshot"}: ${d.n.toLocaleString()} listings, as of ${DATA.as_of}. Growth = share of grants open or forecast vs. recently closed (1.0× = average). Fit = average plan-match score A (0–100).`; }
 const setScope = s2 => { scope = s2; lit = null; $("#t-dncr").setAttribute("aria-pressed", s2 === "dncr"); $("#t-other").setAttribute("aria-pressed", s2 === "other"); render(); };
 $("#t-dncr").onclick = () => setScope("dncr"); $("#t-other").onclick = () => setScope("other");
 document.querySelectorAll(".sort button").forEach(b => b.onclick = () => { sortKey = b.dataset.s;
