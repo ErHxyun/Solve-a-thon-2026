@@ -1,6 +1,6 @@
 """Daily batch workflow as an explicit LangGraph state graph.  Owner: lead
 
-START → collector → gatekeeper → fit_scorer → card_agent → verifier ─┬─→ alert → publish → END
+START → collector → gatekeeper → fit_scorer → card_agent → verifier ─┬─→ alert → notifier → publish → END
                                                    ▲                  │ quotes failed (once)
                                                    └── card_retry ◄───┘
 
@@ -40,6 +40,7 @@ fit_scorer = _load("fit_scorer")
 card_agent = _load("card_agent")
 verifier = _load("verifier")
 alert = _load("alert")
+notifier = _load("notifier")
 if MISSING_AGENTS:
     print(f"[graph] using stubs for: {', '.join(MISSING_AGENTS)}")
 
@@ -54,6 +55,7 @@ class PipelineState(TypedDict, total=False):
     attempts: dict[str, int]          # opp_id -> card attempts
     card_feedback: dict[str, str]     # opp_id -> verifier feedback
     alerts: list[dict]
+    notification: dict                # what the notifier emailed (or why not)
     published: int
 
 
@@ -98,6 +100,7 @@ def build_graph():
     g.add_node("verifier", verifier.run)
     g.add_node("card_retry", card_retry)
     g.add_node("alert", alert.run)
+    g.add_node("notifier", notifier.run)
     g.add_node("publish", publish)
 
     g.add_edge(START, "collector")
@@ -107,7 +110,8 @@ def build_graph():
     g.add_edge("card_agent", "verifier")
     g.add_conditional_edges("verifier", after_verify, {"retry": "card_retry", "done": "alert"})
     g.add_edge("card_retry", "verifier")
-    g.add_edge("alert", "publish")
+    g.add_edge("alert", "notifier")
+    g.add_edge("notifier", "publish")
     g.add_edge("publish", END)
     return g.compile()
 
