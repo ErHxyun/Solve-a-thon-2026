@@ -7,7 +7,7 @@ Everyone adds rows as they work. The deliverable needs: tools used, 3–5 key pr
 |---|---|---|
 | Claude (Claude Code) | Planning, architecture, scaffolding code, Azure setup steps | Lead |
 | Azure OpenAI gpt-6.1-terra / gpt-4.1 | Card Agent, Route Agent, Apply Assist | System |
-| Azure OpenAI text-embedding-3-large | Fit Scorer semantic matching | System |
+| Azure OpenAI text-embedding-3-large | Deployed; Fit Scorer still uses TF-IDF (embeddings pending a precision comparison) | System |
 | | | |
 
 ## Key prompts
