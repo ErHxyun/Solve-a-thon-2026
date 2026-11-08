@@ -1,0 +1,6 @@
+# raw Grants.gov exports and caches stay local
+data/*
+!data/.gitkeep
+*.pkl
+*.npz
+__pycache__/
