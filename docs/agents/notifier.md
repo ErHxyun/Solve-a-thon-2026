@@ -48,6 +48,7 @@ Turns the Alert node's output into **one weekly email plus a same-day email only
 | Variable | Default | Notes |
 |---|---|---|
 | `EMAIL_MODE` | `preview` | `off` · `preview` (render only) · `acs` · `smtp` |
+| `EMAIL_URGENT` | `off` | `on` adds same-day emails for urgent triggers. Default is **weekly only** (client preference); urgent items still appear in the weekly "Act now" section |
 | `EMAIL_TO` | — | comma-separated |
 | `EMAIL_FROM` | — | ACS: `DoNotReply@<id>.azurecomm.net`; SMTP: the account address |
 | `APP_URL` | `http://localhost:8000` | set to the web app URL in Azure |

@@ -37,6 +37,7 @@ def cfg(monkeypatch):
     monkeypatch.setenv("EMAIL_TO", "grants@example.org")
     monkeypatch.setenv("EMAIL_FROM", "DoNotReply@example.azurecomm.net")
     monkeypatch.setenv("APP_URL", "https://ffm.example.org/")
+    monkeypatch.setenv("EMAIL_URGENT", "on")      # these tests cover the same-day path; the default is weekly only
     return notifier.settings()
 
 
@@ -197,3 +198,12 @@ def test_api_serves_the_preview(cfg):
     r = client.get("/api/email/preview?kind=urgent")
     assert r.status_code == 200 and "Act today" in r.text
     assert client.get("/api/email/status").json()["kind"] == "urgent"
+
+
+def test_default_is_weekly_only(monkeypatch):
+    monkeypatch.delenv("EMAIL_URGENT", raising=False)
+    cfg = notifier.settings()
+    ctx = {"urgent": [{"key": "opening:x"}]}
+    assert cfg["urgent"] is False
+    assert notifier.decide_email(ctx, {}, TUE, cfg) == (None, [])          # no same-day email
+    assert notifier.decide_email(ctx, {}, MON, cfg)[0] == "weekly"         # urgent items ride in the weekly "Act now"

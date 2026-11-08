@@ -7,8 +7,9 @@ windows are ~30 days, and a week's delay can make a grant impossible (the school
 
 The pipeline still runs every day. Each run this node decides:
   - weekly day (default Monday, ET) and not sent this week   -> WEEKLY digest (includes "Act now")
-  - otherwise, an urgent trigger not emailed before          -> URGENT email with only those items
+  - otherwise, an urgent trigger not emailed before          -> URGENT email, only if EMAIL_URGENT=on
   - otherwise                                                 -> no email
+Default is weekly only (client preference, 2026-11-07): urgent items still appear in the weekly "Act now".
 Urgent triggers (each item is emailed once per trigger):
   - a Waitlisted forecast is now open for applications       (Alert kind waitlist_opening)
   - a new short-list item whose window is <= 45 days          (new_since_yesterday + close date)
@@ -64,6 +65,7 @@ def settings() -> dict:
         "from": _env("EMAIL_FROM"),
         "reply_to": _env("EMAIL_REPLY_TO"),
         "weekly_day": _env("EMAIL_WEEKLY_DAY", "mon").lower()[:3],
+        "urgent": _env("EMAIL_URGENT", "off").lower() in ("on", "true", "1", "yes"),   # same-day emails; default weekly only
         "urgent_new_days": int(_env("EMAIL_URGENT_NEW_DAYS", "45")),
         "urgent_closing_days": int(_env("EMAIL_URGENT_CLOSING_DAYS", "7")),
         "deadline_window_days": int(_env("EMAIL_DEADLINE_WINDOW_DAYS", "30")),
@@ -380,7 +382,7 @@ def decide_email(ctx: dict, sent: dict, today: date, cfg: dict) -> tuple[Optiona
     fresh = [u for u in ctx["urgent"] if u["key"] not in sent.get("urgent", {})]
     if WEEKDAYS[today.weekday()] == cfg["weekly_day"] and week not in sent.get("weekly", {}):
         return "weekly", fresh
-    if fresh:
+    if fresh and cfg.get("urgent"):
         return "urgent", fresh
     return None, []
 
