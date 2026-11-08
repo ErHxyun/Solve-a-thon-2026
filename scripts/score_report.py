@@ -28,7 +28,8 @@ from core.schemas import Opportunity  # noqa: E402
 from graphs.batch_graph import collector, gatekeeper  # noqa: E402
 
 COLS = [("rank", "Rank", 6), ("number", "Opportunity #", 18), ("title", "Title", 48), ("agency", "Agency", 26),
-        ("deadline", "Deadline", 12), ("final", "Final score", 9), ("A", "Plan match A", 10), ("S", "Meaning S", 9),
+        ("deadline", "Deadline", 12), ("final", "Final score", 9), ("A", "Plan match A", 10), ("P", "Chance P", 8),
+        ("V", "Value V", 8), ("award", "Typical award $", 12), ("S", "Meaning S", 9),
         ("K", "Keywords K", 9), ("objective_id", "Objective", 9), ("second_objective_id", "2nd objective", 9),
         ("U", "Urgency U (0-3)", 9), ("W", "Workload score W", 10), ("H", "Hours H", 8), ("route_to", "Who applies", 30),
         ("suggested_decision", "Suggested button", 12), ("flags", "Flags", 30), ("rationale", "Rationale", 110),
@@ -49,7 +50,8 @@ def build(top_n: int):
 def row_values(rank: int, s, o: Opportunity) -> dict:
     c = s.components
     return {"rank": rank, "number": o.number, "title": o.title, "agency": o.agency_name or o.agency_code,
-            "deadline": o.close_date or "forecast/rolling", "final": s.final, "A": c.get("A"), "S": c.get("S"),
+            "deadline": o.close_date or "forecast/rolling", "final": s.final, "A": c.get("A"), "P": c.get("P"),
+            "V": c.get("V"), "award": c.get("award"), "S": c.get("S"),
             "K": c.get("K"), "objective_id": s.objective_id, "second_objective_id": s.second_objective_id,
             "U": int(c.get("U", 0)), "W": c.get("W"), "H": round(c.get("H", 0)), "route_to": s.route_to,
             "suggested_decision": s.suggested_decision, "flags": "; ".join(s.flags), "rationale": s.rationale,
@@ -62,8 +64,10 @@ def write(path: Path, opps, gates, items, cal, top_n: int) -> None:
     ws.title = f"Top {top_n}"
     ws["A1"] = f"DNCR - Top {top_n} grants by Final score (as of {date.today()})"
     ws["A1"].font = Font(bold=True, size=14)
-    ws["A2"] = ("Only grants that pass all three gates are ranked. Final score = plan match x (0.70 + 0.15 urgency + "
-                "0.15 workload). The button is a suggestion; a person decides.")
+    w = fs.WEIGHTS
+    ws["A2"] = (f"Only grants that pass all three gates are ranked. Final score = plan match x ({w['b']} + {w['P']} chance + "
+                f"{w['V']} value + {w['U']} urgency + {w['W']} workload); weights chosen by testing. "
+                "The button is a suggestion; a person decides.")
     hdr = 4
     for j, (_, h, w) in enumerate(COLS, 1):
         cell = ws.cell(hdr, j, h)
@@ -84,13 +88,20 @@ def write(path: Path, opps, gates, items, cal, top_n: int) -> None:
     lines = [("Step", "Rule used"),
              ("1 Can we apply?", "G1 state eligible (00 / 99, or 'Others' with state text, flagged); G2 not limited to another "
                                  "region or country; G3 open, deadline not passed, forecast not stale. Pass/fail only."),
-             ("2a Plan match A", f"A = (2S + K)/3 x research penalty. S = TF-IDF similarity of title + first {fs.SYNOPSIS_CHARS} chars "
+             ("2a Plan match A", f"A = max({fs.W_S} S + {1 - fs.W_S:.2f} K) x research penalty, floored at {fs.ENTITY_FLOOR} when the listing "
+                                     f"names an agency type DNCR is (state arts agency, SHPO, state library ...). S = TF-IDF similarity of title + first {fs.SYNOPSIS_CHARS} chars "
                                  f"to the 25 objectives, scaled with L = {cal['L']}, H = {cal['H']}. K = IDF-weighted phrase score, "
                                  f"K = 100 x (1 - exp(-K_raw / {cal['tau']})); each negative word halves K. NIH x0.4; NSF/NASA/BAA x0.75."),
-             ("2b Urgency U", "Urgency tier (0-3) of the matched objective; one-time words lift U to 2."),
-             ("2c Workload W", f"H = median of a {fs.N_SIMS:,}-run simulation of 11 stages for the title's profile; "
+             ("2b Chance P", f"P = 1 formula / every-state program; expected awards / {fs.N_STATES} if only states may apply; "
+                             f"published success rate; else {fs.P_DEFAULT} (estimate)."),
+             ("2c Value V", f"V = log of the typical award (floor-ceiling geometric midpoint, or ceiling / 3), "
+                            f"${fs.AWARD_LO:,.0f} = 0, ${fs.AWARD_HI:,.0f} = 1; not stated = {fs.V_UNKNOWN}."),
+             ("2d Urgency U", "Urgency tier (0-3) of the matched objective; one-time words lift U to 2."),
+             ("2e Workload W", f"H = median of a {fs.N_SIMS:,}-run simulation of 11 stages for the title's profile; "
                                f"W = 100 x ({fs.H_HARD} - H) / ({fs.H_HARD} - {fs.H_EASY})."),
-             ("3 Final score", f"Final = A x ({fs.WEIGHTS['base']} + {fs.WEIGHTS['U']} x U/3 + {fs.WEIGHTS['W']} x W/100)."),
+             ("3 Final score", f"Final = A x ({fs.WEIGHTS['b']} + {fs.WEIGHTS['P']} P + {fs.WEIGHTS['V']} V + {fs.WEIGHTS['U']} U/3 "
+                              f"+ {fs.WEIGHTS['W']} W/100). Weights chosen by testing (budget simulation objective, past-wins "
+                              "blind test guardrail, one-standard-error rule); human annotation pending."),
              ("4 Which button?", f"Skip: A < {fs.A_SKIP}. Route: another office applies. Waitlist: forecast/rolling. "
                                  f"Chase: Final >= {fs.FINAL_CHASE}. Otherwise You decide.")]
     for i, (a, b) in enumerate(lines, 1):

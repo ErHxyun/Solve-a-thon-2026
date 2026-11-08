@@ -1,18 +1,25 @@
 """Fit Scorer — implements "DNCR Grant Scoring Rules (Final)".  Owner: Criteria
 Spec: docs/agents/fit_scorer.md   Origin: the team's dncr_grant_scoring.py (ported to the pipeline)
 
-Per grant that passed the Gatekeeper:
-  A  plan match = (2S + K) / 3 x research penalty            (is it ours?)        0-100
+Per grant that passed the Gatekeeper (five factors, fixed by what the client cares about):
+  A  plan match = max(0.5 S + 0.5 K) x research penalty      (is it ours?)        0-100
+       floored at 70 when the listing names an agency type DNCR is (state arts agency, SHPO, state library ...)
        S = TF-IDF similarity of title + first 1,500 chars to each of the 25 objectives,
            scaled between L (median NIH listing) and H (90th pct of DNCR-type funders)
        K = continuous keyword score: rarer plan phrases weigh more (IDF), title hits double,
            K = 100 x (1 - exp(-K_raw / tau)); each negative word halves K
+  P  chance     = 1 formula / every-state program; expected awards / 56 if only states may apply;
+                  published success rate; else 0.25 (estimate)                                 0-1
+  V  value      = log of the typical award, $10k = 0 ... $3M = 1; not stated = 0.5              0-1
   U  urgency    = urgency tier 0-3 of the matched objective (one-time words lift it to 2)
   W  workload   = simulated hands-on hours H (11 stages x triangular), 20 h = 100, 150 h = 0
-  Final         = A x (0.70 + 0.15 x U/3 + 0.15 x W/100)     A is a multiplier: urgency and
-                  low workload can adjust a good fit by up to 30% but cannot rescue a bad one.
-  Suggested decision: Skip if A < 50; Route if another NC office should apply; Waitlist if
-  forecast / no deadline; Chase if Final >= 60; otherwise "You decide". A person decides.
+  Final         = A x (0.30 + 0.20 P + 0.30 V + 0.15 U/3 + 0.05 W/100)
+                  A is a multiplier: the other factors scale a good fit but cannot rescue a bad one.
+                  Weights chosen by testing (budget simulation objective, past-wins blind test
+                  guardrail, 1-SE rule); human annotation pending.
+  Suggested decision: Skip if A < 35; Route if another NC office should apply; Waitlist if
+  forecast / no deadline; Chase if Final >= 38; otherwise "You decide". A person decides.
+Source of truth: the team's dncr_grant_scoring.py ("Final" version, 2026-11-07).
 
 TF-IDF is the baseline semantic signal. TODO(Criteria): try Azure embeddings (core.llm.embed)
 for S and compare precision on the labeled set before switching.
@@ -35,9 +42,26 @@ from core.schemas import Objective, Opportunity, ScoreBreakdown, ScoredItem
 # --------------------------------------------------------------------------- #
 # Parameters (provisional values from the Final rules) — tune with eval/labels
 # --------------------------------------------------------------------------- #
-A_SKIP = 50                          # Skip if plan match A is below this line
-FINAL_CHASE = 60                     # suggest Chase if Final score >= this line
-WEIGHTS = {"base": 0.70, "U": 0.15, "W": 0.15}
+A_SKIP = 35                          # Skip if plan match A is below this line (CV: knee of wins kept vs listings to review)
+FINAL_CHASE = 38                     # suggest Chase if Final >= this line (Chase list ~ one year of her hours, 520 h)
+WEIGHTS = {"b": 0.30, "P": 0.20, "V": 0.30, "U": 0.15, "W": 0.05}   # chosen by testing (rubric weights.md)
+W_S = 0.50                           # CV-chosen: A = W_S x meaning S + (1 - W_S) x keywords K
+ENTITY_FLOOR = 70                    # CV-chosen: A >= 70 when the listing names an agency type DNCR is
+ENTITY = re.compile(r"state (and jurisdictional )?arts agenc|state historic preservation office|\bshpos?\b|state library administrative|"
+                    r"state historical records advisory|state archiv|state museum|state park|natural heritage program", re.I)
+AWARD_LO, AWARD_HI = 1e4, 3e6        # V = 0 at $10k, 1 at $3M (log scale)
+V_UNKNOWN = 0.5                      # no award amount in the listing: neutral value
+N_STATES = 56
+P_STATE_UNKNOWN = 0.50               # only states may apply, no award count (estimate)
+P_DEFAULT = 0.25                     # open competition, no published success rate (estimate)
+FORMULA_WORDS = re.compile(r"\bformula\b|apportion|non.?competitive|funds to the states|"
+                           r"grants? to state (historic preservation offices|library|arts agenc)|"
+                           r"\b(each|every|all \d* ?) ?(state|states and territories)\b.{0,40}(receive|allocat|distribut|eligible for an award)|"
+                           r"in every state|awarded to the nation.s \d+ state", re.I)
+FORMULA_NEGATION = re.compile(r"in addition to|separate from|unlike|rather than|not (a |part of )?", re.I)
+PUBLISHED_RATE = [  # (program title regex, success rate, source) - add more as you find them
+    (r"museums for america", 0.32, "IMLS: 152 awards of 470 applications (Jul 2012 announcement)"),
+]
 H_EASY, H_HARD = 20, 150             # hours -> workload score
 N_SIMS = 10_000
 SYNOPSIS_CHARS = 1500
@@ -71,10 +95,12 @@ ROUTE_RULES = [
     (r"Justice|Violence Against Women|Juvenile Justice|Victims of Crime", None, "NC Dept of Public Safety (confirm)"),
     (r"Housing and Urban", None, "NC Commerce / Housing (confirm)"),
     (r"Employment and Training|Department of Labor", None, "NC Commerce"),
-    (r"Fish and Wildlife", r"wildlife grant|sport fish|wildlife restoration|hunter", "NC Wildlife Resources Commission"),
-    (r"Forest Service", r"fire|wildland", "NCDA&CS Forest Service"),
+    (r"Fish and Wildlife", r"wildlife grant|sport fish|wildlife restoration|hunter|cooperative endangered species|section 6",
+     "NC Wildlife Resources Commission (confirm; plants: NCDA&CS Plant Conservation)"),
+    (r"Forest Service", r"fire|wildland|landscape scale|forest legacy|forest stewardship|urban and community forest", "NCDA&CS Forest Service"),
+    (r"National Park Service", r"internship|business plan", "Universities / student program (not DNCR)"),
     (r"Natural Resources Conservation|Rural|Agricultural Marketing|Farm Service", None, "NCDA&CS (confirm)"),
-    (r"Oceanic|NOAA", r"fisher|coastal zone", "NC DEQ (Coastal Mgmt / Marine Fisheries)"),
+    (r"Oceanic|NOAA", r"fisher|coastal zone|darrp|damage assessment", "NC DEQ (Coastal Mgmt / Marine Fisheries / NRDA trustee)"),
     (r"Economic Development Administration|\bEDA\b", None, "NC Commerce"),
     (r"Veterans|State Home", None, "NC Dept of Military & Veterans Affairs"),
     (r"Highway|Transit|Aviation|Railroad", r"^(?!.*recreational trails).*$", "NCDOT"),
@@ -167,7 +193,7 @@ def plan_match(opps: list[Opportunity], objectives: list[Objective]):
     K = 100 * (1 - np.exp(-kraw / tau))
     neg = np.array([sum(w in f for w in NEGATIVE_WORDS) for f in full])
     K = K * (0.5 ** neg[:, None])
-    A_obj = (2 * S + K) / 3
+    A_obj = W_S * S + (1 - W_S) * K
     return S, K, A_obj, hits, neg, {"L": round(L, 3), "H": round(H, 3), "tau": round(tau, 2)}
 
 
@@ -212,8 +238,51 @@ def workload_score(h: float) -> float:
     return float(np.clip((H_HARD - h) / (H_HARD - H_EASY), 0, 1) * 100)
 
 
-def final_score(A: float, U: int, W: float) -> float:
-    return A * (WEIGHTS["base"] + WEIGHTS["U"] * U / 3 + WEIGHTS["W"] * W / 100)
+def plan_match_A(A_raw: float, penalty: float, opp: Opportunity) -> tuple[float, bool]:
+    """A for the best objective: research penalty, then the agency-type floor (e.g. 'State Historic Preservation Offices')."""
+    _, syn, _ = match_text(opp)
+    entity = bool(ENTITY.search(f"{opp.title}. {syn}"))
+    return max(A_raw * penalty, ENTITY_FLOOR if entity else 0.0), entity
+
+
+def win_probability(o: Opportunity) -> tuple[float, str, str]:
+    """P = chance DNCR wins if it applies. Returns (P, case, source)."""
+    _, syn, text = match_text(o)
+    for hit in FORMULA_WORDS.finditer(text):      # skip "in addition to ... formula grants" and the like
+        if FORMULA_NEGATION.search(text[max(0, hit.start() - 80):hit.start()]):
+            continue
+        return 1.0, "1 formula", f"formula / every-state wording: '{hit.group(0)[:50]}'"
+    n = o.expected_awards
+    if {a.id for a in o.applicant_types} == {"00"}:          # only state governments may apply
+        if n:
+            return min(1.0, n / N_STATES), "2 states only", f"{n} expected awards / {N_STATES} states (listing)"
+        return P_STATE_UNKNOWN, "2 states only", "no award count in listing: estimate"
+    for pat, rate, src in PUBLISHED_RATE:
+        if re.search(pat, o.title, re.I):
+            return rate, "3 open", src
+    return P_DEFAULT, "3 open", "no published success rate: estimate"
+
+
+def typical_award(o: Opportunity) -> tuple[float | None, str]:
+    ce = o.award_ceiling if o.award_ceiling and o.award_ceiling > 0 else None
+    fl = o.award_floor if ce and o.award_floor and o.award_floor >= 0.01 * ce else None
+    if ce and fl:
+        return float(np.sqrt(fl * ce)), "listing floor-ceiling midpoint (geometric)"
+    if ce:
+        return ce / 3, "listing ceiling / 3"
+    return None, "no award amount in listing"
+
+
+def value_score(award: float | None) -> float:
+    if not award:
+        return V_UNKNOWN
+    a = min(AWARD_HI, award)
+    return float(np.clip((np.log(a) - np.log(AWARD_LO)) / (np.log(AWARD_HI) - np.log(AWARD_LO)), 0, 1))
+
+
+def final_score(A: float, P: float, V: float, U: int, W: float) -> float:
+    w = WEIGHTS
+    return A * (w["b"] + w["P"] * P + w["V"] * V + w["U"] * U / 3 + w["W"] * W / 100)
 
 
 def route(o: Opportunity, ob: Objective) -> tuple[str, bool]:
@@ -270,11 +339,15 @@ def _dedup_key(title: str) -> str:
 
 
 def rationale(row: dict, ob: Objective) -> str:
-    parts = [f"Final score {row['final']:.0f} = plan match {row['A']:.0f} x ({WEIGHTS['base']} + {WEIGHTS['U']} x urgency "
-             f"{row['U']}/3 + {WEIGHTS['W']} x workload {row['W']:.0f}/100).",
+    w = WEIGHTS
+    award = f"${round(row['award']):,}" if row["award"] else "not stated, neutral value used"
+    parts = [f"Final score {row['final']:.0f} = plan match {row['A']:.0f} x ({w['b']} + {w['P']} x chance {row['P']:.2f} + "
+             f"{w['V']} x value {row['V']:.2f} + {w['U']} x urgency {row['U']}/3 + {w['W']} x workload {row['W']:.0f}/100).",
+             f"Chance: case {row['P_case']} ({row['P_source']}). Value: {award} ({row['award_src']}).",
              f"Plan match: Objective {ob.objective_id} ({ob.text[:70]}...), plan p. {ob.page}; meaning {row['S']:.0f}, "
              f"keywords {row['K']:.0f}" + (f" (matched '{row['phrases']}')" if row["phrases"] else "")
-             + (f"; {row['penalty']}" if row["penalty"] else "") + ".",
+             + (f"; {row['penalty']}" if row["penalty"] else "")
+             + ("; listing names an agency type DNCR is (floor " + str(ENTITY_FLOOR) + ")" if row["entity"] else "") + ".",
              f"Urgency U = {row['U']} ({row['U_evidence']}).",
              f"Workload: about {row['H']:.0f} hours ({row['H10']:.0f}-{row['H90']:.0f}), {row['anchor']} profile ({row['anchor_why']}).",
              f"Who applies: {row['route']}."]
@@ -301,17 +374,21 @@ def score_all(opps: list[Opportunity], passed: set[str], today: date | None = No
         j, j2 = int(order[0]), int(order[1])
         ob = objectives[j]
         pen, pen_txt = research_penalty(o)
-        A = float(A_obj[i, j] * pen)
+        A, entity = plan_match_A(float(A_obj[i, j]), pen, o)
         U, U_ev = urgency(ob, o.title, today)
         anchor, anchor_why = pick_anchor(o.title)
         h = simulate_hours(anchor)
         W = workload_score(h["H"])
-        final = final_score(A, U, W)
+        P, P_case, P_src = win_probability(o)
+        award, award_src = typical_award(o)
+        V = value_score(award)
+        final = final_score(A, P, V, U, W)
         route_to, dncr = route(o, ob)
         forecast = o.status == "forecasted" or o.close_date is None
         decision, why = decide(A, final, dncr, forecast, route_to)
         rows.append({"o": o, "ob": ob, "ob2": objectives[j2], "A": A, "S": float(S[i, j]), "K": float(K[i, j]), "U": U,
-                     "U_evidence": U_ev, "W": W, **h, "anchor": anchor, "anchor_why": anchor_why, "final": final,
+                     "U_evidence": U_ev, "P": P, "P_case": P_case, "P_source": P_src, "V": V, "award": award,
+                     "award_src": award_src, "entity": entity, "W": W, **h, "anchor": anchor, "anchor_why": anchor_why, "final": final,
                      "route": route_to, "dncr": dncr, "forecast": forecast, "decision": decision, "decision_why": why,
                      "penalty": pen_txt, "phrases": ", ".join(hits[i][j]), "neg": int(neg[i]), "key": _dedup_key(o.title)})
 
@@ -343,7 +420,9 @@ def score_all(opps: list[Opportunity], passed: set[str], today: date | None = No
                                      eligibility=1.0 if codes & {"00", "99"} else 0.5, urgency=round(r["U"] / 3, 3),
                                      timing=_timing(o), funder=1.0 if DNCR_TYPE_FUNDERS.search(f"{o.agency_name} {o.agency_code}") else 0.0),
             components={k: round(float(r[k]), 1) for k in ("A", "S", "K", "U", "W", "H", "H10", "H90")}
-                       | {"penalty": research_penalty(o)[0], "negative_words": r["neg"], "rounds": r["rounds"]},
+                       | {"P": round(r["P"], 3), "V": round(r["V"], 3), "penalty": research_penalty(o)[0],
+                          "negative_words": r["neg"], "rounds": r["rounds"]}
+                       | ({"award": round(r["award"])} if r["award"] else {}),
             objective_id=ob.objective_id,
             second_objective_id=r["ob2"].objective_id,
             division=ob.divisions[0] if ob.divisions else None,
