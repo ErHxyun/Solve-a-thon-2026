@@ -1,0 +1,5572 @@
+{
+ "as_of": "2026-11-07",
+ "source": "Grants.gov listings snapshot (team workbook, 1,662 opportunities)",
+ "all": {
+  "n": 1662,
+  "closed": 788,
+  "coming": 874,
+  "overall_coming": 0.526,
+  "buckets": {
+   "Closed": 788,
+   "2026": 115,
+   "2027": 385,
+   "2028+": 216,
+   "Forecast": 158
+  },
+  "areas": [
+   {
+    "name": "Parks & outdoor recreation",
+    "dncr": true,
+    "n": 4,
+    "closed": 2,
+    "coming": 2,
+    "buckets": {
+     "Closed": 2,
+     "2026": 0,
+     "2027": 0,
+     "2028+": 2,
+     "Forecast": 0
+    },
+    "momentum": 0.95,
+    "fit": 52.5,
+    "strong": 2,
+    "keywords": [
+     "recreation",
+     "land",
+     "visitor",
+     "recreation visitor",
+     "land recreation",
+     "services",
+     "visitor services",
+     "diabetes trail"
+    ],
+    "examples": [
+     {
+      "title": "Outdoor Recreation Legacy Partnership Program (ORLP) Recurring Notice 5 Year",
+      "agency": "National Park Service",
+      "A": 98,
+      "bucket": "2028+",
+      "deadline": "2030-11-01"
+     },
+     {
+      "title": "Readiness and Recreation Initiative (RARI) \u2013 Recurring 5 Year Notice",
+      "agency": "National Park Service",
+      "A": 56,
+      "bucket": "2028+",
+      "deadline": "2030-11-30"
+     },
+     {
+      "title": "FY26 Bureau of Land Management Recreation and Visitor Services - Bureau wide",
+      "agency": "Bureau of Land Management",
+      "A": 44,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)",
+      "agency": "National Institutes of Health",
+      "A": 12,
+      "bucket": "Closed",
+      "deadline": "2026-10-06"
+     }
+    ]
+   },
+   {
+    "name": "Historic preservation & heritage",
+    "dncr": true,
+    "n": 5,
+    "closed": 3,
+    "coming": 2,
+    "buckets": {
+     "Closed": 3,
+     "2026": 1,
+     "2027": 0,
+     "2028+": 0,
+     "Forecast": 1
+    },
+    "momentum": 0.76,
+    "fit": 53.8,
+    "strong": 3,
+    "keywords": [
+     "archaeology",
+     "preservation",
+     "acquisition",
+     "land",
+     "abpp",
+     "battlefield land",
+     "abpp battlefield",
+     "land acquisition"
+    ],
+    "examples": [
+     {
+      "title": "FY2026 ABPP - Battlefield Land Acquisition Grant",
+      "agency": "National Park Service",
+      "A": 98,
+      "bucket": "Closed",
+      "deadline": "2026-09-30"
+     },
+     {
+      "title": "Ambassadors Fund for Cultural Preservation Large Grants Program",
+      "agency": "U.S. Mission to Cambodia",
+      "A": 66,
+      "bucket": "Closed",
+      "deadline": "2019-12-06"
+     },
+     {
+      "title": "Preservation and Reinvestment Initiative for Community Enhancement (PRICE)",
+      "agency": "Department of Housing and Urban Development",
+      "A": 56,
+      "bucket": "Closed",
+      "deadline": "2026-10-19"
+     },
+     {
+      "title": "Archaeology Program Senior Research Awards",
+      "agency": "U.S. National Science Foundation",
+      "A": 33,
+      "bucket": "2026",
+      "deadline": "2026-12-01"
+     }
+    ]
+   },
+   {
+    "name": "Arts, humanities & museums",
+    "dncr": true,
+    "n": 13,
+    "closed": 3,
+    "coming": 10,
+    "buckets": {
+     "Closed": 3,
+     "2026": 5,
+     "2027": 3,
+     "2028+": 2,
+     "Forecast": 0
+    },
+    "momentum": 1.46,
+    "fit": 25.9,
+    "strong": 1,
+    "keywords": [
+     "artifacts",
+     "arts",
+     "arts artifacts",
+     "nea arts",
+     "nea",
+     "indemnity",
+     "international",
+     "medicine"
+    ],
+    "examples": [
+     {
+      "title": "Collections Stewardship",
+      "agency": "National Endowment for the Humanities",
+      "A": 96,
+      "bucket": "2026",
+      "deadline": "2026-12-15"
+     },
+     {
+      "title": "NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)",
+      "agency": "National Endowment for the Arts",
+      "A": 46,
+      "bucket": "Closed",
+      "deadline": "2026-09-14"
+     },
+     {
+      "title": "NEA Arts and Artifacts International Indemnity Program 2, FY2027 (3/27)",
+      "agency": "National Endowment for the Arts",
+      "A": 46,
+      "bucket": "2027",
+      "deadline": "2027-03-08"
+     },
+     {
+      "title": "NEA Arts and Artifacts Domestic Indemnity Program 2, FY2027 (12/26)",
+      "agency": "National Endowment for the Arts",
+      "A": 44,
+      "bucket": "2027",
+      "deadline": "2027-06-07"
+     }
+    ]
+   },
+   {
+    "name": "Conservation & wildlife",
+    "dncr": true,
+    "n": 53,
+    "closed": 36,
+    "coming": 17,
+    "buckets": {
+     "Closed": 36,
+     "2026": 5,
+     "2027": 6,
+     "2028+": 4,
+     "Forecast": 2
+    },
+    "momentum": 0.61,
+    "fit": 33.1,
+    "strong": 13,
+    "keywords": [
+     "invasive",
+     "ecosystem",
+     "species",
+     "conservation",
+     "restoration",
+     "land",
+     "lakes",
+     "forest"
+    ],
+    "examples": [
+     {
+      "title": "2026 National Urban and Community Forestry Challenge Cost Share Grant Program",
+      "agency": "Forest Service",
+      "A": 96,
+      "bucket": "Closed",
+      "deadline": "2026-10-12"
+     },
+     {
+      "title": "Community Forest and Open Space Conservation Program",
+      "agency": "Forest Service",
+      "A": 92,
+      "bucket": "Closed",
+      "deadline": "2026-10-13"
+     },
+     {
+      "title": "Forest Legacy Program - FY2028 Funding",
+      "agency": "Forest Service",
+      "A": 88,
+      "bucket": "Closed",
+      "deadline": "2026-09-11"
+     },
+     {
+      "title": "FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide",
+      "agency": "Bureau of Land Management",
+      "A": 77,
+      "bucket": "Closed",
+      "deadline": "2026-09-28"
+     }
+    ]
+   },
+   {
+    "name": "Climate, ocean & environment",
+    "dncr": true,
+    "n": 41,
+    "closed": 15,
+    "coming": 26,
+    "buckets": {
+     "Closed": 15,
+     "2026": 4,
+     "2027": 11,
+     "2028+": 3,
+     "Forecast": 8
+    },
+    "momentum": 1.21,
+    "fit": 7.7,
+    "strong": 1,
+    "keywords": [
+     "environmental",
+     "marine",
+     "atmospheric",
+     "weather",
+     "echo",
+     "outcomes echo",
+     "influences",
+     "influences child"
+    ],
+    "examples": [
+     {
+      "title": "Climate Program Office for FY 2012",
+      "agency": "Department of Commerce",
+      "A": 67,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "Notice of Funding Opportunity (NOFO) SUSI Civic Engagement and Environmental Issues Selection Process",
+      "agency": "U.S. Mission to Spain",
+      "A": 37,
+      "bucket": "Closed",
+      "deadline": "2022-11-22"
+     },
+     {
+      "title": "Fiscal Year 2027 National Sea Grant College Program Dean John A. Knauss Marine Policy Fellowship",
+      "agency": "DOC NOAA - ERA Production",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-08-26"
+     },
+     {
+      "title": "WaterSMART: Desalination Construction Projects",
+      "agency": "Bureau of Reclamation",
+      "A": 27,
+      "bucket": "2027",
+      "deadline": "2027-08-26"
+     }
+    ]
+   },
+   {
+    "name": "Disaster & emergency",
+    "dncr": true,
+    "n": 37,
+    "closed": 26,
+    "coming": 11,
+    "buckets": {
+     "Closed": 26,
+     "2026": 1,
+     "2027": 3,
+     "2028+": 3,
+     "Forecast": 4
+    },
+    "momentum": 0.57,
+    "fit": 23.0,
+    "strong": 8,
+    "keywords": [
+     "emergency",
+     "disaster",
+     "response",
+     "resilience",
+     "wildland",
+     "training",
+     "care",
+     "blm-national"
+    ],
+    "examples": [
+     {
+      "title": "Fiscal Year 2026 Flood Mitigation Assistance Swift Current",
+      "agency": "Department of Homeland Security - FEMA",
+      "A": 93,
+      "bucket": "2028+",
+      "deadline": "2028-01-31"
+     },
+     {
+      "title": "Fiscal Year 2024 Flood Mitigation Assistance Swift Current",
+      "agency": "Department of Homeland Security - FEMA",
+      "A": 92,
+      "bucket": "2026",
+      "deadline": "2026-12-30"
+     },
+     {
+      "title": "Partnership for Disaster Health Response System",
+      "agency": "Assistant Secretary for Preparedness and Response",
+      "A": 75,
+      "bucket": "Closed",
+      "deadline": "2022-08-01"
+     },
+     {
+      "title": "Pacific Disaster Center",
+      "agency": "Washington Headquarters Services",
+      "A": 72,
+      "bucket": "Closed",
+      "deadline": "2026-09-15"
+     }
+    ]
+   },
+   {
+    "name": "Agriculture & food",
+    "dncr": false,
+    "n": 68,
+    "closed": 26,
+    "coming": 42,
+    "buckets": {
+     "Closed": 26,
+     "2026": 4,
+     "2027": 17,
+     "2028+": 4,
+     "Forecast": 17
+    },
+    "momentum": 1.17,
+    "fit": 9.7,
+    "strong": 2,
+    "keywords": [
+     "food",
+     "rural",
+     "animal",
+     "safety",
+     "regulatory",
+     "food safety",
+     "agricultural",
+     "nutrition"
+    ],
+    "examples": [
+     {
+      "title": "Rural Housing Preservation Grant",
+      "agency": "Rural Housing Service",
+      "A": 65,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     },
+     {
+      "title": "Sheep Production and Marketing Grant Program FY 2026",
+      "agency": "Agricultural Marketing Service",
+      "A": 56,
+      "bucket": "Closed",
+      "deadline": "2026-10-02"
+     },
+     {
+      "title": "Rural Health Network Development Planning Program",
+      "agency": "Health Resources and Services Administration",
+      "A": 38,
+      "bucket": "2027",
+      "deadline": "2027-03-23"
+     },
+     {
+      "title": "Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America",
+      "agency": "Food and Drug Administration",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-08-21"
+     }
+    ]
+   },
+   {
+    "name": "Transportation & infrastructure",
+    "dncr": false,
+    "n": 107,
+    "closed": 48,
+    "coming": 59,
+    "buckets": {
+     "Closed": 48,
+     "2026": 2,
+     "2027": 30,
+     "2028+": 12,
+     "Forecast": 15
+    },
+    "momentum": 1.05,
+    "fit": 5.6,
+    "strong": 1,
+    "keywords": [
+     "infrastructure",
+     "transition",
+     "transportation",
+     "small",
+     "small business",
+     "business",
+     "career",
+     "career transition"
+    ],
+    "examples": [
+     {
+      "title": "U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:",
+      "agency": "U.S. National Science Foundation",
+      "A": 68,
+      "bucket": "Closed",
+      "deadline": "2026-11-04"
+     },
+     {
+      "title": "Interdisciplinary Transportation Law and Policy Technology Training Development",
+      "agency": "69A355 Research and Technology",
+      "A": 43,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Innovative Traffic Safety Enforcement (ITSE) Grant Program",
+      "agency": "National Highway Traffic Safety Administration",
+      "A": 34,
+      "bucket": "2027",
+      "deadline": "2027-09-01"
+     },
+     {
+      "title": "Fiscal Year (FY) 2022-2026 Advanced Digital Construction Management Systems (ADCMS)",
+      "agency": "DOT Federal Highway Administration ",
+      "A": 32,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Housing & community",
+    "dncr": false,
+    "n": 23,
+    "closed": 16,
+    "coming": 7,
+    "buckets": {
+     "Closed": 16,
+     "2026": 5,
+     "2027": 2,
+     "2028+": 0,
+     "Forecast": 0
+    },
+    "momentum": 0.58,
+    "fit": 10.3,
+    "strong": 1,
+    "keywords": [
+     "community",
+     "block",
+     "housing",
+     "demonstration",
+     "services",
+     "youth",
+     "block csbg",
+     "services block"
+    ],
+    "examples": [
+     {
+      "title": "National Communication System for Runaway and Homeless Youth Program",
+      "agency": "Administration for Children & Families - ACYF/FYSB",
+      "A": 52,
+      "bucket": "Closed",
+      "deadline": "2026-08-19"
+     },
+     {
+      "title": "Fair Housing Initiatives Program - Education and Outreach Initiative",
+      "agency": "Department of Housing and Urban Development",
+      "A": 30,
+      "bucket": "Closed",
+      "deadline": "2026-11-02"
+     },
+     {
+      "title": "FAIR HOUSING INITIATIVES PROGRAM PRIVATE ENFORCEMENT INITIATIVE",
+      "agency": "Department of Housing and Urban Development",
+      "A": 29,
+      "bucket": "Closed",
+      "deadline": "2026-11-02"
+     },
+     {
+      "title": "Lead Hazard Reduction Grant Program",
+      "agency": "Department of Housing and Urban Development",
+      "A": 25,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     }
+    ]
+   },
+   {
+    "name": "Education & STEM",
+    "dncr": false,
+    "n": 136,
+    "closed": 64,
+    "coming": 72,
+    "buckets": {
+     "Closed": 64,
+     "2026": 8,
+     "2027": 35,
+     "2028+": 21,
+     "Forecast": 8
+    },
+    "momentum": 1.01,
+    "fit": 11.8,
+    "strong": 4,
+    "keywords": [
+     "education",
+     "training",
+     "youth",
+     "institutional",
+     "graduate",
+     "nervous",
+     "medical",
+     "nih"
+    ],
+    "examples": [
+     {
+      "title": "National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026",
+      "agency": "DOC NOAA - ERA Production",
+      "A": 68,
+      "bucket": "Closed",
+      "deadline": "2026-09-18"
+     },
+     {
+      "title": "Artificial Intelligence and Cybersecurity Education Innovation and Scholarship for Service (CyberAI SFS)",
+      "agency": "U.S. National Science Foundation",
+      "A": 68,
+      "bucket": "2027",
+      "deadline": "2027-04-05"
+     },
+     {
+      "title": "NSF STEM K-12",
+      "agency": "U.S. National Science Foundation",
+      "A": 66,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "Robert Noyce Teacher Scholarship Program",
+      "agency": "U.S. National Science Foundation",
+      "A": 51,
+      "bucket": "Closed",
+      "deadline": "2026-08-25"
+     }
+    ]
+   },
+   {
+    "name": "Workforce & small business",
+    "dncr": false,
+    "n": 88,
+    "closed": 46,
+    "coming": 42,
+    "buckets": {
+     "Closed": 46,
+     "2026": 2,
+     "2027": 19,
+     "2028+": 8,
+     "Forecast": 13
+    },
+    "momentum": 0.91,
+    "fit": 6.7,
+    "strong": 1,
+    "keywords": [
+     "collaborative",
+     "economic",
+     "local",
+     "eda",
+     "manufacturing",
+     "nih",
+     "planning",
+     "planning local"
+    ],
+    "examples": [
+     {
+      "title": "Community Economic Development Projects",
+      "agency": "Administration for Children and Families - OCS",
+      "A": 65,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     },
+     {
+      "title": "Promoting Responsible Investment and Rights-Respecting Production Models",
+      "agency": "Bureau of Democracy Human Rights and Labor",
+      "A": 27,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     },
+     {
+      "title": "Ensuring \u201cPro-American Worker\u201d Critical Minerals Supply Chain in the Western Hemisphere",
+      "agency": "Bureau of International Labor Affairs",
+      "A": 27,
+      "bucket": "Closed",
+      "deadline": "2026-10-17"
+     },
+     {
+      "title": "Leveraging Academic Institutions and Judicial Professional Bodies to Document TNR",
+      "agency": "Bureau of Democracy Human Rights and Labor",
+      "A": 25,
+      "bucket": "Closed",
+      "deadline": "2026-08-20"
+     }
+    ]
+   },
+   {
+    "name": "Justice & public safety",
+    "dncr": false,
+    "n": 31,
+    "closed": 23,
+    "coming": 8,
+    "buckets": {
+     "Closed": 23,
+     "2026": 2,
+     "2027": 5,
+     "2028+": 1,
+     "Forecast": 0
+    },
+    "momentum": 0.49,
+    "fit": 9.0,
+    "strong": 0,
+    "keywords": [
+     "violence",
+     "domestic",
+     "ovw",
+     "domestic violence",
+     "sexual",
+     "bja",
+     "sexual assault",
+     "assault"
+    ],
+    "examples": [
+     {
+      "title": "Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering",
+      "agency": "Bureau of International Narcotics-Law Enforcement",
+      "A": 34,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     },
+     {
+      "title": "BJA FY 2026 Local Law Enforcement Crime Gun Intelligence Center Integration Initiative",
+      "agency": "Bureau of Justice Assistance",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-09-24"
+     },
+     {
+      "title": "FY26 Community Policing Development: Law Enforcement Products and Resources",
+      "agency": "Community Oriented Policing Services",
+      "A": 28,
+      "bucket": "Closed",
+      "deadline": "2026-08-24"
+     },
+     {
+      "title": "Culturally Specific Domestic Violence and Sexual Assault Services",
+      "agency": "Administration for Children and Families - OFVPS",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     }
+    ]
+   },
+   {
+    "name": "Energy, tech & AI",
+    "dncr": false,
+    "n": 85,
+    "closed": 41,
+    "coming": 44,
+    "buckets": {
+     "Closed": 41,
+     "2026": 8,
+     "2027": 20,
+     "2028+": 10,
+     "Forecast": 6
+    },
+    "momentum": 0.98,
+    "fit": 9.9,
+    "strong": 5,
+    "keywords": [
+     "technology",
+     "technologies",
+     "energy",
+     "cancer",
+     "innovation",
+     "advanced",
+     "precision",
+     "imaging"
+    ],
+    "examples": [
+     {
+      "title": "American Innovation Hub: AI & Digital Skills for the Creative & Tech Economy",
+      "agency": "U.S. Mission to Indonesia",
+      "A": 93,
+      "bucket": "Closed",
+      "deadline": "2026-08-30"
+     },
+     {
+      "title": "Decentralized Artificial Intelligence through Controlled Emergence (DICE)",
+      "agency": "DARPA - Information Processing Technologies Office",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-25"
+     },
+     {
+      "title": "Pax Silica Artificial Intelligence Assistance Project",
+      "agency": "Bureau of Economic and Business Affairs",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-20"
+     },
+     {
+      "title": "AI3 Action Institute - Artificial Intelligence for American Indians",
+      "agency": "Administration for Children and Families - ANA",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-27"
+     }
+    ]
+   },
+   {
+    "name": "Foreign diplomacy & exchange",
+    "dncr": false,
+    "n": 87,
+    "closed": 69,
+    "coming": 18,
+    "buckets": {
+     "Closed": 69,
+     "2026": 0,
+     "2027": 3,
+     "2028+": 6,
+     "Forecast": 9
+    },
+    "momentum": 0.39,
+    "fit": 7.4,
+    "strong": 3,
+    "keywords": [
+     "small",
+     "embassy",
+     "mission",
+     "innovation",
+     "public",
+     "alumni",
+     "diplomacy",
+     "public diplomacy"
+    ],
+    "examples": [
+     {
+      "title": "Alumni Engagement Innovation Fund 2024",
+      "agency": "U.S. Mission to Latvia",
+      "A": 61,
+      "bucket": "Closed",
+      "deadline": "2024-02-01"
+     },
+     {
+      "title": "Alumni Engagement Innovation Fund (AEIF) 2021",
+      "agency": "U.S. Mission to the Dominican Republic",
+      "A": 53,
+      "bucket": "Closed",
+      "deadline": "2021-06-20"
+     },
+     {
+      "title": "2022 Alumni Engagement Innovation Fund-Italy",
+      "agency": "U.S. Mission to Italy",
+      "A": 52,
+      "bucket": "Closed",
+      "deadline": "2022-01-30"
+     },
+     {
+      "title": "Alumni Engagement Innovation Fund (AEIF): Sierra Leone",
+      "agency": "U.S. Mission to Sierra Leone",
+      "A": 46,
+      "bucket": "Closed",
+      "deadline": "2026-05-01"
+     }
+    ]
+   },
+   {
+    "name": "Public health & prevention",
+    "dncr": false,
+    "n": 123,
+    "closed": 41,
+    "coming": 82,
+    "buckets": {
+     "Closed": 41,
+     "2026": 14,
+     "2027": 50,
+     "2028+": 17,
+     "Forecast": 1
+    },
+    "momentum": 1.27,
+    "fit": 3.2,
+    "strong": 1,
+    "keywords": [
+     "prevention",
+     "hiv",
+     "global",
+     "injury",
+     "global security",
+     "security",
+     "surveillance",
+     "maternal"
+    ],
+    "examples": [
+     {
+      "title": "US Travelers Health Research, Surveillance, Communication, and Outreach Network",
+      "agency": "Centers for Disease Control and Prevention - ERA",
+      "A": 53,
+      "bucket": "Closed",
+      "deadline": "2026-11-05"
+     },
+     {
+      "title": "Urban Indian Health 4-in-1 Program",
+      "agency": "Indian Health Service",
+      "A": 30,
+      "bucket": "2027",
+      "deadline": "2027-02-01"
+     },
+     {
+      "title": "Making America Healthy Again by Addressing Dementia Disparities",
+      "agency": "Office of the Assistant Secretary for Health",
+      "A": 30,
+      "bucket": "Closed",
+      "deadline": "2025-06-23"
+     },
+     {
+      "title": "Title X Family Planning Services Grants",
+      "agency": "Office of the Assistant Secretary for Health",
+      "A": 28,
+      "bucket": "2027",
+      "deadline": "2027-01-11"
+     }
+    ]
+   },
+   {
+    "name": "Mental health & substance use",
+    "dncr": false,
+    "n": 41,
+    "closed": 21,
+    "coming": 20,
+    "buckets": {
+     "Closed": 21,
+     "2026": 2,
+     "2027": 11,
+     "2028+": 6,
+     "Forecast": 1
+    },
+    "momentum": 0.93,
+    "fit": 4.4,
+    "strong": 0,
+    "keywords": [
+     "use",
+     "substance",
+     "substance use",
+     "alcohol",
+     "mental",
+     "use disorder",
+     "disorder",
+     "resource"
+    ],
+    "examples": [
+     {
+      "title": "BJA FY 2026 Comprehensive Opioid, Stimulant, and Substance Use Site-Based Program",
+      "agency": "Bureau of Justice Assistance",
+      "A": 14,
+      "bucket": "Closed",
+      "deadline": "2026-09-24"
+     },
+     {
+      "title": "BJA FY 2026 Public Safety and Mental Health Initiative",
+      "agency": "Bureau of Justice Assistance",
+      "A": 13,
+      "bucket": "Closed",
+      "deadline": "2026-09-25"
+     },
+     {
+      "title": "Alcohol Treatment, Pharmacotherapy, and Recovery Research (R01 Clinical Trial Required)",
+      "agency": "National Institutes of Health",
+      "A": 13,
+      "bucket": "Closed",
+      "deadline": "2026-09-07"
+     },
+     {
+      "title": "Alcohol Treatment, Pharmacotherapy, and Recovery Research (R34 Clinical Trial required)",
+      "agency": "National Institutes of Health",
+      "A": 12,
+      "bucket": "Closed",
+      "deadline": "2026-09-07"
+     }
+    ]
+   },
+   {
+    "name": "Cancer & military medicine",
+    "dncr": false,
+    "n": 121,
+    "closed": 83,
+    "coming": 38,
+    "buckets": {
+     "Closed": 83,
+     "2026": 12,
+     "2027": 13,
+     "2028+": 11,
+     "Forecast": 2
+    },
+    "momentum": 0.6,
+    "fit": 1.7,
+    "strong": 0,
+    "keywords": [
+     "cancer",
+     "idea",
+     "translational",
+     "academy",
+     "impact",
+     "vision",
+     "oncology",
+     "investigator-initiated"
+    ],
+    "examples": [
+     {
+      "title": "DoW Parkinson\u2019s, Investigator-Initiated Research Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-11-06"
+     },
+     {
+      "title": "DoW Parkinson\u2019s, Early Investigator Research Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-11-06"
+     },
+     {
+      "title": "DoW, Ovarian Cancer, Pilot Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 17,
+      "bucket": "Closed",
+      "deadline": "2026-10-01"
+     },
+     {
+      "title": "Applied regulatory science research to evaluate and treat cardiotoxicity of oncology therapeutics",
+      "agency": "Food and Drug Administration",
+      "A": 16,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Biomedical & science research",
+    "dncr": false,
+    "n": 553,
+    "closed": 203,
+    "coming": 350,
+    "buckets": {
+     "Closed": 203,
+     "2026": 37,
+     "2027": 152,
+     "2028+": 100,
+     "Forecast": 61
+    },
+    "momentum": 1.2,
+    "fit": 2.8,
+    "strong": 2,
+    "keywords": [
+     "disorders",
+     "network",
+     "translational",
+     "career",
+     "disease",
+     "diseases",
+     "nih",
+     "drug"
+    ],
+    "examples": [
+     {
+      "title": "Applied Drug Policy Research Experiences",
+      "agency": "Office of National Drug Control Policy ",
+      "A": 54,
+      "bucket": "Closed",
+      "deadline": "2026-09-06"
+     },
+     {
+      "title": "Staff Research Program",
+      "agency": "Dept of the Army -- Materiel Command",
+      "A": 50,
+      "bucket": "2028+",
+      "deadline": "2030-06-02"
+     },
+     {
+      "title": "Louis Stokes Alliances for Minority Participation",
+      "agency": "U.S. National Science Foundation",
+      "A": 42,
+      "bucket": "2026",
+      "deadline": "2026-11-20"
+     },
+     {
+      "title": "Science of Science: Discovery, Communication and Impact",
+      "agency": "U.S. National Science Foundation",
+      "A": 38,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Other",
+    "dncr": false,
+    "n": 46,
+    "closed": 22,
+    "coming": 24,
+    "buckets": {
+     "Closed": 22,
+     "2026": 3,
+     "2027": 5,
+     "2028+": 6,
+     "Forecast": 10
+    },
+    "momentum": 0.99,
+    "fit": 14.9,
+    "strong": 5,
+    "keywords": [
+     "act",
+     "children",
+     "services",
+     "baa",
+     "information",
+     "modern",
+     "modern slavery",
+     "end modern"
+    ],
+    "examples": [
+     {
+      "title": "Tribal Broadband Connectivity Program",
+      "agency": "DOC NIST ERA",
+      "A": 96,
+      "bucket": "2026",
+      "deadline": "2026-11-17"
+     },
+     {
+      "title": "NATIVE Act Tribal Tourism Cooperative Agreement",
+      "agency": "Bureau of Indian Affairs",
+      "A": 74,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Veterans Legacy Grants Program",
+      "agency": "Veterans Legacy Grants Program",
+      "A": 66,
+      "bucket": "2027",
+      "deadline": "2027-04-09"
+     },
+     {
+      "title": "Request for Information (RFI) No. 95332421K0004 - Community Engagement Services for the Solomon Islands Threshold Program",
+      "agency": "Millennium Challenge Corporation",
+      "A": 64,
+      "bucket": "Closed",
+      "deadline": "2021-02-18"
+     }
+    ]
+   }
+  ],
+  "words": [
+   {
+    "text": "cancer",
+    "n": 69,
+    "coming": 35,
+    "momentum": 0.96,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "training",
+    "n": 57,
+    "coming": 25,
+    "momentum": 0.83,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "network",
+    "n": 54,
+    "coming": 27,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "education",
+    "n": 53,
+    "coming": 27,
+    "momentum": 0.97,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "innovation",
+    "n": 50,
+    "coming": 26,
+    "momentum": 0.99,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "translational",
+    "n": 47,
+    "coming": 27,
+    "momentum": 1.09,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "small",
+    "n": 42,
+    "coming": 20,
+    "momentum": 0.91,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disorders",
+    "n": 40,
+    "coming": 28,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "services",
+    "n": 37,
+    "coming": 14,
+    "momentum": 0.72,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "career",
+    "n": 35,
+    "coming": 30,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "resource",
+    "n": 33,
+    "coming": 12,
+    "momentum": 0.69,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "prevention",
+    "n": 33,
+    "coming": 26,
+    "momentum": 1.5,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "safety",
+    "n": 32,
+    "coming": 19,
+    "momentum": 1.13,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "technology",
+    "n": 32,
+    "coming": 18,
+    "momentum": 1.07,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "drug",
+    "n": 31,
+    "coming": 18,
+    "momentum": 1.1,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technologies",
+    "n": 30,
+    "coming": 16,
+    "momentum": 1.01,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "excellence",
+    "n": 30,
+    "coming": 17,
+    "momentum": 1.08,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "human",
+    "n": 30,
+    "coming": 16,
+    "momentum": 1.01,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "diseases",
+    "n": 30,
+    "coming": 20,
+    "momentum": 1.27,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "interventions",
+    "n": 29,
+    "coming": 22,
+    "momentum": 1.44,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "brain",
+    "n": 28,
+    "coming": 14,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disease",
+    "n": 28,
+    "coming": 7,
+    "momentum": 0.48,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "community",
+    "n": 27,
+    "coming": 7,
+    "momentum": 0.49,
+    "area": "Housing & community"
+   },
+   {
+    "text": "early",
+    "n": 26,
+    "coming": 19,
+    "momentum": 1.39,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "systems",
+    "n": 26,
+    "coming": 22,
+    "momentum": 1.61,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "tribal",
+    "n": 25,
+    "coming": 10,
+    "momentum": 0.76,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "global",
+    "n": 25,
+    "coming": 7,
+    "momentum": 0.53,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "collaborative",
+    "n": 25,
+    "coming": 12,
+    "momentum": 0.91,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "mental",
+    "n": 24,
+    "coming": 21,
+    "momentum": 1.66,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "coordinating",
+    "n": 24,
+    "coming": 8,
+    "momentum": 0.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "public",
+    "n": 22,
+    "coming": 10,
+    "momentum": 0.86,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "infrastructure",
+    "n": 22,
+    "coming": 17,
+    "momentum": 1.47,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "alzheimer",
+    "n": 22,
+    "coming": 3,
+    "momentum": 0.26,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "implementation",
+    "n": 22,
+    "coming": 16,
+    "momentum": 1.38,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovative",
+    "n": 21,
+    "coming": 16,
+    "momentum": 1.45,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "planning",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technical",
+    "n": 21,
+    "coming": 10,
+    "momentum": 0.91,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "approaches",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "consortium",
+    "n": 21,
+    "coming": 4,
+    "momentum": 0.36,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mentored",
+    "n": 21,
+    "coming": 19,
+    "momentum": 1.72,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "response",
+    "n": 20,
+    "coming": 8,
+    "momentum": 0.76,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "medical",
+    "n": 20,
+    "coming": 10,
+    "momentum": 0.95,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "treatment",
+    "n": 20,
+    "coming": 15,
+    "momentum": 1.43,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "biomedical",
+    "n": 20,
+    "coming": 11,
+    "momentum": 1.05,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "engineering",
+    "n": 20,
+    "coming": 11,
+    "momentum": 1.05,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "aids",
+    "n": 20,
+    "coming": 14,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "partnership",
+    "n": 19,
+    "coming": 7,
+    "momentum": 0.7,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "outcomes",
+    "n": 19,
+    "coming": 9,
+    "momentum": 0.9,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "care",
+    "n": 19,
+    "coming": 7,
+    "momentum": 0.7,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "youth",
+    "n": 18,
+    "coming": 9,
+    "momentum": 0.95,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "food",
+    "n": 18,
+    "coming": 15,
+    "momentum": 1.58,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "advanced",
+    "n": 18,
+    "coming": 12,
+    "momentum": 1.27,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "discovery",
+    "n": 17,
+    "coming": 11,
+    "momentum": 1.23,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "access",
+    "n": 17,
+    "coming": 8,
+    "momentum": 0.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "regional",
+    "n": 17,
+    "coming": 6,
+    "momentum": 0.67,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "idea",
+    "n": 17,
+    "coming": 3,
+    "momentum": 0.34,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "capacity",
+    "n": 17,
+    "coming": 8,
+    "momentum": 0.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "local",
+    "n": 17,
+    "coming": 6,
+    "momentum": 0.67,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "security",
+    "n": 17,
+    "coming": 3,
+    "momentum": 0.34,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "investigator",
+    "n": 17,
+    "coming": 12,
+    "momentum": 1.34,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "partnerships",
+    "n": 17,
+    "coming": 8,
+    "momentum": 0.89,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "study",
+    "n": 17,
+    "coming": 7,
+    "momentum": 0.78,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "continuation",
+    "n": 17,
+    "coming": 4,
+    "momentum": 0.45,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "risk",
+    "n": 16,
+    "coming": 9,
+    "momentum": 1.07,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "communities",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "impact",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "children",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "american",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advancing",
+    "n": 16,
+    "coming": 4,
+    "momentum": 0.48,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "novel",
+    "n": 16,
+    "coming": 9,
+    "momentum": 1.07,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "core",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.19,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "validation",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.19,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "scientist",
+    "n": 16,
+    "coming": 15,
+    "momentum": 1.78,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "transition",
+    "n": 16,
+    "coming": 13,
+    "momentum": 1.55,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "building",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "indian",
+    "n": 15,
+    "coming": 9,
+    "momentum": 1.14,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "small business",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "business",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "substance",
+    "n": 15,
+    "coming": 9,
+    "momentum": 1.14,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "alcohol",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.76,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "coordination",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "precision",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "hiv aids",
+    "n": 15,
+    "coming": 14,
+    "momentum": 1.77,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "source",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "single",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "therapeutic",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "exploratory",
+    "n": 15,
+    "coming": 11,
+    "momentum": 1.39,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "biological",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.49,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "products",
+    "n": 14,
+    "coming": 12,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "analysis",
+    "n": 14,
+    "coming": 7,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   }
+  ],
+  "words_dncr": [
+   {
+    "text": "environmental",
+    "n": 13,
+    "coming": 6,
+    "momentum": 0.88,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "emergency",
+    "n": 11,
+    "coming": 5,
+    "momentum": 0.86,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "invasive",
+    "n": 10,
+    "coming": 7,
+    "momentum": 1.33,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "ecosystem",
+    "n": 9,
+    "coming": 1,
+    "momentum": 0.21,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "species",
+    "n": 9,
+    "coming": 5,
+    "momentum": 1.06,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "conservation",
+    "n": 8,
+    "coming": 1,
+    "momentum": 0.24,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "land",
+    "n": 8,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "disaster",
+    "n": 8,
+    "coming": 2,
+    "momentum": 0.48,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "restoration",
+    "n": 8,
+    "coming": 5,
+    "momentum": 1.19,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "partnership",
+    "n": 7,
+    "coming": 3,
+    "momentum": 0.81,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "marine",
+    "n": 6,
+    "coming": 2,
+    "momentum": 0.63,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "lakes",
+    "n": 6,
+    "coming": 5,
+    "momentum": 1.58,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "response",
+    "n": 5,
+    "coming": 1,
+    "momentum": 0.38,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "training",
+    "n": 5,
+    "coming": 2,
+    "momentum": 0.76,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "forest",
+    "n": 5,
+    "coming": 1,
+    "momentum": 0.38,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "atmospheric",
+    "n": 5,
+    "coming": 4,
+    "momentum": 1.52,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "community",
+    "n": 5,
+    "coming": 2,
+    "momentum": 0.76,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "network",
+    "n": 5,
+    "coming": 5,
+    "momentum": 1.9,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "safety",
+    "n": 4,
+    "coming": 1,
+    "momentum": 0.48,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "regional",
+    "n": 4,
+    "coming": 1,
+    "momentum": 0.48,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "resilience",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "mitigation",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "wildlife",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "alaska",
+    "n": 4,
+    "coming": 2,
+    "momentum": 0.95,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "artifacts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "arts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "arts artifacts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "nea arts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "international",
+    "n": 4,
+    "coming": 2,
+    "momentum": 0.95,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "indemnity",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "wildland",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "invasive species",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "lakes restoration",
+    "n": 4,
+    "coming": 4,
+    "momentum": 1.9,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "neural",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.43,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "mental",
+    "n": 4,
+    "coming": 4,
+    "momentum": 1.9,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "resource",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "recreation",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Parks & outdoor recreation"
+   },
+   {
+    "text": "care",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "pediatric",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.63,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "weather",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "ecosystems",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "blm-national",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "department",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "blm-national interagency",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "wildland blm-national",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "interagency",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "plant",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "utilizing",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "technology",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.63,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "echo",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "outcomes echo",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "influences",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "influences child",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "child",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "child outcomes",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "outcomes",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "environmental influences",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.27,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "tribes",
+    "n": 3,
+    "coming": 3,
+    "momentum": 1.9,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "source",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.63,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "aquatic invasive",
+    "n": 3,
+    "coming": 3,
+    "momentum": 1.9,
+    "area": "Conservation & wildlife"
+   }
+  ],
+  "words_other": [
+   {
+    "text": "cancer",
+    "n": 69,
+    "coming": 35,
+    "momentum": 0.96,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "training",
+    "n": 52,
+    "coming": 23,
+    "momentum": 0.84,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "education",
+    "n": 50,
+    "coming": 24,
+    "momentum": 0.91,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "network",
+    "n": 49,
+    "coming": 22,
+    "momentum": 0.85,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovation",
+    "n": 48,
+    "coming": 26,
+    "momentum": 1.03,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "translational",
+    "n": 47,
+    "coming": 27,
+    "momentum": 1.09,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "small",
+    "n": 41,
+    "coming": 20,
+    "momentum": 0.93,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disorders",
+    "n": 38,
+    "coming": 26,
+    "momentum": 1.3,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "services",
+    "n": 36,
+    "coming": 14,
+    "momentum": 0.74,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "career",
+    "n": 35,
+    "coming": 30,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "prevention",
+    "n": 32,
+    "coming": 26,
+    "momentum": 1.55,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "resource",
+    "n": 30,
+    "coming": 12,
+    "momentum": 0.76,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "drug",
+    "n": 29,
+    "coming": 18,
+    "momentum": 1.18,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technology",
+    "n": 29,
+    "coming": 17,
+    "momentum": 1.11,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "diseases",
+    "n": 29,
+    "coming": 20,
+    "momentum": 1.31,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "excellence",
+    "n": 29,
+    "coming": 17,
+    "momentum": 1.11,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "safety",
+    "n": 28,
+    "coming": 18,
+    "momentum": 1.22,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "human",
+    "n": 28,
+    "coming": 15,
+    "momentum": 1.02,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "interventions",
+    "n": 28,
+    "coming": 22,
+    "momentum": 1.49,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technologies",
+    "n": 27,
+    "coming": 14,
+    "momentum": 0.99,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "early",
+    "n": 26,
+    "coming": 19,
+    "momentum": 1.39,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "systems",
+    "n": 26,
+    "coming": 22,
+    "momentum": 1.61,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disease",
+    "n": 26,
+    "coming": 7,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "global",
+    "n": 25,
+    "coming": 7,
+    "momentum": 0.53,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "collaborative",
+    "n": 25,
+    "coming": 12,
+    "momentum": 0.91,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "brain",
+    "n": 25,
+    "coming": 12,
+    "momentum": 0.91,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "tribal",
+    "n": 23,
+    "coming": 10,
+    "momentum": 0.83,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "community",
+    "n": 22,
+    "coming": 5,
+    "momentum": 0.43,
+    "area": "Housing & community"
+   },
+   {
+    "text": "public",
+    "n": 22,
+    "coming": 10,
+    "momentum": 0.86,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "implementation",
+    "n": 22,
+    "coming": 16,
+    "momentum": 1.38,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovative",
+    "n": 21,
+    "coming": 16,
+    "momentum": 1.45,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "planning",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technical",
+    "n": 21,
+    "coming": 10,
+    "momentum": 0.91,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "approaches",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "consortium",
+    "n": 21,
+    "coming": 4,
+    "momentum": 0.36,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "alzheimer",
+    "n": 21,
+    "coming": 3,
+    "momentum": 0.27,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mentored",
+    "n": 21,
+    "coming": 19,
+    "momentum": 1.72,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "coordinating",
+    "n": 21,
+    "coming": 6,
+    "momentum": 0.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "treatment",
+    "n": 20,
+    "coming": 15,
+    "momentum": 1.43,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mental",
+    "n": 20,
+    "coming": 17,
+    "momentum": 1.62,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "infrastructure",
+    "n": 19,
+    "coming": 14,
+    "momentum": 1.4,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "medical",
+    "n": 19,
+    "coming": 9,
+    "momentum": 0.9,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "biomedical",
+    "n": 19,
+    "coming": 11,
+    "momentum": 1.1,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "engineering",
+    "n": 19,
+    "coming": 11,
+    "momentum": 1.1,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advanced",
+    "n": 18,
+    "coming": 12,
+    "momentum": 1.27,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "aids",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.37,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "discovery",
+    "n": 17,
+    "coming": 11,
+    "momentum": 1.23,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "youth",
+    "n": 17,
+    "coming": 9,
+    "momentum": 1.01,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "food",
+    "n": 17,
+    "coming": 15,
+    "momentum": 1.68,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "idea",
+    "n": 17,
+    "coming": 3,
+    "momentum": 0.34,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "local",
+    "n": 17,
+    "coming": 6,
+    "momentum": 0.67,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "investigator",
+    "n": 17,
+    "coming": 12,
+    "momentum": 1.34,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "partnerships",
+    "n": 17,
+    "coming": 8,
+    "momentum": 0.89,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "access",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "capacity",
+    "n": 16,
+    "coming": 8,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "outcomes",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "children",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.83,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "care",
+    "n": 16,
+    "coming": 5,
+    "momentum": 0.59,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "continuation",
+    "n": 16,
+    "coming": 4,
+    "momentum": 0.48,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "validation",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.19,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "scientist",
+    "n": 16,
+    "coming": 15,
+    "momentum": 1.78,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "transition",
+    "n": 16,
+    "coming": 13,
+    "momentum": 1.55,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "response",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.89,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "risk",
+    "n": 15,
+    "coming": 9,
+    "momentum": 1.14,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "communities",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.89,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "impact",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.89,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "american",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advancing",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "security",
+    "n": 15,
+    "coming": 2,
+    "momentum": 0.25,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "substance",
+    "n": 15,
+    "coming": 9,
+    "momentum": 1.14,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "alcohol",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.76,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "novel",
+    "n": 15,
+    "coming": 8,
+    "momentum": 1.01,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "precision",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "therapeutic",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "study",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "products",
+    "n": 14,
+    "coming": 12,
+    "momentum": 1.63,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "building",
+    "n": 14,
+    "coming": 4,
+    "momentum": 0.54,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "indian",
+    "n": 14,
+    "coming": 8,
+    "momentum": 1.09,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "analysis",
+    "n": 14,
+    "coming": 7,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "small business",
+    "n": 14,
+    "coming": 5,
+    "momentum": 0.68,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "business",
+    "n": 14,
+    "coming": 5,
+    "momentum": 0.68,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "hiv aids",
+    "n": 14,
+    "coming": 13,
+    "momentum": 1.77,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "institutional",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.49,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "exploratory",
+    "n": 14,
+    "coming": 10,
+    "momentum": 1.36,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "regulatory",
+    "n": 14,
+    "coming": 13,
+    "momentum": 1.77,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "violence",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.02,
+    "area": "Justice & public safety"
+   },
+   {
+    "text": "regional",
+    "n": 13,
+    "coming": 5,
+    "momentum": 0.73,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "information",
+    "n": 13,
+    "coming": 5,
+    "momentum": 0.73,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "substance use",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.02,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "imaging",
+    "n": 13,
+    "coming": 4,
+    "momentum": 0.59,
+    "area": "Energy, tech & AI"
+   }
+  ]
+ },
+ "eligible": {
+  "n": 1434,
+  "closed": 761,
+  "coming": 673,
+  "overall_coming": 0.469,
+  "buckets": {
+   "Closed": 761,
+   "2026": 88,
+   "2027": 304,
+   "2028+": 169,
+   "Forecast": 112
+  },
+  "areas": [
+   {
+    "name": "Parks & outdoor recreation",
+    "dncr": true,
+    "n": 4,
+    "closed": 2,
+    "coming": 2,
+    "buckets": {
+     "Closed": 2,
+     "2026": 0,
+     "2027": 0,
+     "2028+": 2,
+     "Forecast": 0
+    },
+    "momentum": 1.07,
+    "fit": 52.5,
+    "strong": 2,
+    "keywords": [
+     "recreation",
+     "land",
+     "visitor",
+     "recreation visitor",
+     "land recreation",
+     "services",
+     "visitor services",
+     "diabetes trail"
+    ],
+    "examples": [
+     {
+      "title": "Outdoor Recreation Legacy Partnership Program (ORLP) Recurring Notice 5 Year",
+      "agency": "National Park Service",
+      "A": 98,
+      "bucket": "2028+",
+      "deadline": "2030-11-01"
+     },
+     {
+      "title": "Readiness and Recreation Initiative (RARI) \u2013 Recurring 5 Year Notice",
+      "agency": "National Park Service",
+      "A": 56,
+      "bucket": "2028+",
+      "deadline": "2030-11-30"
+     },
+     {
+      "title": "FY26 Bureau of Land Management Recreation and Visitor Services - Bureau wide",
+      "agency": "Bureau of Land Management",
+      "A": 44,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Advancing Research on the Application of Digital Health Technology to the Management of Type 2 Diabetes (R01- Clinical Trail Required)",
+      "agency": "National Institutes of Health",
+      "A": 12,
+      "bucket": "Closed",
+      "deadline": "2026-10-06"
+     }
+    ]
+   },
+   {
+    "name": "Historic preservation & heritage",
+    "dncr": true,
+    "n": 4,
+    "closed": 3,
+    "coming": 1,
+    "buckets": {
+     "Closed": 3,
+     "2026": 0,
+     "2027": 0,
+     "2028+": 0,
+     "Forecast": 1
+    },
+    "momentum": 0.53,
+    "fit": 59.0,
+    "strong": 3,
+    "keywords": [
+     "preservation",
+     "acquisition",
+     "land",
+     "abpp",
+     "battlefield land",
+     "abpp battlefield",
+     "land acquisition",
+     "battlefield"
+    ],
+    "examples": [
+     {
+      "title": "FY2026 ABPP - Battlefield Land Acquisition Grant",
+      "agency": "National Park Service",
+      "A": 98,
+      "bucket": "Closed",
+      "deadline": "2026-09-30"
+     },
+     {
+      "title": "Ambassadors Fund for Cultural Preservation Large Grants Program",
+      "agency": "U.S. Mission to Cambodia",
+      "A": 66,
+      "bucket": "Closed",
+      "deadline": "2019-12-06"
+     },
+     {
+      "title": "Preservation and Reinvestment Initiative for Community Enhancement (PRICE)",
+      "agency": "Department of Housing and Urban Development",
+      "A": 56,
+      "bucket": "Closed",
+      "deadline": "2026-10-19"
+     },
+     {
+      "title": "High-Risk Research in Biological Anthropology and Archaeology",
+      "agency": "U.S. National Science Foundation",
+      "A": 16,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Arts, humanities & museums",
+    "dncr": true,
+    "n": 12,
+    "closed": 3,
+    "coming": 9,
+    "buckets": {
+     "Closed": 3,
+     "2026": 5,
+     "2027": 3,
+     "2028+": 1,
+     "Forecast": 0
+    },
+    "momentum": 1.6,
+    "fit": 28.0,
+    "strong": 1,
+    "keywords": [
+     "artifacts",
+     "arts",
+     "arts artifacts",
+     "nea arts",
+     "nea",
+     "indemnity",
+     "medicine",
+     "network"
+    ],
+    "examples": [
+     {
+      "title": "Collections Stewardship",
+      "agency": "National Endowment for the Humanities",
+      "A": 96,
+      "bucket": "2026",
+      "deadline": "2026-12-15"
+     },
+     {
+      "title": "NEA Arts and Artifacts International Indemnity Program 1, FY2027 (9/26)",
+      "agency": "National Endowment for the Arts",
+      "A": 46,
+      "bucket": "Closed",
+      "deadline": "2026-09-14"
+     },
+     {
+      "title": "NEA Arts and Artifacts International Indemnity Program 2, FY2027 (3/27)",
+      "agency": "National Endowment for the Arts",
+      "A": 46,
+      "bucket": "2027",
+      "deadline": "2027-03-08"
+     },
+     {
+      "title": "NEA Arts and Artifacts Domestic Indemnity Program 1, FY2027 (12/26)",
+      "agency": "National Endowment for the Arts",
+      "A": 44,
+      "bucket": "2026",
+      "deadline": "2026-12-07"
+     }
+    ]
+   },
+   {
+    "name": "Conservation & wildlife",
+    "dncr": true,
+    "n": 43,
+    "closed": 33,
+    "coming": 10,
+    "buckets": {
+     "Closed": 33,
+     "2026": 1,
+     "2027": 5,
+     "2028+": 3,
+     "Forecast": 1
+    },
+    "momentum": 0.5,
+    "fit": 28.1,
+    "strong": 7,
+    "keywords": [
+     "ecosystem",
+     "invasive",
+     "land",
+     "species",
+     "conservation",
+     "wildlife",
+     "neural",
+     "partnership"
+    ],
+    "examples": [
+     {
+      "title": "2026 National Urban and Community Forestry Challenge Cost Share Grant Program",
+      "agency": "Forest Service",
+      "A": 96,
+      "bucket": "Closed",
+      "deadline": "2026-10-12"
+     },
+     {
+      "title": "Forest Legacy Program - FY2028 Funding",
+      "agency": "Forest Service",
+      "A": 88,
+      "bucket": "Closed",
+      "deadline": "2026-09-11"
+     },
+     {
+      "title": "FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide",
+      "agency": "Bureau of Land Management",
+      "A": 77,
+      "bucket": "Closed",
+      "deadline": "2026-09-28"
+     },
+     {
+      "title": "International Programs & Trade, Invasive Species Program Funding Opportunity",
+      "agency": "Forest Service",
+      "A": 72,
+      "bucket": "Closed",
+      "deadline": "2026-09-30"
+     }
+    ]
+   },
+   {
+    "name": "Climate, ocean & environment",
+    "dncr": true,
+    "n": 28,
+    "closed": 14,
+    "coming": 14,
+    "buckets": {
+     "Closed": 14,
+     "2026": 1,
+     "2027": 6,
+     "2028+": 1,
+     "Forecast": 6
+    },
+    "momentum": 1.07,
+    "fit": 7.8,
+    "strong": 1,
+    "keywords": [
+     "environmental",
+     "atmospheric",
+     "marine",
+     "weather",
+     "echo",
+     "outcomes echo",
+     "influences",
+     "influences child"
+    ],
+    "examples": [
+     {
+      "title": "Climate Program Office for FY 2012",
+      "agency": "Department of Commerce",
+      "A": 67,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "Notice of Funding Opportunity (NOFO) SUSI Civic Engagement and Environmental Issues Selection Process",
+      "agency": "U.S. Mission to Spain",
+      "A": 37,
+      "bucket": "Closed",
+      "deadline": "2022-11-22"
+     },
+     {
+      "title": "Fiscal Year 2027 National Sea Grant College Program Dean John A. Knauss Marine Policy Fellowship",
+      "agency": "DOC NOAA - ERA Production",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-08-26"
+     },
+     {
+      "title": "GlobalX Challenge 26.2: Naval Southern Hemisphere Space Weather and Plasmas (NSHSWP)",
+      "agency": "Office of Naval Research",
+      "A": 16,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     }
+    ]
+   },
+   {
+    "name": "Disaster & emergency",
+    "dncr": true,
+    "n": 37,
+    "closed": 26,
+    "coming": 11,
+    "buckets": {
+     "Closed": 26,
+     "2026": 1,
+     "2027": 3,
+     "2028+": 3,
+     "Forecast": 4
+    },
+    "momentum": 0.63,
+    "fit": 23.0,
+    "strong": 8,
+    "keywords": [
+     "emergency",
+     "disaster",
+     "response",
+     "resilience",
+     "wildland",
+     "training",
+     "care",
+     "blm-national"
+    ],
+    "examples": [
+     {
+      "title": "Fiscal Year 2026 Flood Mitigation Assistance Swift Current",
+      "agency": "Department of Homeland Security - FEMA",
+      "A": 93,
+      "bucket": "2028+",
+      "deadline": "2028-01-31"
+     },
+     {
+      "title": "Fiscal Year 2024 Flood Mitigation Assistance Swift Current",
+      "agency": "Department of Homeland Security - FEMA",
+      "A": 92,
+      "bucket": "2026",
+      "deadline": "2026-12-30"
+     },
+     {
+      "title": "Partnership for Disaster Health Response System",
+      "agency": "Assistant Secretary for Preparedness and Response",
+      "A": 75,
+      "bucket": "Closed",
+      "deadline": "2022-08-01"
+     },
+     {
+      "title": "Pacific Disaster Center",
+      "agency": "Washington Headquarters Services",
+      "A": 72,
+      "bucket": "Closed",
+      "deadline": "2026-09-15"
+     }
+    ]
+   },
+   {
+    "name": "Agriculture & food",
+    "dncr": false,
+    "n": 62,
+    "closed": 25,
+    "coming": 37,
+    "buckets": {
+     "Closed": 25,
+     "2026": 4,
+     "2027": 17,
+     "2028+": 2,
+     "Forecast": 14
+    },
+    "momentum": 1.27,
+    "fit": 9.9,
+    "strong": 2,
+    "keywords": [
+     "food",
+     "rural",
+     "animal",
+     "regulatory",
+     "safety",
+     "agricultural",
+     "food safety",
+     "nutrition"
+    ],
+    "examples": [
+     {
+      "title": "Rural Housing Preservation Grant",
+      "agency": "Rural Housing Service",
+      "A": 65,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     },
+     {
+      "title": "Sheep Production and Marketing Grant Program FY 2026",
+      "agency": "Agricultural Marketing Service",
+      "A": 56,
+      "bucket": "Closed",
+      "deadline": "2026-10-02"
+     },
+     {
+      "title": "Rural Health Network Development Planning Program",
+      "agency": "Health Resources and Services Administration",
+      "A": 38,
+      "bucket": "2027",
+      "deadline": "2027-03-23"
+     },
+     {
+      "title": "Federal and University Partnership to Improve the Safety of Seafood from the Gulf of America",
+      "agency": "Food and Drug Administration",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-08-21"
+     }
+    ]
+   },
+   {
+    "name": "Transportation & infrastructure",
+    "dncr": false,
+    "n": 91,
+    "closed": 46,
+    "coming": 45,
+    "buckets": {
+     "Closed": 46,
+     "2026": 2,
+     "2027": 22,
+     "2028+": 9,
+     "Forecast": 12
+    },
+    "momentum": 1.05,
+    "fit": 5.2,
+    "strong": 0,
+    "keywords": [
+     "infrastructure",
+     "transition",
+     "transportation",
+     "career",
+     "small",
+     "small business",
+     "business",
+     "career transition"
+    ],
+    "examples": [
+     {
+      "title": "Interdisciplinary Transportation Law and Policy Technology Training Development",
+      "agency": "69A355 Research and Technology",
+      "A": 43,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Innovative Traffic Safety Enforcement (ITSE) Grant Program",
+      "agency": "National Highway Traffic Safety Administration",
+      "A": 34,
+      "bucket": "2027",
+      "deadline": "2027-09-01"
+     },
+     {
+      "title": "Fiscal Year (FY) 2022-2026 Advanced Digital Construction Management Systems (ADCMS)",
+      "agency": "DOT Federal Highway Administration ",
+      "A": 32,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "BJA FY26 Body-Worn Camera Policy and Implementation Program to Support Law Enforcement Agencies",
+      "agency": "Bureau of Justice Assistance",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-09-25"
+     }
+    ]
+   },
+   {
+    "name": "Housing & community",
+    "dncr": false,
+    "n": 20,
+    "closed": 15,
+    "coming": 5,
+    "buckets": {
+     "Closed": 15,
+     "2026": 3,
+     "2027": 2,
+     "2028+": 0,
+     "Forecast": 0
+    },
+    "momentum": 0.53,
+    "fit": 10.1,
+    "strong": 1,
+    "keywords": [
+     "community",
+     "block",
+     "demonstration",
+     "services",
+     "youth",
+     "housing",
+     "block csbg",
+     "services block"
+    ],
+    "examples": [
+     {
+      "title": "National Communication System for Runaway and Homeless Youth Program",
+      "agency": "Administration for Children & Families - ACYF/FYSB",
+      "A": 52,
+      "bucket": "Closed",
+      "deadline": "2026-08-19"
+     },
+     {
+      "title": "Fair Housing Initiatives Program - Education and Outreach Initiative",
+      "agency": "Department of Housing and Urban Development",
+      "A": 30,
+      "bucket": "Closed",
+      "deadline": "2026-11-02"
+     },
+     {
+      "title": "Lead Hazard Reduction Grant Program",
+      "agency": "Department of Housing and Urban Development",
+      "A": 25,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     },
+     {
+      "title": "Eviction Protection Grant Program",
+      "agency": "Department of Housing and Urban Development",
+      "A": 23,
+      "bucket": "2027",
+      "deadline": "2027-02-17"
+     }
+    ]
+   },
+   {
+    "name": "Education & STEM",
+    "dncr": false,
+    "n": 100,
+    "closed": 61,
+    "coming": 39,
+    "buckets": {
+     "Closed": 61,
+     "2026": 6,
+     "2027": 17,
+     "2028+": 12,
+     "Forecast": 4
+    },
+    "momentum": 0.83,
+    "fit": 12.0,
+    "strong": 3,
+    "keywords": [
+     "education",
+     "training",
+     "youth",
+     "nervous",
+     "medical",
+     "nih",
+     "drug",
+     "technical"
+    ],
+    "examples": [
+     {
+      "title": "National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026",
+      "agency": "DOC NOAA - ERA Production",
+      "A": 68,
+      "bucket": "Closed",
+      "deadline": "2026-09-18"
+     },
+     {
+      "title": "NSF STEM K-12",
+      "agency": "U.S. National Science Foundation",
+      "A": 66,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "Robert Noyce Teacher Scholarship Program",
+      "agency": "U.S. National Science Foundation",
+      "A": 51,
+      "bucket": "Closed",
+      "deadline": "2026-08-25"
+     },
+     {
+      "title": "Access Alumni Outreach and Engagement and English Access Scholarship Program",
+      "agency": "U.S. Mission to Kazakhstan",
+      "A": 49,
+      "bucket": "Closed",
+      "deadline": "2026-08-21"
+     }
+    ]
+   },
+   {
+    "name": "Workforce & small business",
+    "dncr": false,
+    "n": 72,
+    "closed": 43,
+    "coming": 29,
+    "buckets": {
+     "Closed": 43,
+     "2026": 2,
+     "2027": 12,
+     "2028+": 7,
+     "Forecast": 8
+    },
+    "momentum": 0.86,
+    "fit": 5.8,
+    "strong": 1,
+    "keywords": [
+     "collaborative",
+     "economic",
+     "manufacturing",
+     "laboratory",
+     "innovation",
+     "promoting",
+     "response",
+     "advancing"
+    ],
+    "examples": [
+     {
+      "title": "Community Economic Development Projects",
+      "agency": "Administration for Children and Families - OCS",
+      "A": 65,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     },
+     {
+      "title": "Promoting Responsible Investment and Rights-Respecting Production Models",
+      "agency": "Bureau of Democracy Human Rights and Labor",
+      "A": 27,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     },
+     {
+      "title": "Leveraging Academic Institutions and Judicial Professional Bodies to Document TNR",
+      "agency": "Bureau of Democracy Human Rights and Labor",
+      "A": 25,
+      "bucket": "Closed",
+      "deadline": "2026-08-20"
+     },
+     {
+      "title": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) \u2013 RESEARCH COLLABORATION (RC)",
+      "agency": "Air Force Office of Scientific Research",
+      "A": 23,
+      "bucket": "2027",
+      "deadline": "2027-04-05"
+     }
+    ]
+   },
+   {
+    "name": "Justice & public safety",
+    "dncr": false,
+    "n": 28,
+    "closed": 22,
+    "coming": 6,
+    "buckets": {
+     "Closed": 22,
+     "2026": 2,
+     "2027": 3,
+     "2028+": 1,
+     "Forecast": 0
+    },
+    "momentum": 0.46,
+    "fit": 10.0,
+    "strong": 0,
+    "keywords": [
+     "violence",
+     "ovw",
+     "sexual",
+     "bja",
+     "sexual assault",
+     "assault",
+     "violence sexual",
+     "domestic"
+    ],
+    "examples": [
+     {
+      "title": "Global Cybercrime and Cryptocurrency Assessment and Intelligence Gathering",
+      "agency": "Bureau of International Narcotics-Law Enforcement",
+      "A": 34,
+      "bucket": "Closed",
+      "deadline": "2026-08-31"
+     },
+     {
+      "title": "BJA FY 2026 Local Law Enforcement Crime Gun Intelligence Center Integration Initiative",
+      "agency": "Bureau of Justice Assistance",
+      "A": 32,
+      "bucket": "Closed",
+      "deadline": "2026-09-24"
+     },
+     {
+      "title": "FY26 Community Policing Development: Law Enforcement Products and Resources",
+      "agency": "Community Oriented Policing Services",
+      "A": 28,
+      "bucket": "Closed",
+      "deadline": "2026-08-24"
+     },
+     {
+      "title": "Culturally Specific Domestic Violence and Sexual Assault Services",
+      "agency": "Administration for Children and Families - OFVPS",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-09-08"
+     }
+    ]
+   },
+   {
+    "name": "Energy, tech & AI",
+    "dncr": false,
+    "n": 70,
+    "closed": 40,
+    "coming": 30,
+    "buckets": {
+     "Closed": 40,
+     "2026": 5,
+     "2027": 14,
+     "2028+": 8,
+     "Forecast": 3
+    },
+    "momentum": 0.91,
+    "fit": 10.2,
+    "strong": 4,
+    "keywords": [
+     "technologies",
+     "technology",
+     "cancer",
+     "energy",
+     "advanced",
+     "precision",
+     "imaging",
+     "innovation"
+    ],
+    "examples": [
+     {
+      "title": "American Innovation Hub: AI & Digital Skills for the Creative & Tech Economy",
+      "agency": "U.S. Mission to Indonesia",
+      "A": 93,
+      "bucket": "Closed",
+      "deadline": "2026-08-30"
+     },
+     {
+      "title": "Pax Silica Artificial Intelligence Assistance Project",
+      "agency": "Bureau of Economic and Business Affairs",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-20"
+     },
+     {
+      "title": "AI3 Action Institute - Artificial Intelligence for American Indians",
+      "agency": "Administration for Children and Families - ANA",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-27"
+     },
+     {
+      "title": "Decentralized Artificial Intelligence through Controlled Emergence (DICE)",
+      "agency": "DARPA - Information Processing Technologies Office",
+      "A": 91,
+      "bucket": "Closed",
+      "deadline": "2026-08-25"
+     }
+    ]
+   },
+   {
+    "name": "Foreign diplomacy & exchange",
+    "dncr": false,
+    "n": 78,
+    "closed": 69,
+    "coming": 9,
+    "buckets": {
+     "Closed": 69,
+     "2026": 0,
+     "2027": 2,
+     "2028+": 3,
+     "Forecast": 4
+    },
+    "momentum": 0.25,
+    "fit": 8.0,
+    "strong": 3,
+    "keywords": [
+     "small",
+     "innovation",
+     "mission",
+     "alumni",
+     "public",
+     "embassy",
+     "diplomacy",
+     "italy"
+    ],
+    "examples": [
+     {
+      "title": "Alumni Engagement Innovation Fund 2024",
+      "agency": "U.S. Mission to Latvia",
+      "A": 61,
+      "bucket": "Closed",
+      "deadline": "2024-02-01"
+     },
+     {
+      "title": "Alumni Engagement Innovation Fund (AEIF) 2021",
+      "agency": "U.S. Mission to the Dominican Republic",
+      "A": 53,
+      "bucket": "Closed",
+      "deadline": "2021-06-20"
+     },
+     {
+      "title": "2022 Alumni Engagement Innovation Fund-Italy",
+      "agency": "U.S. Mission to Italy",
+      "A": 52,
+      "bucket": "Closed",
+      "deadline": "2022-01-30"
+     },
+     {
+      "title": "Alumni Engagement Innovation Fund (AEIF): Sierra Leone",
+      "agency": "U.S. Mission to Sierra Leone",
+      "A": 46,
+      "bucket": "Closed",
+      "deadline": "2026-05-01"
+     }
+    ]
+   },
+   {
+    "name": "Public health & prevention",
+    "dncr": false,
+    "n": 107,
+    "closed": 41,
+    "coming": 66,
+    "buckets": {
+     "Closed": 41,
+     "2026": 13,
+     "2027": 37,
+     "2028+": 16,
+     "Forecast": 0
+    },
+    "momentum": 1.31,
+    "fit": 3.1,
+    "strong": 1,
+    "keywords": [
+     "prevention",
+     "hiv",
+     "global",
+     "injury",
+     "global security",
+     "security",
+     "surveillance",
+     "local"
+    ],
+    "examples": [
+     {
+      "title": "US Travelers Health Research, Surveillance, Communication, and Outreach Network",
+      "agency": "Centers for Disease Control and Prevention - ERA",
+      "A": 53,
+      "bucket": "Closed",
+      "deadline": "2026-11-05"
+     },
+     {
+      "title": "Making America Healthy Again by Addressing Dementia Disparities",
+      "agency": "Office of the Assistant Secretary for Health",
+      "A": 30,
+      "bucket": "Closed",
+      "deadline": "2025-06-23"
+     },
+     {
+      "title": "Title X Family Planning Services Grants",
+      "agency": "Office of the Assistant Secretary for Health",
+      "A": 28,
+      "bucket": "2027",
+      "deadline": "2027-01-11"
+     },
+     {
+      "title": "Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)",
+      "agency": "Centers for Disease Control and Prevention - ERA",
+      "A": 25,
+      "bucket": "2026",
+      "deadline": "2026-12-01"
+     }
+    ]
+   },
+   {
+    "name": "Mental health & substance use",
+    "dncr": false,
+    "n": 39,
+    "closed": 21,
+    "coming": 18,
+    "buckets": {
+     "Closed": 21,
+     "2026": 2,
+     "2027": 9,
+     "2028+": 6,
+     "Forecast": 1
+    },
+    "momentum": 0.98,
+    "fit": 4.6,
+    "strong": 0,
+    "keywords": [
+     "use",
+     "substance",
+     "substance use",
+     "alcohol",
+     "mental",
+     "use disorder",
+     "disorder",
+     "resource"
+    ],
+    "examples": [
+     {
+      "title": "BJA FY 2026 Comprehensive Opioid, Stimulant, and Substance Use Site-Based Program",
+      "agency": "Bureau of Justice Assistance",
+      "A": 14,
+      "bucket": "Closed",
+      "deadline": "2026-09-24"
+     },
+     {
+      "title": "BJA FY 2026 Public Safety and Mental Health Initiative",
+      "agency": "Bureau of Justice Assistance",
+      "A": 13,
+      "bucket": "Closed",
+      "deadline": "2026-09-25"
+     },
+     {
+      "title": "Alcohol Treatment, Pharmacotherapy, and Recovery Research (R01 Clinical Trial Required)",
+      "agency": "National Institutes of Health",
+      "A": 13,
+      "bucket": "Closed",
+      "deadline": "2026-09-07"
+     },
+     {
+      "title": "Alcohol Treatment, Pharmacotherapy, and Recovery Research (R34 Clinical Trial required)",
+      "agency": "National Institutes of Health",
+      "A": 12,
+      "bucket": "Closed",
+      "deadline": "2026-09-07"
+     }
+    ]
+   },
+   {
+    "name": "Cancer & military medicine",
+    "dncr": false,
+    "n": 118,
+    "closed": 81,
+    "coming": 37,
+    "buckets": {
+     "Closed": 81,
+     "2026": 12,
+     "2027": 12,
+     "2028+": 11,
+     "Forecast": 2
+    },
+    "momentum": 0.67,
+    "fit": 1.7,
+    "strong": 0,
+    "keywords": [
+     "cancer",
+     "idea",
+     "translational",
+     "academy",
+     "impact",
+     "vision",
+     "oncology",
+     "investigator-initiated"
+    ],
+    "examples": [
+     {
+      "title": "DoW Parkinson\u2019s, Early Investigator Research Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-11-06"
+     },
+     {
+      "title": "DoW Parkinson\u2019s, Investigator-Initiated Research Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 21,
+      "bucket": "Closed",
+      "deadline": "2026-11-06"
+     },
+     {
+      "title": "DoW, Ovarian Cancer, Pilot Award",
+      "agency": "Defense Health Agency Contracting Activity - DHACA",
+      "A": 17,
+      "bucket": "Closed",
+      "deadline": "2026-10-01"
+     },
+     {
+      "title": "Applied regulatory science research to evaluate and treat cardiotoxicity of oncology therapeutics",
+      "agency": "Food and Drug Administration",
+      "A": 16,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Biomedical & science research",
+    "dncr": false,
+    "n": 487,
+    "closed": 196,
+    "coming": 291,
+    "buckets": {
+     "Closed": 196,
+     "2026": 29,
+     "2027": 136,
+     "2028+": 80,
+     "Forecast": 46
+    },
+    "momentum": 1.27,
+    "fit": 2.5,
+    "strong": 1,
+    "keywords": [
+     "disorders",
+     "network",
+     "translational",
+     "disease",
+     "diseases",
+     "nih",
+     "drug",
+     "interventions"
+    ],
+    "examples": [
+     {
+      "title": "Applied Drug Policy Research Experiences",
+      "agency": "Office of National Drug Control Policy ",
+      "A": 54,
+      "bucket": "Closed",
+      "deadline": "2026-09-06"
+     },
+     {
+      "title": "Science of Science: Discovery, Communication and Impact",
+      "agency": "U.S. National Science Foundation",
+      "A": 38,
+      "bucket": "Forecast",
+      "deadline": null
+     },
+     {
+      "title": "GEOSPATIAL INTELLIGENCE PROCESSING AND EXPLOITATION (GeoPEX)",
+      "agency": "Air Force -- Research Lab",
+      "A": 36,
+      "bucket": "Closed",
+      "deadline": "2026-09-30"
+     },
+     {
+      "title": "Professional Formation of Engineers",
+      "agency": "U.S. National Science Foundation",
+      "A": 34,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   },
+   {
+    "name": "Other",
+    "dncr": false,
+    "n": 34,
+    "closed": 20,
+    "coming": 14,
+    "buckets": {
+     "Closed": 20,
+     "2026": 0,
+     "2027": 4,
+     "2028+": 4,
+     "Forecast": 6
+    },
+    "momentum": 0.88,
+    "fit": 13.4,
+    "strong": 4,
+    "keywords": [
+     "children",
+     "services",
+     "baa",
+     "modern",
+     "modern slavery",
+     "end modern",
+     "slavery",
+     "end"
+    ],
+    "examples": [
+     {
+      "title": "NATIVE Act Tribal Tourism Cooperative Agreement",
+      "agency": "Bureau of Indian Affairs",
+      "A": 74,
+      "bucket": "Closed",
+      "deadline": "2026-08-28"
+     },
+     {
+      "title": "Veterans Legacy Grants Program",
+      "agency": "Veterans Legacy Grants Program",
+      "A": 66,
+      "bucket": "2027",
+      "deadline": "2027-04-09"
+     },
+     {
+      "title": "Request for Information (RFI) No. 95332421K0004 - Community Engagement Services for the Solomon Islands Threshold Program",
+      "agency": "Millennium Challenge Corporation",
+      "A": 64,
+      "bucket": "Closed",
+      "deadline": "2021-02-18"
+     },
+     {
+      "title": "State Veterans Home Construction Grant Program",
+      "agency": "Construction of State Home Facilities",
+      "A": 57,
+      "bucket": "Forecast",
+      "deadline": null
+     }
+    ]
+   }
+  ],
+  "words": [
+   {
+    "text": "cancer",
+    "n": 68,
+    "coming": 34,
+    "momentum": 1.07,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "network",
+    "n": 53,
+    "coming": 26,
+    "momentum": 1.05,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "education",
+    "n": 43,
+    "coming": 18,
+    "momentum": 0.89,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "training",
+    "n": 43,
+    "coming": 12,
+    "momentum": 0.59,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "disorders",
+    "n": 40,
+    "coming": 28,
+    "momentum": 1.49,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovation",
+    "n": 40,
+    "coming": 16,
+    "momentum": 0.85,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "small",
+    "n": 37,
+    "coming": 15,
+    "momentum": 0.86,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "translational",
+    "n": 36,
+    "coming": 17,
+    "momentum": 1.01,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "services",
+    "n": 34,
+    "coming": 11,
+    "momentum": 0.69,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "drug",
+    "n": 31,
+    "coming": 18,
+    "momentum": 1.24,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "resource",
+    "n": 31,
+    "coming": 10,
+    "momentum": 0.69,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "career",
+    "n": 31,
+    "coming": 26,
+    "momentum": 1.79,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technologies",
+    "n": 30,
+    "coming": 16,
+    "momentum": 1.14,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "human",
+    "n": 30,
+    "coming": 16,
+    "momentum": 1.14,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "diseases",
+    "n": 30,
+    "coming": 20,
+    "momentum": 1.42,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "safety",
+    "n": 29,
+    "coming": 16,
+    "momentum": 1.18,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "interventions",
+    "n": 29,
+    "coming": 22,
+    "momentum": 1.62,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "prevention",
+    "n": 28,
+    "coming": 21,
+    "momentum": 1.6,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "brain",
+    "n": 28,
+    "coming": 14,
+    "momentum": 1.07,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disease",
+    "n": 27,
+    "coming": 6,
+    "momentum": 0.47,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technology",
+    "n": 25,
+    "coming": 11,
+    "momentum": 0.94,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "global",
+    "n": 25,
+    "coming": 7,
+    "momentum": 0.6,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "community",
+    "n": 25,
+    "coming": 6,
+    "momentum": 0.51,
+    "area": "Housing & community"
+   },
+   {
+    "text": "early",
+    "n": 24,
+    "coming": 17,
+    "momentum": 1.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mental",
+    "n": 24,
+    "coming": 21,
+    "momentum": 1.86,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "collaborative",
+    "n": 23,
+    "coming": 10,
+    "momentum": 0.93,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "coordinating",
+    "n": 23,
+    "coming": 7,
+    "momentum": 0.65,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "alzheimer",
+    "n": 22,
+    "coming": 3,
+    "momentum": 0.29,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "approaches",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "excellence",
+    "n": 20,
+    "coming": 9,
+    "momentum": 0.96,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "consortium",
+    "n": 20,
+    "coming": 3,
+    "momentum": 0.32,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "implementation",
+    "n": 20,
+    "coming": 15,
+    "momentum": 1.6,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "aids",
+    "n": 20,
+    "coming": 14,
+    "momentum": 1.49,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "response",
+    "n": 19,
+    "coming": 7,
+    "momentum": 0.79,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "systems",
+    "n": 19,
+    "coming": 15,
+    "momentum": 1.68,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovative",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "outcomes",
+    "n": 18,
+    "coming": 8,
+    "momentum": 0.95,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "public",
+    "n": 18,
+    "coming": 6,
+    "momentum": 0.71,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "care",
+    "n": 18,
+    "coming": 6,
+    "momentum": 0.71,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "infrastructure",
+    "n": 18,
+    "coming": 14,
+    "momentum": 1.66,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "medical",
+    "n": 18,
+    "coming": 8,
+    "momentum": 0.95,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "treatment",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mentored",
+    "n": 18,
+    "coming": 16,
+    "momentum": 1.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "partnership",
+    "n": 17,
+    "coming": 5,
+    "momentum": 0.63,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "investigator",
+    "n": 17,
+    "coming": 12,
+    "momentum": 1.5,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "engineering",
+    "n": 17,
+    "coming": 9,
+    "momentum": 1.13,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "study",
+    "n": 17,
+    "coming": 7,
+    "momentum": 0.88,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "discovery",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "risk",
+    "n": 16,
+    "coming": 9,
+    "momentum": 1.2,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "youth",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "food",
+    "n": 16,
+    "coming": 13,
+    "momentum": 1.73,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "access",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technical",
+    "n": 16,
+    "coming": 5,
+    "momentum": 0.67,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "children",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "advancing",
+    "n": 16,
+    "coming": 4,
+    "momentum": 0.53,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "partnerships",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "biomedical",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advanced",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "continuation",
+    "n": 16,
+    "coming": 3,
+    "momentum": 0.4,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "validation",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "communities",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "impact",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "capacity",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "security",
+    "n": 15,
+    "coming": 2,
+    "momentum": 0.28,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "alcohol",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "novel",
+    "n": 15,
+    "coming": 8,
+    "momentum": 1.14,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "coordination",
+    "n": 15,
+    "coming": 5,
+    "momentum": 0.71,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "precision",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "hiv aids",
+    "n": 15,
+    "coming": 14,
+    "momentum": 1.99,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "therapeutic",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "exploratory",
+    "n": 15,
+    "coming": 11,
+    "momentum": 1.56,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "planning",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.67,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "tribal",
+    "n": 14,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "products",
+    "n": 14,
+    "coming": 12,
+    "momentum": 1.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "regional",
+    "n": 14,
+    "coming": 4,
+    "momentum": 0.61,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "idea",
+    "n": 14,
+    "coming": 1,
+    "momentum": 0.15,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "building",
+    "n": 14,
+    "coming": 3,
+    "momentum": 0.46,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "imaging",
+    "n": 14,
+    "coming": 5,
+    "momentum": 0.76,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "dementias",
+    "n": 14,
+    "coming": 2,
+    "momentum": 0.3,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "scientist",
+    "n": 14,
+    "coming": 13,
+    "momentum": 1.98,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "transition",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.67,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "analysis",
+    "n": 13,
+    "coming": 6,
+    "momentum": 0.98,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "aging",
+    "n": 13,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "substance",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.15,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "substance use",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.15,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "rare",
+    "n": 13,
+    "coming": 11,
+    "momentum": 1.8,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disparities",
+    "n": 13,
+    "coming": 8,
+    "momentum": 1.31,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "regulatory",
+    "n": 13,
+    "coming": 12,
+    "momentum": 1.97,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "chronic",
+    "n": 13,
+    "coming": 2,
+    "momentum": 0.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "digital",
+    "n": 12,
+    "coming": 3,
+    "momentum": 0.53,
+    "area": "Energy, tech & AI"
+   }
+  ],
+  "words_dncr": [
+   {
+    "text": "emergency",
+    "n": 11,
+    "coming": 5,
+    "momentum": 0.97,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "environmental",
+    "n": 10,
+    "coming": 3,
+    "momentum": 0.64,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "ecosystem",
+    "n": 9,
+    "coming": 1,
+    "momentum": 0.24,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "land",
+    "n": 8,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "disaster",
+    "n": 8,
+    "coming": 2,
+    "momentum": 0.53,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "invasive",
+    "n": 7,
+    "coming": 4,
+    "momentum": 1.22,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "partnership",
+    "n": 6,
+    "coming": 2,
+    "momentum": 0.71,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "species",
+    "n": 6,
+    "coming": 2,
+    "momentum": 0.71,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "network",
+    "n": 5,
+    "coming": 5,
+    "momentum": 2.13,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "safety",
+    "n": 4,
+    "coming": 1,
+    "momentum": 0.53,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "response",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "training",
+    "n": 4,
+    "coming": 1,
+    "momentum": 0.53,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "regional",
+    "n": 4,
+    "coming": 1,
+    "momentum": 0.53,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "conservation",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "marine",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "resilience",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "mitigation",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "wildlife",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "artifacts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "arts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "arts artifacts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "nea arts",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "indemnity",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "wildland",
+    "n": 4,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "atmospheric",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "neural",
+    "n": 4,
+    "coming": 3,
+    "momentum": 1.6,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "mental",
+    "n": 4,
+    "coming": 4,
+    "momentum": 2.13,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "resource",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "forest",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "recreation",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Parks & outdoor recreation"
+   },
+   {
+    "text": "care",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "pediatric",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.71,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "weather",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "restoration",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "international",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.71,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "blm-national",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "department",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "blm-national interagency",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "wildland blm-national",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "interagency",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "plant",
+    "n": 3,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "utilizing",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "technology",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.71,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "community",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.71,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "echo",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "outcomes echo",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "influences",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "influences child",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "child",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "child outcomes",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "outcomes",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "environmental influences",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Climate, ocean & environment"
+   },
+   {
+    "text": "technologies",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "brain",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "using",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "interdisciplinary",
+    "n": 3,
+    "coming": 1,
+    "momentum": 0.71,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "infrastructure",
+    "n": 3,
+    "coming": 3,
+    "momentum": 2.13,
+    "area": "Disaster & emergency"
+   },
+   {
+    "text": "humans",
+    "n": 3,
+    "coming": 2,
+    "momentum": 1.42,
+    "area": "Conservation & wildlife"
+   },
+   {
+    "text": "medicine",
+    "n": 3,
+    "coming": 3,
+    "momentum": 2.13,
+    "area": "Arts, humanities & museums"
+   },
+   {
+    "text": "library",
+    "n": 3,
+    "coming": 3,
+    "momentum": 2.13,
+    "area": "Arts, humanities & museums"
+   }
+  ],
+  "words_other": [
+   {
+    "text": "cancer",
+    "n": 68,
+    "coming": 34,
+    "momentum": 1.07,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "network",
+    "n": 48,
+    "coming": 21,
+    "momentum": 0.93,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "education",
+    "n": 41,
+    "coming": 16,
+    "momentum": 0.83,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "training",
+    "n": 39,
+    "coming": 11,
+    "momentum": 0.6,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "disorders",
+    "n": 38,
+    "coming": 26,
+    "momentum": 1.46,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovation",
+    "n": 38,
+    "coming": 16,
+    "momentum": 0.9,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "small",
+    "n": 36,
+    "coming": 15,
+    "momentum": 0.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "translational",
+    "n": 36,
+    "coming": 17,
+    "momentum": 1.01,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "services",
+    "n": 33,
+    "coming": 11,
+    "momentum": 0.71,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "career",
+    "n": 31,
+    "coming": 26,
+    "momentum": 1.79,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "drug",
+    "n": 29,
+    "coming": 18,
+    "momentum": 1.32,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "diseases",
+    "n": 29,
+    "coming": 20,
+    "momentum": 1.47,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "human",
+    "n": 28,
+    "coming": 15,
+    "momentum": 1.14,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "resource",
+    "n": 28,
+    "coming": 10,
+    "momentum": 0.76,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "interventions",
+    "n": 28,
+    "coming": 22,
+    "momentum": 1.67,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technologies",
+    "n": 27,
+    "coming": 14,
+    "momentum": 1.1,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "prevention",
+    "n": 27,
+    "coming": 21,
+    "momentum": 1.66,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "safety",
+    "n": 25,
+    "coming": 15,
+    "momentum": 1.28,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "global",
+    "n": 25,
+    "coming": 7,
+    "momentum": 0.6,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "brain",
+    "n": 25,
+    "coming": 12,
+    "momentum": 1.02,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disease",
+    "n": 25,
+    "coming": 6,
+    "momentum": 0.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "early",
+    "n": 24,
+    "coming": 17,
+    "momentum": 1.51,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "collaborative",
+    "n": 23,
+    "coming": 10,
+    "momentum": 0.93,
+    "area": "Workforce & small business"
+   },
+   {
+    "text": "technology",
+    "n": 22,
+    "coming": 10,
+    "momentum": 0.97,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "community",
+    "n": 22,
+    "coming": 5,
+    "momentum": 0.48,
+    "area": "Housing & community"
+   },
+   {
+    "text": "approaches",
+    "n": 21,
+    "coming": 18,
+    "momentum": 1.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "alzheimer",
+    "n": 21,
+    "coming": 3,
+    "momentum": 0.3,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "consortium",
+    "n": 20,
+    "coming": 3,
+    "momentum": 0.32,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "implementation",
+    "n": 20,
+    "coming": 15,
+    "momentum": 1.6,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mental",
+    "n": 20,
+    "coming": 17,
+    "momentum": 1.81,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "coordinating",
+    "n": 20,
+    "coming": 5,
+    "momentum": 0.53,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "excellence",
+    "n": 19,
+    "coming": 9,
+    "momentum": 1.01,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "systems",
+    "n": 19,
+    "coming": 15,
+    "momentum": 1.68,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "innovative",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "public",
+    "n": 18,
+    "coming": 6,
+    "momentum": 0.71,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "treatment",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "mentored",
+    "n": 18,
+    "coming": 16,
+    "momentum": 1.89,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "aids",
+    "n": 18,
+    "coming": 13,
+    "momentum": 1.54,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "medical",
+    "n": 17,
+    "coming": 7,
+    "momentum": 0.88,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "investigator",
+    "n": 17,
+    "coming": 12,
+    "momentum": 1.5,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "discovery",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "technical",
+    "n": 16,
+    "coming": 5,
+    "momentum": 0.67,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "children",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "partnerships",
+    "n": 16,
+    "coming": 7,
+    "momentum": 0.93,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "engineering",
+    "n": 16,
+    "coming": 9,
+    "momentum": 1.2,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advanced",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "validation",
+    "n": 16,
+    "coming": 10,
+    "momentum": 1.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "response",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.99,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "risk",
+    "n": 15,
+    "coming": 9,
+    "momentum": 1.28,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "youth",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.99,
+    "area": "Education & STEM"
+   },
+   {
+    "text": "food",
+    "n": 15,
+    "coming": 13,
+    "momentum": 1.85,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "access",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "outcomes",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "care",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "advancing",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "infrastructure",
+    "n": 15,
+    "coming": 11,
+    "momentum": 1.56,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "alcohol",
+    "n": 15,
+    "coming": 6,
+    "momentum": 0.85,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "novel",
+    "n": 15,
+    "coming": 8,
+    "momentum": 1.14,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "biomedical",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.99,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "precision",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "continuation",
+    "n": 15,
+    "coming": 3,
+    "momentum": 0.43,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "therapeutic",
+    "n": 15,
+    "coming": 4,
+    "momentum": 0.57,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "study",
+    "n": 15,
+    "coming": 7,
+    "momentum": 0.99,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "planning",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.67,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "products",
+    "n": 14,
+    "coming": 12,
+    "momentum": 1.83,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "communities",
+    "n": 14,
+    "coming": 6,
+    "momentum": 0.91,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "impact",
+    "n": 14,
+    "coming": 6,
+    "momentum": 0.91,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "idea",
+    "n": 14,
+    "coming": 1,
+    "momentum": 0.15,
+    "area": "Cancer & military medicine"
+   },
+   {
+    "text": "capacity",
+    "n": 14,
+    "coming": 6,
+    "momentum": 0.91,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "hiv aids",
+    "n": 14,
+    "coming": 13,
+    "momentum": 1.98,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "exploratory",
+    "n": 14,
+    "coming": 10,
+    "momentum": 1.52,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "scientist",
+    "n": 14,
+    "coming": 13,
+    "momentum": 1.98,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "transition",
+    "n": 14,
+    "coming": 11,
+    "momentum": 1.67,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "building",
+    "n": 13,
+    "coming": 3,
+    "momentum": 0.49,
+    "area": "Foreign diplomacy & exchange"
+   },
+   {
+    "text": "analysis",
+    "n": 13,
+    "coming": 6,
+    "momentum": 0.98,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "security",
+    "n": 13,
+    "coming": 1,
+    "momentum": 0.16,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "substance",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.15,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "substance use",
+    "n": 13,
+    "coming": 7,
+    "momentum": 1.15,
+    "area": "Mental health & substance use"
+   },
+   {
+    "text": "imaging",
+    "n": 13,
+    "coming": 4,
+    "momentum": 0.66,
+    "area": "Energy, tech & AI"
+   },
+   {
+    "text": "coordination",
+    "n": 13,
+    "coming": 3,
+    "momentum": 0.49,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "dementias",
+    "n": 13,
+    "coming": 2,
+    "momentum": 0.33,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "rare",
+    "n": 13,
+    "coming": 11,
+    "momentum": 1.8,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "disparities",
+    "n": 13,
+    "coming": 8,
+    "momentum": 1.31,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "regulatory",
+    "n": 13,
+    "coming": 12,
+    "momentum": 1.97,
+    "area": "Agriculture & food"
+   },
+   {
+    "text": "tribal",
+    "n": 12,
+    "coming": 0,
+    "momentum": 0.0,
+    "area": "Transportation & infrastructure"
+   },
+   {
+    "text": "local",
+    "n": 12,
+    "coming": 1,
+    "momentum": 0.18,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "social",
+    "n": 12,
+    "coming": 9,
+    "momentum": 1.6,
+    "area": "Biomedical & science research"
+   },
+   {
+    "text": "expanding",
+    "n": 12,
+    "coming": 5,
+    "momentum": 0.89,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "control",
+    "n": 12,
+    "coming": 9,
+    "momentum": 1.6,
+    "area": "Public health & prevention"
+   },
+   {
+    "text": "investigator-initiated",
+    "n": 12,
+    "coming": 7,
+    "momentum": 1.24,
+    "area": "Cancer & military medicine"
+   }
+  ]
+ }
+}
